@@ -1,0 +1,85 @@
+# Google Analytics measurement ID for tools.ezrasnotes.com. Empty turns Analytics off.
+ga_id: ""
+
+# Every tool on the site. The home page list is built from this file.
+# status: live (has a page) or soon (shows as "Coming soon").
+# To add a tool, see COMO-AGREGAR-UNA-HERRAMIENTA.md.
+
+tools:
+  - slug: net-net
+    name: Net-net calculator
+    nav: Net-net
+    status: live
+    blurb: Graham's NCAV, modern NCAV, net cash, Schloss' working capital and book value, per share and against the price.
+
+  - slug: epv
+    name: Earnings power value
+    status: soon
+    blurb: What the business is worth if it never grows.
+
+  - slug: reverse-dcf
+    name: Reverse DCF
+    status: soon
+    blurb: The growth the current price already assumes.
+
+  - slug: red-flags
+    name: Red flags
+    status: soon
+    blurb: Accounting warning signs to check before you buy.
+
+  - slug: moat-management
+    name: Moat and management scorecard
+    status: soon
+    blurb: A scorecard for the competitive advantage and the people running it.
+
+# The net-net calculator, row by row, in the same order as Ezra's Excel template.
+# type: head (section title), input, calc (calculated line), result (total + per share),
+#       ratio (price / per share), test (passes or fails).
+# k is the short name used in shared links. kind: money, shares, price, percent, number.
+net_net_rows:
+  - {type: head, label: "Balance sheet"}
+  - {type: input, k: c,  label: "Cash & Equivalents", kind: money}
+  - {type: input, k: s,  label: "Short-term Investments", kind: money}
+  - {type: input, k: r,  label: "Restricted Cash", kind: money, hint: "Counts, even if it isn't available for daily operations."}
+  - {type: calc,  k: totalCash, label: "Total Cash", hint: "Cash & Equivalents + Short-term Investments + Restricted Cash"}
+  - {type: input, k: ar, label: "Total Receivables", kind: money, hint: "Accounts + other + notes receivable."}
+  - {type: input, k: in, label: "Inventory", kind: money}
+  - {type: input, k: pp, label: "Prepaid Expenses", kind: money}
+  - {type: input, k: ca, label: "Total Current Assets", kind: money, key: true}
+  - {type: calc,  k: otherCA, label: "Other Current Assets", hint: "Total Current Assets minus the lines above."}
+  - {type: input, k: a,  label: "Total Assets", kind: money, hint: "Only used for book value."}
+  - {type: input, k: g,  label: "Goodwill", kind: money, hint: "Only used for adjusted book value."}
+  - {type: input, k: ia, label: "Intangible Assets", kind: money, hint: "Only used for adjusted book value."}
+  - {type: input, k: rou, label: "Right-of-use Assets", kind: money, hint: "Operating lease assets. Only used for adjusted book value."}
+  - {type: input, k: cl, label: "Total Current Liabilities", kind: money}
+  - {type: input, k: d,  label: "Long-Term Debt", kind: money}
+  - {type: input, k: l,  label: "Total Liabilities", kind: money, key: true}
+  - {type: input, k: ob, label: "Off-Balance Sheet Liabilities", kind: money, hint: "Unfunded pensions, guarantees, litigation. Read the notes."}
+  - {type: input, k: pf, label: "Preferred Stock", kind: money, hint: "Face value."}
+  - {type: head, label: "Market"}
+  - {type: input, k: sh, label: "Shares Outstanding", kind: shares, key: true}
+  - {type: input, k: p,  label: "Current Stock Price", kind: price, key: true, hint: "Per share, in full. Never in thousands."}
+  - {type: input, k: mc, label: "Market Cap", kind: money, hint: "Leave blank to use shares × price."}
+  - {type: input, k: ev, label: "EV", kind: money, hint: "Leave blank for market cap + debt + preferred − total cash."}
+  - {type: head, label: "Results", columns: true}
+  - {type: result, k: ncav, label: "Ben Graham's NCAV", hint: "Current Assets − Total Liabilities"}
+  - {type: ratio,  k: ncav, label: "P/NCAV"}
+  - {type: result, k: adj, label: "Modern NCAV", hint: "Current Assets − (Total Liabilities + Off-Balance Sheet Liabilities + Preferred Stock)"}
+  - {type: ratio,  k: adj, label: "Modern P/NCAV"}
+  - {type: result, k: netCash, label: "Net Cash", hint: "Total Cash − Total Liabilities"}
+  - {type: ratio,  k: netCash, label: "P/Net Cash"}
+  - {type: result, k: wc, label: "Working Capital", hint: "Current Assets − Current Liabilities"}
+  - {type: result, k: schloss, label: "Walter Schloss' WC", hint: "Current Assets − Current Liabilities − Long-Term Debt"}
+  - {type: result, k: bv, label: "Book Value", hint: "Total Assets − Total Liabilities"}
+  - {type: ratio,  k: bv, label: "P/B"}
+  - {type: result, k: abv, label: "Adjusted Book Value", hint: "(Total Assets − Goodwill − Intangible Assets − Right-of-use Assets) − Total Liabilities"}
+  - {type: ratio,  k: abv, label: "Adjusted P/B"}
+  - {type: head, label: "Net net working capital", columns: true}
+  - {type: input, k: ar_h, label: "Receivables taken at (%)", kind: percent, default: 75}
+  - {type: input, k: in_h, label: "Inventory taken at (%)", kind: percent, default: 50}
+  - {type: result, k: nnwc, label: "Net Net Working Capital", hint: "Total Cash + Receivables × haircut + Inventory × haircut − Total Liabilities"}
+  - {type: ratio,  k: nnwc, label: "P/NNWC"}
+  - {type: head, label: "Your test"}
+  - {type: input, k: max, label: "Your max P/NCAV", kind: number, default: 0.66, hint: "Graham bought at 0.66 or less. Many investors today accept anything under 1."}
+  - {type: test, k: graham, label: "Graham NCAV test"}
+  - {type: test, k: modern, label: "Modern NCAV test"}

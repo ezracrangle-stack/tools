@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>Tools · Ezra's Notes</title>
+<meta name="description" content="Free value investing calculators built from the spreadsheets I use. They run in your browser, with no sign-up.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="static/style.css?v=ab1afefd">
+<meta property="og:title" content="Tools · Ezra's Notes">
+<meta property="og:description" content="Free value investing calculators built from the spreadsheets I use. They run in your browser, with no sign-up.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="static/icon-512.png">
+<link rel="apple-touch-icon" href="static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/">
+</head>
+<body>
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="">Tools</a>
+  <p class="byline">By <a href="https://x.com/ezracrangle">@ezracrangle</a></p>
+  <nav>
+    <a href="" aria-current="page">All tools</a>
+<a href="net-net/">Net-net</a>
+<a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<section class="lede">
+  <p class="dek">Calculators for value investors, built from the spreadsheets I use to check a stock.</p>
+  <p class="free">Free, and they'll stay free. No sign-up. Everything runs in your browser, so nothing you type gets saved anywhere.</p>
+</section>
+<ul class="tool-list">
+  <li>
+<h2><a href="net-net/">Net-net calculator</a></h2><span class="status live">Live</span>
+    <p>Graham&#39;s NCAV, modern NCAV, net cash, Schloss&#39; working capital and book value, per share and against the price.</p>
+  </li>
+  <li>
+<h2 class="soon">Earnings power value</h2><span class="status later">Coming soon</span>    <p class="soon">What the business is worth if it never grows.</p>
+  </li>
+  <li>
+<h2 class="soon">Reverse DCF</h2><span class="status later">Coming soon</span>    <p class="soon">The growth the current price already assumes.</p>
+  </li>
+  <li>
+<h2 class="soon">Red flags</h2><span class="status later">Coming soon</span>    <p class="soon">Accounting warning signs to check before you buy.</p>
+  </li>
+  <li>
+<h2 class="soon">Moat and management scorecard</h2><span class="status later">Coming soon</span>    <p class="soon">A scorecard for the competitive advantage and the people running it.</p>
+  </li>
+</ul>
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Holdings</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a inversores</a>
+  </p>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
+</body>
+</html>

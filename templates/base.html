@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+{% if ga_id %}<script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_id }}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','{{ ga_id }}');</script>
+{% endif %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>{% block title %}Tools{% endblock %} · Ezra's Notes</title>
+<meta name="description" content="{% block description %}Free value investing tools. Everything runs in your browser.{% endblock %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ root }}static/style.css?v={{ asset_v }}">
+{% set page_url = site_url ~ "/" ~ page %}
+<meta property="og:title" content="{{ self.title() }} · Ezra's Notes">
+<meta property="og:description" content="{{ self.description() }}">
+<meta property="og:url" content="{{ page_url }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="{{ root }}static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="{{ root }}static/icon-512.png">
+<link rel="apple-touch-icon" href="{{ root }}static/apple-touch-icon.png">
+<link rel="canonical" href="{{ page_url }}">
+</head>
+<body>
+<header class="masthead">
+  <div class="topline">
+    <a href="{{ newsletter_url }}">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="{{ root }}">Tools</a>
+  <p class="byline">By <a href="https://x.com/ezracrangle">@ezracrangle</a></p>
+  <nav>
+    <a href="{{ root }}"{% if page == '' %} aria-current="page"{% endif %}>All tools</a>
+    {% for t in tools if t.status == 'live' %}<a href="{{ root }}{{ t.slug }}/"{% if page == t.slug ~ '/' %} aria-current="page"{% endif %}>{{ t.nav or t.name }}</a>
+    {% endfor %}<a href="{{ subscribe_url }}" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+{% block main %}{% endblock %}
+</main>
+
+{% include "_footer.html" %}
+<script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>Net-net calculator · Ezra's Notes</title>
+<meta name="description" content="Graham's NCAV, modern NCAV, net net working capital and net cash per share, against the price. Free, and it runs in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css?v=ab1afefd">
+<meta property="og:title" content="Net-net calculator · Ezra's Notes">
+<meta property="og:description" content="Graham's NCAV, modern NCAV, net net working capital and net cash per share, against the price. Free, and it runs in your browser.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/net-net/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="../static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
+<link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/net-net/">
+</head>
+<body>
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="../">Tools</a>
+  <p class="byline">By <a href="https://x.com/ezracrangle">@ezracrangle</a></p>
+  <nav>
+    <a href="../">All tools</a>
+<a href="../net-net/" aria-current="page">Net-net</a>
+<a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<section class="lede">
+  <h1 class="page-title">Net-net calculator</h1>
+  <p class="dek">A net-net is a stock that sells for less than its current assets minus all of its liabilities. Buy one and you get the factories and the brand for free. (In theory. Keep reading.)</p>
+  <p>Ben Graham called that number net current asset value, or NCAV, and liked to pay two-thirds of it or less. Copy the balance sheet in, top to bottom, and the worksheet does the arithmetic. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="netnet" class="calc" novalidate>
+  <div class="settings">
+    <div><label for="cur">Currency</label>
+      <select id="cur"><option selected>USD</option><option>EUR</option><option>GBP</option><option>CAD</option><option>AUD</option><option>CHF</option><option>JPY</option><option>HKD</option><option>SGD</option><option>SEK</option><option>NOK</option><option>DKK</option><option>MXN</option><option>BRL</option><option>CLP</option><option>COP</option><option>KRW</option><option>INR</option><option>ZAR</option></select></div>
+    <div><label for="u">Amounts in</label>
+      <select id="u"><option value="1">Units</option><option value="1000" selected>Thousands</option><option value="1000000">Millions</option></select></div>
+    <div><label for="su">Shares in</label>
+      <select id="su"><option value="1">Units</option><option value="1000" selected>Thousands</option><option value="1000000">Millions</option></select></div>
+  </div>
+  <p class="small">Copy the numbers as the filing shows them. Most 10-Ks report amounts and shares in thousands. The price always goes in full. Fields with * are needed; leave any other line blank if the company doesn't have it.</p>
+
+  <div class="sheet" role="group" aria-label="Net-net worksheet">
+    <div class="srow head"><span class="lab">Balance sheet</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-c">Cash &amp; Equivalents</label>
+      <span class="cell"><input id="f-c" data-k="c" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-s">Short-term Investments</label>
+      <span class="cell"><input id="f-s" data-k="s" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-r">Restricted Cash<span class="hint">Counts, even if it isn&#39;t available for daily operations.</span></label>
+      <span class="cell"><input id="f-r" data-k="r" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Total Cash<span class="hint">Cash &amp; Equivalents + Short-term Investments + Restricted Cash</span></span><output class="cell" id="o-totalCash">–</output></div>
+    <div class="srow in">
+      <label class="lab" for="f-ar">Total Receivables<span class="hint">Accounts + other + notes receivable.</span></label>
+      <span class="cell"><input id="f-ar" data-k="ar" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-in">Inventory</label>
+      <span class="cell"><input id="f-in" data-k="in" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-pp">Prepaid Expenses</label>
+      <span class="cell"><input id="f-pp" data-k="pp" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in key">
+      <label class="lab" for="f-ca">Total Current Assets *</label>
+      <span class="cell"><input id="f-ca" data-k="ca" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Other Current Assets<span class="hint">Total Current Assets minus the lines above.</span></span><output class="cell" id="o-otherCA">–</output></div>
+    <div class="srow in">
+      <label class="lab" for="f-a">Total Assets<span class="hint">Only used for book value.</span></label>
+      <span class="cell"><input id="f-a" data-k="a" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-g">Goodwill<span class="hint">Only used for adjusted book value.</span></label>
+      <span class="cell"><input id="f-g" data-k="g" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-ia">Intangible Assets<span class="hint">Only used for adjusted book value.</span></label>
+      <span class="cell"><input id="f-ia" data-k="ia" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-rou">Right-of-use Assets<span class="hint">Operating lease assets. Only used for adjusted book value.</span></label>
+      <span class="cell"><input id="f-rou" data-k="rou" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-cl">Total Current Liabilities</label>
+      <span class="cell"><input id="f-cl" data-k="cl" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-d">Long-Term Debt</label>
+      <span class="cell"><input id="f-d" data-k="d" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in key">
+      <label class="lab" for="f-l">Total Liabilities *</label>
+      <span class="cell"><input id="f-l" data-k="l" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-ob">Off-Balance Sheet Liabilities<span class="hint">Unfunded pensions, guarantees, litigation. Read the notes.</span></label>
+      <span class="cell"><input id="f-ob" data-k="ob" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-pf">Preferred Stock<span class="hint">Face value.</span></label>
+      <span class="cell"><input id="f-pf" data-k="pf" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow head"><span class="lab">Market</span></div>
+    <div class="srow in key">
+      <label class="lab" for="f-sh">Shares Outstanding *</label>
+      <span class="cell"><input id="f-sh" data-k="sh" data-kind="shares" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in key">
+      <label class="lab" for="f-p">Current Stock Price *<span class="hint">Per share, in full. Never in thousands.</span></label>
+      <span class="cell"><input id="f-p" data-k="p" data-kind="price" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-mc">Market Cap<span class="hint">Leave blank to use shares × price.</span></label>
+      <span class="cell"><input id="f-mc" data-k="mc" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-ev">EV<span class="hint">Leave blank for market cap + debt + preferred − total cash.</span></label>
+      <span class="cell"><input id="f-ev" data-k="ev" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow head"><span class="lab">Results</span><span class="col">Total</span><span class="col">Per share</span></div>
+    <div class="srow res"><span class="lab">Ben Graham&#39;s NCAV<span class="hint">Current Assets − Total Liabilities</span></span><output class="col" id="t-ncav">–</output><output class="col" id="ps-ncav">–</output></div>
+    <div class="srow ratio"><span class="lab">P/NCAV</span><output class="col" id="r-ncav">–</output><span class="col"></span></div>
+    <div class="srow res"><span class="lab">Modern NCAV<span class="hint">Current Assets − (Total Liabilities + Off-Balance Sheet Liabilities + Preferred Stock)</span></span><output class="col" id="t-adj">–</output><output class="col" id="ps-adj">–</output></div>
+    <div class="srow ratio"><span class="lab">Modern P/NCAV</span><output class="col" id="r-adj">–</output><span class="col"></span></div>
+    <div class="srow res"><span class="lab">Net Cash<span class="hint">Total Cash − Total Liabilities</span></span><output class="col" id="t-netCash">–</output><output class="col" id="ps-netCash">–</output></div>
+    <div class="srow ratio"><span class="lab">P/Net Cash</span><output class="col" id="r-netCash">–</output><span class="col"></span></div>
+    <div class="srow res"><span class="lab">Working Capital<span class="hint">Current Assets − Current Liabilities</span></span><output class="col" id="t-wc">–</output><output class="col" id="ps-wc">–</output></div>
+    <div class="srow res"><span class="lab">Walter Schloss&#39; WC<span class="hint">Current Assets − Current Liabilities − Long-Term Debt</span></span><output class="col" id="t-schloss">–</output><output class="col" id="ps-schloss">–</output></div>
+    <div class="srow res"><span class="lab">Book Value<span class="hint">Total Assets − Total Liabilities</span></span><output class="col" id="t-bv">–</output><output class="col" id="ps-bv">–</output></div>
+    <div class="srow ratio"><span class="lab">P/B</span><output class="col" id="r-bv">–</output><span class="col"></span></div>
+    <div class="srow res"><span class="lab">Adjusted Book Value<span class="hint">(Total Assets − Goodwill − Intangible Assets − Right-of-use Assets) − Total Liabilities</span></span><output class="col" id="t-abv">–</output><output class="col" id="ps-abv">–</output></div>
+    <div class="srow ratio"><span class="lab">Adjusted P/B</span><output class="col" id="r-abv">–</output><span class="col"></span></div>
+    <div class="srow head"><span class="lab">Net net working capital</span><span class="col">Total</span><span class="col">Per share</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-ar_h">Receivables taken at (%)</label>
+      <span class="cell"><input id="f-ar_h" data-k="ar_h" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="75" data-default="75"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-in_h">Inventory taken at (%)</label>
+      <span class="cell"><input id="f-in_h" data-k="in_h" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="50" data-default="50"></span>
+    </div>
+    <div class="srow res"><span class="lab">Net Net Working Capital<span class="hint">Total Cash + Receivables × haircut + Inventory × haircut − Total Liabilities</span></span><output class="col" id="t-nnwc">–</output><output class="col" id="ps-nnwc">–</output></div>
+    <div class="srow ratio"><span class="lab">P/NNWC</span><output class="col" id="r-nnwc">–</output><span class="col"></span></div>
+    <div class="srow head"><span class="lab">Your test</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-max">Your max P/NCAV<span class="hint">Graham bought at 0.66 or less. Many investors today accept anything under 1.</span></label>
+      <span class="cell"><input id="f-max" data-k="max" data-kind="number" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="0.66" data-default="0.66"></span>
+    </div>
+    <div class="srow test"><span class="lab">Graham NCAV test</span><output class="cell" id="x-graham">–</output></div>
+    <div class="srow test"><span class="lab">Modern NCAV test</span><output class="cell" id="x-modern">–</output></div>
+  </div>
+
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the four fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
+
+  <div class="actions">
+    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
+    <button type="button" class="button ghost" id="reset">Clear</button>
+  </div>
+  <p class="copy-note">"n/m" means the value per share is zero or negative, so the ratio doesn't mean anything.</p>
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">What this calculator can't tell you</h2>
+  <p>The worksheet gives you a number. The 10-K tells you if the number is real. Four things I check before I trust it:</p>
+
+  <h3>Whether the inventory sells</h3>
+  <p>NCAV counts inventory at 100% and net net working capital at 50%. Last season's clothes or parts for a discontinued machine can be worth much less. Read the inventory note and check whether days of inventory keep climbing.</p>
+
+  <h3>What isn't on the balance sheet</h3>
+  <p>Unfunded pensions, retiree health costs, lawsuits, guarantees and purchase commitments show up in the notes, if they show up at all. US companies have carried most leases on the balance sheet since 2019; the rest still hides in the footnotes. Add what you find to the off-balance-sheet line and watch modern NCAV.</p>
+
+  <h3>How fast the cash goes</h3>
+  <p>A company with $30 million of NCAV that loses $10 million a year has three years before the discount is gone. Run last year's balance sheet through the calculator too. If NCAV fell more than 25% in 12 months, I'd want to know why before buying.</p>
+
+  <h3>Whether anything closes the gap</h3>
+  <p>Some net-nets stay net-nets for a decade. Look for a reason the price could catch up: a buyback, a sale of the company, an activist, insiders buying with their own money. A CEO who keeps getting paid well while the stock sits at its lows, and no shareholder big enough to replace him, usually means a value trap.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>Benjamin Graham laid out the net current asset test with David Dodd in <em>Security Analysis</em> (1934) and came back to it in <em>The Intelligent Investor</em>. His rule was to pay no more than two-thirds of NCAV and to own a lot of them, so a few disasters wouldn't sink the portfolio.</p>
+  <p>Walter Schloss worked for Graham at Graham-Newman and ran his own partnership from 1955 to 2002, buying cheap stocks against their book value and staying away from debt. Buffett put him in "The Superinvestors of Graham-and-Doddsville" in 1984. The Schloss line in the worksheet takes long-term debt out of working capital for that reason.</p>
+  <p>The modern version of NCAV also subtracts off-balance-sheet liabilities and preferred stock, because both get paid before common shareholders.</p>
+</section>
+
+<aside class="wanted soon-box" id="coming-soon">
+  <p class="wanted-kicker">Coming soon</p>
+  <p class="wanted-head">The AI version</p>
+  <p class="wanted-body">An AI version of this method, built as a Claude skill, is coming. It reads the filings, adjusts the balance sheet and tells you whether the discount is real. Subscribe to Ezra's Notes to get it first.</p>
+  <iframe class="substack" src="https://www.ezrasnotes.com/embed" title="Subscribe to Ezra's Notes" width="480" height="150" frameborder="0" scrolling="no" loading="lazy"></iframe>
+</aside>
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Holdings</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a inversores</a>
+  </p>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
+<script type="module" src="../static/net-net.js?v=ab1afefd"></script></body>
+</html>

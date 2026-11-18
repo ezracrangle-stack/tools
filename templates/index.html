@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Tools{% endblock %}
+{% block description %}Free value investing calculators built from the spreadsheets I use. They run in your browser, with no sign-up.{% endblock %}
+{% block main %}
+<section class="lede">
+  <p class="dek">Calculators for value investors, built from the spreadsheets I use to check a stock.</p>
+  <p class="free">Free, and they'll stay free. No sign-up. Everything runs in your browser, so nothing you type gets saved anywhere.</p>
+</section>
+<ul class="tool-list">
+{% for t in tools %}
+  <li>
+    {% if t.status == 'live' %}<h2><a href="{{ root }}{{ t.slug }}/">{{ t.name }}</a></h2><span class="status live">Live</span>
+    {% else %}<h2 class="soon">{{ t.name }}</h2><span class="status later">Coming soon</span>{% endif %}
+    <p{% if t.status != 'live' %} class="soon"{% endif %}>{{ t.blurb }}</p>
+  </li>
+{% endfor %}
+</ul>
+{% endblock %}

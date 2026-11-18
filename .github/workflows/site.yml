@@ -1,0 +1,64 @@
+name: Build the site
+
+# Runs whenever you edit tools.yaml, the templates, the styles or the scripts on main,
+# or by hand with the "Run workflow" button in the Actions tab.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - tools.yaml
+      - templates/**
+      - static/**
+      - scripts/**
+      - tests/**
+
+permissions:
+  contents: write              # save the rebuilt site
+  issues: write                # open an issue if the build breaks
+
+concurrency:
+  group: tools
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - run: pip install -r requirements.txt
+
+      - name: Check every calculator against the Excel results
+        run: for t in tests/*.test.mjs; do node "$t"; done
+
+      - name: Build the site
+        run: python scripts/build.py
+
+      - name: Save changes
+        run: |
+          git config user.name  "tools-bot"
+          git config user.email "tools-bot@users.noreply.github.com"
+          git add docs
+          git commit -m "Rebuild site $(date -u +%F)" || echo "Nothing to commit"
+          git pull --rebase --autostash && git push
+
+      - name: Tell Ezra if the build broke
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create tools-alert --color B60205 --description "Needs a look" 2>/dev/null || true
+          gh issue create --title "Tools: the site build failed" --label tools-alert \
+            --body "The build or a calculator test failed, so the live site was not changed. A failed test means a formula no longer matches the Excel. Details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
