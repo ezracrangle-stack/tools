@@ -18,6 +18,12 @@ tools:
     status: live
     blurb: What the business is worth if today's cash profits never grow, how much of the price is a bet on growth, and the most you should pay.
 
+  - slug: greenwald
+    name: Greenwald's moat test
+    nav: Greenwald
+    status: live
+    blurb: Greenwald's test. What it would cost to rebuild the business, what its earnings are worth with no growth, and what the gap says about its moat.
+
   - slug: reverse-dcf
     name: Reverse DCF
     status: soon
@@ -157,3 +163,86 @@ epv_rows:
   - {type: calc, k: cyi, label: "Cash yield at the ideal price"}
   - {type: calc, k: vsmax, label: "Share price vs maximum price"}
   - {type: test, k: sell, label: "Sell check", hint: "Oakley wouldn't sell at the maximum price, but might once the price is 25% above it."}
+
+# Assets vs earnings power (Greenwald), row by row, in the order of Parts 0-3 of Greenwald_EPV_Template.xlsx.
+# asset rows: k = book value; the page adds r<k> (reproduction cost) and l<k> (liquidation %, default liq).
+greenwald_rows:
+  - {type: head, label: "Market data"}
+  - {type: input, k: sh, label: "Diluted shares outstanding", kind: shares, key: true, hint: "Basic shares plus in-the-money options and convertibles."}
+  - {type: input, k: p, label: "Share price", kind: price, key: true, hint: "Per share, in full. Never in thousands."}
+  - type: select
+    k: via
+    label: "Can a new competitor make money in this industry?"
+    hint: "Greenwald's first question. If yes, an entrant would rebuild these assets, so value them at what that costs. If no, they're worth what a liquidator would get."
+    options: [{v: "y", t: "Yes"}, {v: "n", t: "No"}]
+
+  - {type: head, label: "1. Asset value", cols: ["Book", "Reproduction"]}
+  - {type: note, label: "Book values from the balance sheet. With <em>Yes</em> above, type the cost to rebuild in the second column only where it differs from book (blank means book). With <em>No</em>, the second column is the share of book a liquidator would get, filled in with Greenwald's figures. Spare real estate and investments go in section 2."}
+  - {type: asset, k: cash, label: "Cash and marketable securities", liq: 100}
+  - {type: asset, k: ar, label: "Accounts receivable", liq: 85, hint: "To rebuild: add back the bad-debt allowance."}
+  - {type: asset, k: inv, label: "Inventory", liq: 50, hint: "To rebuild: add back any LIFO reserve. A liquidator gets less than half for fashion or specialized stock."}
+  - {type: asset, k: oca, label: "Other current assets", liq: 50, hint: "Prepaid expenses, deferred tax assets."}
+  - {type: asset, k: ppe, label: "Property, plant and equipment", liq: 45, hint: "Land and buildings bought long ago usually cost more to rebuild than their book value. Equipment usually costs less."}
+  - {type: asset, k: gw, label: "Goodwill", liq: 0, fixed: "Taken out", hint: "The two lines for intangibles below put a value on what it paid for."}
+  - {type: asset, k: oi, label: "Other intangibles on the balance sheet", liq: 0, hint: "Software and licences bought recently can stay at book. Bought brands go in the brands line below."}
+  - {type: asset, k: ooa, label: "Other operating assets", liq: 50}
+  - {type: note, cls: intang, label: "What a new competitor would also have to build. Only with <em>Yes</em>: a liquidator gets nothing for these."}
+  - {type: input, cls: intang, k: rd, label: "R&D per year", kind: money}
+  - {type: input, cls: intang, k: ry, label: "Years of R&D to rebuild the products", kind: number, default: 3, hint: "Greenwald: about 3 for consumer products, 6 for cars."}
+  - {type: calc, cls: intang, k: prod, label: "Product portfolio", hint: "R&D per year × years"}
+  - {type: input, cls: intang, k: ib, label: "Base for customers, brands and organization", kind: money, hint: "SG&A, advertising or revenue. Pick one and set the multiple to match."}
+  - {type: input, cls: intang, k: im, label: "Multiple of the base", kind: number, hint: "1 to 3 years of SG&A, or what a brand costs per $1 of sales. Greenwald put Liz Claiborne's brands at 0.60 of sales."}
+  - {type: calc, cls: intang, k: cust, label: "Customers, brands and organization", hint: "Base × multiple"}
+  - {type: input, cls: intang, k: dp, label: "Deal price per $1 of sales", kind: number, hint: "Optional check. What buyers paid for similar businesses or brands, from acquisition notes."}
+  - {type: calc, cls: intang, k: dpv, label: "Customers and brands at deal prices", hint: "Deal price × revenue from section 2. Compare it with the line above."}
+  - {type: total, k: tot, label: "Total assets"}
+  - {type: input, k: sl, label: "(−) Spontaneous liabilities", kind: money, hint: "Payables, accrued expenses and taxes payable: interest-free funding that comes with the business. Debt goes in section 2."}
+  - {type: input, k: dtl, label: "(−) Deferred tax liabilities", kind: money, hint: "At book, or less if they won't be paid for many years."}
+  - {type: total, k: av, label: "Asset value", hint: "Before debt."}
+
+  - {type: head, label: "2. Earnings power value"}
+  - {type: input, k: rev, label: "Revenue", kind: money, key: true, hint: "Latest year. If it's a peak or a trough, use the average of the cycle."}
+  - {type: input, k: mg, label: "Average EBIT margin over the cycle (%)", kind: percent, key: true, signed: true, hint: "A simple average of 7 to 10 years. Only use a recent trend if there's a clear economic reason for it."}
+  - {type: helper, id: gw-margin}
+  - {type: calc, k: sebit, label: "Sustainable EBIT", hint: "Revenue × average margin"}
+  - {type: input, k: roo, label: "(−) Recurring 'one-off' charges", kind: money, hint: "Yearly average. Charges that come back most years are a cost of doing business."}
+  - {type: input, k: gsp, label: "(+) Growth spending above maintenance", kind: money, hint: "Optional. R&D, marketing or hiring clearly above what keeps today's business where it is."}
+  - {type: input, k: oadj, label: "(±) Other adjustments", kind: money, signed: true, hint: "Earnings of affiliates outside EBIT, prices being corrected, and so on."}
+  - {type: total, k: aebit, label: "Adjusted EBIT"}
+  - {type: input, k: tax, label: "Average tax rate (%)", kind: percent, key: true, hint: "The average of the last few years."}
+  - {type: calc, k: nopat, label: "After-tax operating earnings"}
+  - {type: input, k: da, label: "Depreciation & amortization (D&A)", kind: money, key: true, hint: "Average of the last 2 or 3 years."}
+  - {type: input, k: mcx, label: "Maintenance capex", kind: money, key: true, hint: "Total capex minus what growth needed. The helper below does it Greenwald's way."}
+  - {type: helper, id: gw-capex}
+  - {type: calc, k: xd, label: "Excess depreciation", hint: "D&A − maintenance capex"}
+  - {type: input, k: xtax, label: "Tax rate on excess depreciation (%)", kind: percent, hint: "Blank = half the tax rate. The tax shield runs out one day, so Greenwald taxes it at about half the full rate (20% vs 36% for Liz Claiborne)."}
+  - {type: calc, k: axd, label: "After-tax excess depreciation"}
+  - {type: total, k: ep, label: "Earnings power", hint: "What the business could pay out every year and stay as it is."}
+  - {type: note, label: "The rate. Greenwald skips CAPM and picks the cost of equity by how risky the business is."}
+  - {type: input, k: ke, label: "Cost of equity (%)", kind: percent, default: 9, hint: "Low risk 7-8%, medium 9-10%, high 11-13%."}
+  - {type: input, k: kd, label: "Pre-tax cost of debt (%)", kind: percent, hint: "Yield on the company's bonds, or on bonds with the same rating."}
+  - {type: input, k: debt, label: "(−) Debt", kind: money, hint: "Bank loans and bonds."}
+  - {type: calc, k: dw, label: "Debt weight", hint: "Debt ÷ (debt + market cap)"}
+  - {type: input, k: cap, label: "Debt weight cap (%)", kind: percent, default: 30, hint: "Past about 30%, cheap debt hides the cost of distress, so Greenwald stops counting it."}
+  - {type: calc, k: wacc, label: "Cost of capital"}
+  - {type: total, k: R, label: "Rate used", hint: "Rounded to a whole point. Anything more precise is false precision."}
+  - {type: total, k: epvE, label: "EPV of the business", hint: "Earnings power ÷ rate used, before debt and cash."}
+  - {type: input, k: opc, label: "Cash the business needs (% of revenue)", kind: percent, default: 0.5, hint: "Greenwald: 0.25% to 0.5% of revenue. The rest of the cash in section 1 is surplus."}
+  - {type: calc, k: surplus, label: "(+) Surplus cash"}
+  - {type: input, k: noa, label: "(+) Non-operating assets", kind: money, hint: "Spare real estate, investments, affiliates outside EBIT. At market value."}
+  - {type: input, k: leg, label: "(−) Legacy liabilities", kind: money, hint: "Pension deficit, retiree medical, lawsuits, environmental clean-up."}
+  - {type: input, k: pref, label: "(−) Preferred equity", kind: money}
+  - {type: input, k: mi, label: "(−) Minority interests", kind: money}
+  - {type: total, k: epvEq, label: "EPV (equity)"}
+  - {type: total, k: epvps, label: "EPV per share"}
+  - {type: calc, k: mos, label: "Margin of safety", hint: "1 − price ÷ EPV per share. Greenwald wants a third to a half."}
+  - {type: calc, k: emos, label: "Margin of safety on the whole business", hint: "1 − market enterprise value ÷ EPV of the business. Read this one when debt is high."}
+
+  - {type: head, label: "3. Assets vs earnings power"}
+  - {type: calc, k: avOp, label: "Asset value without surplus cash"}
+  - {type: calc, k: ratio, label: "EPV ÷ asset value"}
+  - {type: test, k: case, label: "Greenwald's case", hint: "A: below 0.75x. B: 0.75x to 1.25x. C: above 1.25x."}
+  - {type: calc, k: franchise, label: "Franchise value", hint: "EPV of the business − asset value"}
+  - {type: calc, k: roc, label: "Return on reproduction cost", hint: "Earnings power ÷ asset value. Above the rate used means excess returns, and only a moat keeps them there."}
+  - {type: total, k: avEq, label: "Asset value (equity)", hint: "Asset value + non-operating assets − debt and other claims"}
+  - {type: total, k: avps, label: "Asset value per share"}

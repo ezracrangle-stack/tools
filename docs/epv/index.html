@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../static/style.css?v=cf19e25b">
+<link rel="stylesheet" href="../static/style.css?v=71b12f10">
 <meta property="og:title" content="EPV calculator · Ezra's Notes">
 <meta property="og:description" content="Earnings power value, owner earnings, cash yield and a maximum price, following Phil Oakley's method. Free, and it runs in your browser.">
 <meta property="og:url" content="https://tools.ezrasnotes.com/epv/">
@@ -39,6 +39,7 @@
     <a href="../">All tools</a>
 <a href="../net-net/">Net-net</a>
 <a href="../epv/" aria-current="page">EPV</a>
+<a href="../greenwald/">Greenwald</a>
 <a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
   </nav>
 </header>
@@ -296,6 +297,16 @@
 <a href="#verdict" id="stickybar" class="stickybar" hidden></a>
 
 <section class="prose">
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Profitable businesses with a few years of steady results: consumer brands, distributors, services, small industrial firms that have been around a while. Their profits and capex this year say something about next year, and that's what an EPV needs.</p>
+  <p>It works badly for four kinds of company:</p>
+  <ul>
+    <li><strong>Banks and insurers.</strong> Debt is their raw material and they don't report EBIT or capex the same way. Value them on book value and return on equity.</li>
+    <li><strong>Companies that lose money.</strong> With no cash profits there's no earnings power to value. The balance sheet tells you more; try the <a href="../net-net/">net-net calculator</a>.</li>
+    <li><strong>Cyclicals at a peak or a trough.</strong> Miners, steelmakers, airlines, homebuilders. One year's profits mislead, so average a full cycle before you trust the EPV.</li>
+    <li><strong>Young, fast-growing companies.</strong> The EPV will be a small slice of the price. That's the method doing its job, telling you how much of the price rides on growth, but it can't tell you if that growth will come.</li>
+  </ul>
+
   <h2 class="rule-head">What this calculator can't tell you</h2>
   <p>The worksheet takes your numbers at face value. Four of them decide almost everything, and none comes straight from the annual report:</p>
 
@@ -341,5 +352,5 @@
 <script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
 document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
 var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
-<script type="module" src="../static/epv.js?v=cf19e25b"></script></body>
+<script type="module" src="../static/epv.js?v=71b12f10"></script></body>
 </html>

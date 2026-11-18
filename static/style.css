@@ -268,3 +268,26 @@ footer { margin-top: 56px; padding-top: 14px; border-top: 3px double var(--rule)
   .hgrid-3 .hcol:empty { display: none; }
   .hgrid-2 { grid-template-columns: 1fr 8em; }
 }
+
+/* ── Asset rows (book + reproduction or liquidation %) ── */
+.srow.asset .col input { width: 100%; }
+.srow.asset .fixed { display: block; text-align: right; font: italic 15px/1.2 var(--body); color: var(--mute); padding-right: 13px; }
+.calc .mode-liq { display: none; }
+.calc.mode-liq .mode-liq { display: block; }
+.calc.mode-liq .mode-rep { display: none; }
+.srow.intang.off { opacity: .4; }
+.hgrid-4 { grid-template-columns: 1fr 8em 8em 5em; margin-top: 10px; }
+.hgrid-4 .hint { margin: 2px 0 0; font-size: 13px; }
+@media (max-width: 560px) {
+  .srow.asset .fixed { padding-right: 0; }
+  .hgrid-4 { grid-template-columns: 1fr 6.2em 6.2em; }
+  .hgrid-4 .hmargin { grid-column: 2 / 4; margin-top: -4px; }
+  .hgrid-4 .hcol:last-child { display: none; }
+}
+@media (max-width: 560px) { .srow.head .col { font-size: 10px; letter-spacing: .04em; } }
+.level { margin: 18px 0 0; padding: 14px 16px; border: 1px solid var(--ink); }
+.level p { margin: 0 0 6px; font-size: 16px; }
+.level p:last-child { margin-bottom: 0; }
+.level .kicker { font: 11px/1.2 var(--head); text-transform: uppercase; letter-spacing: .16em; }
+.prose ul { margin: 0 0 14px; padding-left: 20px; }
+.prose li { margin: 0 0 8px; }

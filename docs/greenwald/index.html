@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTNNLB6W9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FTNNLB6W9D');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>Greenwald's moat test · Ezra's Notes</title>
+<meta name="description" content="Bruce Greenwald's test: what it would cost to rebuild a business, what its earnings are worth with no growth, and what the gap says about its moat. Free, and it runs in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css?v=71b12f10">
+<meta property="og:title" content="Greenwald's moat test · Ezra's Notes">
+<meta property="og:description" content="Bruce Greenwald's test: what it would cost to rebuild a business, what its earnings are worth with no growth, and what the gap says about its moat. Free, and it runs in your browser.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/greenwald/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="../static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
+<link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/greenwald/">
+</head>
+<body>
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="../">Tools</a>
+  <p class="byline">By <a href="https://x.com/ezracrangle">@ezracrangle</a></p>
+  <nav>
+    <a href="../">All tools</a>
+<a href="../net-net/">Net-net</a>
+<a href="../epv/">EPV</a>
+<a href="../greenwald/" aria-current="page">Greenwald</a>
+<a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<section class="lede">
+  <h1 class="page-title">Greenwald's moat test</h1>
+  <p class="dek">Bruce Greenwald values a business twice. First, what a new competitor would have to spend to rebuild its assets. Then, what its earnings are worth if they never grow. The gap between the two tells you whether the business has a moat.</p>
+  <p>Copy the numbers from the annual report, top to bottom. Nothing you type leaves your browser. If you want the most to pay for a share, use the <a href="../epv/">EPV calculator</a>, which follows Phil Oakley's method.</p>
+  <div class="level">
+    <p class="kicker">For experienced investors</p>
+    <p>This is the harder of the two EPV calculators. You'll need the notes to the accounts, a guess at what a rival would spend on brands and customers, and a cost of capital you pick yourself. If you're new to EPV, start with the <a href="../epv/">Oakley version</a> and come back.</p>
+  </div>
+</section>
+
+<form id="avform" class="calc" novalidate>
+  <div class="settings">
+    <div><label for="cur">Currency</label>
+      <select id="cur"><option selected>USD</option><option>EUR</option><option>GBP</option><option>CAD</option><option>AUD</option><option>CHF</option><option>JPY</option><option>HKD</option><option>SGD</option><option>SEK</option><option>NOK</option><option>DKK</option><option>MXN</option><option>BRL</option><option>CLP</option><option>COP</option><option>KRW</option><option>INR</option><option>ZAR</option></select></div>
+    <div><label for="u">Amounts in</label>
+      <select id="u"><option value="1">Units</option><option value="1000" selected>Thousands</option><option value="1000000">Millions</option></select></div>
+    <div><label for="su">Shares in</label>
+      <select id="su"><option value="1">Units</option><option value="1000" selected>Thousands</option><option value="1000000">Millions</option></select></div>
+  </div>
+
+  <p class="small">Copy the numbers as the annual report shows them, all in the same unit. The share price always goes in full. Percentages go in as whole numbers: 9 means 9%. Fields with * are needed; leave any other line blank if it doesn't apply.</p>
+
+  <div class="sheet" role="group" aria-label="Assets vs earnings power worksheet">
+    <div class="srow head"><span class="lab">Market data</span></div>
+    <div class="srow in key">
+      <label class="lab" for="f-sh">Diluted shares outstanding *<span class="hint">Basic shares plus in-the-money options and convertibles.</span></label>
+      <span class="cell"><input id="f-sh" data-k="sh" data-kind="shares" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in key">
+      <label class="lab" for="f-p">Share price *<span class="hint">Per share, in full. Never in thousands.</span></label>
+      <span class="cell"><input id="f-p" data-k="p" data-kind="price" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in key">
+      <label class="lab" for="f-via">Can a new competitor make money in this industry?<span class="hint">Greenwald's first question. If yes, an entrant would rebuild these assets, so value them at what that costs. If no, they're worth what a liquidator would get.</span></label>
+      <span class="cell"><select id="f-via" data-choice="via"><option value="y">Yes</option><option value="n">No</option></select></span>
+    </div>
+    <div class="srow head"><span class="lab">1. Asset value</span><span class="col">Book</span><span class="col" id="colhead-mode">Reproduction</span></div>
+    <div class="srow note"><span class="lab">Book values from the balance sheet. With <em>Yes</em> above, type the cost to rebuild in the second column only where it differs from book (blank means book). With <em>No</em>, the second column is the share of book a liquidator would get, filled in with Greenwald's figures. Spare real estate and investments go in section 2.</span></div>
+    <div class="srow asset">
+      <label class="lab" for="f-cash">Cash and marketable securities</label>
+      <span class="col"><input id="f-cash" data-k="cash" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Cash and marketable securities, book value"></span>
+      <span class="col">
+<input class="mode-rep" id="f-rcash" data-k="rcash" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="= book" aria-label="Cash and marketable securities, reproduction cost">        <input class="mode-liq" id="f-lcash" data-k="lcash" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="100" data-default="100" aria-label="Cash and marketable securities, % a liquidator would recover">
+      </span>
+    </div>
+    <div class="srow asset">
+      <label class="lab" for="f-ar">Accounts receivable<span class="hint">To rebuild: add back the bad-debt allowance.</span></label>
+      <span class="col"><input id="f-ar" data-k="ar" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Accounts receivable, book value"></span>
+      <span class="col">
+<input class="mode-rep" id="f-rar" data-k="rar" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="= book" aria-label="Accounts receivable, reproduction cost">        <input class="mode-liq" id="f-lar" data-k="lar" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="85" data-default="85" aria-label="Accounts receivable, % a liquidator would recover">
+      </span>
+    </div>
+    <div class="srow asset">
+      <label class="lab" for="f-inv">Inventory<span class="hint">To rebuild: add back any LIFO reserve. A liquidator gets less than half for fashion or specialized stock.</span></label>
+      <span class="col"><input id="f-inv" data-k="inv" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Inventory, book value"></span>
+      <span class="col">
+<input class="mode-rep" id="f-rinv" data-k="rinv" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="= book" aria-label="Inventory, reproduction cost">        <input class="mode-liq" id="f-linv" data-k="linv" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="50" data-default="50" aria-label="Inventory, % a liquidator would recover">
+      </span>
+    </div>
+    <div class="srow asset">
+      <label class="lab" for="f-oca">Other current assets<span class="hint">Prepaid expenses, deferred tax assets.</span></label>
+      <span class="col"><input id="f-oca" data-k="oca" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Other current assets, book value"></span>
+      <span class="col">
+<input class="mode-rep" id="f-roca" data-k="roca" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="= book" aria-label="Other current assets, reproduction cost">        <input class="mode-liq" id="f-loca" data-k="loca" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="50" data-default="50" aria-label="Other current assets, % a liquidator would recover">
+      </span>
+    </div>
+    <div class="srow asset">
+      <label class="lab" for="f-ppe">Property, plant and equipment<span class="hint">Land and buildings bought long ago usually cost more to rebuild than their book value. Equipment usually costs less.</span></label>
+      <span class="col"><input id="f-ppe" data-k="ppe" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Property, plant and equipment, book value"></span>
+      <span class="col">
+<input class="mode-rep" id="f-rppe" data-k="rppe" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="= book" aria-label="Property, plant and equipment, reproduction cost">        <input class="mode-liq" id="f-lppe" data-k="lppe" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="45" data-default="45" aria-label="Property, plant and equipment, % a liquidator would recover">
+      </span>
+    </div>
+    <div class="srow asset">
+      <label class="lab" for="f-gw">Goodwill<span class="hint">The two lines for intangibles below put a value on what it paid for.</span></label>
+      <span class="col"><input id="f-gw" data-k="gw" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Goodwill, book value"></span>
+      <span class="col">
+<span class="fixed mode-rep">Taken out</span>        <input class="mode-liq" id="f-lgw" data-k="lgw" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="0" data-default="0" aria-label="Goodwill, % a liquidator would recover">
+      </span>
+    </div>
+    <div class="srow asset">
+      <label class="lab" for="f-oi">Other intangibles on the balance sheet<span class="hint">Software and licences bought recently can stay at book. Bought brands go in the brands line below.</span></label>
+      <span class="col"><input id="f-oi" data-k="oi" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Other intangibles on the balance sheet, book value"></span>
+      <span class="col">
+<input class="mode-rep" id="f-roi" data-k="roi" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="= book" aria-label="Other intangibles on the balance sheet, reproduction cost">        <input class="mode-liq" id="f-loi" data-k="loi" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="0" data-default="0" aria-label="Other intangibles on the balance sheet, % a liquidator would recover">
+      </span>
+    </div>
+    <div class="srow asset">
+      <label class="lab" for="f-ooa">Other operating assets</label>
+      <span class="col"><input id="f-ooa" data-k="ooa" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Other operating assets, book value"></span>
+      <span class="col">
+<input class="mode-rep" id="f-rooa" data-k="rooa" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="= book" aria-label="Other operating assets, reproduction cost">        <input class="mode-liq" id="f-looa" data-k="looa" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="50" data-default="50" aria-label="Other operating assets, % a liquidator would recover">
+      </span>
+    </div>
+    <div class="srow note intang"><span class="lab">What a new competitor would also have to build. Only with <em>Yes</em>: a liquidator gets nothing for these.</span></div>
+    <div class="srow in intang">
+      <label class="lab" for="f-rd">R&amp;D per year</label>
+      <span class="cell"><input id="f-rd" data-k="rd" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in intang">
+      <label class="lab" for="f-ry">Years of R&amp;D to rebuild the products<span class="hint">Greenwald: about 3 for consumer products, 6 for cars.</span></label>
+      <span class="cell"><input id="f-ry" data-k="ry" data-kind="number" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="3" data-default="3"></span>
+    </div>
+    <div class="srow calc-row intang"><span class="lab">Product portfolio<span class="hint">R&D per year × years</span></span><output class="cell" id="o-prod">–</output></div>
+    <div class="srow in intang">
+      <label class="lab" for="f-ib">Base for customers, brands and organization<span class="hint">SG&A, advertising or revenue. Pick one and set the multiple to match.</span></label>
+      <span class="cell"><input id="f-ib" data-k="ib" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in intang">
+      <label class="lab" for="f-im">Multiple of the base<span class="hint">1 to 3 years of SG&A, or what a brand costs per $1 of sales. Greenwald put Liz Claiborne's brands at 0.60 of sales.</span></label>
+      <span class="cell"><input id="f-im" data-k="im" data-kind="number" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row intang"><span class="lab">Customers, brands and organization<span class="hint">Base × multiple</span></span><output class="cell" id="o-cust">–</output></div>
+    <div class="srow in intang">
+      <label class="lab" for="f-dp">Deal price per $1 of sales<span class="hint">Optional check. What buyers paid for similar businesses or brands, from acquisition notes.</span></label>
+      <span class="cell"><input id="f-dp" data-k="dp" data-kind="number" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row intang"><span class="lab">Customers and brands at deal prices<span class="hint">Deal price × revenue from section 2. Compare it with the line above.</span></span><output class="cell" id="o-dpv">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Total assets</span><output class="cell" id="o-tot">–</output></div>
+    <div class="srow in">
+      <label class="lab" for="f-sl">(−) Spontaneous liabilities<span class="hint">Payables, accrued expenses and taxes payable: interest-free funding that comes with the business. Debt goes in section 2.</span></label>
+      <span class="cell"><input id="f-sl" data-k="sl" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-dtl">(−) Deferred tax liabilities<span class="hint">At book, or less if they won't be paid for many years.</span></label>
+      <span class="cell"><input id="f-dtl" data-k="dtl" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row total"><span class="lab">Asset value<span class="hint">Before debt.</span></span><output class="cell" id="o-av">–</output></div>
+    <div class="srow head"><span class="lab">2. Earnings power value</span></div>
+    <div class="srow in key">
+      <label class="lab" for="f-rev">Revenue *<span class="hint">Latest year. If it's a peak or a trough, use the average of the cycle.</span></label>
+      <span class="cell"><input id="f-rev" data-k="rev" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in key">
+      <label class="lab" for="f-mg">Average EBIT margin over the cycle (%) *<span class="hint">A simple average of 7 to 10 years. Only use a recent trend if there's a clear economic reason for it.</span></label>
+      <span class="cell"><input id="f-mg" data-k="mg" data-kind="percent" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+<details class="helper" id="help-margin">
+  <summary>Help me calculate the average margin</summary>
+  <p class="hint">Type EBIT and revenue for each year, newest first. A full cycle is best: 7 to 10 years. The simple average of the yearly margins goes into the field above.</p>
+  <div class="hgrid hgrid-3">
+    <span></span><span class="hcol">EBIT</span><span class="hcol">Revenue</span><span class="hcol"></span>
+    <label for="h-e1">Year 1 (latest)</label>
+    <input id="h-e1" data-h="he1" type="text" inputmode="text" autocomplete="off" aria-label="EBIT, year 1">
+    <input id="h-r1" data-h="hr1" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 1">
+    <output class="hmargin" id="hm1"></output>
+    <label for="h-e2">Year 2</label>
+    <input id="h-e2" data-h="he2" type="text" inputmode="text" autocomplete="off" aria-label="EBIT, year 2">
+    <input id="h-r2" data-h="hr2" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 2">
+    <output class="hmargin" id="hm2"></output>
+    <label for="h-e3">Year 3</label>
+    <input id="h-e3" data-h="he3" type="text" inputmode="text" autocomplete="off" aria-label="EBIT, year 3">
+    <input id="h-r3" data-h="hr3" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 3">
+    <output class="hmargin" id="hm3"></output>
+    <label for="h-e4">Year 4</label>
+    <input id="h-e4" data-h="he4" type="text" inputmode="text" autocomplete="off" aria-label="EBIT, year 4">
+    <input id="h-r4" data-h="hr4" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 4">
+    <output class="hmargin" id="hm4"></output>
+    <label for="h-e5">Year 5</label>
+    <input id="h-e5" data-h="he5" type="text" inputmode="text" autocomplete="off" aria-label="EBIT, year 5">
+    <input id="h-r5" data-h="hr5" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 5">
+    <output class="hmargin" id="hm5"></output>
+    <label for="h-e6">Year 6</label>
+    <input id="h-e6" data-h="he6" type="text" inputmode="text" autocomplete="off" aria-label="EBIT, year 6">
+    <input id="h-r6" data-h="hr6" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 6">
+    <output class="hmargin" id="hm6"></output>
+    <label for="h-e7">Year 7</label>
+    <input id="h-e7" data-h="he7" type="text" inputmode="text" autocomplete="off" aria-label="EBIT, year 7">
+    <input id="h-r7" data-h="hr7" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 7">
+    <output class="hmargin" id="hm7"></output>
+    <label for="h-e8">Year 8</label>
+    <input id="h-e8" data-h="he8" type="text" inputmode="text" autocomplete="off" aria-label="EBIT, year 8">
+    <input id="h-r8" data-h="hr8" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 8">
+    <output class="hmargin" id="hm8"></output>
+    <label for="h-e9">Year 9</label>
+    <input id="h-e9" data-h="he9" type="text" inputmode="text" autocomplete="off" aria-label="EBIT, year 9">
+    <input id="h-r9" data-h="hr9" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 9">
+    <output class="hmargin" id="hm9"></output>
+    <label for="h-e10">Year 10</label>
+    <input id="h-e10" data-h="he10" type="text" inputmode="text" autocomplete="off" aria-label="EBIT, year 10">
+    <input id="h-r10" data-h="hr10" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 10">
+    <output class="hmargin" id="hm10"></output>
+  </div>
+  <p class="hresult">Average margin: <output id="h-margin">–</output></p>
+</details>    <div class="srow calc-row"><span class="lab">Sustainable EBIT<span class="hint">Revenue × average margin</span></span><output class="cell" id="o-sebit">–</output></div>
+    <div class="srow in">
+      <label class="lab" for="f-roo">(−) Recurring &#39;one-off&#39; charges<span class="hint">Yearly average. Charges that come back most years are a cost of doing business.</span></label>
+      <span class="cell"><input id="f-roo" data-k="roo" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-gsp">(+) Growth spending above maintenance<span class="hint">Optional. R&D, marketing or hiring clearly above what keeps today's business where it is.</span></label>
+      <span class="cell"><input id="f-gsp" data-k="gsp" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-oadj">(±) Other adjustments<span class="hint">Earnings of affiliates outside EBIT, prices being corrected, and so on.</span></label>
+      <span class="cell"><input id="f-oadj" data-k="oadj" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row total"><span class="lab">Adjusted EBIT</span><output class="cell" id="o-aebit">–</output></div>
+    <div class="srow in key">
+      <label class="lab" for="f-tax">Average tax rate (%) *<span class="hint">The average of the last few years.</span></label>
+      <span class="cell"><input id="f-tax" data-k="tax" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">After-tax operating earnings</span><output class="cell" id="o-nopat">–</output></div>
+    <div class="srow in key">
+      <label class="lab" for="f-da">Depreciation &amp; amortization (D&amp;A) *<span class="hint">Average of the last 2 or 3 years.</span></label>
+      <span class="cell"><input id="f-da" data-k="da" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in key">
+      <label class="lab" for="f-mcx">Maintenance capex *<span class="hint">Total capex minus what growth needed. The helper below does it Greenwald's way.</span></label>
+      <span class="cell"><input id="f-mcx" data-k="mcx" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+<details class="helper" id="help-gcapex">
+  <summary>Help me estimate maintenance capex</summary>
+  <p class="hint">Greenwald's way: only growth needs new capital. Work out how many cents of PP&amp;E the business needs per $1 of sales, multiply by the increase in revenue, and take that growth capex out of total capex. A year when revenue fell has no growth capex.</p>
+  <div class="hgrid hgrid-2">
+    <label for="h-ppe">Net PP&amp;E (latest)</label>
+    <input id="h-ppe" data-h="hppe" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-rev">Revenue (latest)</label>
+    <input id="h-rev" data-h="hrev" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-ci">Your own PP&amp;E per $1 of sales<span class="hint">Optional. Blank = net PP&amp;E ÷ revenue.</span></label>
+    <input id="h-ci" data-h="hci" type="text" inputmode="decimal" autocomplete="off">
+  </div>
+  <p class="hresult">PP&amp;E per $1 of sales: <output id="h-int">–</output></p>
+  <div class="hgrid hgrid-4">
+    <span></span><span class="hcol">Total capex</span><span class="hcol">Revenue change</span><span class="hcol">Maint.</span>
+    <label for="h-c1">Year 1 (latest)<span class="hint">Growth capex: <output id="hg1"></output></span></label>
+    <input id="h-c1" data-h="hc1" type="text" inputmode="decimal" autocomplete="off" aria-label="Total capex, year 1">
+    <input id="h-d1" data-h="hd1" type="text" inputmode="text" autocomplete="off" aria-label="Change in revenue, year 1">
+    <output class="hmargin" id="hmx1"></output>
+    <label for="h-c2">Year 2<span class="hint">Growth capex: <output id="hg2"></output></span></label>
+    <input id="h-c2" data-h="hc2" type="text" inputmode="decimal" autocomplete="off" aria-label="Total capex, year 2">
+    <input id="h-d2" data-h="hd2" type="text" inputmode="text" autocomplete="off" aria-label="Change in revenue, year 2">
+    <output class="hmargin" id="hmx2"></output>
+    <label for="h-c3">Year 3<span class="hint">Growth capex: <output id="hg3"></output></span></label>
+    <input id="h-c3" data-h="hc3" type="text" inputmode="decimal" autocomplete="off" aria-label="Total capex, year 3">
+    <input id="h-d3" data-h="hd3" type="text" inputmode="text" autocomplete="off" aria-label="Change in revenue, year 3">
+    <output class="hmargin" id="hmx3"></output>
+  </div>
+  <p class="hresult">Maintenance capex, average: <output id="h-mcx">–</output></p>
+</details>    <div class="srow calc-row"><span class="lab">Excess depreciation<span class="hint">D&A − maintenance capex</span></span><output class="cell" id="o-xd">–</output></div>
+    <div class="srow in">
+      <label class="lab" for="f-xtax">Tax rate on excess depreciation (%)<span class="hint">Blank = half the tax rate. The tax shield runs out one day, so Greenwald taxes it at about half the full rate (20% vs 36% for Liz Claiborne).</span></label>
+      <span class="cell"><input id="f-xtax" data-k="xtax" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">After-tax excess depreciation</span><output class="cell" id="o-axd">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Earnings power<span class="hint">What the business could pay out every year and stay as it is.</span></span><output class="cell" id="o-ep">–</output></div>
+    <div class="srow note"><span class="lab">The rate. Greenwald skips CAPM and picks the cost of equity by how risky the business is.</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-ke">Cost of equity (%)<span class="hint">Low risk 7-8%, medium 9-10%, high 11-13%.</span></label>
+      <span class="cell"><input id="f-ke" data-k="ke" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="9" data-default="9"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-kd">Pre-tax cost of debt (%)<span class="hint">Yield on the company's bonds, or on bonds with the same rating.</span></label>
+      <span class="cell"><input id="f-kd" data-k="kd" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-debt">(−) Debt<span class="hint">Bank loans and bonds.</span></label>
+      <span class="cell"><input id="f-debt" data-k="debt" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Debt weight<span class="hint">Debt ÷ (debt + market cap)</span></span><output class="cell" id="o-dw">–</output></div>
+    <div class="srow in">
+      <label class="lab" for="f-cap">Debt weight cap (%)<span class="hint">Past about 30%, cheap debt hides the cost of distress, so Greenwald stops counting it.</span></label>
+      <span class="cell"><input id="f-cap" data-k="cap" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="30" data-default="30"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Cost of capital</span><output class="cell" id="o-wacc">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Rate used<span class="hint">Rounded to a whole point. Anything more precise is false precision.</span></span><output class="cell" id="o-R">–</output></div>
+    <div class="srow calc-row total"><span class="lab">EPV of the business<span class="hint">Earnings power ÷ rate used, before debt and cash.</span></span><output class="cell" id="o-epvE">–</output></div>
+    <div class="srow in">
+      <label class="lab" for="f-opc">Cash the business needs (% of revenue)<span class="hint">Greenwald: 0.25% to 0.5% of revenue. The rest of the cash in section 1 is surplus.</span></label>
+      <span class="cell"><input id="f-opc" data-k="opc" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="0.5" data-default="0.5"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">(+) Surplus cash</span><output class="cell" id="o-surplus">–</output></div>
+    <div class="srow in">
+      <label class="lab" for="f-noa">(+) Non-operating assets<span class="hint">Spare real estate, investments, affiliates outside EBIT. At market value.</span></label>
+      <span class="cell"><input id="f-noa" data-k="noa" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-leg">(−) Legacy liabilities<span class="hint">Pension deficit, retiree medical, lawsuits, environmental clean-up.</span></label>
+      <span class="cell"><input id="f-leg" data-k="leg" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-pref">(−) Preferred equity</label>
+      <span class="cell"><input id="f-pref" data-k="pref" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-mi">(−) Minority interests</label>
+      <span class="cell"><input id="f-mi" data-k="mi" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row total"><span class="lab">EPV (equity)</span><output class="cell" id="o-epvEq">–</output></div>
+    <div class="srow calc-row total"><span class="lab">EPV per share</span><output class="cell" id="o-epvps">–</output></div>
+    <div class="srow calc-row"><span class="lab">Margin of safety<span class="hint">1 − price ÷ EPV per share. Greenwald wants a third to a half.</span></span><output class="cell" id="o-mos">–</output></div>
+    <div class="srow calc-row"><span class="lab">Margin of safety on the whole business<span class="hint">1 − market enterprise value ÷ EPV of the business. Read this one when debt is high.</span></span><output class="cell" id="o-emos">–</output></div>
+    <div class="srow head"><span class="lab">3. Assets vs earnings power</span></div>
+    <div class="srow calc-row"><span class="lab">Asset value without surplus cash</span><output class="cell" id="o-avOp">–</output></div>
+    <div class="srow calc-row"><span class="lab">EPV ÷ asset value</span><output class="cell" id="o-ratio">–</output></div>
+    <div class="srow test"><span class="lab">Greenwald&#39;s case<span class="hint">A: below 0.75x. B: 0.75x to 1.25x. C: above 1.25x.</span></span><output class="cell" id="x-case">–</output></div>
+    <div class="srow calc-row"><span class="lab">Franchise value<span class="hint">EPV of the business − asset value</span></span><output class="cell" id="o-franchise">–</output></div>
+    <div class="srow calc-row"><span class="lab">Return on reproduction cost<span class="hint">Earnings power ÷ asset value. Above the rate used means excess returns, and only a moat keeps them there.</span></span><output class="cell" id="o-roc">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Asset value (equity)<span class="hint">Asset value + non-operating assets − debt and other claims</span></span><output class="cell" id="o-avEq">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Asset value per share</span><output class="cell" id="o-avps">–</output></div>
+  </div>
+
+
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
+  <div class="actions">
+    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
+    <button type="button" class="button ghost" id="reset">Clear</button>
+  </div>
+<p class="copy-note">&#34;n/m&#34; means the number behind it is zero or negative, so the result doesn&#39;t mean anything.</p>
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Mature businesses whose assets you can price, in an industry you can draw a line around: manufacturers, retailers, distributors, consumer brands, services with a long record. That's where Greenwald used it, from Liz Claiborne to Hudson General.</p>
+  <p>It works badly for four kinds of company:</p>
+  <ul>
+    <li><strong>Banks and insurers.</strong> Their assets are loans and bonds, and debt is their raw material, so EBIT, capex and the cost of capital mean something else.</li>
+    <li><strong>Young, fast-growing companies.</strong> They have no cycle of margins to average, and almost all their value is growth, which this test leaves out.</li>
+    <li><strong>Businesses built on people or code.</strong> Software, consulting or asset managers carry little on the balance sheet, so the asset value is mostly your guess for the intangibles.</li>
+    <li><strong>Conglomerates.</strong> Each business has its own competitors and its own case. Run the test one segment at a time.</li>
+  </ul>
+
+  <h2 class="rule-head">What this calculator can't tell you</h2>
+  <p>It does Greenwald's arithmetic on your numbers. Three of them are judgment calls, and they decide the case:</p>
+
+  <h3>The intangibles</h3>
+  <p>Brands, customer lists and know-how only show up on the balance sheet when the company bought them. Yet they're often most of what a rival would have to spend. Greenwald asked an industry expert for Liz Claiborne. If you're guessing, try a low and a high figure and see if the case changes.</p>
+
+  <h3>A normal margin</h3>
+  <p>EPV assumes the average margin of the cycle holds forever. Ten years with a recession in them tell you more than three good ones. And if the margin has moved for good (a new rival, a lost patent), the old average is too high.</p>
+
+  <h3>The rate</h3>
+  <p>One point on the rate moves the EPV about 10%. That's why Greenwald rounds it, and why case B covers anything within 25% either way.</p>
+
+  <h3>Whether the moat will last</h3>
+  <p>Case C says the business earns more today than its assets justify. It can't say for how long. That depends on the advantage behind the gap, like captive customers or economies of scale, and you have to find it in how the business works.</p>
+  <p>Growth is left out on purpose. Greenwald only counts it in case C, and with a lot of care.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>From Bruce Greenwald's book <em>Value Investing: From Graham to Buffett and Beyond</em> (2nd edition) and from notes on his classes at Columbia Business School.</p>
+</section>
+
+<aside class="wanted soon-box" id="coming-soon">
+  <p class="wanted-kicker">Coming soon</p>
+  <p class="wanted-head">The AI version</p>
+  <p class="wanted-body">An AI version of this method, built as a Claude skill, is coming. It reads the annual reports, rebuilds the asset value line by line, and values growth when the business has a franchise. Subscribe to Ezra&#39;s Notes to get it first.</p>
+  <iframe class="substack" src="https://www.ezrasnotes.com/embed" title="Subscribe to Ezra's Notes" width="480" height="150" frameborder="0" scrolling="no" loading="lazy"></iframe>
+</aside>
+
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Holdings</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a inversores</a>
+  </p>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
+<script type="module" src="../static/greenwald.js?v=71b12f10"></script></body>
+</html>

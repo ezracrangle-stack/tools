@@ -12,24 +12,39 @@
   </div>
 {% endmacro %}
 
-{# Row types: head, note, helper, input, calc, total, result, ratio, test.
+{# Row types: head, note, helper, input, select, asset, calc, total, result, ratio, test.
+   asset = one balance-sheet line: book value plus reproduction cost or liquidation %. cls adds a CSS class.
    A helper row includes templates/helpers/<id>.html: a fold-out mini calculator under a field. #}
 {% macro rows(list, label) %}
   <div class="sheet" role="group" aria-label="{{ label }}">
   {% for r in list %}
     {% if r.type == 'head' %}
-    <div class="srow head"><span class="lab">{{ r.label }}</span>{% if r.columns %}<span class="col">Total</span><span class="col">Per share</span>{% endif %}</div>
+    <div class="srow head"><span class="lab">{{ r.label }}</span>{% if r.columns %}<span class="col">Total</span><span class="col">Per share</span>{% elif r.cols %}<span class="col">{{ r.cols[0] }}</span><span class="col" id="colhead-mode">{{ r.cols[1] }}</span>{% endif %}</div>
     {% elif r.type == 'helper' %}
     {% include "helpers/" ~ r.id ~ ".html" %}
+    {% elif r.type == 'select' %}
+    <div class="srow in key">
+      <label class="lab" for="f-{{ r.k }}">{{ r.label }}{% if r.hint %}<span class="hint">{{ r.hint|safe }}</span>{% endif %}</label>
+      <span class="cell"><select id="f-{{ r.k }}" data-choice="{{ r.k }}">{% for o in r.options %}<option value="{{ o.v }}">{{ o.t }}</option>{% endfor %}</select></span>
+    </div>
+    {% elif r.type == 'asset' %}
+    <div class="srow asset">
+      <label class="lab" for="f-{{ r.k }}">{{ r.label }}{% if r.hint %}<span class="hint">{{ r.hint|safe }}</span>{% endif %}</label>
+      <span class="col"><input id="f-{{ r.k }}" data-k="{{ r.k }}" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="{{ r.label }}, book value"></span>
+      <span class="col">
+        {% if r.fixed %}<span class="fixed mode-rep">{{ r.fixed }}</span>{% else %}<input class="mode-rep" id="f-r{{ r.k }}" data-k="r{{ r.k }}" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="= book" aria-label="{{ r.label }}, reproduction cost">{% endif %}
+        <input class="mode-liq" id="f-l{{ r.k }}" data-k="l{{ r.k }}" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="{{ r.liq }}" data-default="{{ r.liq }}" aria-label="{{ r.label }}, % a liquidator would recover">
+      </span>
+    </div>
     {% elif r.type == 'note' %}
-    <div class="srow note"><span class="lab">{{ r.label|safe }}</span></div>
+    <div class="srow note{% if r.cls %} {{ r.cls }}{% endif %}"><span class="lab">{{ r.label|safe }}</span></div>
     {% elif r.type == 'input' %}
-    <div class="srow in{% if r.key %} key{% endif %}">
+    <div class="srow in{% if r.key %} key{% endif %}{% if r.cls %} {{ r.cls }}{% endif %}">
       <label class="lab" for="f-{{ r.k }}">{{ r.label }}{% if r.key %} *{% endif %}{% if r.hint %}<span class="hint">{{ r.hint|safe }}</span>{% endif %}</label>
       <span class="cell"><input id="f-{{ r.k }}" data-k="{{ r.k }}" data-kind="{{ r.kind }}"{% if r.signed %} data-signed="1"{% endif %} type="text" inputmode="{{ 'text' if r.signed else 'decimal' }}" autocomplete="off" spellcheck="false"{% if r.default is defined %} value="{{ r.default }}" data-default="{{ r.default }}"{% endif %}></span>
     </div>
     {% elif r.type in ('calc', 'total') %}
-    <div class="srow calc-row{% if r.type == 'total' %} total{% endif %}"><span class="lab">{{ r.label }}{% if r.hint %}<span class="hint">{{ r.hint|safe }}</span>{% endif %}</span><output class="cell" id="o-{{ r.k }}">–</output></div>
+    <div class="srow calc-row{% if r.type == 'total' %} total{% endif %}{% if r.cls %} {{ r.cls }}{% endif %}"><span class="lab">{{ r.label }}{% if r.hint %}<span class="hint">{{ r.hint|safe }}</span>{% endif %}</span><output class="cell" id="o-{{ r.k }}">–</output></div>
     {% elif r.type == 'result' %}
     <div class="srow res"><span class="lab">{{ r.label }}<span class="hint">{{ r.hint }}</span></span><output class="col" id="t-{{ r.k }}">–</output><output class="col" id="ps-{{ r.k }}">–</output></div>
     {% elif r.type == 'ratio' %}

@@ -1,0 +1,14 @@
+<details class="helper" id="help-margin">
+  <summary>Help me calculate the average margin</summary>
+  <p class="hint">Type EBIT and revenue for each year, newest first. A full cycle is best: 7 to 10 years. The simple average of the yearly margins goes into the field above.</p>
+  <div class="hgrid hgrid-3">
+    <span></span><span class="hcol">EBIT</span><span class="hcol">Revenue</span><span class="hcol"></span>
+    {% for i in range(1, 11) %}
+    <label for="h-e{{ i }}">Year {{ i }}{% if i == 1 %} (latest){% endif %}</label>
+    <input id="h-e{{ i }}" data-h="he{{ i }}" type="text" inputmode="text" autocomplete="off" aria-label="EBIT, year {{ i }}">
+    <input id="h-r{{ i }}" data-h="hr{{ i }}" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year {{ i }}">
+    <output class="hmargin" id="hm{{ i }}"></output>
+    {% endfor %}
+  </div>
+  <p class="hresult">Average margin: <output id="h-margin">–</output></p>
+</details>

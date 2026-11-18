@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
+{% block title %}Greenwald's moat test{% endblock %}
+{% block description %}Bruce Greenwald's test: what it would cost to rebuild a business, what its earnings are worth with no growth, and what the gap says about its moat. Free, and it runs in your browser.{% endblock %}
+{% block main %}
+<section class="lede">
+  <h1 class="page-title">Greenwald's moat test</h1>
+  <p class="dek">Bruce Greenwald values a business twice. First, what a new competitor would have to spend to rebuild its assets. Then, what its earnings are worth if they never grow. The gap between the two tells you whether the business has a moat.</p>
+  <p>Copy the numbers from the annual report, top to bottom. Nothing you type leaves your browser. If you want the most to pay for a share, use the <a href="{{ root }}epv/">EPV calculator</a>, which follows Phil Oakley's method.</p>
+  <div class="level">
+    <p class="kicker">For experienced investors</p>
+    <p>This is the harder of the two EPV calculators. You'll need the notes to the accounts, a guess at what a rival would spend on brands and customers, and a cost of capital you pick yourself. If you're new to EPV, start with the <a href="{{ root }}epv/">Oakley version</a> and come back.</p>
+  </div>
+</section>
+
+<form id="avform" class="calc" novalidate>
+{{ sheet.units(currencies) }}
+  <p class="small">Copy the numbers as the annual report shows them, all in the same unit. The share price always goes in full. Percentages go in as whole numbers: 9 means 9%. Fields with * are needed; leave any other line blank if it doesn't apply.</p>
+
+{{ sheet.rows(rows, "Assets vs earnings power worksheet") }}
+
+{{ sheet.actions('"n/m" means the number behind it is zero or negative, so the result doesn\'t mean anything.') }}
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Mature businesses whose assets you can price, in an industry you can draw a line around: manufacturers, retailers, distributors, consumer brands, services with a long record. That's where Greenwald used it, from Liz Claiborne to Hudson General.</p>
+  <p>It works badly for four kinds of company:</p>
+  <ul>
+    <li><strong>Banks and insurers.</strong> Their assets are loans and bonds, and debt is their raw material, so EBIT, capex and the cost of capital mean something else.</li>
+    <li><strong>Young, fast-growing companies.</strong> They have no cycle of margins to average, and almost all their value is growth, which this test leaves out.</li>
+    <li><strong>Businesses built on people or code.</strong> Software, consulting or asset managers carry little on the balance sheet, so the asset value is mostly your guess for the intangibles.</li>
+    <li><strong>Conglomerates.</strong> Each business has its own competitors and its own case. Run the test one segment at a time.</li>
+  </ul>
+
+  <h2 class="rule-head">What this calculator can't tell you</h2>
+  <p>It does Greenwald's arithmetic on your numbers. Three of them are judgment calls, and they decide the case:</p>
+
+  <h3>The intangibles</h3>
+  <p>Brands, customer lists and know-how only show up on the balance sheet when the company bought them. Yet they're often most of what a rival would have to spend. Greenwald asked an industry expert for Liz Claiborne. If you're guessing, try a low and a high figure and see if the case changes.</p>
+
+  <h3>A normal margin</h3>
+  <p>EPV assumes the average margin of the cycle holds forever. Ten years with a recession in them tell you more than three good ones. And if the margin has moved for good (a new rival, a lost patent), the old average is too high.</p>
+
+  <h3>The rate</h3>
+  <p>One point on the rate moves the EPV about 10%. That's why Greenwald rounds it, and why case B covers anything within 25% either way.</p>
+
+  <h3>Whether the moat will last</h3>
+  <p>Case C says the business earns more today than its assets justify. It can't say for how long. That depends on the advantage behind the gap, like captive customers or economies of scale, and you have to find it in how the business works.</p>
+  <p>Growth is left out on purpose. Greenwald only counts it in case C, and with a lot of care.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>From Bruce Greenwald's book <em>Value Investing: From Graham to Buffett and Beyond</em> (2nd edition) and from notes on his classes at Columbia Business School.</p>
+</section>
+
+{{ sheet.coming_soon("An AI version of this method, built as a Claude skill, is coming. It reads the annual reports, rebuilds the asset value line by line, and values growth when the business has a franchise. Subscribe to Ezra's Notes to get it first.", substack_embed) }}
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ root }}static/greenwald.js?v={{ asset_v }}"></script>{% endblock %}

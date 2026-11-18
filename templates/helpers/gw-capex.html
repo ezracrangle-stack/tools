@@ -1,0 +1,23 @@
+<details class="helper" id="help-gcapex">
+  <summary>Help me estimate maintenance capex</summary>
+  <p class="hint">Greenwald's way: only growth needs new capital. Work out how many cents of PP&amp;E the business needs per $1 of sales, multiply by the increase in revenue, and take that growth capex out of total capex. A year when revenue fell has no growth capex.</p>
+  <div class="hgrid hgrid-2">
+    <label for="h-ppe">Net PP&amp;E (latest)</label>
+    <input id="h-ppe" data-h="hppe" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-rev">Revenue (latest)</label>
+    <input id="h-rev" data-h="hrev" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-ci">Your own PP&amp;E per $1 of sales<span class="hint">Optional. Blank = net PP&amp;E ÷ revenue.</span></label>
+    <input id="h-ci" data-h="hci" type="text" inputmode="decimal" autocomplete="off">
+  </div>
+  <p class="hresult">PP&amp;E per $1 of sales: <output id="h-int">–</output></p>
+  <div class="hgrid hgrid-4">
+    <span></span><span class="hcol">Total capex</span><span class="hcol">Revenue change</span><span class="hcol">Maint.</span>
+    {% for i in range(1, 4) %}
+    <label for="h-c{{ i }}">Year {{ i }}{% if i == 1 %} (latest){% endif %}<span class="hint">Growth capex: <output id="hg{{ i }}"></output></span></label>
+    <input id="h-c{{ i }}" data-h="hc{{ i }}" type="text" inputmode="decimal" autocomplete="off" aria-label="Total capex, year {{ i }}">
+    <input id="h-d{{ i }}" data-h="hd{{ i }}" type="text" inputmode="text" autocomplete="off" aria-label="Change in revenue, year {{ i }}">
+    <output class="hmargin" id="hmx{{ i }}"></output>
+    {% endfor %}
+  </div>
+  <p class="hresult">Maintenance capex, average: <output id="h-mcx">–</output></p>
+</details>
