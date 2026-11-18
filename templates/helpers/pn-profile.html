@@ -1,0 +1,12 @@
+<div class="profile">
+  <p class="hsub">Your return for each growth rate</p>
+  <table>
+    <thead><tr><th>Residual income growth</th><th>Your return</th><th>vs your hurdle</th></tr></thead>
+    <tbody>
+    {% for g in range(-3, 8) %}
+      <tr id="pr{{ loop.index0 }}"><td>{{ g }}%</td><td><output id="pf{{ loop.index0 }}">–</output></td><td><output id="pd{{ loop.index0 }}">–</output></td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <p class="hint">Each point of growth adds less than a point of return: the weight is 1 − enterprise book-to-price. Rows in bold reach your hurdle.</p>
+</div>

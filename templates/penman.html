@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
+{% block title %}Penman's residual income calculator{% endblock %}
+{% block description %}Stephen Penman's residual income method: the book value of the operations, the growth the price implies and the return you earn at today's price. Free, and it runs in your browser.{% endblock %}
+{% block main %}
+<section class="lede">
+  <h1 class="page-title">Penman's residual income calculator</h1>
+  <p class="dek">Stephen Penman starts from what you can see: the book value of the business and the profit it will make next year. Whatever the price asks for beyond that is a bet on growth. This calculator works out how much growth the price assumes, and what you earn if it shows up and if it doesn't.</p>
+  <p>Copy the numbers from the annual report, top to bottom. Nothing you type leaves your browser.</p>
+  <div class="level">
+    <p class="kicker">For experienced investors</p>
+    <p>You'll have to split the balance sheet into operations and financing, and no annual report does that for you. Get it wrong and every number below is off. If that's new to you, start with the <a href="{{ root }}epv/">EPV calculator</a>.</p>
+  </div>
+</section>
+
+<form id="pnform" class="calc" novalidate>
+{{ sheet.units(currencies) }}
+  <p class="small">Copy the numbers as the annual report shows them, all in the same unit. The share price always goes in full. Percentages go in as whole numbers: 9 means 9%. Fields with * are needed; leave any other line blank if it doesn't apply.</p>
+
+{{ sheet.rows(rows, "Residual income worksheet") }}
+
+{{ sheet.actions('"n/m" means the number behind it is zero or negative, so the result doesn\'t mean anything.') }}
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Companies with a balance sheet worth anchoring on and a profit you can forecast a year out: manufacturers, retailers, distributors, consumer brands, services with a long record.</p>
+  <p>It works badly for four kinds of company:</p>
+  <ul>
+    <li><strong>Banks and insurers.</strong> Debt is their raw material, so operations and financing can't be split. Penman values them on equity instead.</li>
+    <li><strong>Companies that lose money.</strong> With no operating income, there's nothing to add to the book value.</li>
+    <li><strong>Young companies built on R&amp;D or brands.</strong> The accounting expenses those investments, so NOA is small and RNOA looks huge. The numbers still come out, but most of the price lands in speculative growth.</li>
+    <li><strong>Conglomerates.</strong> Run it one segment at a time, if the segments report their assets.</li>
+  </ul>
+
+  <h2 class="rule-head">What this calculator can't tell you</h2>
+  <p>The arithmetic is simple. Four inputs carry the judgment:</p>
+
+  <h3>The split</h3>
+  <p>Cash the business needs, leases and pensions can go either way. Penman puts most cash in financing, and the helper follows him. Whatever you choose, the check against book equity has to pass.</p>
+
+  <h3>Next year's profit</h3>
+  <p>Everything rests on one forecast. Start from the latest year and adjust for what you know (a contract won, a plant closed). Analyst consensus is a cross-check at most.</p>
+
+  <h3>The accounting behind RNOA</h3>
+  <p>Expensed R&amp;D and advertising, or old write-downs, shrink NOA and pump up RNOA. So a high RNOA proves nothing about a moat until you've checked the accounting.</p>
+
+  <h3>Your hurdle</h3>
+  <p>The implied growth and the no-growth value both move with it. Penman leaves it to you: it's the return you want for the risk you take.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>From Stephen Penman's <em>Accounting for Value</em> (Columbia, 2011). The same model runs through <em>Financial Statement Analysis for Value Investing</em> (Columbia, 2025), which he wrote with Peter Pope.</p>
+</section>
+
+{{ sheet.coming_soon("The full version is coming: an Excel template and an AI skill built for Claude. They add a two-year forecast, growth that fades toward GDP, bear and bull scenarios, and a check on how much of the return comes from debt. Subscribe to Ezra's Notes to hear first.", substack_embed) }}
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ root }}static/penman.js?v={{ asset_v }}"></script>{% endblock %}

@@ -24,6 +24,12 @@ tools:
     status: live
     blurb: Greenwald's test. What it would cost to rebuild the business, what its earnings are worth with no growth, and what the gap says about its moat.
 
+  - slug: penman
+    name: Penman's residual income
+    nav: Penman
+    status: live
+    blurb: Anchor on the book value of the operations, then see the growth the price implies and the return you earn at today's price.
+
   - slug: reverse-dcf
     name: Reverse DCF
     status: soon
@@ -246,3 +252,48 @@ greenwald_rows:
   - {type: calc, k: roc, label: "Return on reproduction cost", hint: "Earnings power ÷ asset value. Above the rate used means excess returns, and only a moat keeps them there."}
   - {type: total, k: avEq, label: "Asset value (equity)", hint: "Asset value + non-operating assets − debt and other claims"}
   - {type: total, k: avps, label: "Asset value per share"}
+
+# Penman's residual income, one-year version of Penman_Residual_Income_Template.xlsx (Parts 1, 3-6).
+penman_rows:
+  - {type: head, label: "Market data"}
+  - {type: input, k: sh, label: "Diluted shares outstanding", kind: shares, key: true, hint: "Basic shares plus in-the-money options and convertibles."}
+  - {type: input, k: p, label: "Share price", kind: price, key: true, hint: "Per share, in full. Never in thousands."}
+
+  - {type: head, label: "1. Operations and financing"}
+  - {type: note, label: "Split the latest balance sheet in two: what runs the business, and how it's financed. The helper below does it line by line."}
+  - {type: input, k: noa, label: "Net operating assets (NOA)", kind: money, key: true, hint: "Operating assets − operating liabilities. Goodwill stays in. Cash usually goes in financing."}
+  - {type: helper, id: pn-bs}
+  - {type: input, k: nfo, label: "Net financial obligations", kind: money, key: true, signed: true, hint: "Debt, leases, preferred and pension deficit, minus cash and investments. Negative if the company has more cash than debt."}
+  - {type: input, k: mi, label: "Minority interest", kind: money}
+  - {type: input, k: eq, label: "Book value of common equity", kind: money, signed: true, hint: "Optional, for the check below."}
+  - {type: test, k: chk, label: "Check: NOA − financial obligations − minority = equity", hint: "If it's off, a line is counted twice or missing."}
+  - {type: calc, k: pnoa, label: "Market value of the operations", hint: "Market cap + net financial obligations + minority interest"}
+  - {type: calc, k: ebp, label: "Enterprise book-to-price", hint: "NOA ÷ market value of the operations"}
+
+  - {type: head, label: "2. Next year's operating income"}
+  - {type: input, k: oi, label: "Core operating income after tax, next year", kind: money, key: true, signed: true, hint: "Operating income without one-time items, taxed at a normal rate, with no interest. Penman trusts a year ahead; go further only with a solid reason."}
+  - {type: helper, id: pn-oi}
+  - {type: input, k: r, label: "Your hurdle rate (%)", kind: percent, default: 9, hint: "The return you want to earn. Penman leaves it to you; he doesn't trust CAPM to set it."}
+  - {type: calc, k: rnoa, label: "Return on net operating assets (RNOA)", hint: "Operating income ÷ NOA"}
+  - {type: total, k: ri, label: "Residual operating income", hint: "Operating income − hurdle × NOA. What the business earns above your hurdle."}
+
+  - {type: head, label: "3. The no-growth value"}
+  - {type: total, k: val, label: "Value per share, no growth", hint: "(NOA + residual income ÷ hurdle − financial obligations − minority) ÷ shares"}
+  - {type: calc, k: mos, label: "Margin of safety", hint: "1 − price ÷ value"}
+  - {type: note, label: "What you pay for, per share and as % of the price:"}
+  - {type: calc, k: b1, label: "1. Book value of the business"}
+  - {type: calc, k: b2, label: "2. Value of next year's residual income"}
+  - {type: total, k: b3, label: "3. Speculative growth", hint: "Price − 1 − 2. The part of the price that depends on growth."}
+
+  - {type: head, label: "4. The growth the price implies"}
+  - {type: input, k: gdp, label: "Long-run GDP growth (%)", kind: percent, default: 4, hint: "Nominal, for the company's currency. Penman uses 4% for the US, on the conservative side."}
+  - {type: total, k: g, label: "Implied residual income growth", hint: "The growth that makes the value equal the price. It's also the growth you need to earn your hurdle."}
+  - {type: calc, k: gvs, label: "Implied growth vs GDP growth", hint: "Above GDP needs a competitive advantage to back it."}
+  - {type: calc, k: irnoa, label: "RNOA the price implies with no growth", hint: "Read this one when residual income is negative: the price assumes profitability recovers."}
+
+  - {type: head, label: "5. Your return at today's price"}
+  - {type: total, k: ngr, label: "Return if growth never comes", hint: "Operating income ÷ market value of the operations. Like the yield on a bond."}
+  - {type: calc, k: rgdp, label: "Return at GDP growth"}
+  - {type: input, k: bond, label: "Company's bond yield (%)", kind: percent, hint: "Optional. Or the yield on corporate bonds with similar risk."}
+  - {type: calc, k: vsb, label: "No-growth return vs the bond yield", hint: "Below zero, the shares pay less than the bonds if growth doesn't come."}
+  - {type: helper, id: pn-profile}

@@ -1,0 +1,24 @@
+<details class="helper" id="help-bs">
+  <summary>Help me split the balance sheet</summary>
+  <p class="hint">Put every line of the latest balance sheet in one of the four groups. The totals go into the fields for NOA, net financial obligations and minority interest.</p>
+  {% set groups = [
+    ("Operating assets", "oa", ["Operating cash (only if the business needs it)", "Receivables", "Inventories", "Other current operating assets", "PP&E", "Right-of-use assets (leases)", "Goodwill and intangibles", "Equity-method investments", "Other operating assets"]),
+    ("Operating liabilities", "ol", ["Accounts payable", "Accrued expenses", "Deferred revenue", "Taxes payable and deferred tax liabilities", "Other operating liabilities and provisions"]),
+    ("Financial assets", "fa", ["Cash and equivalents", "Investments in debt securities"]),
+    ("Financial obligations", "fo", ["Short-term debt", "Long-term debt", "Lease liabilities", "Preferred stock", "Pension deficit", "Other financial obligations"]) ] %}
+  {% for title, key, items in groups %}
+  <p class="hsub">{{ title }}: <output id="h-{{ key }}">–</output></p>
+  <div class="hgrid hgrid-2">
+    {% for it in items %}
+    <label for="h-{{ key }}{{ loop.index }}">{{ it }}</label>
+    <input id="h-{{ key }}{{ loop.index }}" data-h="{{ key }}{{ loop.index }}" type="text" inputmode="decimal" autocomplete="off">
+    {% endfor %}
+  </div>
+  {% endfor %}
+  <div class="hgrid hgrid-2">
+    <label for="h-mi">Minority interest</label>
+    <input id="h-mi" data-h="hmi" type="text" inputmode="decimal" autocomplete="off">
+  </div>
+  <p class="hresult">NOA: <output id="h-noa">–</output></p>
+  <p class="hresult">Net financial obligations: <output id="h-nfo">–</output></p>
+</details>

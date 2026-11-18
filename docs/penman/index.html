@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTNNLB6W9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FTNNLB6W9D');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>Penman's residual income calculator · Ezra's Notes</title>
+<meta name="description" content="Stephen Penman's residual income method: the book value of the operations, the growth the price implies and the return you earn at today's price. Free, and it runs in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css?v=959a5b29">
+<meta property="og:title" content="Penman's residual income calculator · Ezra's Notes">
+<meta property="og:description" content="Stephen Penman's residual income method: the book value of the operations, the growth the price implies and the return you earn at today's price. Free, and it runs in your browser.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/penman/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="../static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
+<link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/penman/">
+</head>
+<body>
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="../">Tools</a>
+  <p class="byline">By <a href="https://x.com/ezracrangle">@ezracrangle</a></p>
+  <nav>
+    <a href="../">All tools</a>
+<a href="../net-net/">Net-net</a>
+<a href="../epv/">EPV</a>
+<a href="../greenwald/">Greenwald</a>
+<a href="../penman/" aria-current="page">Penman</a>
+<a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<section class="lede">
+  <h1 class="page-title">Penman's residual income calculator</h1>
+  <p class="dek">Stephen Penman starts from what you can see: the book value of the business and the profit it will make next year. Whatever the price asks for beyond that is a bet on growth. This calculator works out how much growth the price assumes, and what you earn if it shows up and if it doesn't.</p>
+  <p>Copy the numbers from the annual report, top to bottom. Nothing you type leaves your browser.</p>
+  <div class="level">
+    <p class="kicker">For experienced investors</p>
+    <p>You'll have to split the balance sheet into operations and financing, and no annual report does that for you. Get it wrong and every number below is off. If that's new to you, start with the <a href="../epv/">EPV calculator</a>.</p>
+  </div>
+</section>
+
+<form id="pnform" class="calc" novalidate>
+  <div class="settings">
+    <div><label for="cur">Currency</label>
+      <select id="cur"><option selected>USD</option><option>EUR</option><option>GBP</option><option>CAD</option><option>AUD</option><option>CHF</option><option>JPY</option><option>HKD</option><option>SGD</option><option>SEK</option><option>NOK</option><option>DKK</option><option>MXN</option><option>BRL</option><option>CLP</option><option>COP</option><option>KRW</option><option>INR</option><option>ZAR</option></select></div>
+    <div><label for="u">Amounts in</label>
+      <select id="u"><option value="1">Units</option><option value="1000" selected>Thousands</option><option value="1000000">Millions</option></select></div>
+    <div><label for="su">Shares in</label>
+      <select id="su"><option value="1">Units</option><option value="1000" selected>Thousands</option><option value="1000000">Millions</option></select></div>
+  </div>
+
+  <p class="small">Copy the numbers as the annual report shows them, all in the same unit. The share price always goes in full. Percentages go in as whole numbers: 9 means 9%. Fields with * are needed; leave any other line blank if it doesn't apply.</p>
+
+  <div class="sheet" role="group" aria-label="Residual income worksheet">
+    <div class="srow head"><span class="lab">Market data</span></div>
+    <div class="srow in key">
+      <label class="lab" for="f-sh">Diluted shares outstanding *<span class="hint">Basic shares plus in-the-money options and convertibles.</span></label>
+      <span class="cell"><input id="f-sh" data-k="sh" data-kind="shares" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in key">
+      <label class="lab" for="f-p">Share price *<span class="hint">Per share, in full. Never in thousands.</span></label>
+      <span class="cell"><input id="f-p" data-k="p" data-kind="price" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow head"><span class="lab">1. Operations and financing</span></div>
+    <div class="srow note"><span class="lab">Split the latest balance sheet in two: what runs the business, and how it's financed. The helper below does it line by line.</span></div>
+    <div class="srow in key">
+      <label class="lab" for="f-noa">Net operating assets (NOA) *<span class="hint">Operating assets − operating liabilities. Goodwill stays in. Cash usually goes in financing.</span></label>
+      <span class="cell"><input id="f-noa" data-k="noa" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+<details class="helper" id="help-bs">
+  <summary>Help me split the balance sheet</summary>
+  <p class="hint">Put every line of the latest balance sheet in one of the four groups. The totals go into the fields for NOA, net financial obligations and minority interest.</p>
+  <p class="hsub">Operating assets: <output id="h-oa">–</output></p>
+  <div class="hgrid hgrid-2">
+    <label for="h-oa1">Operating cash (only if the business needs it)</label>
+    <input id="h-oa1" data-h="oa1" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-oa2">Receivables</label>
+    <input id="h-oa2" data-h="oa2" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-oa3">Inventories</label>
+    <input id="h-oa3" data-h="oa3" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-oa4">Other current operating assets</label>
+    <input id="h-oa4" data-h="oa4" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-oa5">PP&amp;E</label>
+    <input id="h-oa5" data-h="oa5" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-oa6">Right-of-use assets (leases)</label>
+    <input id="h-oa6" data-h="oa6" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-oa7">Goodwill and intangibles</label>
+    <input id="h-oa7" data-h="oa7" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-oa8">Equity-method investments</label>
+    <input id="h-oa8" data-h="oa8" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-oa9">Other operating assets</label>
+    <input id="h-oa9" data-h="oa9" type="text" inputmode="decimal" autocomplete="off">
+  </div>
+  <p class="hsub">Operating liabilities: <output id="h-ol">–</output></p>
+  <div class="hgrid hgrid-2">
+    <label for="h-ol1">Accounts payable</label>
+    <input id="h-ol1" data-h="ol1" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-ol2">Accrued expenses</label>
+    <input id="h-ol2" data-h="ol2" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-ol3">Deferred revenue</label>
+    <input id="h-ol3" data-h="ol3" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-ol4">Taxes payable and deferred tax liabilities</label>
+    <input id="h-ol4" data-h="ol4" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-ol5">Other operating liabilities and provisions</label>
+    <input id="h-ol5" data-h="ol5" type="text" inputmode="decimal" autocomplete="off">
+  </div>
+  <p class="hsub">Financial assets: <output id="h-fa">–</output></p>
+  <div class="hgrid hgrid-2">
+    <label for="h-fa1">Cash and equivalents</label>
+    <input id="h-fa1" data-h="fa1" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-fa2">Investments in debt securities</label>
+    <input id="h-fa2" data-h="fa2" type="text" inputmode="decimal" autocomplete="off">
+  </div>
+  <p class="hsub">Financial obligations: <output id="h-fo">–</output></p>
+  <div class="hgrid hgrid-2">
+    <label for="h-fo1">Short-term debt</label>
+    <input id="h-fo1" data-h="fo1" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-fo2">Long-term debt</label>
+    <input id="h-fo2" data-h="fo2" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-fo3">Lease liabilities</label>
+    <input id="h-fo3" data-h="fo3" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-fo4">Preferred stock</label>
+    <input id="h-fo4" data-h="fo4" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-fo5">Pension deficit</label>
+    <input id="h-fo5" data-h="fo5" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-fo6">Other financial obligations</label>
+    <input id="h-fo6" data-h="fo6" type="text" inputmode="decimal" autocomplete="off">
+  </div>
+  <div class="hgrid hgrid-2">
+    <label for="h-mi">Minority interest</label>
+    <input id="h-mi" data-h="hmi" type="text" inputmode="decimal" autocomplete="off">
+  </div>
+  <p class="hresult">NOA: <output id="h-noa">–</output></p>
+  <p class="hresult">Net financial obligations: <output id="h-nfo">–</output></p>
+</details>    <div class="srow in key">
+      <label class="lab" for="f-nfo">Net financial obligations *<span class="hint">Debt, leases, preferred and pension deficit, minus cash and investments. Negative if the company has more cash than debt.</span></label>
+      <span class="cell"><input id="f-nfo" data-k="nfo" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-mi">Minority interest</label>
+      <span class="cell"><input id="f-mi" data-k="mi" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-eq">Book value of common equity<span class="hint">Optional, for the check below.</span></label>
+      <span class="cell"><input id="f-eq" data-k="eq" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow test"><span class="lab">Check: NOA − financial obligations − minority = equity<span class="hint">If it's off, a line is counted twice or missing.</span></span><output class="cell" id="x-chk">–</output></div>
+    <div class="srow calc-row"><span class="lab">Market value of the operations<span class="hint">Market cap + net financial obligations + minority interest</span></span><output class="cell" id="o-pnoa">–</output></div>
+    <div class="srow calc-row"><span class="lab">Enterprise book-to-price<span class="hint">NOA ÷ market value of the operations</span></span><output class="cell" id="o-ebp">–</output></div>
+    <div class="srow head"><span class="lab">2. Next year&#39;s operating income</span></div>
+    <div class="srow in key">
+      <label class="lab" for="f-oi">Core operating income after tax, next year *<span class="hint">Operating income without one-time items, taxed at a normal rate, with no interest. Penman trusts a year ahead; go further only with a solid reason.</span></label>
+      <span class="cell"><input id="f-oi" data-k="oi" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+<details class="helper" id="help-oi">
+  <summary>Help me forecast next year's operating income</summary>
+  <p class="hint">Starts from the latest year at the same after-tax margin. Take one-time items out of operating income first. If you know why the margin will change, type your own figure in the field above instead.</p>
+  <div class="hgrid hgrid-2">
+    <label for="h-rev">Revenue, latest year</label>
+    <input id="h-rev" data-h="hrev" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-ebit">Core operating income before tax, latest year</label>
+    <input id="h-ebit" data-h="hebit" type="text" inputmode="text" autocomplete="off">
+    <label for="h-tax">Tax rate (%)<span class="hint">Blank = 25%.</span></label>
+    <input id="h-tax" data-h="htax" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-gr">Sales growth next year (%)<span class="hint">Blank = 0%.</span></label>
+    <input id="h-gr" data-h="hgr" type="text" inputmode="text" autocomplete="off">
+  </div>
+  <p class="hresult">After-tax margin: <output id="h-margin">–</output></p>
+  <p class="hresult">Operating income next year: <output id="h-oi">–</output></p>
+</details>    <div class="srow in">
+      <label class="lab" for="f-r">Your hurdle rate (%)<span class="hint">The return you want to earn. Penman leaves it to you; he doesn't trust CAPM to set it.</span></label>
+      <span class="cell"><input id="f-r" data-k="r" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="9" data-default="9"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Return on net operating assets (RNOA)<span class="hint">Operating income ÷ NOA</span></span><output class="cell" id="o-rnoa">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Residual operating income<span class="hint">Operating income − hurdle × NOA. What the business earns above your hurdle.</span></span><output class="cell" id="o-ri">–</output></div>
+    <div class="srow head"><span class="lab">3. The no-growth value</span></div>
+    <div class="srow calc-row total"><span class="lab">Value per share, no growth<span class="hint">(NOA + residual income ÷ hurdle − financial obligations − minority) ÷ shares</span></span><output class="cell" id="o-val">–</output></div>
+    <div class="srow calc-row"><span class="lab">Margin of safety<span class="hint">1 − price ÷ value</span></span><output class="cell" id="o-mos">–</output></div>
+    <div class="srow note"><span class="lab">What you pay for, per share and as % of the price:</span></div>
+    <div class="srow calc-row"><span class="lab">1. Book value of the business</span><output class="cell" id="o-b1">–</output></div>
+    <div class="srow calc-row"><span class="lab">2. Value of next year&#39;s residual income</span><output class="cell" id="o-b2">–</output></div>
+    <div class="srow calc-row total"><span class="lab">3. Speculative growth<span class="hint">Price − 1 − 2. The part of the price that depends on growth.</span></span><output class="cell" id="o-b3">–</output></div>
+    <div class="srow head"><span class="lab">4. The growth the price implies</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-gdp">Long-run GDP growth (%)<span class="hint">Nominal, for the company's currency. Penman uses 4% for the US, on the conservative side.</span></label>
+      <span class="cell"><input id="f-gdp" data-k="gdp" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="4" data-default="4"></span>
+    </div>
+    <div class="srow calc-row total"><span class="lab">Implied residual income growth<span class="hint">The growth that makes the value equal the price. It's also the growth you need to earn your hurdle.</span></span><output class="cell" id="o-g">–</output></div>
+    <div class="srow calc-row"><span class="lab">Implied growth vs GDP growth<span class="hint">Above GDP needs a competitive advantage to back it.</span></span><output class="cell" id="o-gvs">–</output></div>
+    <div class="srow calc-row"><span class="lab">RNOA the price implies with no growth<span class="hint">Read this one when residual income is negative: the price assumes profitability recovers.</span></span><output class="cell" id="o-irnoa">–</output></div>
+    <div class="srow head"><span class="lab">5. Your return at today&#39;s price</span></div>
+    <div class="srow calc-row total"><span class="lab">Return if growth never comes<span class="hint">Operating income ÷ market value of the operations. Like the yield on a bond.</span></span><output class="cell" id="o-ngr">–</output></div>
+    <div class="srow calc-row"><span class="lab">Return at GDP growth</span><output class="cell" id="o-rgdp">–</output></div>
+    <div class="srow in">
+      <label class="lab" for="f-bond">Company&#39;s bond yield (%)<span class="hint">Optional. Or the yield on corporate bonds with similar risk.</span></label>
+      <span class="cell"><input id="f-bond" data-k="bond" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">No-growth return vs the bond yield<span class="hint">Below zero, the shares pay less than the bonds if growth doesn't come.</span></span><output class="cell" id="o-vsb">–</output></div>
+<div class="profile">
+  <p class="hsub">Your return for each growth rate</p>
+  <table>
+    <thead><tr><th>Residual income growth</th><th>Your return</th><th>vs your hurdle</th></tr></thead>
+    <tbody>
+      <tr id="pr0"><td>-3%</td><td><output id="pf0">–</output></td><td><output id="pd0">–</output></td></tr>
+      <tr id="pr1"><td>-2%</td><td><output id="pf1">–</output></td><td><output id="pd1">–</output></td></tr>
+      <tr id="pr2"><td>-1%</td><td><output id="pf2">–</output></td><td><output id="pd2">–</output></td></tr>
+      <tr id="pr3"><td>0%</td><td><output id="pf3">–</output></td><td><output id="pd3">–</output></td></tr>
+      <tr id="pr4"><td>1%</td><td><output id="pf4">–</output></td><td><output id="pd4">–</output></td></tr>
+      <tr id="pr5"><td>2%</td><td><output id="pf5">–</output></td><td><output id="pd5">–</output></td></tr>
+      <tr id="pr6"><td>3%</td><td><output id="pf6">–</output></td><td><output id="pd6">–</output></td></tr>
+      <tr id="pr7"><td>4%</td><td><output id="pf7">–</output></td><td><output id="pd7">–</output></td></tr>
+      <tr id="pr8"><td>5%</td><td><output id="pf8">–</output></td><td><output id="pd8">–</output></td></tr>
+      <tr id="pr9"><td>6%</td><td><output id="pf9">–</output></td><td><output id="pd9">–</output></td></tr>
+      <tr id="pr10"><td>7%</td><td><output id="pf10">–</output></td><td><output id="pd10">–</output></td></tr>
+    </tbody>
+  </table>
+  <p class="hint">Each point of growth adds less than a point of return: the weight is 1 − enterprise book-to-price. Rows in bold reach your hurdle.</p>
+</div>  </div>
+
+
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
+  <div class="actions">
+    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
+    <button type="button" class="button ghost" id="reset">Clear</button>
+  </div>
+<p class="copy-note">&#34;n/m&#34; means the number behind it is zero or negative, so the result doesn&#39;t mean anything.</p>
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Companies with a balance sheet worth anchoring on and a profit you can forecast a year out: manufacturers, retailers, distributors, consumer brands, services with a long record.</p>
+  <p>It works badly for four kinds of company:</p>
+  <ul>
+    <li><strong>Banks and insurers.</strong> Debt is their raw material, so operations and financing can't be split. Penman values them on equity instead.</li>
+    <li><strong>Companies that lose money.</strong> With no operating income, there's nothing to add to the book value.</li>
+    <li><strong>Young companies built on R&amp;D or brands.</strong> The accounting expenses those investments, so NOA is small and RNOA looks huge. The numbers still come out, but most of the price lands in speculative growth.</li>
+    <li><strong>Conglomerates.</strong> Run it one segment at a time, if the segments report their assets.</li>
+  </ul>
+
+  <h2 class="rule-head">What this calculator can't tell you</h2>
+  <p>The arithmetic is simple. Four inputs carry the judgment:</p>
+
+  <h3>The split</h3>
+  <p>Cash the business needs, leases and pensions can go either way. Penman puts most cash in financing, and the helper follows him. Whatever you choose, the check against book equity has to pass.</p>
+
+  <h3>Next year's profit</h3>
+  <p>Everything rests on one forecast. Start from the latest year and adjust for what you know (a contract won, a plant closed). Analyst consensus is a cross-check at most.</p>
+
+  <h3>The accounting behind RNOA</h3>
+  <p>Expensed R&amp;D and advertising, or old write-downs, shrink NOA and pump up RNOA. So a high RNOA proves nothing about a moat until you've checked the accounting.</p>
+
+  <h3>Your hurdle</h3>
+  <p>The implied growth and the no-growth value both move with it. Penman leaves it to you: it's the return you want for the risk you take.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>From Stephen Penman's <em>Accounting for Value</em> (Columbia, 2011). The same model runs through <em>Financial Statement Analysis for Value Investing</em> (Columbia, 2025), which he wrote with Peter Pope.</p>
+</section>
+
+<aside class="wanted soon-box" id="coming-soon">
+  <p class="wanted-kicker">Coming soon</p>
+  <p class="wanted-head">The AI version</p>
+  <p class="wanted-body">The full version is coming: an Excel template and an AI skill built for Claude. They add a two-year forecast, growth that fades toward GDP, bear and bull scenarios, and a check on how much of the return comes from debt. Subscribe to Ezra&#39;s Notes to hear first.</p>
+  <iframe class="substack" src="https://www.ezrasnotes.com/embed" title="Subscribe to Ezra's Notes" width="480" height="150" frameborder="0" scrolling="no" loading="lazy"></iframe>
+</aside>
+
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Holdings</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a inversores</a>
+  </p>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
+<script type="module" src="../static/penman.js?v=959a5b29"></script></body>
+</html>

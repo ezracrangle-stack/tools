@@ -1,0 +1,16 @@
+<details class="helper" id="help-oi">
+  <summary>Help me forecast next year's operating income</summary>
+  <p class="hint">Starts from the latest year at the same after-tax margin. Take one-time items out of operating income first. If you know why the margin will change, type your own figure in the field above instead.</p>
+  <div class="hgrid hgrid-2">
+    <label for="h-rev">Revenue, latest year</label>
+    <input id="h-rev" data-h="hrev" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-ebit">Core operating income before tax, latest year</label>
+    <input id="h-ebit" data-h="hebit" type="text" inputmode="text" autocomplete="off">
+    <label for="h-tax">Tax rate (%)<span class="hint">Blank = 25%.</span></label>
+    <input id="h-tax" data-h="htax" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-gr">Sales growth next year (%)<span class="hint">Blank = 0%.</span></label>
+    <input id="h-gr" data-h="hgr" type="text" inputmode="text" autocomplete="off">
+  </div>
+  <p class="hresult">After-tax margin: <output id="h-margin">–</output></p>
+  <p class="hresult">Operating income next year: <output id="h-oi">–</output></p>
+</details>
