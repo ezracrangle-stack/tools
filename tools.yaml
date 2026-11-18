@@ -191,7 +191,7 @@ greenwald_rows:
   - {type: input, cls: intang, k: ry, label: "Years of R&D to rebuild the products", kind: number, default: 3, hint: "Greenwald: about 3 for consumer products, 6 for cars."}
   - {type: calc, cls: intang, k: prod, label: "Product portfolio", hint: "R&D per year × years"}
   - {type: input, cls: intang, k: ib, label: "Base for customers, brands and organization", kind: money, hint: "SG&A, advertising or revenue. Pick one and set the multiple to match."}
-  - {type: input, cls: intang, k: im, label: "Multiple of the base", kind: number, hint: "1 to 3 years of SG&A, or what a brand costs per $1 of sales. Greenwald put Liz Claiborne's brands at 0.60 of sales."}
+  - {type: input, cls: intang, k: im, label: "Multiple of the base", kind: number, hint: "1 to 3 years of SG&A, or what a brand costs per $1 of sales."}
   - {type: calc, cls: intang, k: cust, label: "Customers, brands and organization", hint: "Base × multiple"}
   - {type: input, cls: intang, k: dp, label: "Deal price per $1 of sales", kind: number, hint: "Optional check. What buyers paid for similar businesses or brands, from acquisition notes."}
   - {type: calc, cls: intang, k: dpv, label: "Customers and brands at deal prices", hint: "Deal price × revenue from section 2. Compare it with the line above."}
@@ -215,7 +215,7 @@ greenwald_rows:
   - {type: input, k: mcx, label: "Maintenance capex", kind: money, key: true, hint: "Total capex minus what growth needed. The helper below does it Greenwald's way."}
   - {type: helper, id: gw-capex}
   - {type: calc, k: xd, label: "Excess depreciation", hint: "D&A − maintenance capex"}
-  - {type: input, k: xtax, label: "Tax rate on excess depreciation (%)", kind: percent, hint: "Blank = half the tax rate. The tax shield runs out one day, so Greenwald taxes it at about half the full rate (20% vs 36% for Liz Claiborne)."}
+  - {type: input, k: xtax, label: "Tax rate on excess depreciation (%)", kind: percent, hint: "Blank = half the tax rate. The tax shield runs out one day, so Greenwald taxes it at about half the full rate."}
   - {type: calc, k: axd, label: "After-tax excess depreciation"}
   - {type: total, k: ep, label: "Earnings power", hint: "What the business could pay out every year and stay as it is."}
   - {type: note, label: "The rate. Greenwald skips CAPM and picks the cost of equity by how risky the business is."}
