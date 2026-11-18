@@ -1,0 +1,19 @@
+<details class="helper" id="help-capex">
+  <summary>Help me estimate maintenance capex</summary>
+  <p class="hint">Oakley's order: the company's own figure if it gives one; if not, the higher of the 5- and 10-year average total capex. That average includes some growth spending, so it errs on the safe side. Total capex is PP&amp;E plus intangibles bought, from the cash flow statement.</p>
+  <div class="hgrid hgrid-2">
+    <label for="h-cr">Reported by the company</label>
+    <input id="h-cr" data-h="hcr" type="text" inputmode="decimal" autocomplete="off">
+    {% for i in range(1, 11) %}
+    <label for="h-c{{ i }}">Total capex, year {{ i }}{% if i == 1 %} (latest){% endif %}</label>
+    <input id="h-c{{ i }}" data-h="hc{{ i }}" type="text" inputmode="decimal" autocomplete="off">
+    {% endfor %}
+  </div>
+  <div class="hoptions">
+    <p><span>Reported by the company</span><output id="h-cap-rep">–</output><button type="button" class="hbtn" data-use="rep">Use</button></p>
+    <p><span>5-year average</span><output id="h-cap-5">–</output><button type="button" class="hbtn" data-use="a5">Use</button></p>
+    <p><span>10-year average (years filled)</span><output id="h-cap-10">–</output><button type="button" class="hbtn" data-use="a10">Use</button></p>
+    <p><span>120% of D&amp;A</span><output id="h-cap-da">–</output><button type="button" class="hbtn" data-use="da">Use</button></p>
+    <p class="hsuggest"><span>Oakley's pick: <em id="h-cap-method">–</em></span><output id="h-cap-sug">–</output><button type="button" class="hbtn" data-use="sug">Use</button></p>
+  </div>
+</details>

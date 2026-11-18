@@ -1,0 +1,13 @@
+<details class="helper" id="help-ni">
+  <summary>Help me normalize net income</summary>
+  <p class="hint">Latest year only, not averages: net income is a one-year figure. Costs go in as positive, gains as negative. The result goes into the field above.</p>
+  <div class="hgrid hgrid-2">
+    <label for="h-ni">Reported net income (latest year)</label>
+    <input id="h-ni" data-h="hni" type="text" inputmode="text" autocomplete="off">
+    <label for="h-ot">One-offs that affected tax<span class="hint">Taken out after tax, at the rate in section 2.</span></label>
+    <input id="h-ot" data-h="hot" type="text" inputmode="text" autocomplete="off">
+    <label for="h-on">One-offs with no tax effect<span class="hint">Many impairments aren't tax-deductible. If the report says so, they go here, in full.</span></label>
+    <input id="h-on" data-h="hon" type="text" inputmode="text" autocomplete="off">
+  </div>
+  <p class="hresult">Normalized net income: <output id="h-ni-res">–</output></p>
+</details>

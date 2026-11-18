@@ -1,0 +1,14 @@
+<details class="helper" id="help-ebit">
+  <summary>Help me calculate the average EBIT</summary>
+  <p class="hint">Type the EBIT of each year, newest first. The average of the years you fill goes into the field above. Revenue is optional: it shows the margin, so you can spot a peak year.</p>
+  <div class="hgrid hgrid-3">
+    <span></span><span class="hcol">EBIT</span><span class="hcol">Revenue</span><span class="hcol"></span>
+    {% for i in range(1, 6) %}
+    <label for="h-e{{ i }}">Year {{ i }}{% if i == 1 %} (latest){% endif %}</label>
+    <input id="h-e{{ i }}" data-h="he{{ i }}" type="text" inputmode="text" autocomplete="off" aria-label="EBIT, year {{ i }}">
+    <input id="h-r{{ i }}" data-h="hr{{ i }}" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year {{ i }}">
+    <output class="hmargin" id="hm{{ i }}"></output>
+    {% endfor %}
+  </div>
+  <p class="hresult">Average EBIT: <output id="h-ebit-avg">–</output></p>
+</details>

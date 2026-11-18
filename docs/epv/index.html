@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../static/style.css?v=cf6734d9">
+<link rel="stylesheet" href="../static/style.css?v=cf19e25b">
 <meta property="og:title" content="EPV calculator · Ezra's Notes">
 <meta property="og:description" content="Earnings power value, owner earnings, cash yield and a maximum price, following Phil Oakley's method. Free, and it runs in your browser.">
 <meta property="og:url" content="https://tools.ezrasnotes.com/epv/">
@@ -81,7 +81,34 @@
       <label class="lab" for="f-ebit">Average EBIT (5 years) or latest underlying EBIT *<span class="hint">A 5-year average smooths out one good or bad year.</span></label>
       <span class="cell"><input id="f-ebit" data-k="ebit" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
     </div>
-    <div class="srow note"><span class="lab">One-offs, averaged over the same years. Costs as positive (they get added back), gains as negative.</span></div>
+<details class="helper" id="help-ebit">
+  <summary>Help me calculate the average EBIT</summary>
+  <p class="hint">Type the EBIT of each year, newest first. The average of the years you fill goes into the field above. Revenue is optional: it shows the margin, so you can spot a peak year.</p>
+  <div class="hgrid hgrid-3">
+    <span></span><span class="hcol">EBIT</span><span class="hcol">Revenue</span><span class="hcol"></span>
+    <label for="h-e1">Year 1 (latest)</label>
+    <input id="h-e1" data-h="he1" type="text" inputmode="text" autocomplete="off" aria-label="EBIT, year 1">
+    <input id="h-r1" data-h="hr1" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 1">
+    <output class="hmargin" id="hm1"></output>
+    <label for="h-e2">Year 2</label>
+    <input id="h-e2" data-h="he2" type="text" inputmode="text" autocomplete="off" aria-label="EBIT, year 2">
+    <input id="h-r2" data-h="hr2" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 2">
+    <output class="hmargin" id="hm2"></output>
+    <label for="h-e3">Year 3</label>
+    <input id="h-e3" data-h="he3" type="text" inputmode="text" autocomplete="off" aria-label="EBIT, year 3">
+    <input id="h-r3" data-h="hr3" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 3">
+    <output class="hmargin" id="hm3"></output>
+    <label for="h-e4">Year 4</label>
+    <input id="h-e4" data-h="he4" type="text" inputmode="text" autocomplete="off" aria-label="EBIT, year 4">
+    <input id="h-r4" data-h="hr4" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 4">
+    <output class="hmargin" id="hm4"></output>
+    <label for="h-e5">Year 5</label>
+    <input id="h-e5" data-h="he5" type="text" inputmode="text" autocomplete="off" aria-label="EBIT, year 5">
+    <input id="h-r5" data-h="hr5" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 5">
+    <output class="hmargin" id="hm5"></output>
+  </div>
+  <p class="hresult">Average EBIT: <output id="h-ebit-avg">–</output></p>
+</details>    <div class="srow note"><span class="lab">One-offs, averaged over the same years. Costs as positive (they get added back), gains as negative.</span></div>
     <div class="srow in">
       <label class="lab" for="f-rs">Restructuring costs</label>
       <span class="cell"><input id="f-rs" data-k="rs" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
@@ -120,7 +147,41 @@
       <label class="lab" for="f-mcx">Maintenance capex *<span class="hint">What it costs to keep the business as it is. If the company doesn't say, Oakley uses the higher of the 5- and 10-year average capex. 120% of D&A is a rougher shortcut.</span></label>
       <span class="cell"><input id="f-mcx" data-k="mcx" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
     </div>
-    <div class="srow in">
+<details class="helper" id="help-capex">
+  <summary>Help me estimate maintenance capex</summary>
+  <p class="hint">Oakley's order: the company's own figure if it gives one; if not, the higher of the 5- and 10-year average total capex. That average includes some growth spending, so it errs on the safe side. Total capex is PP&amp;E plus intangibles bought, from the cash flow statement.</p>
+  <div class="hgrid hgrid-2">
+    <label for="h-cr">Reported by the company</label>
+    <input id="h-cr" data-h="hcr" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-c1">Total capex, year 1 (latest)</label>
+    <input id="h-c1" data-h="hc1" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-c2">Total capex, year 2</label>
+    <input id="h-c2" data-h="hc2" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-c3">Total capex, year 3</label>
+    <input id="h-c3" data-h="hc3" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-c4">Total capex, year 4</label>
+    <input id="h-c4" data-h="hc4" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-c5">Total capex, year 5</label>
+    <input id="h-c5" data-h="hc5" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-c6">Total capex, year 6</label>
+    <input id="h-c6" data-h="hc6" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-c7">Total capex, year 7</label>
+    <input id="h-c7" data-h="hc7" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-c8">Total capex, year 8</label>
+    <input id="h-c8" data-h="hc8" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-c9">Total capex, year 9</label>
+    <input id="h-c9" data-h="hc9" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-c10">Total capex, year 10</label>
+    <input id="h-c10" data-h="hc10" type="text" inputmode="decimal" autocomplete="off">
+  </div>
+  <div class="hoptions">
+    <p><span>Reported by the company</span><output id="h-cap-rep">–</output><button type="button" class="hbtn" data-use="rep">Use</button></p>
+    <p><span>5-year average</span><output id="h-cap-5">–</output><button type="button" class="hbtn" data-use="a5">Use</button></p>
+    <p><span>10-year average (years filled)</span><output id="h-cap-10">–</output><button type="button" class="hbtn" data-use="a10">Use</button></p>
+    <p><span>120% of D&amp;A</span><output id="h-cap-da">–</output><button type="button" class="hbtn" data-use="da">Use</button></p>
+    <p class="hsuggest"><span>Oakley's pick: <em id="h-cap-method">–</em></span><output id="h-cap-sug">–</output><button type="button" class="hbtn" data-use="sug">Use</button></p>
+  </div>
+</details>    <div class="srow in">
       <label class="lab" for="f-lease">Lease payments<span class="hint">Optional, for IFRS 16 reporters: their D&A includes the depreciation of leased assets, so take off the rent actually paid. If you fill this, leave lease liabilities out of debt.</span></label>
       <span class="cell"><input id="f-lease" data-k="lease" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
     </div>
@@ -166,7 +227,19 @@
       <label class="lab" for="f-ni">Normalized net income<span class="hint">Latest year, without one-off gains or losses. Needed for sections 4 and 5.</span></label>
       <span class="cell"><input id="f-ni" data-k="ni" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
     </div>
-    <div class="srow in">
+<details class="helper" id="help-ni">
+  <summary>Help me normalize net income</summary>
+  <p class="hint">Latest year only, not averages: net income is a one-year figure. Costs go in as positive, gains as negative. The result goes into the field above.</p>
+  <div class="hgrid hgrid-2">
+    <label for="h-ni">Reported net income (latest year)</label>
+    <input id="h-ni" data-h="hni" type="text" inputmode="text" autocomplete="off">
+    <label for="h-ot">One-offs that affected tax<span class="hint">Taken out after tax, at the rate in section 2.</span></label>
+    <input id="h-ot" data-h="hot" type="text" inputmode="text" autocomplete="off">
+    <label for="h-on">One-offs with no tax effect<span class="hint">Many impairments aren't tax-deductible. If the report says so, they go here, in full.</span></label>
+    <input id="h-on" data-h="hon" type="text" inputmode="text" autocomplete="off">
+  </div>
+  <p class="hresult">Normalized net income: <output id="h-ni-res">–</output></p>
+</details>    <div class="srow in">
       <label class="lab" for="f-onc">Other non-cash items<span class="hint">Stock-based compensation, deferred tax, write-downs. D&A, maintenance capex and leases come from section 2.</span></label>
       <span class="cell"><input id="f-onc" data-k="onc" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
     </div>
@@ -268,5 +341,5 @@
 <script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
 document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
 var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
-<script type="module" src="../static/epv.js?v=cf6734d9"></script></body>
+<script type="module" src="../static/epv.js?v=cf19e25b"></script></body>
 </html>

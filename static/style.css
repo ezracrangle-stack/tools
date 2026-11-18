@@ -237,3 +237,34 @@ footer { margin-top: 56px; padding-top: 14px; border-top: 3px double var(--rule)
 .srow.note .lab { font: italic 15px/1.4 var(--body); color: var(--mute); grid-column: 1 / -1; }
 .srow.calc-row.total .lab { font-weight: 600; }
 .srow.calc-row.total output { color: var(--ink); font-style: normal; font-family: var(--head); font-size: 17px; }
+
+/* ── Helpers: fold-out mini calculators under a field ── */
+.helper { margin: 0 0 4px; padding: 0 0 8px; border-bottom: 1px solid var(--hair); }
+.helper summary { cursor: pointer; font: 12px/1.3 var(--head); text-transform: uppercase; letter-spacing: .08em; padding: 8px 0; list-style: none; }
+.helper summary::-webkit-details-marker { display: none; }
+.helper summary::before { content: "+ "; }
+.helper[open] summary::before { content: "− "; }
+.helper[open] { background: var(--hover); padding: 0 12px 12px; }
+.helper .hint { display: block; font: italic 14px/1.4 var(--body); color: var(--mute); margin: 0 0 10px; }
+.hgrid { display: grid; gap: 8px 12px; align-items: center; }
+.hgrid-2 { grid-template-columns: 1fr 9.5em; }
+.hgrid-3 { grid-template-columns: 1fr 8em 8em 4.5em; }
+.hgrid label { font-size: 16px; }
+.hgrid .hcol { font: 11px/1 var(--head); text-transform: uppercase; letter-spacing: .1em; text-align: right; }
+.hmargin { font-size: 14px; color: var(--mute); text-align: right; }
+.calc .helper input { font-size: 17px; padding: 8px 10px; }
+.hresult { margin: 12px 0 0; font-weight: 600; text-align: right; }
+.hresult output { font-family: var(--head); margin-left: 8px; }
+.hoptions { margin-top: 12px; border-top: 1px solid var(--hair); }
+.hoptions p { display: grid; grid-template-columns: 1fr auto auto; gap: 12px; align-items: center; margin: 0; padding: 6px 0; border-bottom: 1px solid var(--hair); }
+.hoptions output { font-variant-numeric: tabular-nums; }
+.hoptions .hsuggest { font-weight: 600; }
+.hbtn { font: 11px/1 var(--head); text-transform: uppercase; letter-spacing: .1em; background: none; color: var(--ink); border: 1px solid var(--ink); padding: 6px 9px 5px; cursor: pointer; }
+.hbtn:hover { background: var(--ink); color: var(--paper); }
+.hbtn:disabled { opacity: .35; cursor: default; background: none; color: var(--ink); }
+@media (max-width: 560px) {
+  .hgrid-3 { grid-template-columns: 1fr 6.2em 6.2em; }
+  .hgrid-3 .hmargin { grid-column: 2 / 4; margin-top: -4px; }
+  .hgrid-3 .hcol:empty { display: none; }
+  .hgrid-2 { grid-template-columns: 1fr 8em; }
+}

@@ -44,6 +44,30 @@ export function compute(x) {
     orate, maxp, bmaxp, ideal, cyi, vsmax, sell });
 }
 
+// ── Helpers (Helper A, B and C in the Excel template) ─────────────────────
+const avg = (xs) => { const v = xs.filter((n) => n !== null); return v.length ? v.reduce((a, b) => a + b, 0) / v.length : 0; };
+
+// Helper A: average EBIT of the years filled (C100), margins where revenue is given.
+export function helperEbit(ebits, revenues) {
+  const n = ebits.filter((v) => v !== null).length;
+  const margins = ebits.map((e, i) => (e !== null && revenues[i] > 0 ? e / revenues[i] : null));
+  return { avg: avg(ebits), n, margins };
+}
+
+// Helper B: the company's figure, else the higher of the 5- and 10-year averages (C115-C119).
+export function helperCapex(reported, capex, da) {
+  const a5 = avg(capex.slice(0, 5)), a10 = avg(capex), d120 = 1.2 * da;
+  const hasRep = reported !== null && reported > 0;
+  const sug = hasRep ? reported : Math.max(a5, a10);
+  const method = hasRep ? "Reported by the company" : a5 === 0 && a10 === 0 ? "–" : a10 > a5 ? "10-year average" : "5-year average";
+  return { rep: hasRep ? reported : 0, a5, a10, d120, sug, method };
+}
+
+// Helper C: normalized net income (C126).
+export function helperNI(ni, taxed, untaxed, tax) {
+  return ni + taxed * (1 - tax) + untaxed;
+}
+
 export function check(x, res, raw, signed) {
   const errors = [], warnings = [];
   for (const [k, v] of Object.entries(raw)) {
@@ -137,7 +161,10 @@ if (typeof document !== "undefined") {
     el.textContent = text;
     el.classList.toggle("neg", !!neg);
   }
-  const clearAll = () => form.querySelectorAll("output").forEach((o) => { o.textContent = "–"; o.classList.remove("neg"); });
+  const clearAll = () => form.querySelectorAll("output").forEach((o) => {
+    if (o.closest(".helper")) return; // helper results stay; they don't depend on the main fields
+    o.textContent = "–"; o.classList.remove("neg");
+  });
 
   let lastSig = "", timer = null;
   function render(source) {
@@ -212,11 +239,56 @@ if (typeof document !== "undefined") {
     const v = {};
     settings.forEach((k) => { v[k] = $(k).value; });
     fields.forEach((f) => { if (f.value.trim() !== "") v[f.dataset.k] = f.value.replace(/[\s,]/g, ""); });
+    hfields.forEach((f) => { if (f.value.trim() !== "") v[f.dataset.h] = f.value.replace(/[\s,]/g, ""); });
     return v;
   }
 
+  // ── Helpers ──
+  const hfields = [...form.querySelectorAll("input[data-h]")];
+  const hv = (k) => { const el = form.querySelector(`input[data-h="${k}"]`); const v = el ? parseNumber(el.value) : null; return ok(v) ? v : null; };
+  const writeField = (k, v, u) => {
+    const f = $("f-" + k);
+    const shown = Math.round((v / u) * 1000) / 1000;
+    f.value = Math.abs(shown) >= 1000 ? fmtInput(shown) : String(shown);
+  };
+  const fmtH = (v) => v.toLocaleString("en-US", { maximumFractionDigits: 1 });
+  function runHelpers(changed) {
+    const { x, u, cur } = read();
+    // A: average EBIT
+    const e = [1, 2, 3, 4, 5].map((i) => hv("he" + i)), rv = [1, 2, 3, 4, 5].map((i) => hv("hr" + i));
+    const A = helperEbit(e, rv);
+    A.margins.forEach((m, i) => { $("hm" + (i + 1)).textContent = m === null ? "" : pct(m, 1); });
+    $("h-ebit-avg").textContent = A.n ? `${fmtH(A.avg)} (${A.n} year${A.n > 1 ? "s" : ""})` : "–";
+    if (changed === "A" && A.n) writeField("ebit", A.avg * u, u);
+    // B: maintenance capex
+    const B = helperCapex(hv("hcr"), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => hv("hc" + i)), x.da / u);
+    const show = (id, v) => { $(id).textContent = v > 0 ? fmtH(v) : "–"; };
+    show("h-cap-rep", B.rep); show("h-cap-5", B.a5); show("h-cap-10", B.a10); show("h-cap-da", B.d120); show("h-cap-sug", B.sug);
+    $("h-cap-method").textContent = B.method;
+    const pick = { rep: B.rep, a5: B.a5, a10: B.a10, da: B.d120, sug: B.sug };
+    form.querySelectorAll(".hbtn").forEach((b) => { b.disabled = !(pick[b.dataset.use] > 0); b.dataset.v = pick[b.dataset.use]; });
+    // C: normalized net income
+    const ni = hv("hni");
+    const C = ni === null ? null : helperNI(ni, hv("hot") || 0, hv("hon") || 0, x.tax);
+    $("h-ni-res").textContent = C === null ? "–" : fmtH(C);
+    if ((changed === "C" || changed === "tax") && C !== null) writeField("ni", C * u, u);
+  }
+  hfields.forEach((f) => {
+    const group = f.dataset.h.startsWith("he") || f.dataset.h.startsWith("hr") ? "A" : f.dataset.h.startsWith("hc") ? "B" : "C";
+    f.addEventListener("input", (ev) => { ev.stopPropagation(); runHelpers(group); render("typing"); });
+    f.addEventListener("blur", () => { const v = parseNumber(f.value); if (ok(v) && Math.abs(v) >= 1000) f.value = fmtInput(v); });
+  });
+  form.querySelectorAll(".hbtn").forEach((b) => b.addEventListener("click", () => {
+    const v = Number(b.dataset.v);
+    if (v > 0) { writeField("mcx", v * Number($("u").value), Number($("u").value)); render("typing"); runHelpers(); }
+  }));
+
   form.addEventListener("submit", (e) => e.preventDefault());
-  form.addEventListener("input", () => render("typing"));
+  form.addEventListener("input", (ev) => {
+    if (ev.target.dataset && ev.target.dataset.h) return;
+    runHelpers(ev.target.id === "f-tax" ? "tax" : undefined);
+    render("typing");
+  });
   settings.forEach((k) => $(k).addEventListener("change", () => render("typing")));
   fields.forEach((f) => f.addEventListener("blur", () => {
     const v = parseNumber(f.value);
@@ -237,7 +309,8 @@ if (typeof document !== "undefined") {
   });
   $("reset").addEventListener("click", () => {
     fields.forEach((f) => { f.value = f.dataset.default || ""; });
-    showErrors([]); clearAll(); render("typing");
+    hfields.forEach((f) => { f.value = ""; });
+    showErrors([]); clearAll(); render("typing"); runHelpers();
     try { history.replaceState(null, "", window.location.pathname); } catch (e) { /* preview */ }
   });
 
@@ -249,8 +322,11 @@ if (typeof document !== "undefined") {
       const v = parseNumber(q[f.dataset.k]);
       f.value = ok(v) && Math.abs(v) >= 1000 ? fmtInput(v) : q[f.dataset.k];
     });
+    hfields.forEach((f) => { if (q[f.dataset.h] !== undefined) { f.value = q[f.dataset.h]; f.closest("details").open = true; } });
+    runHelpers();
     render("link");
   } else {
+    runHelpers();
     render("typing");
   }
 }

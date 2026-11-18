@@ -95,6 +95,7 @@ epv_rows:
 
   - {type: head, label: "1. Normalized EBIT"}
   - {type: input, k: ebit, label: "Average EBIT (5 years) or latest underlying EBIT", kind: money, key: true, signed: true, hint: "A 5-year average smooths out one good or bad year."}
+  - {type: helper, id: epv-ebit}
   - {type: note, label: "One-offs, averaged over the same years. Costs as positive (they get added back), gains as negative."}
   - {type: input, k: rs, label: "Restructuring costs", kind: money, signed: true}
   - {type: input, k: imp, label: "Impairments and write-downs", kind: money, signed: true}
@@ -108,6 +109,7 @@ epv_rows:
   - {type: head, label: "2. Cash profits"}
   - {type: input, k: da, label: "Depreciation & amortization (D&A)", kind: money, key: true, hint: "Latest year, from the cash flow statement."}
   - {type: input, k: mcx, label: "Maintenance capex", kind: money, key: true, hint: "What it costs to keep the business as it is. If the company doesn't say, Oakley uses the higher of the 5- and 10-year average capex. 120% of D&A is a rougher shortcut."}
+  - {type: helper, id: epv-capex}
   - {type: input, k: lease, label: "Lease payments", kind: money, hint: "Optional, for IFRS 16 reporters: their D&A includes the depreciation of leased assets, so take off the rent actually paid. If you fill this, leave lease liabilities out of debt."}
   - {type: calc, k: pre, label: "Pre-tax cash profits", hint: "Normalized EBIT + D&A − maintenance capex − lease payments"}
   - {type: input, k: tax, label: "Tax rate (%)", kind: percent, default: 25, hint: "If the effective rate is below the statutory rate, Oakley uses the statutory one."}
@@ -129,6 +131,7 @@ epv_rows:
 
   - {type: head, label: "4. Owner earnings and cash yield"}
   - {type: input, k: ni, label: "Normalized net income", kind: money, signed: true, hint: "Latest year, without one-off gains or losses. Needed for sections 4 and 5."}
+  - {type: helper, id: epv-ni}
   - {type: input, k: onc, label: "Other non-cash items", kind: money, signed: true, hint: "Stock-based compensation, deferred tax, write-downs. D&A, maintenance capex and leases come from section 2."}
   - {type: total, k: oe, label: "Owner earnings", hint: "Net income + D&A + other non-cash − maintenance capex − lease payments"}
   - {type: total, k: oeps, label: "Owner earnings per share"}

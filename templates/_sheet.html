@@ -12,12 +12,15 @@
   </div>
 {% endmacro %}
 
-{# Row types: head, note, input, calc, total, result, ratio, test #}
+{# Row types: head, note, helper, input, calc, total, result, ratio, test.
+   A helper row includes templates/helpers/<id>.html: a fold-out mini calculator under a field. #}
 {% macro rows(list, label) %}
   <div class="sheet" role="group" aria-label="{{ label }}">
   {% for r in list %}
     {% if r.type == 'head' %}
     <div class="srow head"><span class="lab">{{ r.label }}</span>{% if r.columns %}<span class="col">Total</span><span class="col">Per share</span>{% endif %}</div>
+    {% elif r.type == 'helper' %}
+    {% include "helpers/" ~ r.id ~ ".html" %}
     {% elif r.type == 'note' %}
     <div class="srow note"><span class="lab">{{ r.label|safe }}</span></div>
     {% elif r.type == 'input' %}
