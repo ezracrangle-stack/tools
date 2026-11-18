@@ -1,0 +1,17 @@
+<details class="helper intang" id="help-intang">
+  <summary>Help me estimate intangible investment</summary>
+  <p class="hint">Type each expense as the income statement shows it, and the share you count as investment. Leave out costs tied to this year's sales (the paper leaves out Amazon's fulfillment costs). Amortization is straight-line and starts the year after the spending. The paper's choices for Amazon: 75% of technology and content over 5 years; 50% of marketing and 20% of G&amp;A over 3 years.</p>
+  {% for n, name, pctd, life in [(1, "Technology, content and R&D", 75, 5), (2, "Marketing", 50, 3), (3, "General and administrative", 20, 3)] %}
+  <p class="hsub">{{ name }}</p>
+  <div class="hgrid hgrid-2">
+    <label for="h-l{{ n }}a">This year</label><input id="h-l{{ n }}a" data-h="l{{ n }}a" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l{{ n }}p">% that's investment<span class="hint">Paper for Amazon: {{ pctd }}%</span></label><input id="h-l{{ n }}p" data-h="l{{ n }}p" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l{{ n }}l">Life in years (up to 5)<span class="hint">Paper for Amazon: {{ life }}</span></label><input id="h-l{{ n }}l" data-h="l{{ n }}l" type="text" inputmode="decimal" autocomplete="off">
+    {% for k in range(1, 6) %}
+    <label for="h-l{{ n }}y{{ k }}">{{ k }} year{{ "s" if k > 1 }} ago</label><input id="h-l{{ n }}y{{ k }}" data-h="l{{ n }}y{{ k }}" type="text" inputmode="decimal" autocomplete="off">
+    {% endfor %}
+  </div>
+  {% endfor %}
+  <p class="hresult">Intangible investment: <output id="h-ii">–</output></p>
+  <p class="hresult">Amortization of past investment: <output id="h-ia">–</output></p>
+</details>

@@ -36,6 +36,12 @@ tools:
     status: live
     blurb: Graham's growth formula, the Graham number and his seven tests for the defensive investor, as he wrote them in The Intelligent Investor.
 
+  - slug: fcf
+    name: Mauboussin's FCF
+    nav: Mauboussin
+    status: live
+    blurb: Mauboussin and Callahan's fixes to the cash flow statement. Free cash flow after stock pay and leases, and how much the company really invests.
+
   - slug: reverse-dcf
     name: Reverse DCF
     status: soon
@@ -357,3 +363,63 @@ graham_rows:
   - {type: calc, k: eg, label: "Growth in 3-year average EPS over ten years"}
   - {type: test, k: t5, label: "5. Earnings growth", hint: "At least a third more over ten years."}
   - {type: total, k: n, label: "Tests passed, of 7", hint: "Tests 6 and 7 from section 2 count separately."}
+
+# Free cash flow, recast (Mauboussin & Callahan, Categorizing for Clarity, 2021), same order as Mauboussin_FCF_Template.xlsx.
+fcf_rows:
+  - {type: head, label: "1. From the cash flow statement"}
+  - {type: note, label: "Type outflows as positive numbers, and the section totals with their sign, as the statement shows them."}
+  - {type: input, k: cfo, label: "Cash flow from operating activities", kind: money, key: true, signed: true}
+  - {type: input, k: sbc, label: "Stock-based compensation", kind: money, hint: "The amount added back inside operating cash flow."}
+  - {type: input, k: capex, label: "Purchases of property and equipment", kind: money, key: true}
+  - {type: input, k: prc, label: "Proceeds from property and equipment sales", kind: money}
+  - {type: input, k: acq, label: "Acquisitions, net of cash acquired", kind: money}
+  - {type: input, k: cfi, label: "Cash flow from investing activities (total)", kind: money, signed: true, hint: "Negative when the company invests more than it receives."}
+  - {type: input, k: lease, label: "Principal repayments of finance leases", kind: money, hint: "In financing activities. Add other financing obligations for leased assets, if any."}
+  - {type: input, k: cff, label: "Cash flow from financing activities (total)", kind: money, signed: true}
+
+  - {type: head, label: "2. Free cash flow, four ways"}
+  - {type: total, k: fcf, label: "Popular free cash flow", hint: "Operating cash flow − net capex. Common, and the paper calls it misleading."}
+  - {type: calc, k: fcfS, label: "After stock-based compensation", hint: "Stock pay is shares sold to pay employees: a real cost."}
+  - {type: calc, k: fcfL, label: "After leases", hint: "Assets bought with a lease are investment too."}
+  - {type: total, k: fcfSL, label: "After stock pay and leases"}
+  - {type: calc, k: shrink, label: "How much smaller free cash flow gets"}
+  - {type: calc, k: sbcCfo, label: "Stock pay as % of operating cash flow", hint: "Paper, Russell 1000 in 2020: median 5.7%, and 25% for tech."}
+  - {type: calc, k: sbcFcf, label: "Stock pay as % of popular free cash flow"}
+
+  - {type: head, label: "3. Intangible investment (optional)"}
+  - type: select
+    k: intg
+    label: "Move intangible investment to investing?"
+    hint: "The paper's biggest adjustment, and the one with the most judgment in it. It doesn't change free cash flow: it shows how much the company really invests."
+    options: [{v: "n", t: "No"}, {v: "y", t: "Yes"}]
+  - {type: input, cls: intang, k: ii, label: "Intangible investment this year", kind: money, hint: "The discretionary part of R&D, marketing and G&A. The helper below estimates it."}
+  - {type: helper, id: fcf-intang}
+  - {type: input, cls: intang, k: ia, label: "Amortization of past intangible investment", kind: money}
+  - {type: input, cls: intang, k: ni, label: "Net income", kind: money, signed: true, hint: "Optional, for the line below."}
+  - {type: calc, cls: intang, k: niA, label: "Net income, adjusted", hint: "+ intangible investment − its amortization"}
+
+  - {type: head, label: "4. The statement, recast"}
+  - type: select
+    k: ms
+    label: "Treat marketable securities as cash?"
+    hint: "Optional, and the paper calls it more open to debate. It makes sense for cash-rich companies with short-term securities they don't need to operate."
+    options: [{v: "n", t: "No"}, {v: "y", t: "Yes"}]
+  - {type: input, k: msp, label: "Purchases of marketable securities", kind: money}
+  - {type: input, k: mss, label: "Sales and maturities of marketable securities", kind: money}
+  - {type: helper, id: fcf-table}
+
+  - {type: head, label: "5. How much the company really invests"}
+  - {type: total, k: inv, label: "Total investment", hint: "Net capex + leased assets + acquisitions + intangible investment (if you moved it)"}
+  - {type: calc, k: invRep, label: "What the statement shows", hint: "Net capex + acquisitions"}
+  - {type: total, k: invX, label: "Real investment ÷ what the statement shows"}
+  - {type: calc, k: invCfo, label: "Investment as % of adjusted operating cash flow", hint: "Above 100%, the company had to raise money or spend cash to fund it."}
+
+  - {type: head, label: "6. The multiples (optional)"}
+  - {type: input, k: ev, label: "Enterprise value", kind: money}
+  - {type: input, k: ebitda, label: "EBITDA, reported", kind: money}
+  - {type: calc, k: evR, label: "EV/EBITDA, reported"}
+  - {type: total, k: evA, label: "EV/EBITDA, with intangible investment", hint: "EBITDA rises by the full intangible investment. For Amazon in 2020 the paper gets 18x instead of 35x."}
+  - {type: input, k: sh, label: "Diluted shares", kind: shares}
+  - {type: input, k: p, label: "Share price", kind: price}
+  - {type: calc, k: yR, label: "Popular free cash flow yield"}
+  - {type: total, k: yA, label: "Yield after stock pay and leases"}

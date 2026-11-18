@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTNNLB6W9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FTNNLB6W9D');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>Mauboussin's FCF: free cash flow, recast · Ezra's Notes</title>
+<meta name="description" content="Michael Mauboussin and Dan Callahan's adjustments to the cash flow statement: free cash flow after stock pay and leases, and how much a company really invests. Free, and it runs in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css?v=09ee5a05">
+<meta property="og:title" content="Mauboussin's FCF: free cash flow, recast · Ezra's Notes">
+<meta property="og:description" content="Michael Mauboussin and Dan Callahan's adjustments to the cash flow statement: free cash flow after stock pay and leases, and how much a company really invests. Free, and it runs in your browser.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/fcf/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="../static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
+<link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/fcf/">
+</head>
+<body>
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="../">Tools</a>
+  <p class="byline">By <a href="https://x.com/ezracrangle">@ezracrangle</a></p>
+  <nav>
+    <a href="../">All tools</a>
+<a href="../net-net/">Net-net</a>
+<a href="../epv/">EPV</a>
+<a href="../greenwald/">Greenwald</a>
+<a href="../penman/">Penman</a>
+<a href="../graham/">Graham</a>
+<a href="../fcf/" aria-current="page">Mauboussin</a>
+<a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<section class="lede">
+  <h1 class="page-title">Mauboussin's FCF</h1>
+  <p class="dek">Most people work out free cash flow as operating cash flow minus capex. Michael Mauboussin and Dan Callahan show why that number flatters a lot of companies: it adds back stock pay, leaves out assets bought with leases, and hides the money spent on intangibles inside operating costs.</p>
+  <p>Copy a few lines from the cash flow statement and you get free cash flow four ways, the statement recast and the real size of the investment. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="fcfform" class="calc" novalidate>
+  <div class="settings">
+    <div><label for="cur">Currency</label>
+      <select id="cur"><option selected>USD</option><option>EUR</option><option>GBP</option><option>CAD</option><option>AUD</option><option>CHF</option><option>JPY</option><option>HKD</option><option>SGD</option><option>SEK</option><option>NOK</option><option>DKK</option><option>MXN</option><option>BRL</option><option>CLP</option><option>COP</option><option>KRW</option><option>INR</option><option>ZAR</option></select></div>
+<div><label for="u">Amounts in</label>
+      <select id="u"><option value="1">Units</option><option value="1000" selected>Thousands</option><option value="1000000">Millions</option></select></div>
+    <div><label for="su">Shares in</label>
+      <select id="su"><option value="1">Units</option><option value="1000" selected>Thousands</option><option value="1000000">Millions</option></select></div>  </div>
+
+  <p class="small">Copy the numbers as the annual report shows them, all in the same unit. Fields with * are needed; everything else is optional.</p>
+
+  <div class="sheet" role="group" aria-label="Cash flow worksheet">
+    <div class="srow head"><span class="lab">1. From the cash flow statement</span></div>
+    <div class="srow note"><span class="lab">Type outflows as positive numbers, and the section totals with their sign, as the statement shows them.</span></div>
+    <div class="srow in key">
+      <label class="lab" for="f-cfo">Cash flow from operating activities *</label>
+      <span class="cell"><input id="f-cfo" data-k="cfo" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-sbc">Stock-based compensation<span class="hint">The amount added back inside operating cash flow.</span></label>
+      <span class="cell"><input id="f-sbc" data-k="sbc" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in key">
+      <label class="lab" for="f-capex">Purchases of property and equipment *</label>
+      <span class="cell"><input id="f-capex" data-k="capex" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-prc">Proceeds from property and equipment sales</label>
+      <span class="cell"><input id="f-prc" data-k="prc" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-acq">Acquisitions, net of cash acquired</label>
+      <span class="cell"><input id="f-acq" data-k="acq" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-cfi">Cash flow from investing activities (total)<span class="hint">Negative when the company invests more than it receives.</span></label>
+      <span class="cell"><input id="f-cfi" data-k="cfi" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-lease">Principal repayments of finance leases<span class="hint">In financing activities. Add other financing obligations for leased assets, if any.</span></label>
+      <span class="cell"><input id="f-lease" data-k="lease" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-cff">Cash flow from financing activities (total)</label>
+      <span class="cell"><input id="f-cff" data-k="cff" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow head"><span class="lab">2. Free cash flow, four ways</span></div>
+    <div class="srow calc-row total"><span class="lab">Popular free cash flow<span class="hint">Operating cash flow − net capex. Common, and the paper calls it misleading.</span></span><output class="cell" id="o-fcf">–</output></div>
+    <div class="srow calc-row"><span class="lab">After stock-based compensation<span class="hint">Stock pay is shares sold to pay employees: a real cost.</span></span><output class="cell" id="o-fcfS">–</output></div>
+    <div class="srow calc-row"><span class="lab">After leases<span class="hint">Assets bought with a lease are investment too.</span></span><output class="cell" id="o-fcfL">–</output></div>
+    <div class="srow calc-row total"><span class="lab">After stock pay and leases</span><output class="cell" id="o-fcfSL">–</output></div>
+    <div class="srow calc-row"><span class="lab">How much smaller free cash flow gets</span><output class="cell" id="o-shrink">–</output></div>
+    <div class="srow calc-row"><span class="lab">Stock pay as % of operating cash flow<span class="hint">Paper, Russell 1000 in 2020: median 5.7%, and 25% for tech.</span></span><output class="cell" id="o-sbcCfo">–</output></div>
+    <div class="srow calc-row"><span class="lab">Stock pay as % of popular free cash flow</span><output class="cell" id="o-sbcFcf">–</output></div>
+    <div class="srow head"><span class="lab">3. Intangible investment (optional)</span></div>
+    <div class="srow in key">
+      <label class="lab" for="f-intg">Move intangible investment to investing?<span class="hint">The paper's biggest adjustment, and the one with the most judgment in it. It doesn't change free cash flow: it shows how much the company really invests.</span></label>
+      <span class="cell"><select id="f-intg" data-choice="intg"><option value="n">No</option><option value="y">Yes</option></select></span>
+    </div>
+    <div class="srow in intang">
+      <label class="lab" for="f-ii">Intangible investment this year<span class="hint">The discretionary part of R&D, marketing and G&A. The helper below estimates it.</span></label>
+      <span class="cell"><input id="f-ii" data-k="ii" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+<details class="helper intang" id="help-intang">
+  <summary>Help me estimate intangible investment</summary>
+  <p class="hint">Type each expense as the income statement shows it, and the share you count as investment. Leave out costs tied to this year's sales (the paper leaves out Amazon's fulfillment costs). Amortization is straight-line and starts the year after the spending. The paper's choices for Amazon: 75% of technology and content over 5 years; 50% of marketing and 20% of G&amp;A over 3 years.</p>
+  <p class="hsub">Technology, content and R&amp;D</p>
+  <div class="hgrid hgrid-2">
+    <label for="h-l1a">This year</label><input id="h-l1a" data-h="l1a" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l1p">% that's investment<span class="hint">Paper for Amazon: 75%</span></label><input id="h-l1p" data-h="l1p" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l1l">Life in years (up to 5)<span class="hint">Paper for Amazon: 5</span></label><input id="h-l1l" data-h="l1l" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l1y1">1 year ago</label><input id="h-l1y1" data-h="l1y1" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l1y2">2 years ago</label><input id="h-l1y2" data-h="l1y2" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l1y3">3 years ago</label><input id="h-l1y3" data-h="l1y3" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l1y4">4 years ago</label><input id="h-l1y4" data-h="l1y4" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l1y5">5 years ago</label><input id="h-l1y5" data-h="l1y5" type="text" inputmode="decimal" autocomplete="off">
+  </div>
+  <p class="hsub">Marketing</p>
+  <div class="hgrid hgrid-2">
+    <label for="h-l2a">This year</label><input id="h-l2a" data-h="l2a" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l2p">% that's investment<span class="hint">Paper for Amazon: 50%</span></label><input id="h-l2p" data-h="l2p" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l2l">Life in years (up to 5)<span class="hint">Paper for Amazon: 3</span></label><input id="h-l2l" data-h="l2l" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l2y1">1 year ago</label><input id="h-l2y1" data-h="l2y1" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l2y2">2 years ago</label><input id="h-l2y2" data-h="l2y2" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l2y3">3 years ago</label><input id="h-l2y3" data-h="l2y3" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l2y4">4 years ago</label><input id="h-l2y4" data-h="l2y4" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l2y5">5 years ago</label><input id="h-l2y5" data-h="l2y5" type="text" inputmode="decimal" autocomplete="off">
+  </div>
+  <p class="hsub">General and administrative</p>
+  <div class="hgrid hgrid-2">
+    <label for="h-l3a">This year</label><input id="h-l3a" data-h="l3a" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l3p">% that's investment<span class="hint">Paper for Amazon: 20%</span></label><input id="h-l3p" data-h="l3p" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l3l">Life in years (up to 5)<span class="hint">Paper for Amazon: 3</span></label><input id="h-l3l" data-h="l3l" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l3y1">1 year ago</label><input id="h-l3y1" data-h="l3y1" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l3y2">2 years ago</label><input id="h-l3y2" data-h="l3y2" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l3y3">3 years ago</label><input id="h-l3y3" data-h="l3y3" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l3y4">4 years ago</label><input id="h-l3y4" data-h="l3y4" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-l3y5">5 years ago</label><input id="h-l3y5" data-h="l3y5" type="text" inputmode="decimal" autocomplete="off">
+  </div>
+  <p class="hresult">Intangible investment: <output id="h-ii">–</output></p>
+  <p class="hresult">Amortization of past investment: <output id="h-ia">–</output></p>
+</details>    <div class="srow in intang">
+      <label class="lab" for="f-ia">Amortization of past intangible investment</label>
+      <span class="cell"><input id="f-ia" data-k="ia" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in intang">
+      <label class="lab" for="f-ni">Net income<span class="hint">Optional, for the line below.</span></label>
+      <span class="cell"><input id="f-ni" data-k="ni" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row intang"><span class="lab">Net income, adjusted<span class="hint">+ intangible investment − its amortization</span></span><output class="cell" id="o-niA">–</output></div>
+    <div class="srow head"><span class="lab">4. The statement, recast</span></div>
+    <div class="srow in key">
+      <label class="lab" for="f-ms">Treat marketable securities as cash?<span class="hint">Optional, and the paper calls it more open to debate. It makes sense for cash-rich companies with short-term securities they don't need to operate.</span></label>
+      <span class="cell"><select id="f-ms" data-choice="ms"><option value="n">No</option><option value="y">Yes</option></select></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-msp">Purchases of marketable securities</label>
+      <span class="cell"><input id="f-msp" data-k="msp" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-mss">Sales and maturities of marketable securities</label>
+      <span class="cell"><input id="f-mss" data-k="mss" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+<div class="profile">
+  <table>
+    <thead><tr><th>Cash flow from</th><th>Reported</th><th>Recast</th><th>Change</th></tr></thead>
+    <tbody>
+      <tr><td>Operating activities</td><td><output id="t-cfoR">–</output></td><td><output id="t-cfoA">–</output></td><td><output id="t-cfoD">–</output></td></tr>
+      <tr><td>Investing activities</td><td><output id="t-cfiR">–</output></td><td><output id="t-cfiA">–</output></td><td><output id="t-cfiD">–</output></td></tr>
+      <tr><td>Financing activities</td><td><output id="t-cffR">–</output></td><td><output id="t-cffA">–</output></td><td></td></tr>
+    </tbody>
+  </table>
+  <p class="hint">Stock pay moves from operating to financing; lease repayments from financing to investing; intangible investment from operating to investing. The three moves add up to zero, so the change in cash stays the same.</p>
+</div>    <div class="srow head"><span class="lab">5. How much the company really invests</span></div>
+    <div class="srow calc-row total"><span class="lab">Total investment<span class="hint">Net capex + leased assets + acquisitions + intangible investment (if you moved it)</span></span><output class="cell" id="o-inv">–</output></div>
+    <div class="srow calc-row"><span class="lab">What the statement shows<span class="hint">Net capex + acquisitions</span></span><output class="cell" id="o-invRep">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Real investment ÷ what the statement shows</span><output class="cell" id="o-invX">–</output></div>
+    <div class="srow calc-row"><span class="lab">Investment as % of adjusted operating cash flow<span class="hint">Above 100%, the company had to raise money or spend cash to fund it.</span></span><output class="cell" id="o-invCfo">–</output></div>
+    <div class="srow head"><span class="lab">6. The multiples (optional)</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-ev">Enterprise value</label>
+      <span class="cell"><input id="f-ev" data-k="ev" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-ebitda">EBITDA, reported</label>
+      <span class="cell"><input id="f-ebitda" data-k="ebitda" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">EV/EBITDA, reported</span><output class="cell" id="o-evR">–</output></div>
+    <div class="srow calc-row total"><span class="lab">EV/EBITDA, with intangible investment<span class="hint">EBITDA rises by the full intangible investment. For Amazon in 2020 the paper gets 18x instead of 35x.</span></span><output class="cell" id="o-evA">–</output></div>
+    <div class="srow in">
+      <label class="lab" for="f-sh">Diluted shares</label>
+      <span class="cell"><input id="f-sh" data-k="sh" data-kind="shares" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-p">Share price</label>
+      <span class="cell"><input id="f-p" data-k="p" data-kind="price" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Popular free cash flow yield</span><output class="cell" id="o-yR">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Yield after stock pay and leases</span><output class="cell" id="o-yA">–</output></div>
+  </div>
+
+
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
+  <div class="actions">
+    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
+    <button type="button" class="button ghost" id="reset">Clear</button>
+  </div>
+<p class="copy-note">&#34;n/m&#34; means the number behind it is zero or negative, so the result doesn&#39;t mean anything.</p>
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Almost any company outside finance. It matters most for three kinds:</p>
+  <ul>
+    <li><strong>Tech and young companies that pay in stock.</strong> In the paper's data, stock pay was about 15% of sales for the smallest companies in the Russell 1000.</li>
+    <li><strong>Retailers, airlines and anyone who leases big assets.</strong> Buying and leasing a plane are both investment, but only the purchase shows up in investing.</li>
+    <li><strong>Businesses built on R&amp;D, software or brands.</strong> Most of their investment sits in operating costs.</li>
+  </ul>
+  <p>It doesn't work for banks and insurers, whose cash flow statements mix operations and financing by design.</p>
+
+  <h2 class="rule-head">What this calculator can't tell you</h2>
+
+  <h3>How much of SG&amp;A is investment</h3>
+  <p>The split between spending that builds the business and spending that keeps it running is a judgment call, and it changes by industry and by company. The paper's percentages for Amazon are a starting point to argue with.</p>
+
+  <h3>Whether the investment pays</h3>
+  <p>Negative free cash flow is fine, even welcome, when the return on the investment is good. This page tells you how big the investment is. Whether it earns its keep is a question for the return on capital.</p>
+
+  <h3>The other changes a valuation needs</h3>
+  <p>The paper notes that an unlevered DCF needs more than these moves, starting with a proper NOPAT. Free cash flow, properly defined as NOPAT minus investment, doesn't change with any of them.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>Michael J. Mauboussin and Dan Callahan, "Categorizing for Clarity: Cash Flow Statement Adjustments to Improve Insight," Counterpoint Global Insights (Morgan Stanley Investment Management), October 6, 2021. Their case study is Amazon in 2020.</p>
+</section>
+
+<aside class="wanted soon-box" id="coming-soon">
+  <p class="wanted-kicker">Coming soon</p>
+  <p class="wanted-head">The AI version</p>
+  <p class="wanted-body">The full version is coming: an Excel template and an AI skill built for Claude. The skill reads the annual reports, splits SG&amp;A into maintenance and investment, and builds the amortization schedule for you. Subscribe to Ezra&#39;s Notes to hear first.</p>
+  <iframe class="substack" src="https://www.ezrasnotes.com/embed" title="Subscribe to Ezra's Notes" width="480" height="150" frameborder="0" scrolling="no" loading="lazy"></iframe>
+</aside>
+
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Holdings</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a inversores</a>
+  </p>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
+<script type="module" src="../static/fcf.js?v=09ee5a05"></script></body>
+</html>
