@@ -233,3 +233,7 @@ footer { margin-top: 56px; padding-top: 14px; border-top: 3px double var(--rule)
 .prose p { margin: 0 0 14px; }
 .soon-box { margin-top: 44px; }
 .substack { display: block; width: 100%; max-width: 480px; height: 150px; margin: 14px auto 0; border: 1px solid var(--hair); background: #fff; }
+.srow.note { padding: 10px 0 4px; border-bottom: 0; }
+.srow.note .lab { font: italic 15px/1.4 var(--body); color: var(--mute); grid-column: 1 / -1; }
+.srow.calc-row.total .lab { font-weight: 600; }
+.srow.calc-row.total output { color: var(--ink); font-style: normal; font-family: var(--head); font-size: 17px; }

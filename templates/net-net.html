@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
 {% block title %}Net-net calculator{% endblock %}
 {% block description %}Graham's NCAV, modern NCAV, net net working capital and net cash per share, against the price. Free, and it runs in your browser.{% endblock %}
 {% block main %}
@@ -9,45 +10,12 @@
 </section>
 
 <form id="netnet" class="calc" novalidate>
-  <div class="settings">
-    <div><label for="cur">Currency</label>
-      <select id="cur">{% for c in currencies %}<option{% if c == 'USD' %} selected{% endif %}>{{ c }}</option>{% endfor %}</select></div>
-    <div><label for="u">Amounts in</label>
-      <select id="u"><option value="1">Units</option><option value="1000" selected>Thousands</option><option value="1000000">Millions</option></select></div>
-    <div><label for="su">Shares in</label>
-      <select id="su"><option value="1">Units</option><option value="1000" selected>Thousands</option><option value="1000000">Millions</option></select></div>
-  </div>
+{{ sheet.units(currencies) }}
   <p class="small">Copy the numbers as the filing shows them. Most 10-Ks report amounts and shares in thousands. The price always goes in full. Fields with * are needed; leave any other line blank if the company doesn't have it.</p>
 
-  <div class="sheet" role="group" aria-label="Net-net worksheet">
-  {% for r in rows %}
-    {% if r.type == 'head' %}
-    <div class="srow head"><span class="lab">{{ r.label }}</span>{% if r.columns %}<span class="col">Total</span><span class="col">Per share</span>{% endif %}</div>
-    {% elif r.type == 'input' %}
-    <div class="srow in{% if r.key %} key{% endif %}">
-      <label class="lab" for="f-{{ r.k }}">{{ r.label }}{% if r.key %} *{% endif %}{% if r.hint %}<span class="hint">{{ r.hint }}</span>{% endif %}</label>
-      <span class="cell"><input id="f-{{ r.k }}" data-k="{{ r.k }}" data-kind="{{ r.kind }}" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"{% if r.default is defined %} value="{{ r.default }}" data-default="{{ r.default }}"{% endif %}></span>
-    </div>
-    {% elif r.type == 'calc' %}
-    <div class="srow calc-row"><span class="lab">{{ r.label }}<span class="hint">{{ r.hint }}</span></span><output class="cell" id="o-{{ r.k }}">–</output></div>
-    {% elif r.type == 'result' %}
-    <div class="srow res"><span class="lab">{{ r.label }}<span class="hint">{{ r.hint }}</span></span><output class="col" id="t-{{ r.k }}">–</output><output class="col" id="ps-{{ r.k }}">–</output></div>
-    {% elif r.type == 'ratio' %}
-    <div class="srow ratio"><span class="lab">{{ r.label }}</span><output class="col" id="r-{{ r.k }}">–</output><span class="col"></span></div>
-    {% elif r.type == 'test' %}
-    <div class="srow test"><span class="lab">{{ r.label }}</span><output class="cell" id="x-{{ r.k }}">–</output></div>
-    {% endif %}
-  {% endfor %}
-  </div>
+{{ sheet.rows(rows, "Net-net worksheet") }}
 
-  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the four fields marked * and the results appear as you type.</p></div>
-  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
-
-  <div class="actions">
-    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
-    <button type="button" class="button ghost" id="reset">Clear</button>
-  </div>
-  <p class="copy-note">"n/m" means the value per share is zero or negative, so the ratio doesn't mean anything.</p>
+{{ sheet.actions('"n/m" means the value per share is zero or negative, so the ratio doesn\'t mean anything.') }}
 </form>
 
 <a href="#verdict" id="stickybar" class="stickybar" hidden></a>
@@ -74,11 +42,6 @@
   <p>The modern version of NCAV also subtracts off-balance-sheet liabilities and preferred stock, because both get paid before common shareholders.</p>
 </section>
 
-<aside class="wanted soon-box" id="coming-soon">
-  <p class="wanted-kicker">Coming soon</p>
-  <p class="wanted-head">The AI version</p>
-  <p class="wanted-body">An AI version of this method, built as a Claude skill, is coming. It reads the filings, adjusts the balance sheet and tells you whether the discount is real. Subscribe to Ezra's Notes to get it first.</p>
-  <iframe class="substack" src="{{ substack_embed }}" title="Subscribe to Ezra's Notes" width="480" height="150" frameborder="0" scrolling="no" loading="lazy"></iframe>
-</aside>
+{{ sheet.coming_soon("An AI version of this method, built as a Claude skill, is coming. It reads the filings, adjusts the balance sheet and tells you whether the discount is real. Subscribe to Ezra's Notes to get it first.", substack_embed) }}
 {% endblock %}
 {% block scripts %}<script type="module" src="{{ root }}static/net-net.js?v={{ asset_v }}"></script>{% endblock %}

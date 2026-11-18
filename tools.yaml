@@ -14,8 +14,9 @@ tools:
 
   - slug: epv
     name: Earnings power value
-    status: soon
-    blurb: What the business is worth if it never grows.
+    nav: EPV
+    status: live
+    blurb: What the business is worth if today's cash profits never grow, how much of the price is a bet on growth, and the most you should pay.
 
   - slug: reverse-dcf
     name: Reverse DCF
@@ -83,3 +84,73 @@ net_net_rows:
   - {type: input, k: max, label: "Your max P/NCAV", kind: number, default: 0.66, hint: "Graham bought at 0.66 or less. Many investors today accept anything under 1."}
   - {type: test, k: graham, label: "Graham NCAV test"}
   - {type: test, k: modern, label: "Modern NCAV test"}
+
+# The EPV calculator (Phil Oakley's method), row by row, in the same order as Oakley_EPV_Template.xlsx.
+# signed: true lets a field take negative numbers.
+epv_rows:
+  - {type: head, label: "Market data"}
+  - {type: input, k: sh, label: "Shares outstanding (latest)", kind: shares, key: true, hint: "Used for EPV per share."}
+  - {type: input, k: wsh, label: "Weighted average diluted shares", kind: shares, hint: "Optional. Used for owner earnings per share. Blank = shares outstanding."}
+  - {type: input, k: p, label: "Share price", kind: price, key: true, hint: "Per share, in full. Never in thousands."}
+
+  - {type: head, label: "1. Normalized EBIT"}
+  - {type: input, k: ebit, label: "Average EBIT (5 years) or latest underlying EBIT", kind: money, key: true, signed: true, hint: "A 5-year average smooths out one good or bad year."}
+  - {type: note, label: "One-offs, averaged over the same years. Costs as positive (they get added back), gains as negative."}
+  - {type: input, k: rs, label: "Restructuring costs", kind: money, signed: true}
+  - {type: input, k: imp, label: "Impairments and write-downs", kind: money, signed: true}
+  - {type: input, k: iw, label: "Inventory write-offs", kind: money, signed: true}
+  - {type: input, k: tc, label: "Transaction costs", kind: money, signed: true}
+  - {type: input, k: ls, label: "Legal settlements (net)", kind: money, signed: true, hint: "A net gain goes in as negative."}
+  - {type: input, k: gs, label: "Gains (−) / losses (+) on asset sales", kind: money, signed: true}
+  - {type: input, k: oo, label: "Other one-offs", kind: money, signed: true, hint: "If a one-off shows up most years, it isn't one. Leave it in EBIT."}
+  - {type: total, k: nebit, label: "Normalized EBIT", hint: "Average EBIT + one-offs"}
+
+  - {type: head, label: "2. Cash profits"}
+  - {type: input, k: da, label: "Depreciation & amortization (D&A)", kind: money, key: true, hint: "Latest year, from the cash flow statement."}
+  - {type: input, k: mcx, label: "Maintenance capex", kind: money, key: true, hint: "What it costs to keep the business as it is. If the company doesn't say, Oakley uses the higher of the 5- and 10-year average capex. 120% of D&A is a rougher shortcut."}
+  - {type: input, k: lease, label: "Lease payments", kind: money, hint: "Optional, for IFRS 16 reporters: their D&A includes the depreciation of leased assets, so take off the rent actually paid. If you fill this, leave lease liabilities out of debt."}
+  - {type: calc, k: pre, label: "Pre-tax cash profits", hint: "Normalized EBIT + D&A − maintenance capex − lease payments"}
+  - {type: input, k: tax, label: "Tax rate (%)", kind: percent, default: 25, hint: "If the effective rate is below the statutory rate, Oakley uses the statutory one."}
+  - {type: total, k: cp, label: "After-tax cash profits", hint: "This is the company's earnings power."}
+
+  - {type: head, label: "3. Earnings power value"}
+  - {type: input, k: r, label: "Required rate of return (%)", kind: percent, default: 9, hint: "Oakley's guide: large, steady companies 7-9%. Smaller or indebted ones 10-12%. Very small and risky, 15% or more."}
+  - {type: calc, k: ev, label: "Enterprise value", hint: "After-tax cash profits ÷ required rate"}
+  - {type: input, k: debt, label: "(−) Debt", kind: money}
+  - {type: input, k: pen, label: "(−) Pension deficit", kind: money}
+  - {type: input, k: pref, label: "(−) Preferred equity", kind: money}
+  - {type: input, k: mi, label: "(−) Minority interests", kind: money}
+  - {type: input, k: cash, label: "(+) Surplus cash", kind: money, hint: "Cash the business doesn't need to operate."}
+  - {type: total, k: epv, label: "EPV (equity)"}
+  - {type: total, k: epvps, label: "EPV per share"}
+  - {type: calc, k: epvpct, label: "EPV as % of the share price", hint: "How much of the price today's cash profits explain."}
+  - {type: calc, k: grow, label: "Growth as % of the share price", hint: "How much of the price is a bet on future growth."}
+  - {type: test, k: rule, label: "Oakley's rule: EPV is at least 50% of the price", hint: "Don't buy if more than half the price relies on growth."}
+
+  - {type: head, label: "4. Owner earnings and cash yield"}
+  - {type: input, k: ni, label: "Normalized net income", kind: money, signed: true, hint: "Latest year, without one-off gains or losses. Needed for sections 4 and 5."}
+  - {type: input, k: onc, label: "Other non-cash items", kind: money, signed: true, hint: "Stock-based compensation, deferred tax, write-downs. D&A, maintenance capex and leases come from section 2."}
+  - {type: total, k: oe, label: "Owner earnings", hint: "Net income + D&A + other non-cash − maintenance capex − lease payments"}
+  - {type: total, k: oeps, label: "Owner earnings per share"}
+  - {type: total, k: cy, label: "Cash yield", hint: "Owner earnings per share ÷ price. The interest rate the business pays you at today's price. Oakley wants at least 5%."}
+  - {type: calc, k: p5, label: "Price for a 5% cash yield"}
+  - {type: calc, k: p8, label: "Price for an 8% cash yield"}
+  - {type: input, k: ty, label: "Your target cash yield (%)", kind: percent, default: 10}
+  - {type: note, label: "Years of cash-profit growth needed to reach your target yield at today's price:"}
+  - {type: calc, k: y5, label: "… growing 5% a year"}
+  - {type: calc, k: y10, label: "… growing 10% a year"}
+  - {type: calc, k: y15, label: "… growing 15% a year"}
+
+  - {type: head, label: "5. Maximum price"}
+  - {type: note, label: "Use the 10-year government bond yield and the inflation rate of the currency the company reports in (<span class=\"curname\">USD</span> on this page), not your own country's."}
+  - {type: input, k: bond, label: "10-year government bond yield (%)", kind: percent, hint: "Optional. Only for Buffett's version below."}
+  - {type: input, k: infl, label: "Inflation rate, latest year on year (%)", kind: percent, hint: "Needed for the maximum price."}
+  - {type: input, k: spr, label: "Bond spread over inflation (%)", kind: percent, default: 3, hint: "Oakley's 3% is the 30-year average gap between UK 10-year gilts and UK inflation. Use the long-run gap for the company's currency if you know it."}
+  - {type: calc, k: orate, label: "Oakley's rate", hint: "Inflation + spread"}
+  - {type: total, k: maxp, label: "Maximum price", hint: "Owner earnings per share ÷ Oakley's rate"}
+  - {type: calc, k: bmaxp, label: "Buffett's version", hint: "Owner earnings per share ÷ bond yield. Reference only: low bond yields give silly prices."}
+  - {type: input, k: buf, label: "Safety buffer (%)", kind: percent, default: 15, hint: "Oakley's rule of thumb is 15%."}
+  - {type: total, k: ideal, label: "Ideal buying price", hint: "Maximum price minus the buffer"}
+  - {type: calc, k: cyi, label: "Cash yield at the ideal price"}
+  - {type: calc, k: vsmax, label: "Share price vs maximum price"}
+  - {type: test, k: sell, label: "Sell check", hint: "Oakley wouldn't sell at the maximum price, but might once the price is 25% above it."}

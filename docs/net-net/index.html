@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../static/style.css?v=ab1afefd">
+<link rel="stylesheet" href="../static/style.css?v=cf6734d9">
 <meta property="og:title" content="Net-net calculator · Ezra's Notes">
 <meta property="og:description" content="Graham's NCAV, modern NCAV, net net working capital and net cash per share, against the price. Free, and it runs in your browser.">
 <meta property="og:url" content="https://tools.ezrasnotes.com/net-net/">
@@ -38,6 +38,7 @@
   <nav>
     <a href="../">All tools</a>
 <a href="../net-net/" aria-current="page">Net-net</a>
+<a href="../epv/">EPV</a>
 <a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
   </nav>
 </header>
@@ -58,6 +59,7 @@
     <div><label for="su">Shares in</label>
       <select id="su"><option value="1">Units</option><option value="1000" selected>Thousands</option><option value="1000000">Millions</option></select></div>
   </div>
+
   <p class="small">Copy the numbers as the filing shows them. Most 10-Ks report amounts and shares in thousands. The price always goes in full. Fields with * are needed; leave any other line blank if the company doesn't have it.</p>
 
   <div class="sheet" role="group" aria-label="Net-net worksheet">
@@ -71,10 +73,10 @@
       <span class="cell"><input id="f-s" data-k="s" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
     </div>
     <div class="srow in">
-      <label class="lab" for="f-r">Restricted Cash<span class="hint">Counts, even if it isn&#39;t available for daily operations.</span></label>
+      <label class="lab" for="f-r">Restricted Cash<span class="hint">Counts, even if it isn't available for daily operations.</span></label>
       <span class="cell"><input id="f-r" data-k="r" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
     </div>
-    <div class="srow calc-row"><span class="lab">Total Cash<span class="hint">Cash &amp; Equivalents + Short-term Investments + Restricted Cash</span></span><output class="cell" id="o-totalCash">–</output></div>
+    <div class="srow calc-row"><span class="lab">Total Cash<span class="hint">Cash & Equivalents + Short-term Investments + Restricted Cash</span></span><output class="cell" id="o-totalCash">–</output></div>
     <div class="srow in">
       <label class="lab" for="f-ar">Total Receivables<span class="hint">Accounts + other + notes receivable.</span></label>
       <span class="cell"><input id="f-ar" data-k="ar" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
@@ -178,14 +180,14 @@
     <div class="srow test"><span class="lab">Modern NCAV test</span><output class="cell" id="x-modern">–</output></div>
   </div>
 
-  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the four fields marked * and the results appear as you type.</p></div>
-  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
 
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
   <div class="actions">
     <button type="button" class="button" id="share-link">Copy link to this calculation</button>
     <button type="button" class="button ghost" id="reset">Clear</button>
   </div>
-  <p class="copy-note">"n/m" means the value per share is zero or negative, so the ratio doesn't mean anything.</p>
+<p class="copy-note">&#34;n/m&#34; means the value per share is zero or negative, so the ratio doesn&#39;t mean anything.</p>
 </form>
 
 <a href="#verdict" id="stickybar" class="stickybar" hidden></a>
@@ -215,9 +217,10 @@
 <aside class="wanted soon-box" id="coming-soon">
   <p class="wanted-kicker">Coming soon</p>
   <p class="wanted-head">The AI version</p>
-  <p class="wanted-body">An AI version of this method, built as a Claude skill, is coming. It reads the filings, adjusts the balance sheet and tells you whether the discount is real. Subscribe to Ezra's Notes to get it first.</p>
+  <p class="wanted-body">An AI version of this method, built as a Claude skill, is coming. It reads the filings, adjusts the balance sheet and tells you whether the discount is real. Subscribe to Ezra&#39;s Notes to get it first.</p>
   <iframe class="substack" src="https://www.ezrasnotes.com/embed" title="Subscribe to Ezra's Notes" width="480" height="150" frameborder="0" scrolling="no" loading="lazy"></iframe>
 </aside>
+
 </main>
 
 <footer>
@@ -236,5 +239,5 @@
 <script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
 document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
 var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
-<script type="module" src="../static/net-net.js?v=ab1afefd"></script></body>
+<script type="module" src="../static/net-net.js?v=cf6734d9"></script></body>
 </html>

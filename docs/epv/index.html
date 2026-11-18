@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTNNLB6W9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FTNNLB6W9D');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>EPV calculator · Ezra's Notes</title>
+<meta name="description" content="Earnings power value, owner earnings, cash yield and a maximum price, following Phil Oakley's method. Free, and it runs in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css?v=cf6734d9">
+<meta property="og:title" content="EPV calculator · Ezra's Notes">
+<meta property="og:description" content="Earnings power value, owner earnings, cash yield and a maximum price, following Phil Oakley's method. Free, and it runs in your browser.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/epv/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="../static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
+<link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/epv/">
+</head>
+<body>
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="../">Tools</a>
+  <p class="byline">By <a href="https://x.com/ezracrangle">@ezracrangle</a></p>
+  <nav>
+    <a href="../">All tools</a>
+<a href="../net-net/">Net-net</a>
+<a href="../epv/" aria-current="page">EPV</a>
+<a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<section class="lede">
+  <h1 class="page-title">Earnings power value calculator</h1>
+  <p class="dek">What is a business worth if its cash profits never grow? That's its earnings power value, or EPV. Put it next to the share price and you see how much of what you pay is for the business as it is today, and how much is a bet on growth.</p>
+  <p>The worksheet follows Phil Oakley's method from <em>How to Pick Quality Shares</em>: EPV, owner earnings, cash yield and a maximum price. Copy the numbers from the annual report, top to bottom. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="epvform" class="calc" novalidate>
+  <div class="settings">
+    <div><label for="cur">Currency</label>
+      <select id="cur"><option selected>USD</option><option>EUR</option><option>GBP</option><option>CAD</option><option>AUD</option><option>CHF</option><option>JPY</option><option>HKD</option><option>SGD</option><option>SEK</option><option>NOK</option><option>DKK</option><option>MXN</option><option>BRL</option><option>CLP</option><option>COP</option><option>KRW</option><option>INR</option><option>ZAR</option></select></div>
+    <div><label for="u">Amounts in</label>
+      <select id="u"><option value="1">Units</option><option value="1000" selected>Thousands</option><option value="1000000">Millions</option></select></div>
+    <div><label for="su">Shares in</label>
+      <select id="su"><option value="1">Units</option><option value="1000" selected>Thousands</option><option value="1000000">Millions</option></select></div>
+  </div>
+
+  <p class="small">Copy the numbers as the annual report shows them, all in the same unit. The share price always goes in full. Percentages go in as whole numbers: 9 means 9%. Fields with * are needed; leave any other line blank if it doesn't apply.</p>
+
+  <div class="sheet" role="group" aria-label="EPV worksheet">
+    <div class="srow head"><span class="lab">Market data</span></div>
+    <div class="srow in key">
+      <label class="lab" for="f-sh">Shares outstanding (latest) *<span class="hint">Used for EPV per share.</span></label>
+      <span class="cell"><input id="f-sh" data-k="sh" data-kind="shares" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-wsh">Weighted average diluted shares<span class="hint">Optional. Used for owner earnings per share. Blank = shares outstanding.</span></label>
+      <span class="cell"><input id="f-wsh" data-k="wsh" data-kind="shares" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in key">
+      <label class="lab" for="f-p">Share price *<span class="hint">Per share, in full. Never in thousands.</span></label>
+      <span class="cell"><input id="f-p" data-k="p" data-kind="price" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow head"><span class="lab">1. Normalized EBIT</span></div>
+    <div class="srow in key">
+      <label class="lab" for="f-ebit">Average EBIT (5 years) or latest underlying EBIT *<span class="hint">A 5-year average smooths out one good or bad year.</span></label>
+      <span class="cell"><input id="f-ebit" data-k="ebit" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow note"><span class="lab">One-offs, averaged over the same years. Costs as positive (they get added back), gains as negative.</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-rs">Restructuring costs</label>
+      <span class="cell"><input id="f-rs" data-k="rs" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-imp">Impairments and write-downs</label>
+      <span class="cell"><input id="f-imp" data-k="imp" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-iw">Inventory write-offs</label>
+      <span class="cell"><input id="f-iw" data-k="iw" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-tc">Transaction costs</label>
+      <span class="cell"><input id="f-tc" data-k="tc" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-ls">Legal settlements (net)<span class="hint">A net gain goes in as negative.</span></label>
+      <span class="cell"><input id="f-ls" data-k="ls" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-gs">Gains (−) / losses (+) on asset sales</label>
+      <span class="cell"><input id="f-gs" data-k="gs" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-oo">Other one-offs<span class="hint">If a one-off shows up most years, it isn't one. Leave it in EBIT.</span></label>
+      <span class="cell"><input id="f-oo" data-k="oo" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row total"><span class="lab">Normalized EBIT<span class="hint">Average EBIT + one-offs</span></span><output class="cell" id="o-nebit">–</output></div>
+    <div class="srow head"><span class="lab">2. Cash profits</span></div>
+    <div class="srow in key">
+      <label class="lab" for="f-da">Depreciation &amp; amortization (D&amp;A) *<span class="hint">Latest year, from the cash flow statement.</span></label>
+      <span class="cell"><input id="f-da" data-k="da" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in key">
+      <label class="lab" for="f-mcx">Maintenance capex *<span class="hint">What it costs to keep the business as it is. If the company doesn't say, Oakley uses the higher of the 5- and 10-year average capex. 120% of D&A is a rougher shortcut.</span></label>
+      <span class="cell"><input id="f-mcx" data-k="mcx" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-lease">Lease payments<span class="hint">Optional, for IFRS 16 reporters: their D&A includes the depreciation of leased assets, so take off the rent actually paid. If you fill this, leave lease liabilities out of debt.</span></label>
+      <span class="cell"><input id="f-lease" data-k="lease" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Pre-tax cash profits<span class="hint">Normalized EBIT + D&A − maintenance capex − lease payments</span></span><output class="cell" id="o-pre">–</output></div>
+    <div class="srow in">
+      <label class="lab" for="f-tax">Tax rate (%)<span class="hint">If the effective rate is below the statutory rate, Oakley uses the statutory one.</span></label>
+      <span class="cell"><input id="f-tax" data-k="tax" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="25" data-default="25"></span>
+    </div>
+    <div class="srow calc-row total"><span class="lab">After-tax cash profits<span class="hint">This is the company's earnings power.</span></span><output class="cell" id="o-cp">–</output></div>
+    <div class="srow head"><span class="lab">3. Earnings power value</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-r">Required rate of return (%)<span class="hint">Oakley's guide: large, steady companies 7-9%. Smaller or indebted ones 10-12%. Very small and risky, 15% or more.</span></label>
+      <span class="cell"><input id="f-r" data-k="r" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="9" data-default="9"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Enterprise value<span class="hint">After-tax cash profits ÷ required rate</span></span><output class="cell" id="o-ev">–</output></div>
+    <div class="srow in">
+      <label class="lab" for="f-debt">(−) Debt</label>
+      <span class="cell"><input id="f-debt" data-k="debt" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-pen">(−) Pension deficit</label>
+      <span class="cell"><input id="f-pen" data-k="pen" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-pref">(−) Preferred equity</label>
+      <span class="cell"><input id="f-pref" data-k="pref" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-mi">(−) Minority interests</label>
+      <span class="cell"><input id="f-mi" data-k="mi" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-cash">(+) Surplus cash<span class="hint">Cash the business doesn't need to operate.</span></label>
+      <span class="cell"><input id="f-cash" data-k="cash" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row total"><span class="lab">EPV (equity)</span><output class="cell" id="o-epv">–</output></div>
+    <div class="srow calc-row total"><span class="lab">EPV per share</span><output class="cell" id="o-epvps">–</output></div>
+    <div class="srow calc-row"><span class="lab">EPV as % of the share price<span class="hint">How much of the price today's cash profits explain.</span></span><output class="cell" id="o-epvpct">–</output></div>
+    <div class="srow calc-row"><span class="lab">Growth as % of the share price<span class="hint">How much of the price is a bet on future growth.</span></span><output class="cell" id="o-grow">–</output></div>
+    <div class="srow test"><span class="lab">Oakley&#39;s rule: EPV is at least 50% of the price<span class="hint">Don't buy if more than half the price relies on growth.</span></span><output class="cell" id="x-rule">–</output></div>
+    <div class="srow head"><span class="lab">4. Owner earnings and cash yield</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-ni">Normalized net income<span class="hint">Latest year, without one-off gains or losses. Needed for sections 4 and 5.</span></label>
+      <span class="cell"><input id="f-ni" data-k="ni" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-onc">Other non-cash items<span class="hint">Stock-based compensation, deferred tax, write-downs. D&A, maintenance capex and leases come from section 2.</span></label>
+      <span class="cell"><input id="f-onc" data-k="onc" data-kind="money" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row total"><span class="lab">Owner earnings<span class="hint">Net income + D&A + other non-cash − maintenance capex − lease payments</span></span><output class="cell" id="o-oe">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Owner earnings per share</span><output class="cell" id="o-oeps">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Cash yield<span class="hint">Owner earnings per share ÷ price. The interest rate the business pays you at today's price. Oakley wants at least 5%.</span></span><output class="cell" id="o-cy">–</output></div>
+    <div class="srow calc-row"><span class="lab">Price for a 5% cash yield</span><output class="cell" id="o-p5">–</output></div>
+    <div class="srow calc-row"><span class="lab">Price for an 8% cash yield</span><output class="cell" id="o-p8">–</output></div>
+    <div class="srow in">
+      <label class="lab" for="f-ty">Your target cash yield (%)</label>
+      <span class="cell"><input id="f-ty" data-k="ty" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="10" data-default="10"></span>
+    </div>
+    <div class="srow note"><span class="lab">Years of cash-profit growth needed to reach your target yield at today's price:</span></div>
+    <div class="srow calc-row"><span class="lab">… growing 5% a year</span><output class="cell" id="o-y5">–</output></div>
+    <div class="srow calc-row"><span class="lab">… growing 10% a year</span><output class="cell" id="o-y10">–</output></div>
+    <div class="srow calc-row"><span class="lab">… growing 15% a year</span><output class="cell" id="o-y15">–</output></div>
+    <div class="srow head"><span class="lab">5. Maximum price</span></div>
+    <div class="srow note"><span class="lab">Use the 10-year government bond yield and the inflation rate of the currency the company reports in (<span class="curname">USD</span> on this page), not your own country's.</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-bond">10-year government bond yield (%)<span class="hint">Optional. Only for Buffett's version below.</span></label>
+      <span class="cell"><input id="f-bond" data-k="bond" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-infl">Inflation rate, latest year on year (%)<span class="hint">Needed for the maximum price.</span></label>
+      <span class="cell"><input id="f-infl" data-k="infl" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-spr">Bond spread over inflation (%)<span class="hint">Oakley's 3% is the 30-year average gap between UK 10-year gilts and UK inflation. Use the long-run gap for the company's currency if you know it.</span></label>
+      <span class="cell"><input id="f-spr" data-k="spr" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="3" data-default="3"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Oakley&#39;s rate<span class="hint">Inflation + spread</span></span><output class="cell" id="o-orate">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Maximum price<span class="hint">Owner earnings per share ÷ Oakley's rate</span></span><output class="cell" id="o-maxp">–</output></div>
+    <div class="srow calc-row"><span class="lab">Buffett&#39;s version<span class="hint">Owner earnings per share ÷ bond yield. Reference only: low bond yields give silly prices.</span></span><output class="cell" id="o-bmaxp">–</output></div>
+    <div class="srow in">
+      <label class="lab" for="f-buf">Safety buffer (%)<span class="hint">Oakley's rule of thumb is 15%.</span></label>
+      <span class="cell"><input id="f-buf" data-k="buf" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="15" data-default="15"></span>
+    </div>
+    <div class="srow calc-row total"><span class="lab">Ideal buying price<span class="hint">Maximum price minus the buffer</span></span><output class="cell" id="o-ideal">–</output></div>
+    <div class="srow calc-row"><span class="lab">Cash yield at the ideal price</span><output class="cell" id="o-cyi">–</output></div>
+    <div class="srow calc-row"><span class="lab">Share price vs maximum price</span><output class="cell" id="o-vsmax">–</output></div>
+    <div class="srow test"><span class="lab">Sell check<span class="hint">Oakley wouldn't sell at the maximum price, but might once the price is 25% above it.</span></span><output class="cell" id="x-sell">–</output></div>
+  </div>
+
+
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
+  <div class="actions">
+    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
+    <button type="button" class="button ghost" id="reset">Clear</button>
+  </div>
+<p class="copy-note">&#34;n/m&#34; means the number behind it is zero or negative, so the result doesn&#39;t mean anything.</p>
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">What this calculator can't tell you</h2>
+  <p>The worksheet takes your numbers at face value. Four of them decide almost everything, and none comes straight from the annual report:</p>
+
+  <h3>Maintenance capex</h3>
+  <p>It moves the EPV more than any other input, and few companies report it. Oakley's fix is the 5- or 10-year average capex, which also counts some growth spending, so it errs on the safe side. If capex keeps running well above D&amp;A year after year, find out why before you trust the result.</p>
+
+  <h3>Whether today's profits are normal</h3>
+  <p>EPV assumes this year's cash profits last forever. A cyclical business at the top of its cycle will look cheap, and at the bottom it will look expensive. Look at 10 years of margins before you pick the EBIT.</p>
+
+  <h3>Whether the growth will pay</h3>
+  <p>The worksheet tells you how much of the price is growth. It can't tell you if the growth will come, or if it will earn more than it costs. A company that reinvests at returns below your required rate grows and gets less valuable at the same time.</p>
+
+  <h3>The rate</h3>
+  <p>Raise the required return from 9% to 10% and the EPV drops 10%. Use Oakley's ranges, then try one point higher before you decide.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>Phil Oakley spent ten years as an analyst in the City of London and wrote <em>How to Pick Quality Shares</em> (Harriman House, 2016) for private investors. His EPV is a simpler version of the earnings power value Bruce Greenwald teaches at Columbia, which goes back to Graham and Dodd.</p>
+  <p>Owner earnings come from Warren Buffett's 1986 letter to Berkshire shareholders. So does the idea behind the maximum price: divide owner earnings by the government bond yield. Oakley swaps the bond yield for inflation plus 3%, because with bond yields near zero, Buffett's version justifies almost any price.</p>
+</section>
+
+<aside class="wanted soon-box" id="coming-soon">
+  <p class="wanted-kicker">Coming soon</p>
+  <p class="wanted-head">The AI version</p>
+  <p class="wanted-body">An AI version of this method, built as a Claude skill, is coming. It reads the annual reports, estimates maintenance capex and normal profits, and tells you how much of the price is a bet on growth. Subscribe to Ezra&#39;s Notes to get it first.</p>
+  <iframe class="substack" src="https://www.ezrasnotes.com/embed" title="Subscribe to Ezra's Notes" width="480" height="150" frameborder="0" scrolling="no" loading="lazy"></iframe>
+</aside>
+
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Holdings</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a inversores</a>
+  </p>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
+<script type="module" src="../static/epv.js?v=cf6734d9"></script></body>
+</html>

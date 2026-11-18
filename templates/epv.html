@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
+{% block title %}EPV calculator{% endblock %}
+{% block description %}Earnings power value, owner earnings, cash yield and a maximum price, following Phil Oakley's method. Free, and it runs in your browser.{% endblock %}
+{% block main %}
+<section class="lede">
+  <h1 class="page-title">Earnings power value calculator</h1>
+  <p class="dek">What is a business worth if its cash profits never grow? That's its earnings power value, or EPV. Put it next to the share price and you see how much of what you pay is for the business as it is today, and how much is a bet on growth.</p>
+  <p>The worksheet follows Phil Oakley's method from <em>How to Pick Quality Shares</em>: EPV, owner earnings, cash yield and a maximum price. Copy the numbers from the annual report, top to bottom. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="epvform" class="calc" novalidate>
+{{ sheet.units(currencies) }}
+  <p class="small">Copy the numbers as the annual report shows them, all in the same unit. The share price always goes in full. Percentages go in as whole numbers: 9 means 9%. Fields with * are needed; leave any other line blank if it doesn't apply.</p>
+
+{{ sheet.rows(rows, "EPV worksheet") }}
+
+{{ sheet.actions('"n/m" means the number behind it is zero or negative, so the result doesn\'t mean anything.') }}
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">What this calculator can't tell you</h2>
+  <p>The worksheet takes your numbers at face value. Four of them decide almost everything, and none comes straight from the annual report:</p>
+
+  <h3>Maintenance capex</h3>
+  <p>It moves the EPV more than any other input, and few companies report it. Oakley's fix is the 5- or 10-year average capex, which also counts some growth spending, so it errs on the safe side. If capex keeps running well above D&amp;A year after year, find out why before you trust the result.</p>
+
+  <h3>Whether today's profits are normal</h3>
+  <p>EPV assumes this year's cash profits last forever. A cyclical business at the top of its cycle will look cheap, and at the bottom it will look expensive. Look at 10 years of margins before you pick the EBIT.</p>
+
+  <h3>Whether the growth will pay</h3>
+  <p>The worksheet tells you how much of the price is growth. It can't tell you if the growth will come, or if it will earn more than it costs. A company that reinvests at returns below your required rate grows and gets less valuable at the same time.</p>
+
+  <h3>The rate</h3>
+  <p>Raise the required return from 9% to 10% and the EPV drops 10%. Use Oakley's ranges, then try one point higher before you decide.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>Phil Oakley spent ten years as an analyst in the City of London and wrote <em>How to Pick Quality Shares</em> (Harriman House, 2016) for private investors. His EPV is a simpler version of the earnings power value Bruce Greenwald teaches at Columbia, which goes back to Graham and Dodd.</p>
+  <p>Owner earnings come from Warren Buffett's 1986 letter to Berkshire shareholders. So does the idea behind the maximum price: divide owner earnings by the government bond yield. Oakley swaps the bond yield for inflation plus 3%, because with bond yields near zero, Buffett's version justifies almost any price.</p>
+</section>
+
+{{ sheet.coming_soon("An AI version of this method, built as a Claude skill, is coming. It reads the annual reports, estimates maintenance capex and normal profits, and tells you how much of the price is a bet on growth. Subscribe to Ezra's Notes to get it first.", substack_embed) }}
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ root }}static/epv.js?v={{ asset_v }}"></script>{% endblock %}
