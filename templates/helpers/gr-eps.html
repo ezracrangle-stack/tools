@@ -1,0 +1,17 @@
+<details class="helper" id="help-eps">
+  <summary>Help me with normal earnings and growth</summary>
+  <p class="hint">Type up to ten years of EPS, newest first. Pick normal earnings with the buttons. The past growth is only a reference for your forecast. It also fills the EPS lines in sections 2 and 3.</p>
+  <div class="hgrid hgrid-2">
+    {% for i in range(1, 11) %}
+    <label for="h-e{{ i }}">EPS, year {{ i }}{% if i == 1 %} (latest){% endif %}</label>
+    <input id="h-e{{ i }}" data-h="he{{ i }}" type="text" inputmode="text" autocomplete="off">
+    {% endfor %}
+  </div>
+  <div class="hoptions">
+    <p><span>Latest year</span><output id="h-latest">–</output><button type="button" class="hbtn" data-use="latest">Use</button></p>
+    <p><span>Average of the last 3 years</span><output id="h-avg3">–</output><button type="button" class="hbtn" data-use="avg3">Use</button></p>
+    <p><span>Average 8 to 10 years ago</span><output id="h-avg810">–</output><span></span></p>
+    <p><span>Years with positive EPS</span><output id="h-pos">–</output><span></span></p>
+    <p class="hsuggest"><span>Past growth of the 3-year average, a year</span><output id="h-g">–</output><button type="button" class="hbtn" data-use="g">Use</button></p>
+  </div>
+</details>

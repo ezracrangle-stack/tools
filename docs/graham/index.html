@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTNNLB6W9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FTNNLB6W9D');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>Graham's formulas · Ezra's Notes</title>
+<meta name="description" content="Benjamin Graham's growth formula, the Graham number and his seven tests for the defensive investor, as he wrote them in The Intelligent Investor. Free, and it runs in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css?v=1b6188aa">
+<meta property="og:title" content="Graham's formulas · Ezra's Notes">
+<meta property="og:description" content="Benjamin Graham's growth formula, the Graham number and his seven tests for the defensive investor, as he wrote them in The Intelligent Investor. Free, and it runs in your browser.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/graham/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="../static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
+<link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/graham/">
+</head>
+<body>
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="../">Tools</a>
+  <p class="byline">By <a href="https://x.com/ezracrangle">@ezracrangle</a></p>
+  <nav>
+    <a href="../">All tools</a>
+<a href="../net-net/">Net-net</a>
+<a href="../epv/">EPV</a>
+<a href="../greenwald/">Greenwald</a>
+<a href="../penman/">Penman</a>
+<a href="../graham/" aria-current="page">Graham</a>
+<a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<section class="lede">
+  <h1 class="page-title">Graham's formulas</h1>
+  <p class="dek">Benjamin Graham left two rules of thumb that get quoted everywhere. One prices a stock from its earnings and growth. The other, now called the Graham number, caps what a careful investor should pay. Both come from <em>The Intelligent Investor</em>, and this page uses them the way he wrote them.</p>
+  <p>Fill in section 1, section 2 or both. Section 3 runs the rest of his checklist. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="grform" class="calc" novalidate>
+  <div class="settings">
+    <div><label for="cur">Currency</label>
+      <select id="cur"><option selected>USD</option><option>EUR</option><option>GBP</option><option>CAD</option><option>AUD</option><option>CHF</option><option>JPY</option><option>HKD</option><option>SGD</option><option>SEK</option><option>NOK</option><option>DKK</option><option>MXN</option><option>BRL</option><option>CLP</option><option>COP</option><option>KRW</option><option>INR</option><option>ZAR</option></select></div>
+  </div>
+
+  <p class="small">Per-share figures in full. Percentages go in as whole numbers: 6 means 6%.</p>
+
+  <div class="sheet" role="group" aria-label="Graham worksheet">
+    <div class="srow head"><span class="lab">Market data</span></div>
+    <div class="srow in key">
+      <label class="lab" for="f-p">Share price *<span class="hint">Per share, in full.</span></label>
+      <span class="cell"><input id="f-p" data-k="p" data-kind="price" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow head"><span class="lab">1. Graham&#39;s growth formula</span></div>
+    <div class="srow note"><span class="lab">Value = normal earnings × (8.5 + twice the expected growth rate). From chapter 11.</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-eps">Normal earnings per share<span class="hint">Today's earnings without one-offs, or an average if this year was unusual.</span></label>
+      <span class="cell"><input id="f-eps" data-k="eps" data-kind="price" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+<details class="helper" id="help-eps">
+  <summary>Help me with normal earnings and growth</summary>
+  <p class="hint">Type up to ten years of EPS, newest first. Pick normal earnings with the buttons. The past growth is only a reference for your forecast. It also fills the EPS lines in sections 2 and 3.</p>
+  <div class="hgrid hgrid-2">
+    <label for="h-e1">EPS, year 1 (latest)</label>
+    <input id="h-e1" data-h="he1" type="text" inputmode="text" autocomplete="off">
+    <label for="h-e2">EPS, year 2</label>
+    <input id="h-e2" data-h="he2" type="text" inputmode="text" autocomplete="off">
+    <label for="h-e3">EPS, year 3</label>
+    <input id="h-e3" data-h="he3" type="text" inputmode="text" autocomplete="off">
+    <label for="h-e4">EPS, year 4</label>
+    <input id="h-e4" data-h="he4" type="text" inputmode="text" autocomplete="off">
+    <label for="h-e5">EPS, year 5</label>
+    <input id="h-e5" data-h="he5" type="text" inputmode="text" autocomplete="off">
+    <label for="h-e6">EPS, year 6</label>
+    <input id="h-e6" data-h="he6" type="text" inputmode="text" autocomplete="off">
+    <label for="h-e7">EPS, year 7</label>
+    <input id="h-e7" data-h="he7" type="text" inputmode="text" autocomplete="off">
+    <label for="h-e8">EPS, year 8</label>
+    <input id="h-e8" data-h="he8" type="text" inputmode="text" autocomplete="off">
+    <label for="h-e9">EPS, year 9</label>
+    <input id="h-e9" data-h="he9" type="text" inputmode="text" autocomplete="off">
+    <label for="h-e10">EPS, year 10</label>
+    <input id="h-e10" data-h="he10" type="text" inputmode="text" autocomplete="off">
+  </div>
+  <div class="hoptions">
+    <p><span>Latest year</span><output id="h-latest">–</output><button type="button" class="hbtn" data-use="latest">Use</button></p>
+    <p><span>Average of the last 3 years</span><output id="h-avg3">–</output><button type="button" class="hbtn" data-use="avg3">Use</button></p>
+    <p><span>Average 8 to 10 years ago</span><output id="h-avg810">–</output><span></span></p>
+    <p><span>Years with positive EPS</span><output id="h-pos">–</output><span></span></p>
+    <p class="hsuggest"><span>Past growth of the 3-year average, a year</span><output id="h-g">–</output><button type="button" class="hbtn" data-use="g">Use</button></p>
+  </div>
+</details>    <div class="srow in">
+      <label class="lab" for="f-g">Expected annual growth, next 7-10 years (%)<span class="hint">Graham: above about 8% there's no realistic way to value a company.</span></label>
+      <span class="cell"><input id="f-g" data-k="g" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Earnings multiplier<span class="hint">8.5 + 2 × growth. 8.5 is Graham's P/E for a business that doesn't grow.</span></span><output class="cell" id="o-mult">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Value per share</span><output class="cell" id="o-val">–</output></div>
+    <div class="srow calc-row"><span class="lab">Margin of safety<span class="hint">1 − price ÷ value</span></span><output class="cell" id="o-mos">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Growth the price implies<span class="hint">(P/E − 8.5) ÷ 2. Graham ran the formula backwards like this himself.</span></span><output class="cell" id="o-ig">–</output></div>
+    <div class="srow note"><span class="lab">Graham's 1974 version, adjusted for bond yields. It isn't in the book: he added it after rates had soared.</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-y">Yield on AAA corporate bonds (%)<span class="hint">Graham used 20-year AAA bonds; 4.4% was their yield in 1963. Use the highest-grade corporate yield in the company's currency.</span></label>
+      <span class="cell"><input id="f-y" data-k="y" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row total"><span class="lab">Value per share × 4.4 ÷ bond yield</span><output class="cell" id="o-valy">–</output></div>
+    <div class="srow calc-row"><span class="lab">Margin of safety</span><output class="cell" id="o-mosy">–</output></div>
+    <div class="srow calc-row"><span class="lab">Growth the price implies, with the bond yield</span><output class="cell" id="o-igy">–</output></div>
+    <div class="srow head"><span class="lab">2. The Graham number</span></div>
+    <div class="srow note"><span class="lab">Chapter 14 caps what a defensive investor should pay: P/E no more than 15 on three-year average earnings, price-to-book (P/B) no more than 1.5, or their product no more than 22.5. The Graham number is the price where that product hits 22.5.</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-e1">EPS, latest year</label>
+      <span class="cell"><input id="f-e1" data-k="e1" data-kind="price" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-e2">EPS, one year earlier</label>
+      <span class="cell"><input id="f-e2" data-k="e2" data-kind="price" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-e3">EPS, two years earlier</label>
+      <span class="cell"><input id="f-e3" data-k="e3" data-kind="price" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Average EPS, last 3 years</span><output class="cell" id="o-avg">–</output></div>
+    <div class="srow in">
+      <label class="lab" for="f-bv">Book value per share<span class="hint">Latest reported.</span></label>
+      <span class="cell"><input id="f-bv" data-k="bv" data-kind="price" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+<details class="helper" id="help-bv">
+  <summary>Help me calculate book value per share</summary>
+  <p class="hint">Common shareholders' equity from the balance sheet (without minority interest or preferred stock), divided by the shares outstanding. Both in the same unit.</p>
+  <div class="hgrid hgrid-2">
+    <label for="h-eq">Shareholders' equity</label>
+    <input id="h-eq" data-h="heq" type="text" inputmode="decimal" autocomplete="off">
+    <label for="h-sh">Shares outstanding</label>
+    <input id="h-sh" data-h="hsh" type="text" inputmode="decimal" autocomplete="off">
+  </div>
+  <p class="hresult">Book value per share: <output id="h-bv">–</output></p>
+</details>    <div class="srow calc-row"><span class="lab">P/E on average earnings<span class="hint">Test 6: no more than 15.</span></span><output class="cell" id="o-pe">–</output></div>
+    <div class="srow calc-row"><span class="lab">Price-to-book (P/B)<span class="hint">Test 7: no more than 1.5, or more if the P/E is low enough to keep the product at 22.5.</span></span><output class="cell" id="o-pb">–</output></div>
+    <div class="srow calc-row"><span class="lab">P/E × P/B<span class="hint">No more than 22.5.</span></span><output class="cell" id="o-pepb">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Graham number<span class="hint">√(22.5 × average EPS × book value per share). A cap on what to pay; Graham never called it a value.</span></span><output class="cell" id="o-gn">–</output></div>
+    <div class="srow calc-row"><span class="lab">Price vs the Graham number</span><output class="cell" id="o-vsgn">–</output></div>
+    <div class="srow test"><span class="lab">P/E × P/B test</span><output class="cell" id="x-t67">–</output></div>
+    <div class="srow head"><span class="lab">3. Graham&#39;s other five tests</span></div>
+    <div class="srow note"><span class="lab">The rest of chapter 14's checklist for the defensive investor. Amounts in any unit, as long as it's the same one.</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-sales">Annual sales</label>
+      <span class="cell"><input id="f-sales" data-k="sales" data-kind="number" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-minsales">Your minimum sales<span class="hint">Graham asked for $100 million in 1972 dollars. Jason Zweig's 2003 update: a market value above $2 billion.</span></label>
+      <span class="cell"><input id="f-minsales" data-k="minsales" data-kind="number" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow test"><span class="lab">1. Adequate size</span><output class="cell" id="x-t1">–</output></div>
+    <div class="srow in">
+      <label class="lab" for="f-ca">Current assets</label>
+      <span class="cell"><input id="f-ca" data-k="ca" data-kind="number" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-cl">Current liabilities</label>
+      <span class="cell"><input id="f-cl" data-k="cl" data-kind="number" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-ltd">Long-term debt</label>
+      <span class="cell"><input id="f-ltd" data-k="ltd" data-kind="number" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Current ratio</span><output class="cell" id="o-cr">–</output></div>
+    <div class="srow test"><span class="lab">2. Strong financial condition<span class="hint">Current ratio of at least 2, and long-term debt no bigger than working capital.</span></span><output class="cell" id="x-t2">–</output></div>
+    <div class="srow in">
+      <label class="lab" for="f-ypos">Years with positive earnings, of the last 10</label>
+      <span class="cell"><input id="f-ypos" data-k="ypos" data-kind="number" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow test"><span class="lab">3. Earnings stability<span class="hint">Earnings in each of the last 10 years.</span></span><output class="cell" id="x-t3">–</output></div>
+    <div class="srow in">
+      <label class="lab" for="f-ydiv">Years of uninterrupted dividends</label>
+      <span class="cell"><input id="f-ydiv" data-k="ydiv" data-kind="number" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow test"><span class="lab">4. Dividend record<span class="hint">At least 20 years.</span></span><output class="cell" id="x-t4">–</output></div>
+    <div class="srow in">
+      <label class="lab" for="f-e10">Average EPS ten years ago (3-year average)<span class="hint">Average of the EPS 8, 9 and 10 years back. The ten-year helper in section 1 fills it in.</span></label>
+      <span class="cell"><input id="f-e10" data-k="e10" data-kind="price" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Growth in 3-year average EPS over ten years</span><output class="cell" id="o-eg">–</output></div>
+    <div class="srow test"><span class="lab">5. Earnings growth<span class="hint">At least a third more over ten years.</span></span><output class="cell" id="x-t5">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Tests passed, of 7<span class="hint">Tests 6 and 7 from section 2 count separately.</span></span><output class="cell" id="o-n">–</output></div>
+  </div>
+
+
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
+  <div class="actions">
+    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
+    <button type="button" class="button ghost" id="reset">Clear</button>
+  </div>
+<p class="copy-note">&#34;n/m&#34; means the number behind it is zero or negative, so the result doesn&#39;t mean anything.</p>
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Large, steady, profitable companies with a long record, which is the universe Graham had in mind for the defensive investor. He also wanted them held in a portfolio of 10 to 30 stocks, never one at a time.</p>
+  <p>It works badly for four kinds of company:</p>
+  <ul>
+    <li><strong>Fast growers.</strong> Above about 8% a year, Graham himself said no formula values a company realistically.</li>
+    <li><strong>Companies that lose money, or earn at a cyclical peak.</strong> The formulas multiply earnings, so use normal earnings or don't use them.</li>
+    <li><strong>Banks, insurers and utilities.</strong> The current-ratio test doesn't fit them. Graham gave utilities a different debt rule.</li>
+    <li><strong>Businesses built on brands or software.</strong> Their book value leaves out most of what they own, so they fail the price-to-book (P/B) test almost by design.</li>
+  </ul>
+
+  <h2 class="rule-head">What this calculator can't tell you</h2>
+
+  <h3>The growth rate</h3>
+  <p>In the formula, the 7-to-10-year growth rate decides almost everything. Graham printed it with a warning: such projections aren't reliable, and prices won't follow them. The number to look at is the growth the price implies. Then ask if the business can deliver it.</p>
+
+  <h3>Normal earnings</h3>
+  <p>Graham asked for "current (normal)" earnings. One good year at the top of a cycle can make any stock look cheap.</p>
+
+  <h3>The bond yield</h3>
+  <p>The 1974 version leans on AAA bond yields, and few companies are rated AAA today. Use the highest-grade corporate yield you can find in the company's currency, and say which one you used.</p>
+
+  <h3>The business</h3>
+  <p>Graham's tests check size, balance sheet, record and price. They say nothing about competition, management or where the industry is going.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>The growth formula is in chapter 11 of <em>The Intelligent Investor</em> (revised edition, 1973). The bond-yield version comes from Graham's 1974 article "The Decade 1965-1974: Its Significance for Financial Analysts." The book never uses the name Graham number: it's the cap on P/E times price-to-book (P/B) in chapter 14, which also lists the other five tests.</p>
+</section>
+
+<aside class="wanted soon-box" id="coming-soon">
+  <p class="wanted-kicker">Coming soon</p>
+  <p class="wanted-head">The AI version</p>
+  <p class="wanted-body">An AI version, built as a Claude skill, is coming. It reads ten years of annual reports, works out normal earnings and runs all seven of Graham&#39;s tests. Subscribe to Ezra&#39;s Notes to get it first.</p>
+  <iframe class="substack" src="https://www.ezrasnotes.com/embed" title="Subscribe to Ezra's Notes" width="480" height="150" frameborder="0" scrolling="no" loading="lazy"></iframe>
+</aside>
+
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Holdings</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a inversores</a>
+  </p>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
+<script type="module" src="../static/graham.js?v=1b6188aa"></script></body>
+</html>

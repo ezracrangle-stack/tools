@@ -30,6 +30,12 @@ tools:
     status: live
     blurb: Anchor on the book value of the operations, then see the growth the price implies and the return you earn at today's price.
 
+  - slug: graham
+    name: Graham's formulas
+    nav: Graham
+    status: live
+    blurb: Graham's growth formula, the Graham number and his seven tests for the defensive investor, as he wrote them in The Intelligent Investor.
+
   - slug: reverse-dcf
     name: Reverse DCF
     status: soon
@@ -297,3 +303,57 @@ penman_rows:
   - {type: input, k: bond, label: "Company's bond yield (%)", kind: percent, hint: "Optional. Or the yield on corporate bonds with similar risk."}
   - {type: calc, k: vsb, label: "No-growth return vs the bond yield", hint: "Below zero, the shares pay less than the bonds if growth doesn't come."}
   - {type: helper, id: pn-profile}
+
+# Graham's formulas: The Intelligent Investor ch. 11 and 14, same order as Graham_Formulas_Template.xlsx.
+graham_rows:
+  - {type: head, label: "Market data"}
+  - {type: input, k: p, label: "Share price", kind: price, key: true, hint: "Per share, in full."}
+
+  - {type: head, label: "1. Graham's growth formula"}
+  - {type: note, label: "Value = normal earnings × (8.5 + twice the expected growth rate). From chapter 11."}
+  - {type: input, k: eps, label: "Normal earnings per share", kind: price, signed: true, hint: "Today's earnings without one-offs, or an average if this year was unusual."}
+  - {type: helper, id: gr-eps}
+  - {type: input, k: g, label: "Expected annual growth, next 7-10 years (%)", kind: percent, hint: "Graham: above about 8% there's no realistic way to value a company."}
+  - {type: calc, k: mult, label: "Earnings multiplier", hint: "8.5 + 2 × growth. 8.5 is Graham's P/E for a business that doesn't grow."}
+  - {type: total, k: val, label: "Value per share"}
+  - {type: calc, k: mos, label: "Margin of safety", hint: "1 − price ÷ value"}
+  - {type: total, k: ig, label: "Growth the price implies", hint: "(P/E − 8.5) ÷ 2. Graham ran the formula backwards like this himself."}
+  - {type: note, label: "Graham's 1974 version, adjusted for bond yields. It isn't in the book: he added it after rates had soared."}
+  - {type: input, k: y, label: "Yield on AAA corporate bonds (%)", kind: percent, hint: "Graham used 20-year AAA bonds; 4.4% was their yield in 1963. Use the highest-grade corporate yield in the company's currency."}
+  - {type: total, k: valy, label: "Value per share × 4.4 ÷ bond yield"}
+  - {type: calc, k: mosy, label: "Margin of safety"}
+  - {type: calc, k: igy, label: "Growth the price implies, with the bond yield"}
+
+  - {type: head, label: "2. The Graham number"}
+  - {type: note, label: "Chapter 14 caps what a defensive investor should pay: P/E no more than 15 on three-year average earnings, price-to-book (P/B) no more than 1.5, or their product no more than 22.5. The Graham number is the price where that product hits 22.5."}
+  - {type: input, k: e1, label: "EPS, latest year", kind: price, signed: true}
+  - {type: input, k: e2, label: "EPS, one year earlier", kind: price, signed: true}
+  - {type: input, k: e3, label: "EPS, two years earlier", kind: price, signed: true}
+  - {type: calc, k: avg, label: "Average EPS, last 3 years"}
+  - {type: input, k: bv, label: "Book value per share", kind: price, signed: true, hint: "Latest reported."}
+  - {type: helper, id: gr-bv}
+  - {type: calc, k: pe, label: "P/E on average earnings", hint: "Test 6: no more than 15."}
+  - {type: calc, k: pb, label: "Price-to-book (P/B)", hint: "Test 7: no more than 1.5, or more if the P/E is low enough to keep the product at 22.5."}
+  - {type: calc, k: pepb, label: "P/E × P/B", hint: "No more than 22.5."}
+  - {type: total, k: gn, label: "Graham number", hint: "√(22.5 × average EPS × book value per share). A cap on what to pay; Graham never called it a value."}
+  - {type: calc, k: vsgn, label: "Price vs the Graham number"}
+  - {type: test, k: t67, label: "P/E × P/B test"}
+
+  - {type: head, label: "3. Graham's other five tests"}
+  - {type: note, label: "The rest of chapter 14's checklist for the defensive investor. Amounts in any unit, as long as it's the same one."}
+  - {type: input, k: sales, label: "Annual sales", kind: number}
+  - {type: input, k: minsales, label: "Your minimum sales", kind: number, hint: "Graham asked for $100 million in 1972 dollars. Jason Zweig's 2003 update: a market value above $2 billion."}
+  - {type: test, k: t1, label: "1. Adequate size"}
+  - {type: input, k: ca, label: "Current assets", kind: number}
+  - {type: input, k: cl, label: "Current liabilities", kind: number}
+  - {type: input, k: ltd, label: "Long-term debt", kind: number}
+  - {type: calc, k: cr, label: "Current ratio"}
+  - {type: test, k: t2, label: "2. Strong financial condition", hint: "Current ratio of at least 2, and long-term debt no bigger than working capital."}
+  - {type: input, k: ypos, label: "Years with positive earnings, of the last 10", kind: number}
+  - {type: test, k: t3, label: "3. Earnings stability", hint: "Earnings in each of the last 10 years."}
+  - {type: input, k: ydiv, label: "Years of uninterrupted dividends", kind: number}
+  - {type: test, k: t4, label: "4. Dividend record", hint: "At least 20 years."}
+  - {type: input, k: e10, label: "Average EPS ten years ago (3-year average)", kind: price, signed: true, hint: "Average of the EPS 8, 9 and 10 years back. The ten-year helper in section 1 fills it in."}
+  - {type: calc, k: eg, label: "Growth in 3-year average EPS over ten years"}
+  - {type: test, k: t5, label: "5. Earnings growth", hint: "At least a third more over ten years."}
+  - {type: total, k: n, label: "Tests passed, of 7", hint: "Tests 6 and 7 from section 2 count separately."}

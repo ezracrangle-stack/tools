@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
+{% block title %}Graham's formulas{% endblock %}
+{% block description %}Benjamin Graham's growth formula, the Graham number and his seven tests for the defensive investor, as he wrote them in The Intelligent Investor. Free, and it runs in your browser.{% endblock %}
+{% block main %}
+<section class="lede">
+  <h1 class="page-title">Graham's formulas</h1>
+  <p class="dek">Benjamin Graham left two rules of thumb that get quoted everywhere. One prices a stock from its earnings and growth. The other, now called the Graham number, caps what a careful investor should pay. Both come from <em>The Intelligent Investor</em>, and this page uses them the way he wrote them.</p>
+  <p>Fill in section 1, section 2 or both. Section 3 runs the rest of his checklist. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="grform" class="calc" novalidate>
+{{ sheet.units(currencies, amounts=False) }}
+  <p class="small">Per-share figures in full. Percentages go in as whole numbers: 6 means 6%.</p>
+
+{{ sheet.rows(rows, "Graham worksheet") }}
+
+{{ sheet.actions('"n/m" means the number behind it is zero or negative, so the result doesn\'t mean anything.') }}
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Large, steady, profitable companies with a long record, which is the universe Graham had in mind for the defensive investor. He also wanted them held in a portfolio of 10 to 30 stocks, never one at a time.</p>
+  <p>It works badly for four kinds of company:</p>
+  <ul>
+    <li><strong>Fast growers.</strong> Above about 8% a year, Graham himself said no formula values a company realistically.</li>
+    <li><strong>Companies that lose money, or earn at a cyclical peak.</strong> The formulas multiply earnings, so use normal earnings or don't use them.</li>
+    <li><strong>Banks, insurers and utilities.</strong> The current-ratio test doesn't fit them. Graham gave utilities a different debt rule.</li>
+    <li><strong>Businesses built on brands or software.</strong> Their book value leaves out most of what they own, so they fail the price-to-book (P/B) test almost by design.</li>
+  </ul>
+
+  <h2 class="rule-head">What this calculator can't tell you</h2>
+
+  <h3>The growth rate</h3>
+  <p>In the formula, the 7-to-10-year growth rate decides almost everything. Graham printed it with a warning: such projections aren't reliable, and prices won't follow them. The number to look at is the growth the price implies. Then ask if the business can deliver it.</p>
+
+  <h3>Normal earnings</h3>
+  <p>Graham asked for "current (normal)" earnings. One good year at the top of a cycle can make any stock look cheap.</p>
+
+  <h3>The bond yield</h3>
+  <p>The 1974 version leans on AAA bond yields, and few companies are rated AAA today. Use the highest-grade corporate yield you can find in the company's currency, and say which one you used.</p>
+
+  <h3>The business</h3>
+  <p>Graham's tests check size, balance sheet, record and price. They say nothing about competition, management or where the industry is going.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>The growth formula is in chapter 11 of <em>The Intelligent Investor</em> (revised edition, 1973). The bond-yield version comes from Graham's 1974 article "The Decade 1965-1974: Its Significance for Financial Analysts." The book never uses the name Graham number: it's the cap on P/E times price-to-book (P/B) in chapter 14, which also lists the other five tests.</p>
+</section>
+
+{{ sheet.coming_soon("An AI version, built as a Claude skill, is coming. It reads ten years of annual reports, works out normal earnings and runs all seven of Graham's tests. Subscribe to Ezra's Notes to get it first.", substack_embed) }}
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ root }}static/graham.js?v={{ asset_v }}"></script>{% endblock %}

@@ -1,14 +1,14 @@
 {# Shared pieces for every worksheet-style calculator. Import with:
    {% import "_sheet.html" as sheet %} #}
 
-{% macro units(currencies, amounts_default="1000", shares_default="1000") %}
+{% macro units(currencies, amounts_default="1000", shares_default="1000", amounts=True) %}
   <div class="settings">
     <div><label for="cur">Currency</label>
       <select id="cur">{% for c in currencies %}<option{% if c == 'USD' %} selected{% endif %}>{{ c }}</option>{% endfor %}</select></div>
-    <div><label for="u">Amounts in</label>
+    {% if amounts %}<div><label for="u">Amounts in</label>
       <select id="u">{% for v, t in [("1","Units"),("1000","Thousands"),("1000000","Millions")] %}<option value="{{ v }}"{% if v == amounts_default %} selected{% endif %}>{{ t }}</option>{% endfor %}</select></div>
     <div><label for="su">Shares in</label>
-      <select id="su">{% for v, t in [("1","Units"),("1000","Thousands"),("1000000","Millions")] %}<option value="{{ v }}"{% if v == shares_default %} selected{% endif %}>{{ t }}</option>{% endfor %}</select></div>
+      <select id="su">{% for v, t in [("1","Units"),("1000","Thousands"),("1000000","Millions")] %}<option value="{{ v }}"{% if v == shares_default %} selected{% endif %}>{{ t }}</option>{% endfor %}</select></div>{% endif %}
   </div>
 {% endmacro %}
 
