@@ -5,6 +5,10 @@ ga_id: "G-FTNNLB6W9D"
 # into Ezra's private Google Sheet. Empty hides those buttons.
 collect_url: "https://script.google.com/macros/s/AKfycbz-a4q03dY00RYGWBKOHaKqYKL92Z3afAqhJ5iYdPQGYCMbU2CpFTR-JfEfArbdoUZXHg/exec"
 
+# Old addresses sent to their new page (old: new).
+redirects:
+  cscore: red-flags
+
 # Every tool on the site. The home page list is built from this file.
 # status: live (has a page) or soon (shows as "Coming soon").
 # To add a tool, see COMO-AGREGAR-UNA-HERRAMIENTA.md.
@@ -94,12 +98,12 @@ tools:
     status: live
     blurb: Twenty-three pairs of opposites, from lenders to investors to funds. Pick a side for each and take the market's temperature, as Howard Marks does in Mastering the Market Cycle.
 
-  - slug: cscore
-    share: "Montier's C-Score"
-    name: Montier's C-Score
-    nav: Montier
+  - slug: red-flags
+    share: "the red flags check"
+    name: Red flags
+    nav: Red flags
     status: live
-    blurb: Is the company cooking its books? Six common earnings manipulations, scored from two years of accounts. From James Montier's Value Investing.
+    blurb: Is the company dressing up its numbers? Montier's C-Score, Beneish's M-Score and four checks from Financial Shenanigans, on two years of accounts.
 
   - slug: beauty-contest
     share: "Keynes' beauty contest"
@@ -109,10 +113,6 @@ tools:
     blurb: A monthly game. Pick a number from 0 to 100; the winner is closest to two-thirds of everyone's average. How far ahead of the crowd can you think?
 
 
-  - slug: red-flags
-    name: Red flags
-    status: soon
-    blurb: Accounting warning signs to check before you buy.
 
   - slug: moat-management
     name: Moat and management scorecard

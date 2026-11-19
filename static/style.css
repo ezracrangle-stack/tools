@@ -446,3 +446,4 @@ table.grid .gcalc th, table.grid .gcalc output { font-weight: 700; }
 .bc-bar::before { content: ""; display: block; width: 100%; height: var(--h); background: var(--ink); }
 .bc-bar i { position: absolute; bottom: -20px; left: 0; font: 12px var(--body); font-style: normal; color: var(--muted, #666); }
 .bc-ok input[type=checkbox] { -webkit-appearance: auto; appearance: auto; width: 18px; height: 18px; min-width: 0; margin: 0 8px 0 0; padding: 0; border: 0; vertical-align: middle; accent-color: var(--ink); }
+.rf-use { font: 600 11px var(--body); letter-spacing: .08em; font-style: normal; margin-right: 4px; }

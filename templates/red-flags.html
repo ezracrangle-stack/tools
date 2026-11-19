@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
+{% set INC = [
+  ("rev", "Revenue", "CBS", "", 0), ("cogs", "Cost of goods sold", "CBS", "", 0),
+  ("sga", "Selling, general and administrative expenses", "B", "", 0),
+  ("ni", "Net income from continuing operations", "CB", "Net income if nothing was discontinued.", 1),
+  ("cfo", "Cash flow from operations", "CBS", "", 1),
+  ("dep", "Depreciation", "CB", "Leave out amortization of intangibles if you can.", 0),
+  ("capex", "Capital expenditures", "S", "Purchases of PP&E.", 0),
+  ("acq", "Cash paid for acquisitions", "S", "Blank counts as 0.", 0)] %}
+{% set BAL = [
+  ("ar", "Accounts receivable, net", "CBS", "After the allowance.", 0),
+  ("ada", "Allowance for doubtful accounts", "S", "In the receivables note.", 0),
+  ("inv", "Inventory", "C", "", 0), ("oca", "Other current assets", "C", "The catch-all line.", 0),
+  ("tca", "Total current assets", "B", "", 0),
+  ("ppe", "Gross property, plant and equipment", "C", "Before accumulated depreciation, in the notes.", 0),
+  ("ppen", "Net property, plant and equipment", "B", "As on the balance sheet.", 0),
+  ("sec", "Long-term investments", "B", "Blank counts as 0.", 0),
+  ("ta", "Total assets", "CB", "", 0), ("ap", "Accounts payable", "S", "", 0),
+  ("dr", "Deferred revenue", "S", "Current plus non-current.", 0),
+  ("tcl", "Total current liabilities", "B", "", 0), ("ltd", "Long-term debt", "B", "Blank counts as 0.", 0)] %}
+{% macro inrows(items) %}{% for k, label, used, hint, signed in items %}
+      <tr><th scope="row">{{ label }}<span class="hint"><span class="rf-use">{{ used|join(" ") }}</span>{% if hint %} {{ hint }}{% endif %}</span></th>{% for y, yl in [("0", "prior year"), ("1", "latest year")] %}<td><input data-k="{{ k }}{{ y }}"{% if signed %} data-signed="1"{% endif %} type="text" inputmode="{{ 'text' if signed else 'decimal' }}" autocomplete="off" aria-label="{{ label }}, {{ yl }}"></td>{% endfor %}</tr>{% endfor %}
+{% endmacro %}
+{% macro flag(p, k, label, hint) %}
+      <tr><th scope="row">{{ label }}<span class="hint">{{ hint }}</span></th><td><output id="{{ p }}-{{ k }}0">–</output></td><td><output id="{{ p }}-{{ k }}1">–</output></td><td><output id="{{ p }}-{{ k }}f">–</output></td></tr>{% endmacro %}
+{% block title %}Red flags: C-Score, M-Score and Financial Shenanigans checks{% endblock %}
+{% block description %}Three accounting checks on two years of numbers: James Montier's C-Score, Messod Beneish's M-Score and four quick checks from Financial Shenanigans. Free, and it runs in your browser.{% endblock %}
+{% block main %}
+<section class="lede">
+  <h1 class="page-title">Red flags</h1>
+  <p class="dek">Is the company dressing up its numbers? Three checks on the same two years of accounts: James Montier's C-Score, Messod Beneish's M-Score, and four quick tests from Howard Schilit's <em>Financial Shenanigans</em>.</p>
+  <p>Fill in what you have. Each check runs with the lines it needs, marked C, B and S next to each line. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="rfform" class="calc" novalidate>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-co">Company<span class="hint">Optional.</span></label>
+      <span class="cell"><input id="f-co" type="text" maxlength="60" autocomplete="off" spellcheck="false" style="text-align:left"></span>
+    </div>
+  </div>
+  <div class="profile csx">
+    <p class="hsub">Income and cash flow statements</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Prior year</th><th>Latest year</th></tr></thead>
+      <tbody>{{ inrows(INC) }}
+      </tbody>
+    </table>
+    </div>
+    <p class="hsub">Balance sheet, at year-end</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Prior year</th><th>Latest year</th></tr></thead>
+      <tbody>{{ inrows(BAL) }}
+      </tbody>
+    </table>
+    </div>
+    <p class="hint">C = Montier, B = Beneish, S = Schilit. Same unit for every amount (e.g. millions). Net income and cash flow can be negative.</p>
+  </div>
+
+  <div class="profile csx">
+    <p class="hsub">A. Montier's C-Score</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Prior year</th><th>Latest year</th><th>Flag</th></tr></thead>
+      <tbody>
+      {{- flag("c", "gap", "1. Net income minus cash flow from operations", "Up if the gap grows: earnings rest on estimates; cash is harder to shape.") }}
+      {{- flag("c", "dso", "2. Days sales outstanding", "Up if it rises: receivables growing faster than sales.") }}
+      {{- flag("c", "dsi", "3. Days sales of inventory", "Up if it rises: inventory piling up usually means sales are slowing.") }}
+      {{- flag("c", "oca", "4. Other current assets ÷ revenue", "Up if it rises: a place to hide what the CFO doesn't want you to look at.") }}
+      {{- flag("c", "dep", "5. Depreciation ÷ gross PP&E", "Up if it falls: a longer assumed asset life lifts earnings.") }}
+      {{- flag("c", "ta", "6. Total asset growth", "Up if it's above the threshold below: serial acquirers can use deals to blur their earnings.") }}
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="srow in key">
+      <label class="lab" for="f-hi">What counts as high asset growth (%)<span class="hint">The book doesn't give a number. 10 is our default.</span></label>
+      <span class="cell"><input id="f-hi" data-k="hi" type="text" inputmode="decimal" autocomplete="off" value="10" data-default="10"></span>
+    </div>
+    <div class="srow calc-row total"><span class="lab">C-Score<span class="hint">0 to 6, once every flag can be scored.</span></span><output class="cell" id="c-score">–</output></div>
+    <div class="srow test"><span class="lab">Reading<span class="hint">5 or 6 high, 3 or 4 middling, 0 to 2 low.</span></span><output class="cell" id="c-read">–</output></div>
+  </div>
+
+  <div class="profile csx">
+    <p class="hsub">B. Beneish's M-Score</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Index</th><th>Weighted</th></tr></thead>
+      <tbody>
+      {%- for k, label, hint in [
+        ("dsri", "Days sales in receivables", "Receivables against sales, this year over last."),
+        ("gmi", "Gross margin", "Last year's margin over this year's. Above 1: margins fell."),
+        ("aqi", "Asset quality", "Assets that aren't current, PP&E or investments. Rising: more costs capitalized."),
+        ("sgi", "Sales growth", "Fast growers face more pressure to keep it up."),
+        ("depi", "Depreciation", "Last year's depreciation rate over this year's. Above 1: slower depreciation."),
+        ("sgai", "SG&A", "SG&A against sales, this year over last."),
+        ("tata", "Total accruals to total assets", "Earnings minus cash flow, over assets. The heaviest weight."),
+        ("lvgi", "Leverage", "Liabilities and debt against assets, this year over last.")] %}
+      <tr><th scope="row">{{ label }}<span class="hint">{{ hint }}</span></th><td><output id="b-{{ k }}">–</output></td><td><output id="b-{{ k }}w">–</output></td></tr>
+      {%- endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="srow calc-row total"><span class="lab">M-Score<span class="hint">−4.84 plus the weighted indexes. Needs all eight.</span></span><output class="cell" id="b-m">–</output></div>
+    <div class="srow test"><span class="lab">Reading<span class="hint">Above −1.78 looks like Beneish's manipulators; −2.22 to −1.78 is a grey zone.</span></span><output class="cell" id="b-read">–</output></div>
+  </div>
+
+  <div class="profile csx">
+    <p class="hsub">C. Schilit's checks</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Prior year</th><th>Latest year</th><th>Flag</th></tr></thead>
+      <tbody>
+      {{- flag("s", "fcfa", "Free cash flow after acquisitions", "Cash flow from operations minus capex and acquisitions. Up if it's negative while cash flow from operations is positive.") }}
+      {{- flag("s", "dpo", "Days payable outstanding", "Up if it rises: paying suppliers later lifts cash flow, once.") }}
+      {{- flag("s", "ada", "Allowance ÷ gross receivables", "Up if it falls: smaller reserves for bad debts lift earnings.") }}
+      {{- flag("s", "dr", "Deferred revenue", "Up if it falls while sales grow: future revenue may be coming in early.") }}
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="srow calc-row total"><span class="lab">Schilit flags up</span><output class="cell" id="s-up">–</output></div>
+    <div class="srow head"><span class="lab">With valuation</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-mcap">Market value of the shares<span class="hint">Optional, same unit as the amounts above.</span></label>
+      <span class="cell"><input id="f-mcap" data-k="mcap" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Price to sales</span><output class="cell" id="o-ps">–</output></div>
+    <div class="srow test"><span class="lab">C-Score of 5 or more and price to sales above 2<span class="hint">The combination that lost about 4% a year in Montier's test.</span></span><output class="cell" id="x-short">–</output></div>
+  </div>
+
+{{ sheet.actions('A red flag is a reason to read the notes, not proof that anyone is cheating.') }}
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">A. Montier's C-Score</h2>
+  <p>C for cooking the books. Each of six flags scores 1 when it's up, and the C-Score is the total. Montier built it after noticing that short sellers are the most careful readers of accounts.</p>
+  <p>In his test (1993 to 2007), stocks with high C-Scores trailed the market by about 8% a year in the USA and 5% in Europe. It works best with valuation: a C-Score of 5 with a price to sales above 2 lost about 4% a year in both regions, and more than half of those stocks fell. The threshold for high asset growth is ours: the book doesn't give one.</p>
+
+  <h2 class="rule-head">B. Beneish's M-Score</h2>
+  <p>Messod Beneish compared 74 companies caught manipulating their earnings with thousands that weren't, and found eight ratios that told them apart. The M-Score weighs them in one number. Above −1.78, a company looks like the manipulators in his sample. Many analysts use −2.22 as a softer cut, so we show the space between the two as a grey zone.</p>
+  <p>The ratio with the most weight is total accruals: earnings that don't show up as cash. Growth and leverage are in the model as motives, not as signs of manipulation.</p>
+
+  <h2 class="rule-head">C. Schilit's checks</h2>
+  <p>Four quick tests from <em>Financial Shenanigans</em>, each aimed at a trick the book documents:</p>
+  <ul>
+    <li><strong>Free cash flow after acquisitions</strong> (chapter 16). Buying companies can lift cash flow from operations, because the cash spent shows up as investing. Serial acquirers can report strong operating cash flow while burning cash overall.</li>
+    <li><strong>Days payable outstanding</strong> (chapter 12). Paying suppliers later lifts operating cash flow, but only once: it can't go on forever.</li>
+    <li><strong>Allowance for doubtful accounts</strong> (chapter 7). The allowance usually grows with receivables. When it shrinks as receivables rise, the company may be booking too little bad-debt expense.</li>
+    <li><strong>Deferred revenue</strong> (chapter 8). It's cash collected for work not yet done. When it falls while sales grow, the company may be pulling future revenue into today.</li>
+  </ul>
+
+  <h2 class="rule-head">How to read the result</h2>
+  <p>All three are screens. A jump in inventory before a product launch, slower payments negotiated with suppliers, or one sensible acquisition can each raise a flag for innocent reasons. Read the notes behind every flag that's up. When the three checks point the same way, look harder.</p>
+
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Industrial, retail, consumer and technology companies with receivables, inventory and fixed assets. Not banks or insurers: Beneish left them out of his study, and most of the lines don't apply.</p>
+
+  <h2 class="rule-head">Where the methods come from</h2>
+  <p>James Montier, <em>Value Investing: Tools and Techniques for Intelligent Investment</em> (Wiley, 2009), chapter 25. Messod D. Beneish, "The Detection of Earnings Manipulation", <em>Financial Analysts Journal</em>, September/October 1999. Howard M. Schilit, Jeremy Perler and Yoni Engelhart, <em>Financial Shenanigans</em>, 4th edition (McGraw-Hill, 2018).</p>
+</section>
+
+{{ sheet.coming_soon("The full version is coming: an Excel template and an AI skill built for Claude. They pull the lines from the filings, run the three checks over several years, and read the notes behind every flag. Subscribe to Ezra's Notes to hear first.", substack_embed) }}
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ root }}static/redflags.js?v={{ asset_v }}"></script>{% endblock %}

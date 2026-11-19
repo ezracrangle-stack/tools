@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTNNLB6W9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FTNNLB6W9D');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>Red flags: C-Score, M-Score and Financial Shenanigans checks · Ezra's Notes</title>
+<meta name="description" content="Three accounting checks on two years of numbers: James Montier's C-Score, Messod Beneish's M-Score and four quick checks from Financial Shenanigans. Free, and it runs in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css?v=3cecb0a5">
+<meta property="og:title" content="Red flags: C-Score, M-Score and Financial Shenanigans checks · Ezra's Notes">
+<meta property="og:description" content="Three accounting checks on two years of numbers: James Montier's C-Score, Messod Beneish's M-Score and four quick checks from Financial Shenanigans. Free, and it runs in your browser.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/red-flags/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="../static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
+<link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/red-flags/">
+</head>
+<body data-collect="https://script.google.com/macros/s/AKfycbz-a4q03dY00RYGWBKOHaKqYKL92Z3afAqhJ5iYdPQGYCMbU2CpFTR-JfEfArbdoUZXHg/exec" data-tool-name="the red flags check">
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="../">Tools</a>
+  <p class="byline">By <a href="https://x.com/ezracrangle">@ezracrangle</a></p>
+  <nav>
+    <a href="../">All tools</a>
+    <details class="nav-menu">
+      <summary>Red flags</summary>
+      <div class="nav-drop"><a href="../net-net/">Net-net</a><a href="../epv/">EPV</a><a href="../greenwald/">Greenwald</a><a href="../penman/">Penman</a><a href="../graham/">Graham</a><a href="../fcf/">Mauboussin</a><a href="../roic/">ROIC</a><a href="../reverse-dcf/">Reverse DCF</a><a href="../compounders/">Compounders</a><a href="../dhandho/">Pabrai</a><a href="../lynch/">Lynch</a><a href="../marks/">Marks</a><a href="../red-flags/" aria-current="page">Red flags</a><a href="../beauty-contest/">Beauty contest</a></div>
+    </details>
+    <a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<div class="print-head" aria-hidden="true"><strong>Ezra's Notes · Tools</strong><span id="print-stamp"></span></div>
+<div class="print-summary verdict" id="print-summary" aria-hidden="true"></div>
+<section class="lede">
+  <h1 class="page-title">Red flags</h1>
+  <p class="dek">Is the company dressing up its numbers? Three checks on the same two years of accounts: James Montier's C-Score, Messod Beneish's M-Score, and four quick tests from Howard Schilit's <em>Financial Shenanigans</em>.</p>
+  <p>Fill in what you have. Each check runs with the lines it needs, marked C, B and S next to each line. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="rfform" class="calc" novalidate>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-co">Company<span class="hint">Optional.</span></label>
+      <span class="cell"><input id="f-co" type="text" maxlength="60" autocomplete="off" spellcheck="false" style="text-align:left"></span>
+    </div>
+  </div>
+  <div class="profile csx">
+    <p class="hsub">Income and cash flow statements</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Prior year</th><th>Latest year</th></tr></thead>
+      <tbody>      <tr><th scope="row">Revenue<span class="hint"><span class="rf-use">C B S</span></span></th><td><input data-k="rev0" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, prior year"></td><td><input data-k="rev1" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, latest year"></td></tr>      <tr><th scope="row">Cost of goods sold<span class="hint"><span class="rf-use">C B S</span></span></th><td><input data-k="cogs0" type="text" inputmode="decimal" autocomplete="off" aria-label="Cost of goods sold, prior year"></td><td><input data-k="cogs1" type="text" inputmode="decimal" autocomplete="off" aria-label="Cost of goods sold, latest year"></td></tr>      <tr><th scope="row">Selling, general and administrative expenses<span class="hint"><span class="rf-use">B</span></span></th><td><input data-k="sga0" type="text" inputmode="decimal" autocomplete="off" aria-label="Selling, general and administrative expenses, prior year"></td><td><input data-k="sga1" type="text" inputmode="decimal" autocomplete="off" aria-label="Selling, general and administrative expenses, latest year"></td></tr>      <tr><th scope="row">Net income from continuing operations<span class="hint"><span class="rf-use">C B</span> Net income if nothing was discontinued.</span></th><td><input data-k="ni0" data-signed="1" type="text" inputmode="text" autocomplete="off" aria-label="Net income from continuing operations, prior year"></td><td><input data-k="ni1" data-signed="1" type="text" inputmode="text" autocomplete="off" aria-label="Net income from continuing operations, latest year"></td></tr>      <tr><th scope="row">Cash flow from operations<span class="hint"><span class="rf-use">C B S</span></span></th><td><input data-k="cfo0" data-signed="1" type="text" inputmode="text" autocomplete="off" aria-label="Cash flow from operations, prior year"></td><td><input data-k="cfo1" data-signed="1" type="text" inputmode="text" autocomplete="off" aria-label="Cash flow from operations, latest year"></td></tr>      <tr><th scope="row">Depreciation<span class="hint"><span class="rf-use">C B</span> Leave out amortization of intangibles if you can.</span></th><td><input data-k="dep0" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation, prior year"></td><td><input data-k="dep1" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation, latest year"></td></tr>      <tr><th scope="row">Capital expenditures<span class="hint"><span class="rf-use">S</span> Purchases of PP&amp;E.</span></th><td><input data-k="capex0" type="text" inputmode="decimal" autocomplete="off" aria-label="Capital expenditures, prior year"></td><td><input data-k="capex1" type="text" inputmode="decimal" autocomplete="off" aria-label="Capital expenditures, latest year"></td></tr>      <tr><th scope="row">Cash paid for acquisitions<span class="hint"><span class="rf-use">S</span> Blank counts as 0.</span></th><td><input data-k="acq0" type="text" inputmode="decimal" autocomplete="off" aria-label="Cash paid for acquisitions, prior year"></td><td><input data-k="acq1" type="text" inputmode="decimal" autocomplete="off" aria-label="Cash paid for acquisitions, latest year"></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="hsub">Balance sheet, at year-end</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Prior year</th><th>Latest year</th></tr></thead>
+      <tbody>      <tr><th scope="row">Accounts receivable, net<span class="hint"><span class="rf-use">C B S</span> After the allowance.</span></th><td><input data-k="ar0" type="text" inputmode="decimal" autocomplete="off" aria-label="Accounts receivable, net, prior year"></td><td><input data-k="ar1" type="text" inputmode="decimal" autocomplete="off" aria-label="Accounts receivable, net, latest year"></td></tr>      <tr><th scope="row">Allowance for doubtful accounts<span class="hint"><span class="rf-use">S</span> In the receivables note.</span></th><td><input data-k="ada0" type="text" inputmode="decimal" autocomplete="off" aria-label="Allowance for doubtful accounts, prior year"></td><td><input data-k="ada1" type="text" inputmode="decimal" autocomplete="off" aria-label="Allowance for doubtful accounts, latest year"></td></tr>      <tr><th scope="row">Inventory<span class="hint"><span class="rf-use">C</span></span></th><td><input data-k="inv0" type="text" inputmode="decimal" autocomplete="off" aria-label="Inventory, prior year"></td><td><input data-k="inv1" type="text" inputmode="decimal" autocomplete="off" aria-label="Inventory, latest year"></td></tr>      <tr><th scope="row">Other current assets<span class="hint"><span class="rf-use">C</span> The catch-all line.</span></th><td><input data-k="oca0" type="text" inputmode="decimal" autocomplete="off" aria-label="Other current assets, prior year"></td><td><input data-k="oca1" type="text" inputmode="decimal" autocomplete="off" aria-label="Other current assets, latest year"></td></tr>      <tr><th scope="row">Total current assets<span class="hint"><span class="rf-use">B</span></span></th><td><input data-k="tca0" type="text" inputmode="decimal" autocomplete="off" aria-label="Total current assets, prior year"></td><td><input data-k="tca1" type="text" inputmode="decimal" autocomplete="off" aria-label="Total current assets, latest year"></td></tr>      <tr><th scope="row">Gross property, plant and equipment<span class="hint"><span class="rf-use">C</span> Before accumulated depreciation, in the notes.</span></th><td><input data-k="ppe0" type="text" inputmode="decimal" autocomplete="off" aria-label="Gross property, plant and equipment, prior year"></td><td><input data-k="ppe1" type="text" inputmode="decimal" autocomplete="off" aria-label="Gross property, plant and equipment, latest year"></td></tr>      <tr><th scope="row">Net property, plant and equipment<span class="hint"><span class="rf-use">B</span> As on the balance sheet.</span></th><td><input data-k="ppen0" type="text" inputmode="decimal" autocomplete="off" aria-label="Net property, plant and equipment, prior year"></td><td><input data-k="ppen1" type="text" inputmode="decimal" autocomplete="off" aria-label="Net property, plant and equipment, latest year"></td></tr>      <tr><th scope="row">Long-term investments<span class="hint"><span class="rf-use">B</span> Blank counts as 0.</span></th><td><input data-k="sec0" type="text" inputmode="decimal" autocomplete="off" aria-label="Long-term investments, prior year"></td><td><input data-k="sec1" type="text" inputmode="decimal" autocomplete="off" aria-label="Long-term investments, latest year"></td></tr>      <tr><th scope="row">Total assets<span class="hint"><span class="rf-use">C B</span></span></th><td><input data-k="ta0" type="text" inputmode="decimal" autocomplete="off" aria-label="Total assets, prior year"></td><td><input data-k="ta1" type="text" inputmode="decimal" autocomplete="off" aria-label="Total assets, latest year"></td></tr>      <tr><th scope="row">Accounts payable<span class="hint"><span class="rf-use">S</span></span></th><td><input data-k="ap0" type="text" inputmode="decimal" autocomplete="off" aria-label="Accounts payable, prior year"></td><td><input data-k="ap1" type="text" inputmode="decimal" autocomplete="off" aria-label="Accounts payable, latest year"></td></tr>      <tr><th scope="row">Deferred revenue<span class="hint"><span class="rf-use">S</span> Current plus non-current.</span></th><td><input data-k="dr0" type="text" inputmode="decimal" autocomplete="off" aria-label="Deferred revenue, prior year"></td><td><input data-k="dr1" type="text" inputmode="decimal" autocomplete="off" aria-label="Deferred revenue, latest year"></td></tr>      <tr><th scope="row">Total current liabilities<span class="hint"><span class="rf-use">B</span></span></th><td><input data-k="tcl0" type="text" inputmode="decimal" autocomplete="off" aria-label="Total current liabilities, prior year"></td><td><input data-k="tcl1" type="text" inputmode="decimal" autocomplete="off" aria-label="Total current liabilities, latest year"></td></tr>      <tr><th scope="row">Long-term debt<span class="hint"><span class="rf-use">B</span> Blank counts as 0.</span></th><td><input data-k="ltd0" type="text" inputmode="decimal" autocomplete="off" aria-label="Long-term debt, prior year"></td><td><input data-k="ltd1" type="text" inputmode="decimal" autocomplete="off" aria-label="Long-term debt, latest year"></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="hint">C = Montier, B = Beneish, S = Schilit. Same unit for every amount (e.g. millions). Net income and cash flow can be negative.</p>
+  </div>
+
+  <div class="profile csx">
+    <p class="hsub">A. Montier's C-Score</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Prior year</th><th>Latest year</th><th>Flag</th></tr></thead>
+      <tbody>      <tr><th scope="row">1. Net income minus cash flow from operations<span class="hint">Up if the gap grows: earnings rest on estimates; cash is harder to shape.</span></th><td><output id="c-gap0">–</output></td><td><output id="c-gap1">–</output></td><td><output id="c-gapf">–</output></td></tr>      <tr><th scope="row">2. Days sales outstanding<span class="hint">Up if it rises: receivables growing faster than sales.</span></th><td><output id="c-dso0">–</output></td><td><output id="c-dso1">–</output></td><td><output id="c-dsof">–</output></td></tr>      <tr><th scope="row">3. Days sales of inventory<span class="hint">Up if it rises: inventory piling up usually means sales are slowing.</span></th><td><output id="c-dsi0">–</output></td><td><output id="c-dsi1">–</output></td><td><output id="c-dsif">–</output></td></tr>      <tr><th scope="row">4. Other current assets ÷ revenue<span class="hint">Up if it rises: a place to hide what the CFO doesn&#39;t want you to look at.</span></th><td><output id="c-oca0">–</output></td><td><output id="c-oca1">–</output></td><td><output id="c-ocaf">–</output></td></tr>      <tr><th scope="row">5. Depreciation ÷ gross PP&amp;E<span class="hint">Up if it falls: a longer assumed asset life lifts earnings.</span></th><td><output id="c-dep0">–</output></td><td><output id="c-dep1">–</output></td><td><output id="c-depf">–</output></td></tr>      <tr><th scope="row">6. Total asset growth<span class="hint">Up if it&#39;s above the threshold below: serial acquirers can use deals to blur their earnings.</span></th><td><output id="c-ta0">–</output></td><td><output id="c-ta1">–</output></td><td><output id="c-taf">–</output></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="srow in key">
+      <label class="lab" for="f-hi">What counts as high asset growth (%)<span class="hint">The book doesn't give a number. 10 is our default.</span></label>
+      <span class="cell"><input id="f-hi" data-k="hi" type="text" inputmode="decimal" autocomplete="off" value="10" data-default="10"></span>
+    </div>
+    <div class="srow calc-row total"><span class="lab">C-Score<span class="hint">0 to 6, once every flag can be scored.</span></span><output class="cell" id="c-score">–</output></div>
+    <div class="srow test"><span class="lab">Reading<span class="hint">5 or 6 high, 3 or 4 middling, 0 to 2 low.</span></span><output class="cell" id="c-read">–</output></div>
+  </div>
+
+  <div class="profile csx">
+    <p class="hsub">B. Beneish's M-Score</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Index</th><th>Weighted</th></tr></thead>
+      <tbody>      <tr><th scope="row">Days sales in receivables<span class="hint">Receivables against sales, this year over last.</span></th><td><output id="b-dsri">–</output></td><td><output id="b-dsriw">–</output></td></tr>      <tr><th scope="row">Gross margin<span class="hint">Last year&#39;s margin over this year&#39;s. Above 1: margins fell.</span></th><td><output id="b-gmi">–</output></td><td><output id="b-gmiw">–</output></td></tr>      <tr><th scope="row">Asset quality<span class="hint">Assets that aren&#39;t current, PP&amp;E or investments. Rising: more costs capitalized.</span></th><td><output id="b-aqi">–</output></td><td><output id="b-aqiw">–</output></td></tr>      <tr><th scope="row">Sales growth<span class="hint">Fast growers face more pressure to keep it up.</span></th><td><output id="b-sgi">–</output></td><td><output id="b-sgiw">–</output></td></tr>      <tr><th scope="row">Depreciation<span class="hint">Last year&#39;s depreciation rate over this year&#39;s. Above 1: slower depreciation.</span></th><td><output id="b-depi">–</output></td><td><output id="b-depiw">–</output></td></tr>      <tr><th scope="row">SG&amp;A<span class="hint">SG&amp;A against sales, this year over last.</span></th><td><output id="b-sgai">–</output></td><td><output id="b-sgaiw">–</output></td></tr>      <tr><th scope="row">Total accruals to total assets<span class="hint">Earnings minus cash flow, over assets. The heaviest weight.</span></th><td><output id="b-tata">–</output></td><td><output id="b-tataw">–</output></td></tr>      <tr><th scope="row">Leverage<span class="hint">Liabilities and debt against assets, this year over last.</span></th><td><output id="b-lvgi">–</output></td><td><output id="b-lvgiw">–</output></td></tr>      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="srow calc-row total"><span class="lab">M-Score<span class="hint">−4.84 plus the weighted indexes. Needs all eight.</span></span><output class="cell" id="b-m">–</output></div>
+    <div class="srow test"><span class="lab">Reading<span class="hint">Above −1.78 looks like Beneish's manipulators; −2.22 to −1.78 is a grey zone.</span></span><output class="cell" id="b-read">–</output></div>
+  </div>
+
+  <div class="profile csx">
+    <p class="hsub">C. Schilit's checks</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Prior year</th><th>Latest year</th><th>Flag</th></tr></thead>
+      <tbody>      <tr><th scope="row">Free cash flow after acquisitions<span class="hint">Cash flow from operations minus capex and acquisitions. Up if it&#39;s negative while cash flow from operations is positive.</span></th><td><output id="s-fcfa0">–</output></td><td><output id="s-fcfa1">–</output></td><td><output id="s-fcfaf">–</output></td></tr>      <tr><th scope="row">Days payable outstanding<span class="hint">Up if it rises: paying suppliers later lifts cash flow, once.</span></th><td><output id="s-dpo0">–</output></td><td><output id="s-dpo1">–</output></td><td><output id="s-dpof">–</output></td></tr>      <tr><th scope="row">Allowance ÷ gross receivables<span class="hint">Up if it falls: smaller reserves for bad debts lift earnings.</span></th><td><output id="s-ada0">–</output></td><td><output id="s-ada1">–</output></td><td><output id="s-adaf">–</output></td></tr>      <tr><th scope="row">Deferred revenue<span class="hint">Up if it falls while sales grow: future revenue may be coming in early.</span></th><td><output id="s-dr0">–</output></td><td><output id="s-dr1">–</output></td><td><output id="s-drf">–</output></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="srow calc-row total"><span class="lab">Schilit flags up</span><output class="cell" id="s-up">–</output></div>
+    <div class="srow head"><span class="lab">With valuation</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-mcap">Market value of the shares<span class="hint">Optional, same unit as the amounts above.</span></label>
+      <span class="cell"><input id="f-mcap" data-k="mcap" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Price to sales</span><output class="cell" id="o-ps">–</output></div>
+    <div class="srow test"><span class="lab">C-Score of 5 or more and price to sales above 2<span class="hint">The combination that lost about 4% a year in Montier's test.</span></span><output class="cell" id="x-short">–</output></div>
+  </div>
+
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
+  <div class="actions">
+    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
+    <button type="button" class="button ghost" id="reset">Clear</button>
+  </div>
+<p class="copy-note">A red flag is a reason to read the notes, not proof that anyone is cheating.</p>  <div class="sharebar" id="sharebar">
+    <label class="sb-co"><span>Company or ticker <em>(optional, goes in the link and the files)</em></span>
+      <input id="sb-company" type="text" maxlength="60" autocomplete="off" spellcheck="false" placeholder="e.g. ACME"></label>
+    <div class="sb-groups">
+      <p class="share-buttons"><span class="sb-k">Share</span>
+        <button type="button" id="sb-x">X</button>
+        <button type="button" id="sb-in">LinkedIn</button>
+        <button type="button" id="sb-native" hidden>More</button></p>
+      <p class="share-buttons"><span class="sb-k">Download</span>
+        <button type="button" id="sb-pdf">PDF</button>
+        <button type="button" id="sb-csv">CSV</button></p>
+      <p class="share-buttons sb-community" hidden><span class="sb-k">Community</span>
+        <button type="button" id="sb-save">Send to Ezra</button>
+        <button type="button" id="sb-tm">Leave a testimonial</button></p>
+    </div>
+    <div class="sb-box" id="sb-savebox" hidden>
+      <p>Send this calculation to Ezra. He reads them, and with your OK he may share some with the community. Nothing leaves your browser until you press Send.</p>
+      <label>Your name or X handle <em>(optional)</em> <input id="sb-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label class="check"><input id="sb-ok" type="checkbox"> Ezra can publish this calculation and my name or handle</label>
+      <input id="sb-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="sb-send">Send</button> <span id="sb-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+    <div class="sb-box" id="testimonial" hidden>
+      <p>Did this calculator help you? Tell Ezra in a few words.</p>
+      <label>What did it help you with? <textarea id="tm-text" rows="4" maxlength="1500"></textarea></label>
+      <label>Name <input id="tm-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label>X or LinkedIn handle <em>(optional)</em> <input id="tm-handle" type="text" maxlength="80" autocomplete="off"></label>
+      <label>What you do <em>(optional, e.g. "individual investor" or "analyst at a fund")</em> <input id="tm-role" type="text" maxlength="120" autocomplete="off"></label>
+      <label class="check"><input id="tm-ok" type="checkbox"> Ezra can publish this on the site with my name</label>
+      <input id="tm-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="tm-send">Send</button> <span id="tm-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+  </div>
+
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">A. Montier's C-Score</h2>
+  <p>C for cooking the books. Each of six flags scores 1 when it's up, and the C-Score is the total. Montier built it after noticing that short sellers are the most careful readers of accounts.</p>
+  <p>In his test (1993 to 2007), stocks with high C-Scores trailed the market by about 8% a year in the USA and 5% in Europe. It works best with valuation: a C-Score of 5 with a price to sales above 2 lost about 4% a year in both regions, and more than half of those stocks fell. The threshold for high asset growth is ours: the book doesn't give one.</p>
+
+  <h2 class="rule-head">B. Beneish's M-Score</h2>
+  <p>Messod Beneish compared 74 companies caught manipulating their earnings with thousands that weren't, and found eight ratios that told them apart. The M-Score weighs them in one number. Above −1.78, a company looks like the manipulators in his sample. Many analysts use −2.22 as a softer cut, so we show the space between the two as a grey zone.</p>
+  <p>The ratio with the most weight is total accruals: earnings that don't show up as cash. Growth and leverage are in the model as motives, not as signs of manipulation.</p>
+
+  <h2 class="rule-head">C. Schilit's checks</h2>
+  <p>Four quick tests from <em>Financial Shenanigans</em>, each aimed at a trick the book documents:</p>
+  <ul>
+    <li><strong>Free cash flow after acquisitions</strong> (chapter 16). Buying companies can lift cash flow from operations, because the cash spent shows up as investing. Serial acquirers can report strong operating cash flow while burning cash overall.</li>
+    <li><strong>Days payable outstanding</strong> (chapter 12). Paying suppliers later lifts operating cash flow, but only once: it can't go on forever.</li>
+    <li><strong>Allowance for doubtful accounts</strong> (chapter 7). The allowance usually grows with receivables. When it shrinks as receivables rise, the company may be booking too little bad-debt expense.</li>
+    <li><strong>Deferred revenue</strong> (chapter 8). It's cash collected for work not yet done. When it falls while sales grow, the company may be pulling future revenue into today.</li>
+  </ul>
+
+  <h2 class="rule-head">How to read the result</h2>
+  <p>All three are screens. A jump in inventory before a product launch, slower payments negotiated with suppliers, or one sensible acquisition can each raise a flag for innocent reasons. Read the notes behind every flag that's up. When the three checks point the same way, look harder.</p>
+
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Industrial, retail, consumer and technology companies with receivables, inventory and fixed assets. Not banks or insurers: Beneish left them out of his study, and most of the lines don't apply.</p>
+
+  <h2 class="rule-head">Where the methods come from</h2>
+  <p>James Montier, <em>Value Investing: Tools and Techniques for Intelligent Investment</em> (Wiley, 2009), chapter 25. Messod D. Beneish, "The Detection of Earnings Manipulation", <em>Financial Analysts Journal</em>, September/October 1999. Howard M. Schilit, Jeremy Perler and Yoni Engelhart, <em>Financial Shenanigans</em>, 4th edition (McGraw-Hill, 2018).</p>
+</section>
+
+<aside class="wanted soon-box" id="coming-soon">
+  <p class="wanted-kicker">Coming soon</p>
+  <p class="wanted-head">The AI version</p>
+  <p class="wanted-body">The full version is coming: an Excel template and an AI skill built for Claude. They pull the lines from the filings, run the three checks over several years, and read the notes behind every flag. Subscribe to Ezra&#39;s Notes to hear first.</p>
+  <iframe class="substack" src="https://www.ezrasnotes.com/embed" title="Subscribe to Ezra's Notes" width="480" height="150" frameborder="0" scrolling="no" loading="lazy"></iframe>
+</aside>
+
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Holdings</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a inversores</a>
+  </p>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
+<script>document.addEventListener("click",function(e){var m=document.querySelector(".nav-menu[open]");if(m&&!m.contains(e.target))m.removeAttribute("open")});</script>
+<script src="../static/share.js?v=3cecb0a5"></script><script type="module" src="../static/redflags.js?v=3cecb0a5"></script></body>
+</html>

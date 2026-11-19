@@ -33,6 +33,15 @@ def build():
     (OUT / "CNAME").write_text("tools.ezrasnotes.com\n")
     (OUT / ".nojekyll").write_text("")
 
+    # Old addresses that moved: keep links working, query string included.
+    for old, new in (data.get("redirects") or {}).items():
+        d = OUT / old; d.mkdir(parents=True, exist_ok=True)
+        (d / "index.html").write_text(
+            f'<!DOCTYPE html><meta charset="utf-8"><title>Moved</title><link rel="canonical" href="{SITE_URL}/{new}/">'
+            f'<meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=../{new}/">'
+            f'<script>location.replace("../{new}/" + location.search + location.hash)</script>'
+            f'<p>This tool moved to <a href="../{new}/">{SITE_URL}/{new}/</a>.</p>\n', encoding="utf-8")
+
     def render(template, page, root, **kw):
         path = OUT / page / "index.html" if page else OUT / "index.html"
         path.parent.mkdir(parents=True, exist_ok=True)
