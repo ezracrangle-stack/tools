@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
+{% block title %}Measuring the moat: where the ROIC comes from and how stable the market is{% endblock %}
+{% block description %}Two numbers from Mauboussin and Callahan's Measuring the Moat: split ROIC into margin and turnover to see if the edge is differentiation or cost leadership, and measure how much market shares move. Free, and it runs in your browser.{% endblock %}
+{% block main %}
+<section class="lede">
+  <h1 class="page-title">Measuring the moat</h1>
+  <p class="dek">Two numbers from Michael Mauboussin and Dan Callahan's <em>Measuring the Moat</em>. Where a company's return on capital comes from, compared with its peers. And how much market shares move in its industry, which tells you how hard it is to hold on to an edge.</p>
+  <p>Use one part or both. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="moatform" class="calc" novalidate>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-co">Company<span class="hint">Optional, for the link and the files.</span></label>
+      <span class="cell"><input id="f-co" type="text" maxlength="60" autocomplete="off" spellcheck="false" style="text-align:left"></span>
+    </div>
+  </div>
+
+  <div class="profile csx mtx">
+    <p class="hsub">1. Where the ROIC comes from</p>
+    <p class="hint">The company in the first row, its closest competitors below. Same unit and same year for all. NOPAT is operating income after tax; invested capital is what the business needs to run (net working capital plus fixed and other operating assets).</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Revenue</th><th>NOPAT</th><th>Invested capital</th></tr></thead>
+      <tbody>
+      {%- for i in range(5) %}
+      <tr><th scope="row"><input data-k="n{{ i }}" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="{{ 'The company' if i == 0 else 'Peer ' ~ i }}" aria-label="Name, row {{ i + 1 }}" class="mt-name"></th>
+        <td><input data-k="rev{{ i }}" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, row {{ i + 1 }}"></td>
+        <td><input data-k="nopat{{ i }}" data-signed="1" type="text" inputmode="text" autocomplete="off" aria-label="NOPAT, row {{ i + 1 }}"></td>
+        <td><input data-k="ic{{ i }}" type="text" inputmode="decimal" autocomplete="off" aria-label="Invested capital, row {{ i + 1 }}"></td></tr>
+      {%- endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-wacc">Cost of capital (%)<span class="hint">Optional. Shows how far each ROIC is above or below it.</span></label>
+      <span class="cell"><input id="f-wacc" data-k="wacc" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+  </div>
+  <div class="profile csx mtx">
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>NOPAT margin</th><th>Turnover</th><th>ROIC</th><th>ROIC − cost</th></tr></thead>
+      <tbody>
+      {%- for i in range(5) %}
+      <tr><th scope="row" id="lbl{{ i }}">{{ 'The company' if i == 0 else 'Peer ' ~ i }}</th><td><output id="m{{ i }}">–</output></td><td><output id="t{{ i }}">–</output></td><td><output id="r{{ i }}">–</output></td><td><output id="s{{ i }}">–</output></td></tr>
+      {%- endfor %}
+      <tr class="on"><th scope="row">Peers combined<span class="hint">Added together, so bigger peers weigh more.</span></th><td><output id="pm">–</output></td><td><output id="pt">–</output></td><td><output id="pr">–</output></td><td></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="srow calc-row"><span class="lab">ROIC: company minus peers</span><output class="cell" id="o-gap">–</output></div>
+    <div class="srow calc-row"><span class="lab">Margin: company ÷ peers</span><output class="cell" id="o-mr">–</output></div>
+    <div class="srow calc-row"><span class="lab">Turnover: company ÷ peers</span><output class="cell" id="o-tr">–</output></div>
+    <div class="srow test"><span class="lab">Where the edge comes from<span class="hint">The larger ratio names the source; both above 1.1x counts as both. Our rule, not the paper's.</span></span><output class="cell" id="x-src">–</output></div>
+  </div>
+
+  <div class="profile csx mtx">
+    <p class="hsub">2. How stable are market shares?</p>
+    <p class="hint">Sales, units or shares in %, for each competitor in two years, usually three to five years apart. Shares are worked out from each year's total. Leave a year blank for a company that entered or left. An "Other" line counts like any company, as in the paper.</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Earlier year</th><th>Later year</th><th>Share then</th><th>Share now</th><th>Change</th></tr></thead>
+      <tbody>
+      {%- for i in range(15) %}
+      <tr{% if i >= 6 %} class="mt-more" hidden{% endif %}><th scope="row"><input data-k="c{{ i }}" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Competitor {{ i + 1 }}" aria-label="Competitor {{ i + 1 }}" class="mt-name"></th>
+        <td><input data-k="a{{ i }}" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor {{ i + 1 }}, earlier year"></td>
+        <td><input data-k="b{{ i }}" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor {{ i + 1 }}, later year"></td>
+        <td><output id="sa{{ i }}">–</output></td><td><output id="sb{{ i }}">–</output></td><td><output id="ch{{ i }}">–</output></td></tr>
+      {%- endfor %}
+      </tbody>
+    </table>
+    </div>
+    <p><button type="button" class="button ghost" id="mt-add">Show more rows</button></p>
+  </div>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-yrs">Years between the two<span class="hint">The 2% rule is for five-year changes.</span></label>
+      <span class="cell"><input id="f-yrs" data-k="yrs" type="text" inputmode="decimal" autocomplete="off" value="5" data-default="5"></span>
+    </div>
+    <div class="srow calc-row total"><span class="lab">Average absolute change in share</span><output class="cell" id="o-avg">–</output></div>
+    <div class="srow test"><span class="lab">Stability<span class="hint">Mauboussin: 2% or less over five years is relatively stable; more is unstable.</span></span><output class="cell" id="x-stab">–</output></div>
+    <div class="srow calc-row"><span class="lab">HHI, earlier year</span><output class="cell" id="o-hhia">–</output></div>
+    <div class="srow calc-row"><span class="lab">HHI, later year<span class="hint">Sum of the squared shares in %, from 0 to 10,000.</span></span><output class="cell" id="o-hhib">–</output></div>
+    <div class="srow test"><span class="lab">Concentration<span class="hint">Above 1,800 is highly concentrated under the 2023 US Merger Guidelines.</span></span><output class="cell" id="x-conc">–</output></div>
+    <div class="srow calc-row"><span class="lab">Top four, earlier year</span><output class="cell" id="o-c4a">–</output></div>
+    <div class="srow calc-row"><span class="lab">Top four, later year</span><output class="cell" id="o-c4b">–</output></div>
+  </div>
+
+{{ sheet.actions('These numbers point you to questions. The moat itself is in the industry and the strategy.') }}
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">1. Where the ROIC comes from</h2>
+  <p>Return on invested capital is NOPAT margin times invested capital turnover: how much of each sale is left after tax, times how many dollars of sales each dollar of capital brings in. Two companies can earn the same ROIC in opposite ways.</p>
+  <p>Mauboussin and Callahan's point: companies that win through <strong>differentiation</strong>, a product customers pay more for, tend to have high margins and satisfactory turnover. Companies that win through <strong>cost leadership</strong> tend to have satisfactory margins and high turnover. Comparing the two parts with the peers tells you which kind of advantage to go and look for, and so which questions to ask: what makes customers pay more, or what lets the company produce for less.</p>
+  <p>Use the same definitions for every company: the comparison only works if NOPAT and invested capital are measured the same way. Our ROIC calculator works both out from the filings.</p>
+
+  <h2 class="rule-head">2. How stable are market shares?</h2>
+  <p>Stable market shares make it easier for a company to keep earning more than its cost of capital. Shares that jump around point to new entrants, changing technology, shifting demand or price wars. The measure, which Mauboussin takes from Bruce Greenwald, is the average of the absolute changes in each competitor's share between two years.</p>
+  <p>His rule of thumb: five-year changes of 2% or less mean a relatively stable industry; more than 2%, an unstable one. In the paper, US search engines and car makers moved about 1% from 2018 to 2023, web browsers and social media about 3%.</p>
+  <p>Concentration is shown too: the Herfindahl-Hirschman Index (HHI) and the share of the top four. Mauboussin warns that concentration isn't reliably linked to value creation or stock returns, and that market share is the better link to profitability. It can rise because one company is better, or because of consolidation.</p>
+
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Any company with clear competitors and comparable accounts. The first part fits non-financial companies; for banks and insurers, invested capital doesn't mean the same thing. The second needs a market you can define, with shares from industry data, company filings or trade groups.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>Michael J. Mauboussin and Dan Callahan, "Measuring the Moat: Assessing the Magnitude and Sustainability of Value Creation", Counterpoint Global Insights, October 2024. The paper ends with a checklist of the questions behind the numbers.</p>
+</section>
+
+{{ sheet.coming_soon("The full version is coming: an Excel template and an AI skill built for Claude. They pull the numbers from the filings, run both checks over several years, and walk through the paper's checklist. Subscribe to Ezra's Notes to hear first.", substack_embed) }}
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ root }}static/moat.js?v={{ asset_v }}"></script>{% endblock %}

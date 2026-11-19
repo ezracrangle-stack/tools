@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTNNLB6W9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FTNNLB6W9D');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>Measuring the moat: where the ROIC comes from and how stable the market is · Ezra's Notes</title>
+<meta name="description" content="Two numbers from Mauboussin and Callahan's Measuring the Moat: split ROIC into margin and turnover to see if the edge is differentiation or cost leadership, and measure how much market shares move. Free, and it runs in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css?v=48937a69">
+<meta property="og:title" content="Measuring the moat: where the ROIC comes from and how stable the market is · Ezra's Notes">
+<meta property="og:description" content="Two numbers from Mauboussin and Callahan's Measuring the Moat: split ROIC into margin and turnover to see if the edge is differentiation or cost leadership, and measure how much market shares move. Free, and it runs in your browser.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/moat/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="../static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
+<link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/moat/">
+</head>
+<body data-collect="https://script.google.com/macros/s/AKfycbz-a4q03dY00RYGWBKOHaKqYKL92Z3afAqhJ5iYdPQGYCMbU2CpFTR-JfEfArbdoUZXHg/exec" data-tool-name="the Measuring the Moat calculator">
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="../">Tools</a>
+  <p class="byline">By <a href="https://x.com/ezracrangle">@ezracrangle</a></p>
+  <nav>
+    <a href="../">All tools</a>
+    <details class="nav-menu">
+      <summary>Moat</summary>
+      <div class="nav-drop"><a href="../net-net/">Net-net</a><a href="../epv/">EPV</a><a href="../greenwald/">Greenwald</a><a href="../penman/">Penman</a><a href="../graham/">Graham</a><a href="../fcf/">Mauboussin</a><a href="../roic/">ROIC</a><a href="../reverse-dcf/">Reverse DCF</a><a href="../compounders/">Compounders</a><a href="../dhandho/">Pabrai</a><a href="../lynch/">Lynch</a><a href="../marks/">Marks</a><a href="../moat/" aria-current="page">Moat</a><a href="../red-flags/">Red flags</a><a href="../beauty-contest/">Beauty contest</a></div>
+    </details>
+    <a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<div class="print-head" aria-hidden="true"><strong>Ezra's Notes · Tools</strong><span id="print-stamp"></span></div>
+<div class="print-summary verdict" id="print-summary" aria-hidden="true"></div>
+<section class="lede">
+  <h1 class="page-title">Measuring the moat</h1>
+  <p class="dek">Two numbers from Michael Mauboussin and Dan Callahan's <em>Measuring the Moat</em>. Where a company's return on capital comes from, compared with its peers. And how much market shares move in its industry, which tells you how hard it is to hold on to an edge.</p>
+  <p>Use one part or both. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="moatform" class="calc" novalidate>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-co">Company<span class="hint">Optional, for the link and the files.</span></label>
+      <span class="cell"><input id="f-co" type="text" maxlength="60" autocomplete="off" spellcheck="false" style="text-align:left"></span>
+    </div>
+  </div>
+
+  <div class="profile csx mtx">
+    <p class="hsub">1. Where the ROIC comes from</p>
+    <p class="hint">The company in the first row, its closest competitors below. Same unit and same year for all. NOPAT is operating income after tax; invested capital is what the business needs to run (net working capital plus fixed and other operating assets).</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Revenue</th><th>NOPAT</th><th>Invested capital</th></tr></thead>
+      <tbody>      <tr><th scope="row"><input data-k="n0" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="The company" aria-label="Name, row 1" class="mt-name"></th>
+        <td><input data-k="rev0" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, row 1"></td>
+        <td><input data-k="nopat0" data-signed="1" type="text" inputmode="text" autocomplete="off" aria-label="NOPAT, row 1"></td>
+        <td><input data-k="ic0" type="text" inputmode="decimal" autocomplete="off" aria-label="Invested capital, row 1"></td></tr>      <tr><th scope="row"><input data-k="n1" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Peer 1" aria-label="Name, row 2" class="mt-name"></th>
+        <td><input data-k="rev1" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, row 2"></td>
+        <td><input data-k="nopat1" data-signed="1" type="text" inputmode="text" autocomplete="off" aria-label="NOPAT, row 2"></td>
+        <td><input data-k="ic1" type="text" inputmode="decimal" autocomplete="off" aria-label="Invested capital, row 2"></td></tr>      <tr><th scope="row"><input data-k="n2" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Peer 2" aria-label="Name, row 3" class="mt-name"></th>
+        <td><input data-k="rev2" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, row 3"></td>
+        <td><input data-k="nopat2" data-signed="1" type="text" inputmode="text" autocomplete="off" aria-label="NOPAT, row 3"></td>
+        <td><input data-k="ic2" type="text" inputmode="decimal" autocomplete="off" aria-label="Invested capital, row 3"></td></tr>      <tr><th scope="row"><input data-k="n3" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Peer 3" aria-label="Name, row 4" class="mt-name"></th>
+        <td><input data-k="rev3" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, row 4"></td>
+        <td><input data-k="nopat3" data-signed="1" type="text" inputmode="text" autocomplete="off" aria-label="NOPAT, row 4"></td>
+        <td><input data-k="ic3" type="text" inputmode="decimal" autocomplete="off" aria-label="Invested capital, row 4"></td></tr>      <tr><th scope="row"><input data-k="n4" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Peer 4" aria-label="Name, row 5" class="mt-name"></th>
+        <td><input data-k="rev4" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, row 5"></td>
+        <td><input data-k="nopat4" data-signed="1" type="text" inputmode="text" autocomplete="off" aria-label="NOPAT, row 5"></td>
+        <td><input data-k="ic4" type="text" inputmode="decimal" autocomplete="off" aria-label="Invested capital, row 5"></td></tr>      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-wacc">Cost of capital (%)<span class="hint">Optional. Shows how far each ROIC is above or below it.</span></label>
+      <span class="cell"><input id="f-wacc" data-k="wacc" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+  </div>
+  <div class="profile csx mtx">
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>NOPAT margin</th><th>Turnover</th><th>ROIC</th><th>ROIC − cost</th></tr></thead>
+      <tbody>      <tr><th scope="row" id="lbl0">The company</th><td><output id="m0">–</output></td><td><output id="t0">–</output></td><td><output id="r0">–</output></td><td><output id="s0">–</output></td></tr>      <tr><th scope="row" id="lbl1">Peer 1</th><td><output id="m1">–</output></td><td><output id="t1">–</output></td><td><output id="r1">–</output></td><td><output id="s1">–</output></td></tr>      <tr><th scope="row" id="lbl2">Peer 2</th><td><output id="m2">–</output></td><td><output id="t2">–</output></td><td><output id="r2">–</output></td><td><output id="s2">–</output></td></tr>      <tr><th scope="row" id="lbl3">Peer 3</th><td><output id="m3">–</output></td><td><output id="t3">–</output></td><td><output id="r3">–</output></td><td><output id="s3">–</output></td></tr>      <tr><th scope="row" id="lbl4">Peer 4</th><td><output id="m4">–</output></td><td><output id="t4">–</output></td><td><output id="r4">–</output></td><td><output id="s4">–</output></td></tr>      <tr class="on"><th scope="row">Peers combined<span class="hint">Added together, so bigger peers weigh more.</span></th><td><output id="pm">–</output></td><td><output id="pt">–</output></td><td><output id="pr">–</output></td><td></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="srow calc-row"><span class="lab">ROIC: company minus peers</span><output class="cell" id="o-gap">–</output></div>
+    <div class="srow calc-row"><span class="lab">Margin: company ÷ peers</span><output class="cell" id="o-mr">–</output></div>
+    <div class="srow calc-row"><span class="lab">Turnover: company ÷ peers</span><output class="cell" id="o-tr">–</output></div>
+    <div class="srow test"><span class="lab">Where the edge comes from<span class="hint">The larger ratio names the source; both above 1.1x counts as both. Our rule, not the paper's.</span></span><output class="cell" id="x-src">–</output></div>
+  </div>
+
+  <div class="profile csx mtx">
+    <p class="hsub">2. How stable are market shares?</p>
+    <p class="hint">Sales, units or shares in %, for each competitor in two years, usually three to five years apart. Shares are worked out from each year's total. Leave a year blank for a company that entered or left. An "Other" line counts like any company, as in the paper.</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Earlier year</th><th>Later year</th><th>Share then</th><th>Share now</th><th>Change</th></tr></thead>
+      <tbody>      <tr><th scope="row"><input data-k="c0" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Competitor 1" aria-label="Competitor 1" class="mt-name"></th>
+        <td><input data-k="a0" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 1, earlier year"></td>
+        <td><input data-k="b0" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 1, later year"></td>
+        <td><output id="sa0">–</output></td><td><output id="sb0">–</output></td><td><output id="ch0">–</output></td></tr>      <tr><th scope="row"><input data-k="c1" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Competitor 2" aria-label="Competitor 2" class="mt-name"></th>
+        <td><input data-k="a1" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 2, earlier year"></td>
+        <td><input data-k="b1" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 2, later year"></td>
+        <td><output id="sa1">–</output></td><td><output id="sb1">–</output></td><td><output id="ch1">–</output></td></tr>      <tr><th scope="row"><input data-k="c2" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Competitor 3" aria-label="Competitor 3" class="mt-name"></th>
+        <td><input data-k="a2" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 3, earlier year"></td>
+        <td><input data-k="b2" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 3, later year"></td>
+        <td><output id="sa2">–</output></td><td><output id="sb2">–</output></td><td><output id="ch2">–</output></td></tr>      <tr><th scope="row"><input data-k="c3" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Competitor 4" aria-label="Competitor 4" class="mt-name"></th>
+        <td><input data-k="a3" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 4, earlier year"></td>
+        <td><input data-k="b3" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 4, later year"></td>
+        <td><output id="sa3">–</output></td><td><output id="sb3">–</output></td><td><output id="ch3">–</output></td></tr>      <tr><th scope="row"><input data-k="c4" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Competitor 5" aria-label="Competitor 5" class="mt-name"></th>
+        <td><input data-k="a4" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 5, earlier year"></td>
+        <td><input data-k="b4" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 5, later year"></td>
+        <td><output id="sa4">–</output></td><td><output id="sb4">–</output></td><td><output id="ch4">–</output></td></tr>      <tr><th scope="row"><input data-k="c5" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Competitor 6" aria-label="Competitor 6" class="mt-name"></th>
+        <td><input data-k="a5" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 6, earlier year"></td>
+        <td><input data-k="b5" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 6, later year"></td>
+        <td><output id="sa5">–</output></td><td><output id="sb5">–</output></td><td><output id="ch5">–</output></td></tr>      <tr class="mt-more" hidden><th scope="row"><input data-k="c6" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Competitor 7" aria-label="Competitor 7" class="mt-name"></th>
+        <td><input data-k="a6" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 7, earlier year"></td>
+        <td><input data-k="b6" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 7, later year"></td>
+        <td><output id="sa6">–</output></td><td><output id="sb6">–</output></td><td><output id="ch6">–</output></td></tr>      <tr class="mt-more" hidden><th scope="row"><input data-k="c7" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Competitor 8" aria-label="Competitor 8" class="mt-name"></th>
+        <td><input data-k="a7" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 8, earlier year"></td>
+        <td><input data-k="b7" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 8, later year"></td>
+        <td><output id="sa7">–</output></td><td><output id="sb7">–</output></td><td><output id="ch7">–</output></td></tr>      <tr class="mt-more" hidden><th scope="row"><input data-k="c8" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Competitor 9" aria-label="Competitor 9" class="mt-name"></th>
+        <td><input data-k="a8" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 9, earlier year"></td>
+        <td><input data-k="b8" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 9, later year"></td>
+        <td><output id="sa8">–</output></td><td><output id="sb8">–</output></td><td><output id="ch8">–</output></td></tr>      <tr class="mt-more" hidden><th scope="row"><input data-k="c9" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Competitor 10" aria-label="Competitor 10" class="mt-name"></th>
+        <td><input data-k="a9" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 10, earlier year"></td>
+        <td><input data-k="b9" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 10, later year"></td>
+        <td><output id="sa9">–</output></td><td><output id="sb9">–</output></td><td><output id="ch9">–</output></td></tr>      <tr class="mt-more" hidden><th scope="row"><input data-k="c10" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Competitor 11" aria-label="Competitor 11" class="mt-name"></th>
+        <td><input data-k="a10" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 11, earlier year"></td>
+        <td><input data-k="b10" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 11, later year"></td>
+        <td><output id="sa10">–</output></td><td><output id="sb10">–</output></td><td><output id="ch10">–</output></td></tr>      <tr class="mt-more" hidden><th scope="row"><input data-k="c11" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Competitor 12" aria-label="Competitor 12" class="mt-name"></th>
+        <td><input data-k="a11" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 12, earlier year"></td>
+        <td><input data-k="b11" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 12, later year"></td>
+        <td><output id="sa11">–</output></td><td><output id="sb11">–</output></td><td><output id="ch11">–</output></td></tr>      <tr class="mt-more" hidden><th scope="row"><input data-k="c12" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Competitor 13" aria-label="Competitor 13" class="mt-name"></th>
+        <td><input data-k="a12" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 13, earlier year"></td>
+        <td><input data-k="b12" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 13, later year"></td>
+        <td><output id="sa12">–</output></td><td><output id="sb12">–</output></td><td><output id="ch12">–</output></td></tr>      <tr class="mt-more" hidden><th scope="row"><input data-k="c13" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Competitor 14" aria-label="Competitor 14" class="mt-name"></th>
+        <td><input data-k="a13" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 14, earlier year"></td>
+        <td><input data-k="b13" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 14, later year"></td>
+        <td><output id="sa13">–</output></td><td><output id="sb13">–</output></td><td><output id="ch13">–</output></td></tr>      <tr class="mt-more" hidden><th scope="row"><input data-k="c14" data-text="1" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Competitor 15" aria-label="Competitor 15" class="mt-name"></th>
+        <td><input data-k="a14" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 15, earlier year"></td>
+        <td><input data-k="b14" type="text" inputmode="decimal" autocomplete="off" aria-label="Competitor 15, later year"></td>
+        <td><output id="sa14">–</output></td><td><output id="sb14">–</output></td><td><output id="ch14">–</output></td></tr>      </tbody>
+    </table>
+    </div>
+    <p><button type="button" class="button ghost" id="mt-add">Show more rows</button></p>
+  </div>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-yrs">Years between the two<span class="hint">The 2% rule is for five-year changes.</span></label>
+      <span class="cell"><input id="f-yrs" data-k="yrs" type="text" inputmode="decimal" autocomplete="off" value="5" data-default="5"></span>
+    </div>
+    <div class="srow calc-row total"><span class="lab">Average absolute change in share</span><output class="cell" id="o-avg">–</output></div>
+    <div class="srow test"><span class="lab">Stability<span class="hint">Mauboussin: 2% or less over five years is relatively stable; more is unstable.</span></span><output class="cell" id="x-stab">–</output></div>
+    <div class="srow calc-row"><span class="lab">HHI, earlier year</span><output class="cell" id="o-hhia">–</output></div>
+    <div class="srow calc-row"><span class="lab">HHI, later year<span class="hint">Sum of the squared shares in %, from 0 to 10,000.</span></span><output class="cell" id="o-hhib">–</output></div>
+    <div class="srow test"><span class="lab">Concentration<span class="hint">Above 1,800 is highly concentrated under the 2023 US Merger Guidelines.</span></span><output class="cell" id="x-conc">–</output></div>
+    <div class="srow calc-row"><span class="lab">Top four, earlier year</span><output class="cell" id="o-c4a">–</output></div>
+    <div class="srow calc-row"><span class="lab">Top four, later year</span><output class="cell" id="o-c4b">–</output></div>
+  </div>
+
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
+  <div class="actions">
+    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
+    <button type="button" class="button ghost" id="reset">Clear</button>
+  </div>
+<p class="copy-note">These numbers point you to questions. The moat itself is in the industry and the strategy.</p>  <div class="sharebar" id="sharebar">
+    <label class="sb-co"><span>Company or ticker <em>(optional, goes in the link and the files)</em></span>
+      <input id="sb-company" type="text" maxlength="60" autocomplete="off" spellcheck="false" placeholder="e.g. ACME"></label>
+    <div class="sb-groups">
+      <p class="share-buttons"><span class="sb-k">Share</span>
+        <button type="button" id="sb-x">X</button>
+        <button type="button" id="sb-in">LinkedIn</button>
+        <button type="button" id="sb-native" hidden>More</button></p>
+      <p class="share-buttons"><span class="sb-k">Download</span>
+        <button type="button" id="sb-pdf">PDF</button>
+        <button type="button" id="sb-csv">CSV</button></p>
+      <p class="share-buttons sb-community" hidden><span class="sb-k">Community</span>
+        <button type="button" id="sb-save">Send to Ezra</button>
+        <button type="button" id="sb-tm">Leave a testimonial</button></p>
+    </div>
+    <div class="sb-box" id="sb-savebox" hidden>
+      <p>Send this calculation to Ezra. He reads them, and with your OK he may share some with the community. Nothing leaves your browser until you press Send.</p>
+      <label>Your name or X handle <em>(optional)</em> <input id="sb-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label class="check"><input id="sb-ok" type="checkbox"> Ezra can publish this calculation and my name or handle</label>
+      <input id="sb-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="sb-send">Send</button> <span id="sb-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+    <div class="sb-box" id="testimonial" hidden>
+      <p>Did this calculator help you? Tell Ezra in a few words.</p>
+      <label>What did it help you with? <textarea id="tm-text" rows="4" maxlength="1500"></textarea></label>
+      <label>Name <input id="tm-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label>X or LinkedIn handle <em>(optional)</em> <input id="tm-handle" type="text" maxlength="80" autocomplete="off"></label>
+      <label>What you do <em>(optional, e.g. "individual investor" or "analyst at a fund")</em> <input id="tm-role" type="text" maxlength="120" autocomplete="off"></label>
+      <label class="check"><input id="tm-ok" type="checkbox"> Ezra can publish this on the site with my name</label>
+      <input id="tm-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="tm-send">Send</button> <span id="tm-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+  </div>
+
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">1. Where the ROIC comes from</h2>
+  <p>Return on invested capital is NOPAT margin times invested capital turnover: how much of each sale is left after tax, times how many dollars of sales each dollar of capital brings in. Two companies can earn the same ROIC in opposite ways.</p>
+  <p>Mauboussin and Callahan's point: companies that win through <strong>differentiation</strong>, a product customers pay more for, tend to have high margins and satisfactory turnover. Companies that win through <strong>cost leadership</strong> tend to have satisfactory margins and high turnover. Comparing the two parts with the peers tells you which kind of advantage to go and look for, and so which questions to ask: what makes customers pay more, or what lets the company produce for less.</p>
+  <p>Use the same definitions for every company: the comparison only works if NOPAT and invested capital are measured the same way. Our ROIC calculator works both out from the filings.</p>
+
+  <h2 class="rule-head">2. How stable are market shares?</h2>
+  <p>Stable market shares make it easier for a company to keep earning more than its cost of capital. Shares that jump around point to new entrants, changing technology, shifting demand or price wars. The measure, which Mauboussin takes from Bruce Greenwald, is the average of the absolute changes in each competitor's share between two years.</p>
+  <p>His rule of thumb: five-year changes of 2% or less mean a relatively stable industry; more than 2%, an unstable one. In the paper, US search engines and car makers moved about 1% from 2018 to 2023, web browsers and social media about 3%.</p>
+  <p>Concentration is shown too: the Herfindahl-Hirschman Index (HHI) and the share of the top four. Mauboussin warns that concentration isn't reliably linked to value creation or stock returns, and that market share is the better link to profitability. It can rise because one company is better, or because of consolidation.</p>
+
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Any company with clear competitors and comparable accounts. The first part fits non-financial companies; for banks and insurers, invested capital doesn't mean the same thing. The second needs a market you can define, with shares from industry data, company filings or trade groups.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>Michael J. Mauboussin and Dan Callahan, "Measuring the Moat: Assessing the Magnitude and Sustainability of Value Creation", Counterpoint Global Insights, October 2024. The paper ends with a checklist of the questions behind the numbers.</p>
+</section>
+
+<aside class="wanted soon-box" id="coming-soon">
+  <p class="wanted-kicker">Coming soon</p>
+  <p class="wanted-head">The AI version</p>
+  <p class="wanted-body">The full version is coming: an Excel template and an AI skill built for Claude. They pull the numbers from the filings, run both checks over several years, and walk through the paper&#39;s checklist. Subscribe to Ezra&#39;s Notes to hear first.</p>
+  <iframe class="substack" src="https://www.ezrasnotes.com/embed" title="Subscribe to Ezra's Notes" width="480" height="150" frameborder="0" scrolling="no" loading="lazy"></iframe>
+</aside>
+
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Holdings</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a inversores</a>
+  </p>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
+<script>document.addEventListener("click",function(e){var m=document.querySelector(".nav-menu[open]");if(m&&!m.contains(e.target))m.removeAttribute("open")});</script>
+<script src="../static/share.js?v=48937a69"></script><script type="module" src="../static/moat.js?v=48937a69"></script></body>
+</html>

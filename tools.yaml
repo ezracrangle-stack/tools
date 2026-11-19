@@ -98,6 +98,13 @@ tools:
     status: live
     blurb: Twenty-three pairs of opposites, from lenders to investors to funds. Pick a side for each and take the market's temperature, as Howard Marks does in Mastering the Market Cycle.
 
+  - slug: moat
+    share: "the Measuring the Moat calculator"
+    name: Measuring the moat
+    nav: Moat
+    status: live
+    blurb: Where a company's ROIC comes from, margin or turnover, against its peers, and how much market shares move in its industry. From Mauboussin and Callahan's Measuring the Moat.
+
   - slug: red-flags
     share: "the red flags check"
     name: Red flags

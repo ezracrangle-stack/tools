@@ -447,3 +447,17 @@ table.grid .gcalc th, table.grid .gcalc output { font-weight: 700; }
 .bc-bar i { position: absolute; bottom: -20px; left: 0; font: 12px var(--body); font-style: normal; color: var(--muted, #666); }
 .bc-ok input[type=checkbox] { -webkit-appearance: auto; appearance: auto; width: 18px; height: 18px; min-width: 0; margin: 0 8px 0 0; padding: 0; border: 0; vertical-align: middle; accent-color: var(--ink); }
 .rf-use { font: 600 11px var(--body); letter-spacing: .08em; font-style: normal; margin-right: 4px; }
+/* Measuring the moat */
+.mtx table.grid tbody th input.mt-name { width: 100%; max-width: 14em; text-align: left; font: 600 15px var(--body); padding: 4px 6px; }
+.mtx table.grid td output { white-space: nowrap; }
+.mtx tr[hidden] { display: none; }
+@media (max-width: 560px) { .mtx table.grid tbody th input.mt-name { max-width: 8em; font-size: 14px; } .mtx table.grid td input { width: 4.6em; } }
+.srow.test output { white-space: normal; text-align: right; }
+@media (max-width: 560px) {
+  .mtx table.grid { font-size: 13px; }
+  .mtx table.grid th, .mtx table.grid td { padding-left: 3px; padding-right: 3px; }
+  .mtx table.grid thead th { font-size: 10px; letter-spacing: .04em; white-space: normal; }
+  .mtx table.grid tbody th input.mt-name { max-width: 6.5em; font-size: 13px; }
+  .mtx table.grid td input { width: 4.2em; font-size: 14px; padding: 4px; }
+  .mtx table.grid td output { font-size: 13px; }
+}
