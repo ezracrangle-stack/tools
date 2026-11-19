@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
+{% block title %}Peter Lynch's P/E vs growth: PEG calculator{% endblock %}
+{% block description %}The PEG ratio and Peter Lynch's dividend-adjusted version, the P/E without the company's net cash, and what ten years of compounding does to the price. From One Up on Wall Street. Free, and it runs in your browser.{% endblock %}
+{% block main %}
+<section class="lede">
+  <h1 class="page-title">Peter Lynch's P/E vs growth</h1>
+  <p class="dek">"The p/e ratio of any company that's fairly priced will equal its growth rate." Peter Lynch's rule of thumb from <em>One Up on Wall Street</em>, with the dividend-adjusted version he gives next to it and his trick of taking the cash out of the price, as he did with Ford.</p>
+  <p>You need the share price, earnings per share and your estimate of how fast earnings will grow. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="lyform" class="calc" novalidate>
+  <p class="small">Price, earnings, dividend and cash per share, all in the same currency. Percentages as whole numbers: 12 means 12%. Fields with * are needed.</p>
+
+{{ sheet.rows(rows, "P/E vs growth worksheet") }}
+
+{{ sheet.actions('"n/m" means the number can\'t be worked out, for example a PEG with no growth.') }}
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">How it's calculated</h2>
+  <p>The PEG divides the P/E by the growth rate of earnings, taken as a whole number: a P/E of 15 on 15% growth is 1. Lynch: a company with 12% growth and a P/E of 6 is very attractive; one with 6% growth and a P/E of 12 is headed for a comedown.</p>
+  <p>The dividend-adjusted version adds the dividend yield to the growth and divides by the P/E. His example: 12% growth plus a 3% yield, over a P/E of 10, gives 1.5. Below 1 is poor, 1.5 is okay, and 2 or better is what you're looking for.</p>
+  <p>Cash changes the picture. In 1988 Ford traded at $38 with $16.30 a share in cash beyond its debt, so Lynch was really paying $21.70 for the car business: a P/E of 3.1, not 5.4. The calculator does the same with the net cash you give it.</p>
+  <p>Section 3 is Lynch's argument for fast growers. At the same PEG, a 20% grower at 20 times earnings beats a 10% grower at 10 times: after ten years its earnings are $6.19 against $2.60, and even at a P/E of 15 the stock is worth $92.85 against $26.</p>
+
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Lynch sorts companies into six categories. The PEG is built for two of them: stalwarts, which grow 10% to 12% a year, and fast growers, at 20% to 25%. For slow growers the dividend-adjusted ratio is the better guide.</p>
+  <p>It works badly for the other three:</p>
+  <ul>
+    <li><strong>Cyclicals.</strong> Their P/E is lowest at the top of the cycle, when earnings are about to fall. A low PEG there is a trap.</li>
+    <li><strong>Turnarounds.</strong> Earnings are low or negative, so the P/E says little.</li>
+    <li><strong>Asset plays.</strong> The value is in what the company owns, not in what it earns. Look at the net cash and the assets instead.</li>
+  </ul>
+
+  <h2 class="rule-head">What it can't tell you</h2>
+  <h3>The growth rate</h3>
+  <p>It's the number everything rests on, and it's the future one that counts. Lynch's advice: the growth that matters is of earnings, his favorites grow 20% to 25% a year, he's wary of anything faster than 25%, and suspicious of 50% to 100%. That pace is very hard to keep up for three years, let alone ten.</p>
+  <h3>Whether the earnings are real</h3>
+  <p>A PEG on inflated earnings is a precise answer to the wrong question. Check the cash flow and the balance sheet too.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>From <em>One Up on Wall Street</em> by Peter Lynch with John Rothchild, chapter 13, "Some Famous Numbers": the sections on the price/earnings ratio, the cash position and the growth rate.</p>
+</section>
+
+{{ sheet.coming_soon("The full version is coming: an Excel template and an AI skill built for Claude. They place the company in Lynch's six categories, pull the growth and the net cash from its filings, and run his checklist for each category. Subscribe to Ezra's Notes to hear first.", substack_embed) }}
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ root }}static/lynch.js?v={{ asset_v }}"></script>{% endblock %}

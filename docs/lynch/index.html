@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTNNLB6W9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FTNNLB6W9D');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>Peter Lynch's P/E vs growth: PEG calculator · Ezra's Notes</title>
+<meta name="description" content="The PEG ratio and Peter Lynch's dividend-adjusted version, the P/E without the company's net cash, and what ten years of compounding does to the price. From One Up on Wall Street. Free, and it runs in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css?v=da83c78c">
+<meta property="og:title" content="Peter Lynch's P/E vs growth: PEG calculator · Ezra's Notes">
+<meta property="og:description" content="The PEG ratio and Peter Lynch's dividend-adjusted version, the P/E without the company's net cash, and what ten years of compounding does to the price. From One Up on Wall Street. Free, and it runs in your browser.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/lynch/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="../static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
+<link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/lynch/">
+</head>
+<body data-collect="https://script.google.com/macros/s/AKfycbz-a4q03dY00RYGWBKOHaKqYKL92Z3afAqhJ5iYdPQGYCMbU2CpFTR-JfEfArbdoUZXHg/exec" data-tool-name="Peter Lynch&#39;s P/E vs growth calculator">
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="../">Tools</a>
+  <p class="byline">By <a href="https://x.com/ezracrangle">@ezracrangle</a></p>
+  <nav>
+    <a href="../">All tools</a>
+    <details class="nav-menu">
+      <summary>Lynch</summary>
+      <div class="nav-drop"><a href="../net-net/">Net-net</a><a href="../epv/">EPV</a><a href="../greenwald/">Greenwald</a><a href="../penman/">Penman</a><a href="../graham/">Graham</a><a href="../fcf/">Mauboussin</a><a href="../roic/">ROIC</a><a href="../reverse-dcf/">Reverse DCF</a><a href="../compounders/">Compounders</a><a href="../dhandho/">Pabrai</a><a href="../lynch/" aria-current="page">Lynch</a></div>
+    </details>
+    <a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<div class="print-head" aria-hidden="true"><strong>Ezra's Notes · Tools</strong><span id="print-stamp"></span></div>
+<div class="print-summary verdict" id="print-summary" aria-hidden="true"></div>
+<section class="lede">
+  <h1 class="page-title">Peter Lynch's P/E vs growth</h1>
+  <p class="dek">"The p/e ratio of any company that's fairly priced will equal its growth rate." Peter Lynch's rule of thumb from <em>One Up on Wall Street</em>, with the dividend-adjusted version he gives next to it and his trick of taking the cash out of the price, as he did with Ford.</p>
+  <p>You need the share price, earnings per share and your estimate of how fast earnings will grow. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="lyform" class="calc" novalidate>
+  <p class="small">Price, earnings, dividend and cash per share, all in the same currency. Percentages as whole numbers: 12 means 12%. Fields with * are needed.</p>
+
+  <div class="sheet" role="group" aria-label="P/E vs growth worksheet">
+    <div class="srow head"><span class="lab">1. The company</span></div>
+    <div class="srow in key">
+      <label class="lab" for="f-price">Share price *</label>
+      <span class="cell"><input id="f-price" data-k="price" data-kind="number" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in key">
+      <label class="lab" for="f-eps">Earnings per share, last 12 months *</label>
+      <span class="cell"><input id="f-eps" data-k="eps" data-kind="number" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in key">
+      <label class="lab" for="f-g">Long-term growth of earnings, a year (%) *<span class="hint">Your estimate of future growth. 'Your guess is as good as mine,' Lynch says. The helper below gives the past growth.</span></label>
+      <span class="cell"><input id="f-g" data-k="g" data-kind="percent" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Growth over the last years<span class="hint">From the helper</span></span><output class="cell" id="o-hg">–</output></div>
+<details class="helper" id="help-growth">
+  <summary>Work out past growth from earnings per share</summary>
+  <p class="hint">Lynch's way: take the annual earnings and work out the percent increase from one year to the next. Type up to 6 years, oldest first, starting in Year 1. The compound rate goes into the growth field; change it to what you expect.</p>
+  <div class="gridwrap">
+  <table class="grid">
+    <thead><tr><th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Year 4</th><th>Year 5</th><th>Year 6</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">EPS</th><td><input data-h="he1" type="text" inputmode="decimal" autocomplete="off" aria-label="EPS, year 1"></td><td><input data-h="he2" type="text" inputmode="decimal" autocomplete="off" aria-label="EPS, year 2"></td><td><input data-h="he3" type="text" inputmode="decimal" autocomplete="off" aria-label="EPS, year 3"></td><td><input data-h="he4" type="text" inputmode="decimal" autocomplete="off" aria-label="EPS, year 4"></td><td><input data-h="he5" type="text" inputmode="decimal" autocomplete="off" aria-label="EPS, year 5"></td><td><input data-h="he6" type="text" inputmode="decimal" autocomplete="off" aria-label="EPS, year 6"></td></tr>
+      <tr><th scope="row">Change</th><td></td><td><output id="h-c2"></output></td><td><output id="h-c3"></output></td><td><output id="h-c4"></output></td><td><output id="h-c5"></output></td><td><output id="h-c6"></output></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="hresult">Compound growth a year: <output id="h-cagr">–</output></p>
+</details>    <div class="srow in">
+      <label class="lab" for="f-dps">Dividend per share, a year<span class="hint">Optional.</span></label>
+      <span class="cell"><input id="f-dps" data-k="dps" data-kind="number" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-cash">Net cash per share<span class="hint">Optional. Cash and investments minus long-term debt, per share. Negative if debt is larger. Lynch's Ford example.</span></label>
+      <span class="cell"><input id="f-cash" data-k="cash" data-kind="number" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow head"><span class="lab">2. Lynch&#39;s numbers</span></div>
+    <div class="srow calc-row"><span class="lab">P/E</span><output class="cell" id="o-pe">–</output></div>
+    <div class="srow calc-row"><span class="lab">Dividend yield</span><output class="cell" id="o-yld">–</output></div>
+    <div class="srow calc-row total"><span class="lab">PEG: P/E ÷ growth rate<span class="hint">1 = fairly priced. Half is very positive; twice is very negative.</span></span><output class="cell" id="o-peg">–</output></div>
+    <div class="srow test"><span class="lab">Reading</span><output class="cell" id="x-pegr">–</output></div>
+    <div class="srow calc-row total"><span class="lab">With dividends: (growth + yield) ÷ P/E<span class="hint">Less than 1 is poor, 1.5 is okay, 2 or better is what you're looking for.</span></span><output class="cell" id="o-div">–</output></div>
+    <div class="srow test"><span class="lab">Reading</span><output class="cell" id="x-divr">–</output></div>
+    <div class="srow calc-row"><span class="lab">P/E without the net cash<span class="hint">(Price − net cash) ÷ EPS: what you pay for the business itself.</span></span><output class="cell" id="o-pex">–</output></div>
+    <div class="srow calc-row"><span class="lab">PEG without the net cash</span><output class="cell" id="o-pegx">–</output></div>
+    <div class="srow calc-row"><span class="lab">With dividends, without the net cash</span><output class="cell" id="o-divx">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Price where the P/E equals the growth rate<span class="hint">Growth rate × EPS: Lynch's fair price.</span></span><output class="cell" id="o-fair">–</output></div>
+    <div class="srow calc-row"><span class="lab">Plus the net cash</span><output class="cell" id="o-fairc">–</output></div>
+    <div class="srow calc-row"><span class="lab">Upside to the fair price<span class="hint">Uses the fair price plus net cash when you gave it.</span></span><output class="cell" id="o-up">–</output></div>
+    <div class="srow head"><span class="lab">3. The arithmetic of compounded earnings</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-yrs">Years<span class="hint">Lynch's example runs 10 years.</span></label>
+      <span class="cell"><input id="f-yrs" data-k="yrs" data-kind="years" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="10" data-default="10"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-peEnd">P/E at the end<span class="hint">Blank = today's P/E. Lynch: even if a 20% grower's P/E falls from 20 to 15, it beats a 10% grower at 10 times earnings.</span></label>
+      <span class="cell"><input id="f-peEnd" data-k="peEnd" data-kind="pe" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Earnings per share at the end</span><output class="cell" id="o-epsn">–</output></div>
+    <div class="srow calc-row"><span class="lab">P/E used</span><output class="cell" id="o-peu">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Share price at the end</span><output class="cell" id="o-pricen">–</output></div>
+    <div class="srow calc-row"><span class="lab">Multiple of today&#39;s price</span><output class="cell" id="o-multn">–</output></div>
+    <div class="srow calc-row"><span class="lab">Return a year, before dividends</span><output class="cell" id="o-yearn">–</output></div>
+  </div>
+
+
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
+  <div class="actions">
+    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
+    <button type="button" class="button ghost" id="reset">Clear</button>
+  </div>
+<p class="copy-note">&#34;n/m&#34; means the number can&#39;t be worked out, for example a PEG with no growth.</p>  <div class="sharebar" id="sharebar">
+    <label class="sb-co"><span>Company or ticker <em>(optional, goes in the link and the files)</em></span>
+      <input id="sb-company" type="text" maxlength="60" autocomplete="off" spellcheck="false" placeholder="e.g. ACME"></label>
+    <div class="sb-groups">
+      <p class="share-buttons"><span class="sb-k">Share</span>
+        <button type="button" id="sb-x">X</button>
+        <button type="button" id="sb-in">LinkedIn</button>
+        <button type="button" id="sb-native" hidden>More</button></p>
+      <p class="share-buttons"><span class="sb-k">Download</span>
+        <button type="button" id="sb-pdf">PDF</button>
+        <button type="button" id="sb-csv">CSV</button></p>
+      <p class="share-buttons sb-community" hidden><span class="sb-k">Community</span>
+        <button type="button" id="sb-save">Send to Ezra</button>
+        <button type="button" id="sb-tm">Leave a testimonial</button></p>
+    </div>
+    <div class="sb-box" id="sb-savebox" hidden>
+      <p>Send this calculation to Ezra. He reads them, and with your OK he may share some with the community. Nothing leaves your browser until you press Send.</p>
+      <label>Your name or X handle <em>(optional)</em> <input id="sb-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label class="check"><input id="sb-ok" type="checkbox"> Ezra can publish this calculation and my name or handle</label>
+      <input id="sb-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="sb-send">Send</button> <span id="sb-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+    <div class="sb-box" id="testimonial" hidden>
+      <p>Did this calculator help you? Tell Ezra in a few words.</p>
+      <label>What did it help you with? <textarea id="tm-text" rows="4" maxlength="1500"></textarea></label>
+      <label>Name <input id="tm-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label>X or LinkedIn handle <em>(optional)</em> <input id="tm-handle" type="text" maxlength="80" autocomplete="off"></label>
+      <label>What you do <em>(optional, e.g. "individual investor" or "analyst at a fund")</em> <input id="tm-role" type="text" maxlength="120" autocomplete="off"></label>
+      <label class="check"><input id="tm-ok" type="checkbox"> Ezra can publish this on the site with my name</label>
+      <input id="tm-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="tm-send">Send</button> <span id="tm-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+  </div>
+
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">How it's calculated</h2>
+  <p>The PEG divides the P/E by the growth rate of earnings, taken as a whole number: a P/E of 15 on 15% growth is 1. Lynch: a company with 12% growth and a P/E of 6 is very attractive; one with 6% growth and a P/E of 12 is headed for a comedown.</p>
+  <p>The dividend-adjusted version adds the dividend yield to the growth and divides by the P/E. His example: 12% growth plus a 3% yield, over a P/E of 10, gives 1.5. Below 1 is poor, 1.5 is okay, and 2 or better is what you're looking for.</p>
+  <p>Cash changes the picture. In 1988 Ford traded at $38 with $16.30 a share in cash beyond its debt, so Lynch was really paying $21.70 for the car business: a P/E of 3.1, not 5.4. The calculator does the same with the net cash you give it.</p>
+  <p>Section 3 is Lynch's argument for fast growers. At the same PEG, a 20% grower at 20 times earnings beats a 10% grower at 10 times: after ten years its earnings are $6.19 against $2.60, and even at a P/E of 15 the stock is worth $92.85 against $26.</p>
+
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Lynch sorts companies into six categories. The PEG is built for two of them: stalwarts, which grow 10% to 12% a year, and fast growers, at 20% to 25%. For slow growers the dividend-adjusted ratio is the better guide.</p>
+  <p>It works badly for the other three:</p>
+  <ul>
+    <li><strong>Cyclicals.</strong> Their P/E is lowest at the top of the cycle, when earnings are about to fall. A low PEG there is a trap.</li>
+    <li><strong>Turnarounds.</strong> Earnings are low or negative, so the P/E says little.</li>
+    <li><strong>Asset plays.</strong> The value is in what the company owns, not in what it earns. Look at the net cash and the assets instead.</li>
+  </ul>
+
+  <h2 class="rule-head">What it can't tell you</h2>
+  <h3>The growth rate</h3>
+  <p>It's the number everything rests on, and it's the future one that counts. Lynch's advice: the growth that matters is of earnings, his favorites grow 20% to 25% a year, he's wary of anything faster than 25%, and suspicious of 50% to 100%. That pace is very hard to keep up for three years, let alone ten.</p>
+  <h3>Whether the earnings are real</h3>
+  <p>A PEG on inflated earnings is a precise answer to the wrong question. Check the cash flow and the balance sheet too.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>From <em>One Up on Wall Street</em> by Peter Lynch with John Rothchild, chapter 13, "Some Famous Numbers": the sections on the price/earnings ratio, the cash position and the growth rate.</p>
+</section>
+
+<aside class="wanted soon-box" id="coming-soon">
+  <p class="wanted-kicker">Coming soon</p>
+  <p class="wanted-head">The AI version</p>
+  <p class="wanted-body">The full version is coming: an Excel template and an AI skill built for Claude. They place the company in Lynch&#39;s six categories, pull the growth and the net cash from its filings, and run his checklist for each category. Subscribe to Ezra&#39;s Notes to hear first.</p>
+  <iframe class="substack" src="https://www.ezrasnotes.com/embed" title="Subscribe to Ezra's Notes" width="480" height="150" frameborder="0" scrolling="no" loading="lazy"></iframe>
+</aside>
+
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Holdings</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a inversores</a>
+  </p>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
+<script>document.addEventListener("click",function(e){var m=document.querySelector(".nav-menu[open]");if(m&&!m.contains(e.target))m.removeAttribute("open")});</script>
+<script src="../static/share.js?v=da83c78c"></script><script type="module" src="../static/lynch.js?v=da83c78c"></script></body>
+</html>

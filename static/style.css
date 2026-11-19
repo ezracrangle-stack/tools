@@ -396,3 +396,5 @@ table.grid .gcalc th, table.grid .gcalc output { font-weight: 700; }
   .dhx table.grid td input { width: 4.2em; }
   .dhx table.grid th, .dhx table.grid td { padding-left: 4px; padding-right: 4px; }
 }
+#help-growth table.grid td input { width: 5em; text-align: right; }
+#help-growth table.grid td { text-align: right; }

@@ -80,6 +80,13 @@ tools:
     status: live
     blurb: Write down what can happen and how likely it is. Get the odds, the chance of losing money, and how much of your bankroll the Kelly Formula says to bet. From The Dhandho Investor.
 
+  - slug: lynch
+    share: "Peter Lynch's P/E vs growth calculator"
+    name: Peter Lynch's P/E vs growth
+    nav: Lynch
+    status: live
+    blurb: The PEG and its dividend-adjusted version, the P/E without the company's net cash, and what ten years of compounding does to the price. From One Up on Wall Street.
+
 
   - slug: red-flags
     name: Red flags
@@ -593,3 +600,37 @@ dhandho_rows:
   - {type: head, label: "4. Several bets at once"}
   - {type: note, label: "Kelly sizes each bet as if it were the only one. With several at the same time and no borrowing, scale them down so they add up to 100% (tables 10.2 and 10.3 of the book). Type the Kelly percentage of each bet."}
   - {type: helper, id: dh-portfolio}
+
+# Peter Lynch's P/E vs growth: One Up on Wall Street, chapter 13. Same order as Lynch_PE_Growth_Template.xlsx.
+lynch_rows:
+  - {type: head, label: "1. The company"}
+  - {type: input, k: price, label: "Share price", kind: number, key: true}
+  - {type: input, k: eps, label: "Earnings per share, last 12 months", kind: number, key: true}
+  - {type: input, k: g, label: "Long-term growth of earnings, a year (%)", kind: percent, key: true, signed: true, hint: "Your estimate of future growth. 'Your guess is as good as mine,' Lynch says. The helper below gives the past growth."}
+  - {type: calc, k: hg, label: "Growth over the last years", hint: "From the helper"}
+  - {type: helper, id: ly-growth}
+  - {type: input, k: dps, label: "Dividend per share, a year", kind: number, hint: "Optional."}
+  - {type: input, k: cash, label: "Net cash per share", kind: number, signed: true, hint: "Optional. Cash and investments minus long-term debt, per share. Negative if debt is larger. Lynch's Ford example."}
+
+  - {type: head, label: "2. Lynch's numbers"}
+  - {type: calc, k: pe, label: "P/E"}
+  - {type: calc, k: yld, label: "Dividend yield"}
+  - {type: total, k: peg, label: "PEG: P/E ÷ growth rate", hint: "1 = fairly priced. Half is very positive; twice is very negative."}
+  - {type: test, k: pegr, label: "Reading"}
+  - {type: total, k: div, label: "With dividends: (growth + yield) ÷ P/E", hint: "Less than 1 is poor, 1.5 is okay, 2 or better is what you're looking for."}
+  - {type: test, k: divr, label: "Reading"}
+  - {type: calc, k: pex, label: "P/E without the net cash", hint: "(Price − net cash) ÷ EPS: what you pay for the business itself."}
+  - {type: calc, k: pegx, label: "PEG without the net cash"}
+  - {type: calc, k: divx, label: "With dividends, without the net cash"}
+  - {type: total, k: fair, label: "Price where the P/E equals the growth rate", hint: "Growth rate × EPS: Lynch's fair price."}
+  - {type: calc, k: fairc, label: "Plus the net cash"}
+  - {type: calc, k: up, label: "Upside to the fair price", hint: "Uses the fair price plus net cash when you gave it."}
+
+  - {type: head, label: "3. The arithmetic of compounded earnings"}
+  - {type: input, k: yrs, label: "Years", kind: years, default: 10, hint: "Lynch's example runs 10 years."}
+  - {type: input, k: peEnd, label: "P/E at the end", kind: pe, hint: "Blank = today's P/E. Lynch: even if a 20% grower's P/E falls from 20 to 15, it beats a 10% grower at 10 times earnings."}
+  - {type: calc, k: epsn, label: "Earnings per share at the end"}
+  - {type: calc, k: peu, label: "P/E used"}
+  - {type: total, k: pricen, label: "Share price at the end"}
+  - {type: calc, k: multn, label: "Multiple of today's price"}
+  - {type: calc, k: yearn, label: "Return a year, before dividends"}

@@ -1,0 +1,14 @@
+<details class="helper" id="help-growth">
+  <summary>Work out past growth from earnings per share</summary>
+  <p class="hint">Lynch's way: take the annual earnings and work out the percent increase from one year to the next. Type up to 6 years, oldest first, starting in Year 1. The compound rate goes into the growth field; change it to what you expect.</p>
+  <div class="gridwrap">
+  <table class="grid">
+    <thead><tr><th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Year 4</th><th>Year 5</th><th>Year 6</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">EPS</th><td><input data-h="he1" type="text" inputmode="decimal" autocomplete="off" aria-label="EPS, year 1"></td><td><input data-h="he2" type="text" inputmode="decimal" autocomplete="off" aria-label="EPS, year 2"></td><td><input data-h="he3" type="text" inputmode="decimal" autocomplete="off" aria-label="EPS, year 3"></td><td><input data-h="he4" type="text" inputmode="decimal" autocomplete="off" aria-label="EPS, year 4"></td><td><input data-h="he5" type="text" inputmode="decimal" autocomplete="off" aria-label="EPS, year 5"></td><td><input data-h="he6" type="text" inputmode="decimal" autocomplete="off" aria-label="EPS, year 6"></td></tr>
+      <tr><th scope="row">Change</th><td></td><td><output id="h-c2"></output></td><td><output id="h-c3"></output></td><td><output id="h-c4"></output></td><td><output id="h-c5"></output></td><td><output id="h-c6"></output></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="hresult">Compound growth a year: <output id="h-cagr">–</output></p>
+</details>
