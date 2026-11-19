@@ -385,3 +385,14 @@ table.grid .gcalc th, table.grid .gcalc output { font-weight: 700; }
 .cpm table.grid thead th:first-child { text-align: left; white-space: normal; min-width: 8em; }
 .cpm table.grid td { text-align: right; }
 .cpm table.grid td.hit output { font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+.dhx table.grid td input { width: 5.5em; text-align: right; }
+.dhx table.grid tbody th input { width: 13em; text-align: left; }
+.dhx table.grid td { text-align: right; }
+.dhx table.grid tr.sum th, .dhx table.grid tr.sum td { font-weight: 700; border-top: 1px solid var(--rule); }
+.dhx .err { display: block; font-size: 13px; }
+.linkish { background: none; border: 0; padding: 0; font: inherit; color: inherit; text-decoration: underline; cursor: pointer; }
+@media (max-width: 560px) {
+  .dhx table.grid tbody th input { width: 7.5em; }
+  .dhx table.grid td input { width: 4.2em; }
+  .dhx table.grid th, .dhx table.grid td { padding-left: 4px; padding-right: 4px; }
+}

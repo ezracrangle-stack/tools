@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
+{% block title %}Pabrai's Dhandho bet: Kelly Formula calculator{% endblock %}
+{% block description %}Write down what can happen to an investment and how likely each outcome is. Get the edge, the chance of losing money, and how much of your bankroll the Kelly Formula says to bet. From Mohnish Pabrai's The Dhandho Investor. Free, and it runs in your browser.{% endblock %}
+{% block main %}
+<section class="lede">
+  <h1 class="page-title">Pabrai's Dhandho bet</h1>
+  <p class="dek">"Heads, I win; tails, I don't lose much." Mohnish Pabrai's rule from <em>The Dhandho Investor</em>: few bets, big bets, infrequent bets, placed only when the odds are heavily in your favor. This calculator puts numbers on the odds and uses the Kelly Formula, as Pabrai does in the book, to tell you how much of your bankroll they justify.</p>
+  <p>You need the outcomes you see for the investment, how likely each one is and what you'd get back. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="dhform" class="calc" novalidate>
+  <p class="small">Percentages go in as whole numbers: 90 means 90%. Returns can be negative: −100 means you lose everything.</p>
+
+{{ sheet.rows(rows, "Dhandho bet worksheet") }}
+
+{{ sheet.actions('Kelly assumes you know the odds exactly. You never do, so read it as a ceiling, not a target.') }}
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">How it's calculated</h2>
+  <p>The edge is what you expect to make per dollar: each outcome's return times its probability, added up. Pabrai's shortcut divides the edge by the odds, meaning what you win if you win. A coin toss that pays $2 or costs $1 has an edge of $0.50 and odds of $2, so you bet 25% of your bankroll.</p>
+  <p>The shortcut is exact when there are two outcomes. With more, Kelly finds the share of your bankroll that makes it grow fastest over many bets: the point where adding a little more to the bet stops adding growth. The book points to an online calculator for this, and Pabrai's cases use it: Buffett's American Express bet comes out at 98.3%, Stewart Enterprises at about 97%, the gas station at 88%. This calculator gives the same numbers.</p>
+  <p>Several bets at once can't each get their full Kelly share without borrowing, so section 4 scales them down to add up to 100%.</p>
+
+  <h2 class="rule-head">Which investments it works for</h2>
+  <p>Any bet where you can name the outcomes and put rough odds on them: a cheap stock with a clear catalyst, a distressed bond, a business you'd buy outright. Pabrai uses it on stocks, convertible bonds and a gas station.</p>
+  <p>It works badly when you can't list the outcomes, or when they depend on each other across your positions. Kelly treats each bet as independent.</p>
+
+  <h2 class="rule-head">How to read the result</h2>
+  <h3>Kelly is a ceiling</h3>
+  <p>Bet more than Kelly and, with enough bets, you're all but sure to end up with nothing. Bet less and you give up some growth for a lot less volatility. Half Kelly keeps about three quarters of the growth.</p>
+  <h3>Your odds are an estimate</h3>
+  <p>Pabrai's odds are deliberately conservative, and even then he caps each position at about 10% of his fund. Buffett sized American Express at 40% of his partnership, well below Kelly's 98%.</p>
+  <h3>Look for the low-risk, high-uncertainty bet</h3>
+  <p>The big Kelly numbers come from bets where the chance of losing money is tiny and the upside is large. When the market confuses uncertainty with risk, it prices those bets cheaply.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>From <em>The Dhandho Investor: The Low-Risk Value Method to High Returns</em> by Mohnish Pabrai (Wiley, 2007): chapter 10 for the Kelly Formula and the portfolio tables, and chapters 12, 13 and 15 for the cases. The formula is John L. Kelly Jr.'s, from Bell Labs in 1956.</p>
+</section>
+
+{{ sheet.coming_soon("The full version is coming: an Excel template and an AI skill built for Claude. They check the odds against the company's filings, run the book's cases, and size a whole portfolio of bets. Subscribe to Ezra's Notes to hear first.", substack_embed) }}
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ root }}static/dhandho.js?v={{ asset_v }}"></script>{% endblock %}

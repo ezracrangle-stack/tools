@@ -73,6 +73,13 @@ tools:
     status: live
     blurb: How much more than the market you can pay for a business that reinvests at high returns, and the P/E that still earns your target. From The Compounders.
 
+  - slug: dhandho
+    share: "Pabrai's Dhandho bet sizer"
+    name: Pabrai's Dhandho bet
+    nav: Pabrai
+    status: live
+    blurb: Write down what can happen and how likely it is. Get the odds, the chance of losing money, and how much of your bankroll the Kelly Formula says to bet. From The Dhandho Investor.
+
 
   - slug: red-flags
     name: Red flags
@@ -559,3 +566,30 @@ compounders_rows:
   - {type: input, k: fpe2, label: "Company's P/E", kind: pe, hint: "Optional, to compare."}
   - {type: calc, k: fvs, label: "Fair P/E vs the company's P/E", hint: "Above zero: at today's P/E you'd earn more than your target, if the reinvestment and ROE hold."}
   - {type: helper, id: cp-grid}
+
+# Pabrai's Dhandho bet: The Dhandho Investor, chapter 10. Same order as Dhandho_Bet_Template.xlsx.
+dhandho_rows:
+  - {type: head, label: "1. Your bet"}
+  - {type: input, k: price, label: "Price you pay per share", kind: number, hint: "Optional. Fill it in to type each outcome as a value per share instead of a return."}
+  - {type: input, k: yrs, label: "Years until it plays out", kind: years, default: 3, hint: "Pabrai assumes the gap to value closes in 3 years or less."}
+  - {type: helper, id: dh-outcomes}
+
+  - {type: head, label: "2. The odds"}
+  - {type: total, k: edge, label: "Expected return (the edge)", hint: "Probability × return, added up."}
+  - {type: calc, k: mult, label: "Expected multiple of your money"}
+  - {type: calc, k: year, label: "Expected return a year"}
+  - {type: calc, k: lose, label: "Chance of losing money", hint: "Pabrai's test: heads I win, tails I don't lose much."}
+  - {type: calc, k: wipe, label: "Chance of losing it all"}
+  - {type: calc, k: best, label: "Best outcome"}
+  - {type: calc, k: worst, label: "Worst outcome"}
+
+  - {type: head, label: "3. How much to bet"}
+  - {type: calc, k: short, label: "Pabrai's shortcut: edge ÷ odds", hint: "Odds = what you win if you win (the best outcome). Exact with two outcomes."}
+  - {type: total, k: kelly, label: "Kelly for several outcomes", hint: "The share of your bankroll that makes it grow fastest over many bets. Pabrai's cases use this one."}
+  - {type: calc, k: half, label: "Half Kelly", hint: "Less volatile, and it forgives a mistake in the odds."}
+  - {type: input, k: cap, label: "Most you'll put in one position (%)", kind: percent, default: 10, hint: "Pabrai Funds puts about 10% in each bet."}
+  - {type: total, k: pos, label: "Position size", hint: "The smaller of Kelly and your limit."}
+
+  - {type: head, label: "4. Several bets at once"}
+  - {type: note, label: "Kelly sizes each bet as if it were the only one. With several at the same time and no borrowing, scale them down so they add up to 100% (tables 10.2 and 10.3 of the book). Type the Kelly percentage of each bet."}
+  - {type: helper, id: dh-portfolio}
