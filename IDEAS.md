@@ -45,3 +45,11 @@ Not for the site: Acquirer's Multiple, Magic Formula and Martin Whitman screens.
    - Add the three reasons to sell, and the four dimensions of Conservative Investors Sleep Well (same edition).
    - Separate tool, linked with the moat and management scorecard. Paid version: the management-assessment skill.
    - Upload the book before building, to paraphrase the points faithfully.
+
+13. **Montier's C-Score.** James Montier, "Cooking the books, or, more sailing under the black flag" (Mind Matters, SocGen, 30 June 2008); also ch. 25 of Value Investing: Tools and Techniques for Intelligent Investment.
+   - Six yes/no flags from two years of statements: growing gap between net income and operating cash flow; rising days sales outstanding; rising days of inventory; other current assets rising vs revenue; depreciation falling vs gross PP&E; high total asset growth (often >10%). Score 0 (no evidence) to 6.
+   - Montier found it adds more combined with price-to-sales above 2. Could live with Beneish in the red-flags tool.
+   - Need the paper or the book chapter to confirm the definitions.
+
+14. **Keynes's beauty contest (behavioral, community).** Pick a number 0-100; the winner is closest to 2/3 of the average. Montier uses it to show markets are about guessing what others think.
+   - Uses the save-to-sheet system. Ezra publishes the monthly average, winning number and distribution in the newsletter and on X.
