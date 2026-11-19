@@ -12,3 +12,8 @@ Already listed as "Coming soon" on the site: reverse DCF, red flags, moat and ma
 5. **Altman Z-Score.** Bankruptcy risk (original manufacturing version plus the non-manufacturing Z'').
 6. **Sum-of-the-parts.** Simple version for retail investors: each segment × a multiple, plus investments, minus net debt and capitalized overhead.
 7. **Reverse DCF.** Simple version for retail investors: the growth the price assumes.
+
+8. **Peter Lynch's formula (PEG and dividend-adjusted).** One Up on Wall Street (1989), ch. 13 "Some Famous Numbers".
+   - Rule: a fairly priced stock has a P/E equal to its earnings growth rate. PEG = P/E ÷ growth (around 1 fair; Lynch: half the growth rate is very attractive, twice is very unattractive).
+   - Refinement with dividends: (long-term growth rate + dividend yield) ÷ P/E. Below 1 poor, 1.5 okay, 2 or better is what you want. Book example: 15% growth, 3% dividend, P/E 6 → 3.
+   - Show both ratios and say which way is "good" (PEG low is good; Lynch's ratio high is good). Helper: EPS growth from 5 years of EPS. Caveat: not for cyclicals or very high growth rates.
