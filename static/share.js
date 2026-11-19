@@ -38,7 +38,7 @@
       if (r.classList.contains("head")) { section = r.textContent.replace(/\s+/g, " ").trim(); return; }
       if (r.classList.contains("note")) return;
       if (r.tagName === "TR") {
-        var cells = [].slice.call(r.children).map(function (c) { var i = c.querySelector("input,output"); return i ? clean(i) : c.textContent.replace(/\s+/g, " ").trim(); });
+        var cells = [].slice.call(r.children).map(function (c) { var i = c.querySelector("input,output,select"); return i ? clean(i) : c.textContent.replace(/\s+/g, " ").trim(); });
         if (cells.some(function (c) { return c !== ""; })) out.push([section].concat(cells));
         return;
       }

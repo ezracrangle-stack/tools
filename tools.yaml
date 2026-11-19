@@ -87,6 +87,13 @@ tools:
     status: live
     blurb: The PEG and its dividend-adjusted version, the P/E without the company's net cash, and what ten years of compounding does to the price. From One Up on Wall Street.
 
+  - slug: marks
+    share: "Howard Marks' market temperature check"
+    name: Howard Marks' market temperature
+    nav: Marks
+    status: live
+    blurb: Twenty-three pairs of opposites, from lenders to investors to funds. Pick a side for each and take the market's temperature, as Howard Marks does in Mastering the Market Cycle.
+
 
   - slug: red-flags
     name: Red flags

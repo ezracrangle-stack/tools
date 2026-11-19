@@ -41,7 +41,7 @@ def build():
     render("index.html", "", "")
     for t in tools:
         if t["status"] == "live":
-            extra = {"rows": data.get(t["slug"].replace("-", "_") + "_rows", [])}
+            extra = {"rows": data.get(t["slug"].replace("-", "_") + "_rows", []), "marks_reading": data.get("marks_reading") or {}}
             render(f"{t['slug']}.html", t["slug"] + "/", "../", **extra)
     print("Built", sum(1 for _ in OUT.rglob("index.html")), "pages")
 

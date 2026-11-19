@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTNNLB6W9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FTNNLB6W9D');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>Howard Marks' market temperature check · Ezra's Notes</title>
+<meta name="description" content="Howard Marks' guide to market assessment from Mastering the Market Cycle: pick a side in 23 pairs of opposites and get the market's temperature, with the stance and the mistakes it calls for. Free, and it runs in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css?v=3651268d">
+<meta property="og:title" content="Howard Marks' market temperature check · Ezra's Notes">
+<meta property="og:description" content="Howard Marks' guide to market assessment from Mastering the Market Cycle: pick a side in 23 pairs of opposites and get the market's temperature, with the stance and the mistakes it calls for. Free, and it runs in your browser.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/marks/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="../static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
+<link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/marks/">
+</head>
+<body data-collect="https://script.google.com/macros/s/AKfycbz-a4q03dY00RYGWBKOHaKqYKL92Z3afAqhJ5iYdPQGYCMbU2CpFTR-JfEfArbdoUZXHg/exec" data-tool-name="Howard Marks&#39; market temperature check">
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="../">Tools</a>
+  <p class="byline">By <a href="https://x.com/ezracrangle">@ezracrangle</a></p>
+  <nav>
+    <a href="../">All tools</a>
+    <details class="nav-menu">
+      <summary>Marks</summary>
+      <div class="nav-drop"><a href="../net-net/">Net-net</a><a href="../epv/">EPV</a><a href="../greenwald/">Greenwald</a><a href="../penman/">Penman</a><a href="../graham/">Graham</a><a href="../fcf/">Mauboussin</a><a href="../roic/">ROIC</a><a href="../reverse-dcf/">Reverse DCF</a><a href="../compounders/">Compounders</a><a href="../dhandho/">Pabrai</a><a href="../lynch/">Lynch</a><a href="../marks/" aria-current="page">Marks</a></div>
+    </details>
+    <a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<div class="print-head" aria-hidden="true"><strong>Ezra's Notes · Tools</strong><span id="print-stamp"></span></div>
+<div class="print-summary verdict" id="print-summary" aria-hidden="true"></div>
+<section class="lede">
+  <h1 class="page-title">Howard Marks' market temperature</h1>
+  <p class="dek">"For each pair, check off the one you think is most descriptive of the current market. And if you find that most of your checkmarks are in the left-hand column, hold on to your wallet." Howard Marks' guide to market assessment, from <em>Mastering the Market Cycle</em>, turned into a temperature you can take every month.</p>
+  <p>No numbers needed: just your read of what's going on around you. Nothing you choose leaves your browser.</p>
+</section>
+
+<form id="mkform" class="calc" novalidate>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-mkt">Market you're assessing<span class="hint">Optional, e.g. "US stocks" or "high yield bonds".</span></label>
+      <span class="cell"><input id="f-mkt" type="text" maxlength="60" autocomplete="off" spellcheck="false" style="text-align:left"></span>
+    </div>
+  </div>
+  <div class="profile mkx">
+    <p class="hsub">The guide: pick a side for each pair</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Hot side</th><th>Cold side</th><th>Now</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">Economy</th><td class="hot">Vibrant</td><td class="cold">Sluggish</td><td><select id="a1" aria-label="Economy: Vibrant or Sluggish"><option value=""></option><option>Vibrant</option><option>In between</option><option>Sluggish</option></select></td></tr>
+      <tr><th scope="row">Outlook</th><td class="hot">Positive</td><td class="cold">Negative</td><td><select id="a2" aria-label="Outlook: Positive or Negative"><option value=""></option><option>Positive</option><option>In between</option><option>Negative</option></select></td></tr>
+      <tr><th scope="row">Lenders</th><td class="hot">Eager</td><td class="cold">Reticent</td><td><select id="a3" aria-label="Lenders: Eager or Reticent"><option value=""></option><option>Eager</option><option>In between</option><option>Reticent</option></select></td></tr>
+      <tr><th scope="row">Capital markets</th><td class="hot">Loose</td><td class="cold">Tight</td><td><select id="a4" aria-label="Capital markets: Loose or Tight"><option value=""></option><option>Loose</option><option>In between</option><option>Tight</option></select></td></tr>
+      <tr><th scope="row">Capital</th><td class="hot">Plentiful</td><td class="cold">Scarce</td><td><select id="a5" aria-label="Capital: Plentiful or Scarce"><option value=""></option><option>Plentiful</option><option>In between</option><option>Scarce</option></select></td></tr>
+      <tr><th scope="row">Terms</th><td class="hot">Easy</td><td class="cold">Restrictive</td><td><select id="a6" aria-label="Terms: Easy or Restrictive"><option value=""></option><option>Easy</option><option>In between</option><option>Restrictive</option></select></td></tr>
+      <tr><th scope="row">Interest rates</th><td class="hot">Low</td><td class="cold">High</td><td><select id="a7" aria-label="Interest rates: Low or High"><option value=""></option><option>Low</option><option>In between</option><option>High</option></select></td></tr>
+      <tr><th scope="row">Yield spreads</th><td class="hot">Narrow</td><td class="cold">Wide</td><td><select id="a8" aria-label="Yield spreads: Narrow or Wide"><option value=""></option><option>Narrow</option><option>In between</option><option>Wide</option></select></td></tr>
+      <tr><th scope="row">Investors</th><td class="hot">Optimistic</td><td class="cold">Pessimistic</td><td><select id="a9" aria-label="Investors: Optimistic or Pessimistic"><option value=""></option><option>Optimistic</option><option>In between</option><option>Pessimistic</option></select></td></tr>
+      <tr><th scope="row"></th><td class="hot">Sanguine</td><td class="cold">Distressed</td><td><select id="a10" aria-label="Investors: Sanguine or Distressed"><option value=""></option><option>Sanguine</option><option>In between</option><option>Distressed</option></select></td></tr>
+      <tr><th scope="row"></th><td class="hot">Eager to buy</td><td class="cold">Uninterested in buying</td><td><select id="a11" aria-label="Investors: Eager to buy or Uninterested in buying"><option value=""></option><option>Eager to buy</option><option>In between</option><option>Uninterested in buying</option></select></td></tr>
+      <tr><th scope="row">Asset owners</th><td class="hot">Happy to hold</td><td class="cold">Rushing for the exits</td><td><select id="a12" aria-label="Asset owners: Happy to hold or Rushing for the exits"><option value=""></option><option>Happy to hold</option><option>In between</option><option>Rushing for the exits</option></select></td></tr>
+      <tr><th scope="row">Sellers</th><td class="hot">Few</td><td class="cold">Many</td><td><select id="a13" aria-label="Sellers: Few or Many"><option value=""></option><option>Few</option><option>In between</option><option>Many</option></select></td></tr>
+      <tr><th scope="row">Markets</th><td class="hot">Crowded</td><td class="cold">Starved for attention</td><td><select id="a14" aria-label="Markets: Crowded or Starved for attention"><option value=""></option><option>Crowded</option><option>In between</option><option>Starved for attention</option></select></td></tr>
+      <tr><th scope="row">Funds</th><td class="hot">Hard to gain entry</td><td class="cold">Open to anyone</td><td><select id="a15" aria-label="Funds: Hard to gain entry or Open to anyone"><option value=""></option><option>Hard to gain entry</option><option>In between</option><option>Open to anyone</option></select></td></tr>
+      <tr><th scope="row"></th><td class="hot">New ones daily</td><td class="cold">Only the best can raise money</td><td><select id="a16" aria-label="Funds: New ones daily or Only the best can raise money"><option value=""></option><option>New ones daily</option><option>In between</option><option>Only the best can raise money</option></select></td></tr>
+      <tr><th scope="row"></th><td class="hot">General partners hold the cards on terms</td><td class="cold">Limited partners have bargaining power</td><td><select id="a17" aria-label="Funds: General partners hold the cards on terms or Limited partners have bargaining power"><option value=""></option><option>General partners hold the cards on terms</option><option>In between</option><option>Limited partners have bargaining power</option></select></td></tr>
+      <tr><th scope="row">Recent performance</th><td class="hot">Strong</td><td class="cold">Weak</td><td><select id="a18" aria-label="Recent performance: Strong or Weak"><option value=""></option><option>Strong</option><option>In between</option><option>Weak</option></select></td></tr>
+      <tr><th scope="row">Asset prices</th><td class="hot">High</td><td class="cold">Low</td><td><select id="a19" aria-label="Asset prices: High or Low"><option value=""></option><option>High</option><option>In between</option><option>Low</option></select></td></tr>
+      <tr><th scope="row">Prospective returns</th><td class="hot">Low</td><td class="cold">High</td><td><select id="a20" aria-label="Prospective returns: Low or High"><option value=""></option><option>Low</option><option>In between</option><option>High</option></select></td></tr>
+      <tr><th scope="row">Risk</th><td class="hot">High</td><td class="cold">Low</td><td><select id="a21" aria-label="Risk: High or Low"><option value=""></option><option>High</option><option>In between</option><option>Low</option></select></td></tr>
+      <tr><th scope="row">Popular qualities</th><td class="hot">Aggressiveness</td><td class="cold">Caution and discipline</td><td><select id="a22" aria-label="Popular qualities: Aggressiveness or Caution and discipline"><option value=""></option><option>Aggressiveness</option><option>In between</option><option>Caution and discipline</option></select></td></tr>
+      <tr><th scope="row"></th><td class="hot">Broad reach</td><td class="cold">Selectivity</td><td><select id="a23" aria-label="Popular qualities: Broad reach or Selectivity"><option value=""></option><option>Broad reach</option><option>In between</option><option>Selectivity</option></select></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="hint">"In between" is for pairs you can't call; it counts half. Marks' list has three more groups, the right qualities and the mistakes on offer, which depend on where you land: they're in the reading below.</p>
+  </div>
+
+  <div class="sheet">
+    <div class="srow head"><span class="lab">The reading</span></div>
+    <div class="srow calc-row"><span class="lab">Pairs answered</span><output class="cell" id="o-n">–</output></div>
+    <div class="srow calc-row"><span class="lab">On the hot side</span><output class="cell" id="o-hot">–</output></div>
+    <div class="srow calc-row"><span class="lab">In between</span><output class="cell" id="o-mid">–</output></div>
+    <div class="srow calc-row"><span class="lab">On the cold side</span><output class="cell" id="o-cold">–</output></div>
+    <div class="mk-gauge empty" id="gauge" aria-hidden="true"><span class="mk-bar"></span><span class="mk-mark"></span><span class="mk-end l">Frigid</span><span class="mk-end r">Red-hot</span></div>
+    <div class="srow calc-row total"><span class="lab">Temperature<span class="hint">0 = frigid, 100 = red-hot. Share of your answers on the hot side.</span></span><output class="cell" id="o-temp">–</output></div>
+    <div class="srow test"><span class="lab">Reading</span><output class="cell" id="x-band">–</output></div>
+    <div class="srow calc-row"><span class="lab">Stance Marks would lean to</span><output class="cell" id="o-stance">–</output></div>
+    <div class="srow calc-row"><span class="lab">The right qualities now</span><output class="cell" id="o-qual">–</output></div>
+    <div class="srow calc-row"><span class="lab">The mistakes on offer</span><output class="cell" id="o-mist">–</output></div>
+  </div>
+
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
+  <div class="actions">
+    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
+    <button type="button" class="button ghost" id="reset">Clear</button>
+  </div>
+<p class="copy-note">The bands (75, 60, 40, 25) are ours. Marks gives no numbers: his guide is, in his words, non-scientific and non-quantifiable.</p>  <div class="sharebar" id="sharebar">
+    <label class="sb-co"><span>Company or ticker <em>(optional, goes in the link and the files)</em></span>
+      <input id="sb-company" type="text" maxlength="60" autocomplete="off" spellcheck="false" placeholder="e.g. ACME"></label>
+    <div class="sb-groups">
+      <p class="share-buttons"><span class="sb-k">Share</span>
+        <button type="button" id="sb-x">X</button>
+        <button type="button" id="sb-in">LinkedIn</button>
+        <button type="button" id="sb-native" hidden>More</button></p>
+      <p class="share-buttons"><span class="sb-k">Download</span>
+        <button type="button" id="sb-pdf">PDF</button>
+        <button type="button" id="sb-csv">CSV</button></p>
+      <p class="share-buttons sb-community" hidden><span class="sb-k">Community</span>
+        <button type="button" id="sb-save">Send to Ezra</button>
+        <button type="button" id="sb-tm">Leave a testimonial</button></p>
+    </div>
+    <div class="sb-box" id="sb-savebox" hidden>
+      <p>Send this calculation to Ezra. He reads them, and with your OK he may share some with the community. Nothing leaves your browser until you press Send.</p>
+      <label>Your name or X handle <em>(optional)</em> <input id="sb-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label class="check"><input id="sb-ok" type="checkbox"> Ezra can publish this calculation and my name or handle</label>
+      <input id="sb-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="sb-send">Send</button> <span id="sb-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+    <div class="sb-box" id="testimonial" hidden>
+      <p>Did this calculator help you? Tell Ezra in a few words.</p>
+      <label>What did it help you with? <textarea id="tm-text" rows="4" maxlength="1500"></textarea></label>
+      <label>Name <input id="tm-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label>X or LinkedIn handle <em>(optional)</em> <input id="tm-handle" type="text" maxlength="80" autocomplete="off"></label>
+      <label>What you do <em>(optional, e.g. "individual investor" or "analyst at a fund")</em> <input id="tm-role" type="text" maxlength="120" autocomplete="off"></label>
+      <label class="check"><input id="tm-ok" type="checkbox"> Ezra can publish this on the site with my name</label>
+      <input id="tm-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="tm-send">Send</button> <span id="tm-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+  </div>
+
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">How it works</h2>
+  <p>Marks' point is that the risk in investing comes mostly from how other investors behave. When they're euphoric, their buying lifts prices to dangerous levels; when they're despondent, their selling takes prices to bargain lows. The guide is a disciplined way of noticing which of the two is going on.</p>
+  <p>Each pair has a hot side and a cold side. The temperature is the share of your answers on the hot side, with "in between" counting half. Above 60 Marks would lean defensive, below 40 aggressive.</p>
+
+  <h2 class="rule-head">Marks' two questions</h2>
+  <p>How are things priced, and how are investors around us behaving? Start with the first: if valuations aren't out of line with history, the cycle is unlikely to be extended in either direction. This guide answers the second.</p>
+  <p>A trick from the book for the stance: travel a few years into the future and look back. Are you more likely to say "I wish I'd been more aggressive" or "I wish I'd been more defensive"?</p>
+
+  <h2 class="rule-head">What it can't tell you</h2>
+  <p>When the market will turn. Marks: even the best temperature-taking can't tell us what will happen next, just the tendencies. From a high point the market can still go up, flat or down; a fall is only the more likely of the three.</p>
+  <p>The answers are judgments, so they carry your mood. Taking the reading on the same day each month, and looking at the trend, helps keep it honest.</p>
+
+  <h2 class="rule-head">Where the guide comes from</h2>
+  <p>Howard Marks, <em>Mastering the Market Cycle: Getting the Odds on Your Side</em> (2018), chapter XIII, "How to Cope with Market Cycles", and chapter XIV, "Cycle Positioning". The guide first appeared in his memo "It Is What It Is" (March 2006) and in <em>The Most Important Thing</em>.</p>
+</section>
+
+<aside class="wanted soon-box" id="coming-soon">
+  <p class="wanted-kicker">Coming soon</p>
+  <p class="wanted-head">The AI version</p>
+  <p class="wanted-body">The Excel version of this guide is coming, so you can keep a monthly log and see the trend. Subscribe to Ezra&#39;s Notes to hear first.</p>
+  <iframe class="substack" src="https://www.ezrasnotes.com/embed" title="Subscribe to Ezra's Notes" width="480" height="150" frameborder="0" scrolling="no" loading="lazy"></iframe>
+</aside>
+
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Holdings</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a inversores</a>
+  </p>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
+<script>document.addEventListener("click",function(e){var m=document.querySelector(".nav-menu[open]");if(m&&!m.contains(e.target))m.removeAttribute("open")});</script>
+<script src="../static/share.js?v=3651268d"></script><script type="module" src="../static/marks.js?v=3651268d"></script></body>
+</html>

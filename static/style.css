@@ -398,3 +398,34 @@ table.grid .gcalc th, table.grid .gcalc output { font-weight: 700; }
 }
 #help-growth table.grid td input { width: 5em; text-align: right; }
 #help-growth table.grid td { text-align: right; }
+.mkx table.grid td.hot, .mkx table.grid td.cold { font-size: 15px; }
+.mkx table.grid select { font: 15px var(--body); padding: 4px; max-width: 13em; background: var(--paper); color: var(--ink); border: 1px solid var(--hair); }
+.mkx tr[data-side="L"] td.hot, .mkx tr[data-side="R"] td.cold { font-weight: 700; }
+.mkx tr[data-side="M"] td.hot, .mkx tr[data-side="M"] td.cold { font-style: italic; }
+.mk-gauge { position: relative; height: 46px; margin: 12px 0 4px; }
+.mk-bar { position: absolute; left: 0; right: 0; top: 8px; height: 10px; background: linear-gradient(90deg, #9cb8d6, var(--paper) 50%, #d98c7a); border: 1px solid var(--rule); }
+.mk-mark { position: absolute; top: 2px; width: 3px; height: 22px; background: var(--ink); left: calc(var(--t, 50) * 1%); transform: translateX(-1px); }
+.mk-gauge.empty .mk-mark { display: none; }
+.mk-end { position: absolute; top: 24px; font: 11px/1 var(--head); text-transform: uppercase; letter-spacing: .12em; color: var(--mute); }
+.mk-end.l { left: 0; } .mk-end.r { right: 0; }
+.mk-reading { border: 1px solid var(--rule); padding: 14px 16px; margin: 0 0 22px; font-size: 16px; }
+.mk-reading p { margin: 6px 0; }
+.mk-score { font: 28px/1.1 var(--head); margin: 4px 0 8px; }
+@media (max-width: 560px) { .mkx table.grid select { max-width: 8.5em; font-size: 14px; } .mkx table.grid td.hot, .mkx table.grid td.cold { font-size: 13px; } }
+.mkx table.grid td.hot, .mkx table.grid td.cold { text-align: left; }
+.mkx table.grid tbody th { text-transform: none; letter-spacing: 0; font: 600 15px var(--body); white-space: normal; }
+@media (max-width: 560px) {
+  .mkx table.grid thead th:nth-child(2), .mkx table.grid thead th:nth-child(3),
+  .mkx table.grid td.hot, .mkx table.grid td.cold { display: none; }
+  .mkx table.grid { min-width: 0; width: 100%; }
+  .mkx table.grid select { max-width: none; width: 100%; font-size: 15px; }
+  .mkx table.grid tbody th { width: 38%; font-size: 14px; }
+}
+@media (min-width: 561px) {
+  .mkx table.grid { table-layout: fixed; width: 100%; min-width: 0; }
+  .mkx table.grid th:nth-child(1) { width: 20%; }
+  .mkx table.grid th:nth-child(2), .mkx table.grid th:nth-child(3) { width: 28%; }
+  .mkx table.grid th:nth-child(4) { width: 24%; }
+  .mkx table.grid select { width: 100%; max-width: none; }
+}
+.mkx table.grid td, .mkx table.grid th { white-space: normal; text-align: left; word-spacing: normal; }
