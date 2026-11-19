@@ -479,3 +479,4 @@ table.grid .gcalc th, table.grid .gcalc output { font-weight: 700; }
 .pdf-mode a { text-decoration: none; }
 .pdf-mode footer { margin-top: 12px; padding-top: 6px; }
 .pdf-mode .print-summary, .pdf-mode .verdict { box-sizing: border-box; max-width: 100%; overflow-wrap: anywhere; }
+.pdf-mode .print-summary p { padding-right: 14px; }

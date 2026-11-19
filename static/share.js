@@ -85,6 +85,19 @@
         g.head.classList.add("print-skip"); g.rows.forEach(function (r) { r.classList.add("print-skip"); });
       }
     });
+    // Tables (competitors, bets, outcomes...): drop empty rows, and the whole table if nothing is left.
+    form.querySelectorAll("table").forEach(function (tb) {
+      var rows = [].slice.call(tb.querySelectorAll("tbody tr"));
+      var data = rows.filter(function (r) { return r.querySelector("input:not(.sr), select, output"); });
+      data.forEach(function (r) { if (blank(r)) r.classList.add("print-skip"); });
+      if (data.length && data.every(function (r) { return r.classList.contains("print-skip"); })) {
+        (tb.closest(".gridwrap") || tb).classList.add("print-skip");
+      }
+    });
+    form.querySelectorAll(".profile").forEach(function (box) {
+      var ws = box.querySelectorAll(".gridwrap");
+      if (ws.length && [].every.call(ws, function (w) { return w.classList.contains("print-skip"); })) box.classList.add("print-skip");
+    });
     var sum = document.getElementById("print-summary"), v = document.getElementById("verdict");
     var lede = document.querySelector(".lede");
     if (sum && lede) lede.after(sum);
