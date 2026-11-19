@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
+{% block title %}ROIC, ROIIC and reinvestment rate calculator{% endblock %}
+{% block description %}Return on invested capital, return on incremental capital and the reinvestment rate over six years, with and without goodwill. Free, and it runs in your browser.{% endblock %}
+{% block main %}
+<section class="lede">
+  <h1 class="page-title">ROIC, ROIIC and reinvestment</h1>
+  <p class="dek">Three numbers tell you whether a business compounds: what it earns on the capital it has, what it earns on the capital it adds, and how much of its profit it puts back to work. Together they tell you how fast it can grow without borrowing or issuing shares.</p>
+  <p>You'll need six years of results and seven balance sheets. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="roicform" class="calc" novalidate>
+{{ sheet.units(currencies, shares=False) }}
+  <p class="small">Copy the numbers as the annual report shows them, all in the same unit. Percentages go in as whole numbers: 25 means 25%. Fields with * are needed.</p>
+
+{{ sheet.rows(rows, "ROIC worksheet") }}
+
+{{ sheet.actions('"n/m" means the number behind it is zero or negative, so the result doesn\'t mean anything.') }}
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">How it's calculated</h2>
+  <ul>
+    <li><strong>ROIC</strong> = NOPAT ÷ invested capital at the start of the year. NOPAT is operating income plus the amortization of acquired intangibles, after tax. Invested capital is debt plus minority interest plus equity, minus the cash the business doesn't need to operate.</li>
+    <li><strong>Reinvestment rate</strong> = (capex + acquisitions − depreciation + the increase in working capital) ÷ NOPAT, as Aswath Damodaran defines it. Reinvestment rate × ROIC is the growth those returns can fund.</li>
+    <li><strong>ROIIC</strong> = the change in NOPAT ÷ the change in invested capital one year earlier, over 3 and 5 years. The lag follows Michael Mauboussin and Dan Callahan: what a company invests this year earns its profit next year. Without it, a year of heavy building looks terrible and the next one brilliant.</li>
+  </ul>
+
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Companies whose capital sits on the balance sheet: manufacturers, retailers, distributors, consumer brands and most services.</p>
+  <p>It works badly for three kinds of company:</p>
+  <ul>
+    <li><strong>Banks and insurers.</strong> Debt is their raw material, so their invested capital means something else.</li>
+    <li><strong>Companies built on R&amp;D or marketing.</strong> The accounting expenses their investment, so the capital is too small and ROIC too high.</li>
+    <li><strong>Serial acquirers after big write-downs.</strong> Impairments shrink the capital and make returns look better than the deals were. Add them back.</li>
+  </ul>
+
+  <h2 class="rule-head">What this calculator can't tell you</h2>
+
+  <h3>Whether the returns will last</h3>
+  <p>High ROIC attracts competition. In Mauboussin and Callahan's data for 1990-2022, under half of the companies in the top fifth by ROIC were still there three years later, and 15% had fallen to the bottom fifth. Their data also show that share prices follow the change in ROIC more than its level.</p>
+
+  <h3>Whether there's room to reinvest</h3>
+  <p>A business can earn 40% on capital and have nowhere to put more of it. Past reinvestment doesn't promise future opportunities.</p>
+
+  <h3>What ROIIC is worth</h3>
+  <p>ROIIC shows where returns are heading, but Mauboussin warns it isn't a true return: it overstates economic returns when it's above the cost of capital and understates them when it's below. Don't set the two side by side.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>ROIC is the standard calculation you'll find in most finance textbooks: after-tax operating profit over the capital that debt and equity holders put in. The reinvestment rate and the growth it supports come from Aswath Damodaran's valuation classes at NYU Stern. ROIIC, the operating cash rule and the view with and without goodwill come from Michael J. Mauboussin and Dan Callahan, "Return on Invested Capital: How to Calculate ROIC and Handle Common Issues" (Counterpoint Global Insights, 2022).</p>
+</section>
+
+{{ sheet.coming_soon("The full version is coming: an Excel template and an AI skill built for Claude. They capitalize R&D and marketing the way Mauboussin and Callahan do, and read ten years of reports for you. Subscribe to Ezra's Notes to hear first.", substack_embed) }}
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ root }}static/roic.js?v={{ asset_v }}"></script>{% endblock %}

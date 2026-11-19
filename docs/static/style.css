@@ -300,3 +300,16 @@ footer { margin-top: 56px; padding-top: 14px; border-top: 3px double var(--rule)
 .profile td { text-align: right; padding: 5px 4px; border-bottom: 1px solid var(--hair); font-size: 16px; }
 .profile tr.hit td { font-weight: 600; }
 .profile .hint { display: block; font: italic 14px/1.4 var(--body); color: var(--mute); margin: 8px 0 0; }
+
+/* ── Year grid (ROIC) ── */
+.gridwrap { overflow-x: auto; margin: 10px 0 4px; -webkit-overflow-scrolling: touch; }
+table.grid { border-collapse: collapse; min-width: 100%; font-variant-numeric: tabular-nums; }
+table.grid th, table.grid td { padding: 3px 4px; border-bottom: 1px solid var(--hair); white-space: nowrap; }
+table.grid thead th { font: 11px/1.2 var(--head); text-transform: uppercase; letter-spacing: .06em; text-align: right; border-bottom: 1px solid var(--rule); }
+table.grid tbody th { font: 14px/1.25 var(--body); text-align: left; white-space: normal; min-width: 11em; max-width: 15em; position: sticky; left: 0; background: var(--paper); z-index: 1; padding-right: 8px; }
+table.grid .gsub th { font: 11px/1.2 var(--head); text-transform: uppercase; letter-spacing: .08em; padding-top: 12px; position: static; }
+table.grid input { width: 6.2em; padding: 6px 6px; font-size: 15px; text-align: right; }
+table.grid td output { display: block; text-align: right; font-size: 15px; min-width: 5em; }
+table.grid .gcalc th, table.grid .gcalc output { font-weight: 700; }
+.gridhint { display: block; font: italic 14px/1.4 var(--body); color: var(--mute); margin: 4px 0 12px; }
+@media (max-width: 560px) { table.grid tbody th { min-width: 8.5em; font-size: 13px; } table.grid input { width: 5.4em; font-size: 14px; } }

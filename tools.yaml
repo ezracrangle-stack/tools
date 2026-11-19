@@ -42,6 +42,12 @@ tools:
     status: live
     blurb: Mauboussin and Callahan's fixes to the cash flow statement. Free cash flow after stock pay and leases, and how much the company really invests.
 
+  - slug: roic
+    name: ROIC, ROIIC and reinvestment
+    nav: ROIC
+    status: live
+    blurb: How much a business earns on its capital, what the new capital earns, how much it reinvests, and the growth that supports.
+
   - slug: reverse-dcf
     name: Reverse DCF
     status: soon
@@ -423,3 +429,33 @@ fcf_rows:
   - {type: input, k: p, label: "Share price", kind: price}
   - {type: calc, k: yR, label: "Popular free cash flow yield"}
   - {type: total, k: yA, label: "Yield after stock pay and leases"}
+
+# ROIC, ROIIC and reinvestment, same formulas as ROIC_Reinvestment_Template.xlsx.
+roic_rows:
+  - {type: head, label: "1. Settings"}
+  - {type: input, k: tax, label: "Tax rate on operating income (%)", kind: percent, key: true, hint: "A normal rate, the same for every year. Damodaran's EBIT(1 − t)."}
+  - {type: input, k: opc, label: "Operating cash (% of revenue)", kind: percent, default: 2, hint: "Cash above this is excess and comes out of invested capital. Mauboussin and Callahan: about 2%, up to 5% for faster-growing or less predictable companies."}
+  - {type: input, k: coc, label: "Cost of capital (%)", kind: percent, hint: "Optional, for the ROIC spread."}
+  - {type: input, k: year, label: "Latest fiscal year", kind: number, hint: "Optional, only for the column labels."}
+
+  - {type: head, label: "2. Seven years of numbers"}
+  - {type: note, label: "Oldest on the left. Year 0 only needs revenue and the balance sheet. Tip: copy a row of numbers from a spreadsheet and paste it in the first box of a line; it fills the years across."}
+  - {type: helper, id: roic-grid}
+
+  - {type: head, label: "3. Year by year"}
+  - {type: helper, id: roic-results}
+
+  - {type: head, label: "4. Summary"}
+  - {type: total, k: roicL, label: "ROIC, latest year", hint: "NOPAT ÷ invested capital at the start of the year"}
+  - {type: calc, k: roicxL, label: "ROIC without goodwill, latest year", hint: "The business on its own. With goodwill, it's what shareholders earn after paying for the acquisitions."}
+  - {type: calc, k: spread, label: "ROIC minus cost of capital"}
+  - {type: calc, k: avgRoic, label: "Average ROIC, last 5 years"}
+  - {type: total, k: roiic3, label: "ROIIC, 3 years", hint: "Change in NOPAT ÷ the capital added a year earlier"}
+  - {type: total, k: roiic5, label: "ROIIC, 5 years"}
+  - {type: calc, k: rrL, label: "Reinvestment rate, latest year", hint: "(Capex + acquisitions − D&A + Δ working capital) ÷ NOPAT"}
+  - {type: total, k: rr5, label: "Reinvestment rate, last 5 years combined"}
+  - {type: calc, k: fgL, label: "Fundamental growth, latest year", hint: "Reinvestment rate × ROIC"}
+  - {type: total, k: fg5, label: "Fundamental growth, 5-year reinvestment × average ROIC"}
+  - {type: total, k: cagr, label: "Actual NOPAT growth, 5 years a year"}
+  - {type: calc, k: gap, label: "Fundamental minus actual growth", hint: "Above zero: the reinvestment hasn't shown up in profit yet, or earned less than the average. Below zero: growth came from better returns on old capital, which doesn't last forever."}
+  - {type: calc, k: bsVsCf, label: "Capital added ÷ reinvestment, 5 years", hint: "Close to 1.00x when the balance sheet and the cash flow statement agree."}

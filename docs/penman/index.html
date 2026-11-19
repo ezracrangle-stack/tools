@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../static/style.css?v=09ee5a05">
+<link rel="stylesheet" href="../static/style.css?v=aed28e85">
 <meta property="og:title" content="Penman's residual income calculator · Ezra's Notes">
 <meta property="og:description" content="Stephen Penman's residual income method: the book value of the operations, the growth the price implies and the return you earn at today's price. Free, and it runs in your browser.">
 <meta property="og:url" content="https://tools.ezrasnotes.com/penman/">
@@ -43,6 +43,7 @@
 <a href="../penman/" aria-current="page">Penman</a>
 <a href="../graham/">Graham</a>
 <a href="../fcf/">Mauboussin</a>
+<a href="../roic/">ROIC</a>
 <a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
   </nav>
 </header>
@@ -64,7 +65,7 @@
       <select id="cur"><option selected>USD</option><option>EUR</option><option>GBP</option><option>CAD</option><option>AUD</option><option>CHF</option><option>JPY</option><option>HKD</option><option>SGD</option><option>SEK</option><option>NOK</option><option>DKK</option><option>MXN</option><option>BRL</option><option>CLP</option><option>COP</option><option>KRW</option><option>INR</option><option>ZAR</option></select></div>
 <div><label for="u">Amounts in</label>
       <select id="u"><option value="1">Units</option><option value="1000" selected>Thousands</option><option value="1000000">Millions</option></select></div>
-    <div><label for="su">Shares in</label>
+<div><label for="su">Shares in</label>
       <select id="su"><option value="1">Units</option><option value="1000" selected>Thousands</option><option value="1000000">Millions</option></select></div>  </div>
 
   <p class="small">Copy the numbers as the annual report shows them, all in the same unit. The share price always goes in full. Percentages go in as whole numbers: 9 means 9%. Fields with * are needed; leave any other line blank if it doesn't apply.</p>
@@ -302,5 +303,5 @@
 <script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
 document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
 var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
-<script type="module" src="../static/penman.js?v=09ee5a05"></script></body>
+<script type="module" src="../static/penman.js?v=aed28e85"></script></body>
 </html>

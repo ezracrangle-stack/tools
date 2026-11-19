@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTNNLB6W9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FTNNLB6W9D');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>ROIC, ROIIC and reinvestment rate calculator · Ezra's Notes</title>
+<meta name="description" content="Return on invested capital, return on incremental capital and the reinvestment rate over six years, with and without goodwill. Free, and it runs in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css?v=aed28e85">
+<meta property="og:title" content="ROIC, ROIIC and reinvestment rate calculator · Ezra's Notes">
+<meta property="og:description" content="Return on invested capital, return on incremental capital and the reinvestment rate over six years, with and without goodwill. Free, and it runs in your browser.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/roic/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="../static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
+<link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/roic/">
+</head>
+<body>
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="../">Tools</a>
+  <p class="byline">By <a href="https://x.com/ezracrangle">@ezracrangle</a></p>
+  <nav>
+    <a href="../">All tools</a>
+<a href="../net-net/">Net-net</a>
+<a href="../epv/">EPV</a>
+<a href="../greenwald/">Greenwald</a>
+<a href="../penman/">Penman</a>
+<a href="../graham/">Graham</a>
+<a href="../fcf/">Mauboussin</a>
+<a href="../roic/" aria-current="page">ROIC</a>
+<a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<section class="lede">
+  <h1 class="page-title">ROIC, ROIIC and reinvestment</h1>
+  <p class="dek">Three numbers tell you whether a business compounds: what it earns on the capital it has, what it earns on the capital it adds, and how much of its profit it puts back to work. Together they tell you how fast it can grow without borrowing or issuing shares.</p>
+  <p>You'll need six years of results and seven balance sheets. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="roicform" class="calc" novalidate>
+  <div class="settings">
+    <div><label for="cur">Currency</label>
+      <select id="cur"><option selected>USD</option><option>EUR</option><option>GBP</option><option>CAD</option><option>AUD</option><option>CHF</option><option>JPY</option><option>HKD</option><option>SGD</option><option>SEK</option><option>NOK</option><option>DKK</option><option>MXN</option><option>BRL</option><option>CLP</option><option>COP</option><option>KRW</option><option>INR</option><option>ZAR</option></select></div>
+<div><label for="u">Amounts in</label>
+      <select id="u"><option value="1">Units</option><option value="1000" selected>Thousands</option><option value="1000000">Millions</option></select></div>
+  </div>
+
+  <p class="small">Copy the numbers as the annual report shows them, all in the same unit. Percentages go in as whole numbers: 25 means 25%. Fields with * are needed.</p>
+
+  <div class="sheet" role="group" aria-label="ROIC worksheet">
+    <div class="srow head"><span class="lab">1. Settings</span></div>
+    <div class="srow in key">
+      <label class="lab" for="f-tax">Tax rate on operating income (%) *<span class="hint">A normal rate, the same for every year. Damodaran's EBIT(1 − t).</span></label>
+      <span class="cell"><input id="f-tax" data-k="tax" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-opc">Operating cash (% of revenue)<span class="hint">Cash above this is excess and comes out of invested capital. Mauboussin and Callahan: about 2%, up to 5% for faster-growing or less predictable companies.</span></label>
+      <span class="cell"><input id="f-opc" data-k="opc" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="2" data-default="2"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-coc">Cost of capital (%)<span class="hint">Optional, for the ROIC spread.</span></label>
+      <span class="cell"><input id="f-coc" data-k="coc" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-year">Latest fiscal year<span class="hint">Optional, only for the column labels.</span></label>
+      <span class="cell"><input id="f-year" data-k="year" data-kind="number" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow head"><span class="lab">2. Seven years of numbers</span></div>
+    <div class="srow note"><span class="lab">Oldest on the left. Year 0 only needs revenue and the balance sheet. Tip: copy a row of numbers from a spreadsheet and paste it in the first box of a line; it fills the years across.</span></div>
+<div class="gridwrap">
+  <table class="grid">
+    <thead><tr><th></th><th class="yl0">Year 0</th><th class="yl1">Year 1</th><th class="yl2">Year 2</th><th class="yl3">Year 3</th><th class="yl4">Year 4</th><th class="yl5">Year 5</th><th class="yl6">Year 6</th></tr></thead>
+    <tbody>
+      <tr class="gsub"><th colspan="8">Income and cash flow</th></tr>
+      <tr><th scope="row">Revenue</th>
+<td><input data-k="rev0" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 0"></td><td><input data-k="rev1" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 1"></td><td><input data-k="rev2" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 2"></td><td><input data-k="rev3" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 3"></td><td><input data-k="rev4" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 4"></td><td><input data-k="rev5" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 5"></td><td><input data-k="rev6" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 6"></td></tr>
+      <tr><th scope="row">Operating income (EBIT) *</th>
+<td></td><td><input data-k="ebit1" type="text" inputmode="text" autocomplete="off" aria-label="Operating income (EBIT), year 1"></td><td><input data-k="ebit2" type="text" inputmode="text" autocomplete="off" aria-label="Operating income (EBIT), year 2"></td><td><input data-k="ebit3" type="text" inputmode="text" autocomplete="off" aria-label="Operating income (EBIT), year 3"></td><td><input data-k="ebit4" type="text" inputmode="text" autocomplete="off" aria-label="Operating income (EBIT), year 4"></td><td><input data-k="ebit5" type="text" inputmode="text" autocomplete="off" aria-label="Operating income (EBIT), year 5"></td><td><input data-k="ebit6" type="text" inputmode="text" autocomplete="off" aria-label="Operating income (EBIT), year 6"></td></tr>
+      <tr><th scope="row">(+) Amortization of acquired intangibles</th>
+<td></td><td><input data-k="am1" type="text" inputmode="decimal" autocomplete="off" aria-label="(+) Amortization of acquired intangibles, year 1"></td><td><input data-k="am2" type="text" inputmode="decimal" autocomplete="off" aria-label="(+) Amortization of acquired intangibles, year 2"></td><td><input data-k="am3" type="text" inputmode="decimal" autocomplete="off" aria-label="(+) Amortization of acquired intangibles, year 3"></td><td><input data-k="am4" type="text" inputmode="decimal" autocomplete="off" aria-label="(+) Amortization of acquired intangibles, year 4"></td><td><input data-k="am5" type="text" inputmode="decimal" autocomplete="off" aria-label="(+) Amortization of acquired intangibles, year 5"></td><td><input data-k="am6" type="text" inputmode="decimal" autocomplete="off" aria-label="(+) Amortization of acquired intangibles, year 6"></td></tr>
+      <tr><th scope="row">Capital expenditures</th>
+<td></td><td><input data-k="capex1" type="text" inputmode="decimal" autocomplete="off" aria-label="Capital expenditures, year 1"></td><td><input data-k="capex2" type="text" inputmode="decimal" autocomplete="off" aria-label="Capital expenditures, year 2"></td><td><input data-k="capex3" type="text" inputmode="decimal" autocomplete="off" aria-label="Capital expenditures, year 3"></td><td><input data-k="capex4" type="text" inputmode="decimal" autocomplete="off" aria-label="Capital expenditures, year 4"></td><td><input data-k="capex5" type="text" inputmode="decimal" autocomplete="off" aria-label="Capital expenditures, year 5"></td><td><input data-k="capex6" type="text" inputmode="decimal" autocomplete="off" aria-label="Capital expenditures, year 6"></td></tr>
+      <tr><th scope="row">Acquisitions, net of cash</th>
+<td></td><td><input data-k="acq1" type="text" inputmode="decimal" autocomplete="off" aria-label="Acquisitions, net of cash, year 1"></td><td><input data-k="acq2" type="text" inputmode="decimal" autocomplete="off" aria-label="Acquisitions, net of cash, year 2"></td><td><input data-k="acq3" type="text" inputmode="decimal" autocomplete="off" aria-label="Acquisitions, net of cash, year 3"></td><td><input data-k="acq4" type="text" inputmode="decimal" autocomplete="off" aria-label="Acquisitions, net of cash, year 4"></td><td><input data-k="acq5" type="text" inputmode="decimal" autocomplete="off" aria-label="Acquisitions, net of cash, year 5"></td><td><input data-k="acq6" type="text" inputmode="decimal" autocomplete="off" aria-label="Acquisitions, net of cash, year 6"></td></tr>
+      <tr><th scope="row">Depreciation and amortization</th>
+<td></td><td><input data-k="da1" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation and amortization, year 1"></td><td><input data-k="da2" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation and amortization, year 2"></td><td><input data-k="da3" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation and amortization, year 3"></td><td><input data-k="da4" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation and amortization, year 4"></td><td><input data-k="da5" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation and amortization, year 5"></td><td><input data-k="da6" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation and amortization, year 6"></td></tr>
+      <tr><th scope="row">Increase in non-cash working capital</th>
+<td></td><td><input data-k="dwc1" type="text" inputmode="text" autocomplete="off" aria-label="Increase in non-cash working capital, year 1"></td><td><input data-k="dwc2" type="text" inputmode="text" autocomplete="off" aria-label="Increase in non-cash working capital, year 2"></td><td><input data-k="dwc3" type="text" inputmode="text" autocomplete="off" aria-label="Increase in non-cash working capital, year 3"></td><td><input data-k="dwc4" type="text" inputmode="text" autocomplete="off" aria-label="Increase in non-cash working capital, year 4"></td><td><input data-k="dwc5" type="text" inputmode="text" autocomplete="off" aria-label="Increase in non-cash working capital, year 5"></td><td><input data-k="dwc6" type="text" inputmode="text" autocomplete="off" aria-label="Increase in non-cash working capital, year 6"></td></tr>
+      <tr class="gsub"><th colspan="8">Balance sheet, year-end</th></tr>
+      <tr><th scope="row">Total debt, with lease liabilities</th>
+<td><input data-k="debt0" type="text" inputmode="decimal" autocomplete="off" aria-label="Total debt, with lease liabilities, year 0"></td><td><input data-k="debt1" type="text" inputmode="decimal" autocomplete="off" aria-label="Total debt, with lease liabilities, year 1"></td><td><input data-k="debt2" type="text" inputmode="decimal" autocomplete="off" aria-label="Total debt, with lease liabilities, year 2"></td><td><input data-k="debt3" type="text" inputmode="decimal" autocomplete="off" aria-label="Total debt, with lease liabilities, year 3"></td><td><input data-k="debt4" type="text" inputmode="decimal" autocomplete="off" aria-label="Total debt, with lease liabilities, year 4"></td><td><input data-k="debt5" type="text" inputmode="decimal" autocomplete="off" aria-label="Total debt, with lease liabilities, year 5"></td><td><input data-k="debt6" type="text" inputmode="decimal" autocomplete="off" aria-label="Total debt, with lease liabilities, year 6"></td></tr>
+      <tr><th scope="row">Minority interest</th>
+<td><input data-k="mi0" type="text" inputmode="decimal" autocomplete="off" aria-label="Minority interest, year 0"></td><td><input data-k="mi1" type="text" inputmode="decimal" autocomplete="off" aria-label="Minority interest, year 1"></td><td><input data-k="mi2" type="text" inputmode="decimal" autocomplete="off" aria-label="Minority interest, year 2"></td><td><input data-k="mi3" type="text" inputmode="decimal" autocomplete="off" aria-label="Minority interest, year 3"></td><td><input data-k="mi4" type="text" inputmode="decimal" autocomplete="off" aria-label="Minority interest, year 4"></td><td><input data-k="mi5" type="text" inputmode="decimal" autocomplete="off" aria-label="Minority interest, year 5"></td><td><input data-k="mi6" type="text" inputmode="decimal" autocomplete="off" aria-label="Minority interest, year 6"></td></tr>
+      <tr><th scope="row">Shareholders&#39; equity *</th>
+<td><input data-k="eq0" type="text" inputmode="text" autocomplete="off" aria-label="Shareholders&#39; equity, year 0"></td><td><input data-k="eq1" type="text" inputmode="text" autocomplete="off" aria-label="Shareholders&#39; equity, year 1"></td><td><input data-k="eq2" type="text" inputmode="text" autocomplete="off" aria-label="Shareholders&#39; equity, year 2"></td><td><input data-k="eq3" type="text" inputmode="text" autocomplete="off" aria-label="Shareholders&#39; equity, year 3"></td><td><input data-k="eq4" type="text" inputmode="text" autocomplete="off" aria-label="Shareholders&#39; equity, year 4"></td><td><input data-k="eq5" type="text" inputmode="text" autocomplete="off" aria-label="Shareholders&#39; equity, year 5"></td><td><input data-k="eq6" type="text" inputmode="text" autocomplete="off" aria-label="Shareholders&#39; equity, year 6"></td></tr>
+      <tr><th scope="row">Cash and investments</th>
+<td><input data-k="cash0" type="text" inputmode="decimal" autocomplete="off" aria-label="Cash and investments, year 0"></td><td><input data-k="cash1" type="text" inputmode="decimal" autocomplete="off" aria-label="Cash and investments, year 1"></td><td><input data-k="cash2" type="text" inputmode="decimal" autocomplete="off" aria-label="Cash and investments, year 2"></td><td><input data-k="cash3" type="text" inputmode="decimal" autocomplete="off" aria-label="Cash and investments, year 3"></td><td><input data-k="cash4" type="text" inputmode="decimal" autocomplete="off" aria-label="Cash and investments, year 4"></td><td><input data-k="cash5" type="text" inputmode="decimal" autocomplete="off" aria-label="Cash and investments, year 5"></td><td><input data-k="cash6" type="text" inputmode="decimal" autocomplete="off" aria-label="Cash and investments, year 6"></td></tr>
+      <tr><th scope="row">Goodwill and acquired intangibles</th>
+<td><input data-k="gw0" type="text" inputmode="decimal" autocomplete="off" aria-label="Goodwill and acquired intangibles, year 0"></td><td><input data-k="gw1" type="text" inputmode="decimal" autocomplete="off" aria-label="Goodwill and acquired intangibles, year 1"></td><td><input data-k="gw2" type="text" inputmode="decimal" autocomplete="off" aria-label="Goodwill and acquired intangibles, year 2"></td><td><input data-k="gw3" type="text" inputmode="decimal" autocomplete="off" aria-label="Goodwill and acquired intangibles, year 3"></td><td><input data-k="gw4" type="text" inputmode="decimal" autocomplete="off" aria-label="Goodwill and acquired intangibles, year 4"></td><td><input data-k="gw5" type="text" inputmode="decimal" autocomplete="off" aria-label="Goodwill and acquired intangibles, year 5"></td><td><input data-k="gw6" type="text" inputmode="decimal" autocomplete="off" aria-label="Goodwill and acquired intangibles, year 6"></td></tr>
+      <tr class="gcalc"><th scope="row">Invested capital</th><td><output id="r-ic0">–</output></td><td><output id="r-ic1">–</output></td><td><output id="r-ic2">–</output></td><td><output id="r-ic3">–</output></td><td><output id="r-ic4">–</output></td><td><output id="r-ic5">–</output></td><td><output id="r-ic6">–</output></td></tr>
+    </tbody>
+  </table>
+</div>
+<p class="hint gridhint">Debt + minority + equity − cash above the operating level. Increase in working capital: positive when it absorbs cash.</p>    <div class="srow head"><span class="lab">3. Year by year</span></div>
+<div class="gridwrap">
+  <table class="grid results">
+    <thead><tr><th></th><th class="yl1">Year 1</th><th class="yl2">Year 2</th><th class="yl3">Year 3</th><th class="yl4">Year 4</th><th class="yl5">Year 5</th><th class="yl6">Year 6</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">NOPAT</th><td><output id="r-nopat1">–</output></td><td><output id="r-nopat2">–</output></td><td><output id="r-nopat3">–</output></td><td><output id="r-nopat4">–</output></td><td><output id="r-nopat5">–</output></td><td><output id="r-nopat6">–</output></td></tr>
+      <tr class="gcalc"><th scope="row">ROIC</th><td><output id="r-roic1">–</output></td><td><output id="r-roic2">–</output></td><td><output id="r-roic3">–</output></td><td><output id="r-roic4">–</output></td><td><output id="r-roic5">–</output></td><td><output id="r-roic6">–</output></td></tr>
+      <tr><th scope="row">ROIC without goodwill</th><td><output id="r-roicx1">–</output></td><td><output id="r-roicx2">–</output></td><td><output id="r-roicx3">–</output></td><td><output id="r-roicx4">–</output></td><td><output id="r-roicx5">–</output></td><td><output id="r-roicx6">–</output></td></tr>
+      <tr><th scope="row">NOPAT margin</th><td><output id="r-margin1">–</output></td><td><output id="r-margin2">–</output></td><td><output id="r-margin3">–</output></td><td><output id="r-margin4">–</output></td><td><output id="r-margin5">–</output></td><td><output id="r-margin6">–</output></td></tr>
+      <tr><th scope="row">Capital turnover</th><td><output id="r-turn1">–</output></td><td><output id="r-turn2">–</output></td><td><output id="r-turn3">–</output></td><td><output id="r-turn4">–</output></td><td><output id="r-turn5">–</output></td><td><output id="r-turn6">–</output></td></tr>
+      <tr><th scope="row">ROIIC, one year</th><td></td><td><output id="r-roiic12">–</output></td><td><output id="r-roiic13">–</output></td><td><output id="r-roiic14">–</output></td><td><output id="r-roiic15">–</output></td><td><output id="r-roiic16">–</output></td></tr>
+      <tr><th scope="row">Reinvestment</th><td><output id="r-reinv1">–</output></td><td><output id="r-reinv2">–</output></td><td><output id="r-reinv3">–</output></td><td><output id="r-reinv4">–</output></td><td><output id="r-reinv5">–</output></td><td><output id="r-reinv6">–</output></td></tr>
+      <tr class="gcalc"><th scope="row">Reinvestment rate</th><td><output id="r-rr1">–</output></td><td><output id="r-rr2">–</output></td><td><output id="r-rr3">–</output></td><td><output id="r-rr4">–</output></td><td><output id="r-rr5">–</output></td><td><output id="r-rr6">–</output></td></tr>
+      <tr><th scope="row">Same, from the balance sheet</th><td><output id="r-bsrr1">–</output></td><td><output id="r-bsrr2">–</output></td><td><output id="r-bsrr3">–</output></td><td><output id="r-bsrr4">–</output></td><td><output id="r-bsrr5">–</output></td><td><output id="r-bsrr6">–</output></td></tr>
+      <tr><th scope="row">Fundamental growth</th><td><output id="r-fg1">–</output></td><td><output id="r-fg2">–</output></td><td><output id="r-fg3">–</output></td><td><output id="r-fg4">–</output></td><td><output id="r-fg5">–</output></td><td><output id="r-fg6">–</output></td></tr>
+      <tr><th scope="row">Actual NOPAT growth</th><td></td><td><output id="r-ng2">–</output></td><td><output id="r-ng3">–</output></td><td><output id="r-ng4">–</output></td><td><output id="r-ng5">–</output></td><td><output id="r-ng6">–</output></td></tr>
+    </tbody>
+  </table>
+</div>
+<p class="hint gridhint">ROIC = NOPAT margin × capital turnover. Year-by-year ROIIC is noisy: the 3- and 5-year figures below are the ones to read.</p>    <div class="srow head"><span class="lab">4. Summary</span></div>
+    <div class="srow calc-row total"><span class="lab">ROIC, latest year<span class="hint">NOPAT ÷ invested capital at the start of the year</span></span><output class="cell" id="o-roicL">–</output></div>
+    <div class="srow calc-row"><span class="lab">ROIC without goodwill, latest year<span class="hint">The business on its own. With goodwill, it's what shareholders earn after paying for the acquisitions.</span></span><output class="cell" id="o-roicxL">–</output></div>
+    <div class="srow calc-row"><span class="lab">ROIC minus cost of capital</span><output class="cell" id="o-spread">–</output></div>
+    <div class="srow calc-row"><span class="lab">Average ROIC, last 5 years</span><output class="cell" id="o-avgRoic">–</output></div>
+    <div class="srow calc-row total"><span class="lab">ROIIC, 3 years<span class="hint">Change in NOPAT ÷ the capital added a year earlier</span></span><output class="cell" id="o-roiic3">–</output></div>
+    <div class="srow calc-row total"><span class="lab">ROIIC, 5 years</span><output class="cell" id="o-roiic5">–</output></div>
+    <div class="srow calc-row"><span class="lab">Reinvestment rate, latest year<span class="hint">(Capex + acquisitions − D&A + Δ working capital) ÷ NOPAT</span></span><output class="cell" id="o-rrL">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Reinvestment rate, last 5 years combined</span><output class="cell" id="o-rr5">–</output></div>
+    <div class="srow calc-row"><span class="lab">Fundamental growth, latest year<span class="hint">Reinvestment rate × ROIC</span></span><output class="cell" id="o-fgL">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Fundamental growth, 5-year reinvestment × average ROIC</span><output class="cell" id="o-fg5">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Actual NOPAT growth, 5 years a year</span><output class="cell" id="o-cagr">–</output></div>
+    <div class="srow calc-row"><span class="lab">Fundamental minus actual growth<span class="hint">Above zero: the reinvestment hasn't shown up in profit yet, or earned less than the average. Below zero: growth came from better returns on old capital, which doesn't last forever.</span></span><output class="cell" id="o-gap">–</output></div>
+    <div class="srow calc-row"><span class="lab">Capital added ÷ reinvestment, 5 years<span class="hint">Close to 1.00x when the balance sheet and the cash flow statement agree.</span></span><output class="cell" id="o-bsVsCf">–</output></div>
+  </div>
+
+
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
+  <div class="actions">
+    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
+    <button type="button" class="button ghost" id="reset">Clear</button>
+  </div>
+<p class="copy-note">&#34;n/m&#34; means the number behind it is zero or negative, so the result doesn&#39;t mean anything.</p>
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">How it's calculated</h2>
+  <ul>
+    <li><strong>ROIC</strong> = NOPAT ÷ invested capital at the start of the year. NOPAT is operating income plus the amortization of acquired intangibles, after tax. Invested capital is debt plus minority interest plus equity, minus the cash the business doesn't need to operate.</li>
+    <li><strong>Reinvestment rate</strong> = (capex + acquisitions − depreciation + the increase in working capital) ÷ NOPAT, as Aswath Damodaran defines it. Reinvestment rate × ROIC is the growth those returns can fund.</li>
+    <li><strong>ROIIC</strong> = the change in NOPAT ÷ the change in invested capital one year earlier, over 3 and 5 years. The lag follows Michael Mauboussin and Dan Callahan: what a company invests this year earns its profit next year. Without it, a year of heavy building looks terrible and the next one brilliant.</li>
+  </ul>
+
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Companies whose capital sits on the balance sheet: manufacturers, retailers, distributors, consumer brands and most services.</p>
+  <p>It works badly for three kinds of company:</p>
+  <ul>
+    <li><strong>Banks and insurers.</strong> Debt is their raw material, so their invested capital means something else.</li>
+    <li><strong>Companies built on R&amp;D or marketing.</strong> The accounting expenses their investment, so the capital is too small and ROIC too high.</li>
+    <li><strong>Serial acquirers after big write-downs.</strong> Impairments shrink the capital and make returns look better than the deals were. Add them back.</li>
+  </ul>
+
+  <h2 class="rule-head">What this calculator can't tell you</h2>
+
+  <h3>Whether the returns will last</h3>
+  <p>High ROIC attracts competition. In Mauboussin and Callahan's data for 1990-2022, under half of the companies in the top fifth by ROIC were still there three years later, and 15% had fallen to the bottom fifth. Their data also show that share prices follow the change in ROIC more than its level.</p>
+
+  <h3>Whether there's room to reinvest</h3>
+  <p>A business can earn 40% on capital and have nowhere to put more of it. Past reinvestment doesn't promise future opportunities.</p>
+
+  <h3>What ROIIC is worth</h3>
+  <p>ROIIC shows where returns are heading, but Mauboussin warns it isn't a true return: it overstates economic returns when it's above the cost of capital and understates them when it's below. Don't set the two side by side.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>ROIC is the standard calculation you'll find in most finance textbooks: after-tax operating profit over the capital that debt and equity holders put in. The reinvestment rate and the growth it supports come from Aswath Damodaran's valuation classes at NYU Stern. ROIIC, the operating cash rule and the view with and without goodwill come from Michael J. Mauboussin and Dan Callahan, "Return on Invested Capital: How to Calculate ROIC and Handle Common Issues" (Counterpoint Global Insights, 2022).</p>
+</section>
+
+<aside class="wanted soon-box" id="coming-soon">
+  <p class="wanted-kicker">Coming soon</p>
+  <p class="wanted-head">The AI version</p>
+  <p class="wanted-body">The full version is coming: an Excel template and an AI skill built for Claude. They capitalize R&amp;D and marketing the way Mauboussin and Callahan do, and read ten years of reports for you. Subscribe to Ezra&#39;s Notes to hear first.</p>
+  <iframe class="substack" src="https://www.ezrasnotes.com/embed" title="Subscribe to Ezra's Notes" width="480" height="150" frameborder="0" scrolling="no" loading="lazy"></iframe>
+</aside>
+
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Holdings</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a inversores</a>
+  </p>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
+<script type="module" src="../static/roic.js?v=aed28e85"></script></body>
+</html>

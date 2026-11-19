@@ -1,0 +1,12 @@
+{% set res = [("nopat", "NOPAT"), ("roic", "ROIC"), ("roicx", "ROIC without goodwill"), ("margin", "NOPAT margin"), ("turn", "Capital turnover"), ("roiic1", "ROIIC, one year"), ("reinv", "Reinvestment"), ("rr", "Reinvestment rate"), ("bsrr", "Same, from the balance sheet"), ("fg", "Fundamental growth"), ("ng", "Actual NOPAT growth")] %}
+<div class="gridwrap">
+  <table class="grid results">
+    <thead><tr><th></th>{% for t in range(1, 7) %}<th class="yl{{ t }}">Year {{ t }}</th>{% endfor %}</tr></thead>
+    <tbody>
+      {% for k, name in res %}
+      <tr{% if k in ["roic", "rr"] %} class="gcalc"{% endif %}><th scope="row">{{ name }}</th>{% for t in range(1, 7) %}<td>{% if not (k in ["roiic1", "ng"] and t == 1) %}<output id="r-{{ k }}{{ t }}">–</output>{% endif %}</td>{% endfor %}</tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<p class="hint gridhint">ROIC = NOPAT margin × capital turnover. Year-by-year ROIIC is noisy: the 3- and 5-year figures below are the ones to read.</p>

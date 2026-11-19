@@ -1,0 +1,21 @@
+{% set inc = [("rev", "Revenue", 0), ("ebit", "Operating income (EBIT)", 1), ("am", "(+) Amortization of acquired intangibles", 1), ("capex", "Capital expenditures", 1), ("acq", "Acquisitions, net of cash", 1), ("da", "Depreciation and amortization", 1), ("dwc", "Increase in non-cash working capital", 1)] %}
+{% set bal = [("debt", "Total debt, with lease liabilities", 0), ("mi", "Minority interest", 0), ("eq", "Shareholders' equity", 0), ("cash", "Cash and investments", 0), ("gw", "Goodwill and acquired intangibles", 0)] %}
+<div class="gridwrap">
+  <table class="grid">
+    <thead><tr><th></th>{% for t in range(7) %}<th class="yl{{ t }}">Year {{ t }}</th>{% endfor %}</tr></thead>
+    <tbody>
+      <tr class="gsub"><th colspan="8">Income and cash flow</th></tr>
+      {% for k, name, start in inc %}
+      <tr><th scope="row">{{ name }}{% if k in ["ebit"] %} *{% endif %}</th>
+        {% for t in range(7) %}<td>{% if t >= start %}<input data-k="{{ k }}{{ t }}" type="text" inputmode="{{ 'text' if k in ['ebit','dwc'] else 'decimal' }}" autocomplete="off" aria-label="{{ name }}, year {{ t }}">{% endif %}</td>{% endfor %}</tr>
+      {% endfor %}
+      <tr class="gsub"><th colspan="8">Balance sheet, year-end</th></tr>
+      {% for k, name, start in bal %}
+      <tr><th scope="row">{{ name }}{% if k == "eq" %} *{% endif %}</th>
+        {% for t in range(7) %}<td><input data-k="{{ k }}{{ t }}" type="text" inputmode="{{ 'text' if k == 'eq' else 'decimal' }}" autocomplete="off" aria-label="{{ name }}, year {{ t }}"></td>{% endfor %}</tr>
+      {% endfor %}
+      <tr class="gcalc"><th scope="row">Invested capital</th>{% for t in range(7) %}<td><output id="r-ic{{ t }}">–</output></td>{% endfor %}</tr>
+    </tbody>
+  </table>
+</div>
+<p class="hint gridhint">Debt + minority + equity − cash above the operating level. Increase in working capital: positive when it absorbs cash.</p>
