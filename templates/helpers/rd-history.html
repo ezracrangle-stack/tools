@@ -1,0 +1,23 @@
+<details class="helper" id="help-history">
+  <summary>Start from the last 3 years</summary>
+  <p class="hint">Copy 4 years of sales and 3 years of the rest from the annual report or any free financial site, in the same unit as above. The results go into the fields below; change them to what you believe.</p>
+  <div class="gridwrap">
+  <table class="grid">
+    <thead><tr><th></th><th>3 years ago</th><th>2 years ago</th><th>Last year</th><th>Latest</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Sales</th><td><input data-h="hs0" type="text" inputmode="decimal" autocomplete="off" aria-label="Sales, 3 years ago"></td><td><input data-h="hs1" type="text" inputmode="decimal" autocomplete="off" aria-label="Sales, 2 years ago"></td><td><input data-h="hs2" type="text" inputmode="decimal" autocomplete="off" aria-label="Sales, last year"></td><td><input data-h="hs3" type="text" inputmode="decimal" autocomplete="off" aria-label="Sales, latest year"></td></tr>
+      <tr><th scope="row">Operating profit (EBIT)</th><td></td><td><input data-h="hoi1" type="text" inputmode="decimal" autocomplete="off" aria-label="Operating profit (EBIT), 2 years ago"></td><td><input data-h="hoi2" type="text" inputmode="decimal" autocomplete="off" aria-label="Operating profit (EBIT), last year"></td><td><input data-h="hoi3" type="text" inputmode="decimal" autocomplete="off" aria-label="Operating profit (EBIT), latest year"></td></tr>
+      <tr><th scope="row">Capital expenditures</th><td></td><td><input data-h="hcx1" type="text" inputmode="decimal" autocomplete="off" aria-label="Capital expenditures, 2 years ago"></td><td><input data-h="hcx2" type="text" inputmode="decimal" autocomplete="off" aria-label="Capital expenditures, last year"></td><td><input data-h="hcx3" type="text" inputmode="decimal" autocomplete="off" aria-label="Capital expenditures, latest year"></td></tr>
+      <tr><th scope="row">Depreciation and amortization</th><td></td><td><input data-h="hda1" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation and amortization, 2 years ago"></td><td><input data-h="hda2" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation and amortization, last year"></td><td><input data-h="hda3" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation and amortization, latest year"></td></tr>
+      <tr><th scope="row">Increase in working capital<span class="hint">Positive when it grows. The cash flow statement shows it with the opposite sign.</span></th><td></td><td><input data-h="hwc1" type="text" inputmode="text" autocomplete="off" aria-label="Increase in working capital, 2 years ago"></td><td><input data-h="hwc2" type="text" inputmode="text" autocomplete="off" aria-label="Increase in working capital, last year"></td><td><input data-h="hwc3" type="text" inputmode="text" autocomplete="off" aria-label="Increase in working capital, latest year"></td></tr>
+      <tr><th scope="row">Cash taxes paid<span class="hint">Optional</span></th><td></td><td><input data-h="htx1" type="text" inputmode="decimal" autocomplete="off" aria-label="Cash taxes paid, 2 years ago"></td><td><input data-h="htx2" type="text" inputmode="decimal" autocomplete="off" aria-label="Cash taxes paid, last year"></td><td><input data-h="htx3" type="text" inputmode="decimal" autocomplete="off" aria-label="Cash taxes paid, latest year"></td></tr>
+      <tr><th scope="row">Pre-tax income<span class="hint">Optional</span></th><td></td><td><input data-h="hpt1" type="text" inputmode="decimal" autocomplete="off" aria-label="Pre-tax income, 2 years ago"></td><td><input data-h="hpt2" type="text" inputmode="decimal" autocomplete="off" aria-label="Pre-tax income, last year"></td><td><input data-h="hpt3" type="text" inputmode="decimal" autocomplete="off" aria-label="Pre-tax income, latest year"></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="hresult">Sales growth, a year: <output id="h-g">–</output></p>
+  <p class="hresult">Operating margin: <output id="h-m">–</output></p>
+  <p class="hresult">Reinvestment per $1 of new sales: <output id="h-inv">–</output></p>
+  <p class="hresult">Cash tax rate: <output id="h-t">–</output></p>
+  <p class="hint">Reinvestment = (capex − D&amp;A + increase in working capital) ÷ growth in sales over the 3 years. It's lumpy, so read it next to what the business does. "n/m" means sales didn't grow.</p>
+</details>

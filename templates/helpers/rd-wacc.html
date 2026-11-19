@@ -1,0 +1,21 @@
+<details class="helper" id="help-wacc">
+  <summary>Calculate the WACC instead</summary>
+  <p class="hint">The book discounts at the weighted average cost of capital. With little debt it lands close to a rate set by risk; with a lot of debt, use this one. The result goes into the discount rate.</p>
+  <div class="hgrid hgrid-2">
+    <label for="w-rf">10-year government bond yield (%)</label>
+    <input id="w-rf" data-h="wrf" type="text" inputmode="decimal" autocomplete="off">
+    <label for="w-b">Beta</label>
+    <input id="w-b" data-h="wb" type="text" inputmode="decimal" autocomplete="off">
+    <label for="w-erp">Equity risk premium (%)<span class="hint">Aswath Damodaran publishes one every month.</span></label>
+    <input id="w-erp" data-h="werp" type="text" inputmode="decimal" autocomplete="off">
+    <label for="w-kd">Pre-tax cost of debt (%)<span class="hint">Yield on the company's bonds, or on bonds with the same rating.</span></label>
+    <input id="w-kd" data-h="wkd" type="text" inputmode="decimal" autocomplete="off">
+    <label for="w-tx">Tax rate (%)</label>
+    <input id="w-tx" data-h="wtx" type="text" inputmode="decimal" autocomplete="off">
+    <label for="w-w">Debt ÷ (debt + market value) (%)</label>
+    <input id="w-w" data-h="ww" type="text" inputmode="decimal" autocomplete="off">
+  </div>
+  <p class="hresult">Cost of equity: <output id="h-ke">–</output></p>
+  <p class="hresult">After-tax cost of debt: <output id="h-kd">–</output></p>
+  <p class="hresult">WACC: <output id="h-wacc">–</output></p>
+</details>

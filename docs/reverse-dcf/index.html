@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTNNLB6W9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FTNNLB6W9D');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>Reverse DCF calculator · Ezra's Notes</title>
+<meta name="description" content="Start from the share price and work out what it assumes: how many years of above-cost returns, and how much sales growth. Mauboussin and Rappaport's method, with your own numbers. Free, and it runs in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css?v=1c964819">
+<meta property="og:title" content="Reverse DCF calculator · Ezra's Notes">
+<meta property="og:description" content="Start from the share price and work out what it assumes: how many years of above-cost returns, and how much sales growth. Mauboussin and Rappaport's method, with your own numbers. Free, and it runs in your browser.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/reverse-dcf/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="../static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
+<link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/reverse-dcf/">
+</head>
+<body data-collect="https://script.google.com/macros/s/AKfycbz-a4q03dY00RYGWBKOHaKqYKL92Z3afAqhJ5iYdPQGYCMbU2CpFTR-JfEfArbdoUZXHg/exec" data-tool-name="a reverse DCF">
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="../">Tools</a>
+  <p class="byline">By <a href="https://x.com/ezracrangle">@ezracrangle</a></p>
+  <nav>
+    <a href="../">All tools</a>
+    <details class="nav-menu">
+      <summary>Reverse DCF</summary>
+      <div class="nav-drop"><a href="../net-net/">Net-net</a><a href="../epv/">EPV</a><a href="../greenwald/">Greenwald</a><a href="../penman/">Penman</a><a href="../graham/">Graham</a><a href="../fcf/">Mauboussin</a><a href="../roic/">ROIC</a><a href="../reverse-dcf/" aria-current="page">Reverse DCF</a></div>
+    </details>
+    <a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<div class="print-head" aria-hidden="true"><strong>Ezra's Notes · Tools</strong><span id="print-stamp"></span></div>
+<div class="print-summary verdict" id="print-summary" aria-hidden="true"></div>
+<section class="lede">
+  <h1 class="page-title">Reverse DCF</h1>
+  <p class="dek">A normal valuation starts with a forecast and ends with a price. This one starts with the price. You say what you think the business will do, and it tells you how many years of that the market is already paying for, or how much growth it needs.</p>
+  <p>You'll need the share price, last year's sales, debt and cash, and your view of the years ahead. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="rdform" class="calc" novalidate>
+  <div class="settings">
+    <div><label for="cur">Currency</label>
+      <select id="cur"><option selected>USD</option><option>EUR</option><option>GBP</option><option>CAD</option><option>AUD</option><option>CHF</option><option>JPY</option><option>HKD</option><option>SGD</option><option>SEK</option><option>NOK</option><option>DKK</option><option>MXN</option><option>BRL</option><option>CLP</option><option>COP</option><option>KRW</option><option>INR</option><option>ZAR</option></select></div>
+<div><label for="u">Amounts in</label>
+      <select id="u"><option value="1">Units</option><option value="1000" selected>Thousands</option><option value="1000000">Millions</option></select></div>
+<div><label for="su">Shares in</label>
+      <select id="su"><option value="1">Units</option><option value="1000" selected>Thousands</option><option value="1000000">Millions</option></select></div>  </div>
+
+  <p class="small">Amounts as the annual report shows them, all in the same unit. The share price always goes in full. Percentages go in as whole numbers: 7 means 7%. Fields with * are needed.</p>
+
+  <div class="sheet" role="group" aria-label="Reverse DCF worksheet">
+    <div class="srow head"><span class="lab">Market data</span></div>
+    <div class="srow in key">
+      <label class="lab" for="f-sh">Diluted shares outstanding *</label>
+      <span class="cell"><input id="f-sh" data-k="sh" data-kind="shares" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in key">
+      <label class="lab" for="f-p">Share price *<span class="hint">Per share, in full.</span></label>
+      <span class="cell"><input id="f-p" data-k="p" data-kind="price" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow head"><span class="lab">1. The company</span></div>
+    <div class="srow in key">
+      <label class="lab" for="f-s0">Sales, last full year *</label>
+      <span class="cell"><input id="f-s0" data-k="s0" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-debt">Debt<span class="hint">Bank loans and bonds. Add leases, preferred stock and pension deficits if they're large.</span></label>
+      <span class="cell"><input id="f-debt" data-k="debt" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-cash">Cash and investments<span class="hint">Cash, securities and stakes in other companies the business doesn't need to operate.</span></label>
+      <span class="cell"><input id="f-cash" data-k="cash" data-kind="money" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow head"><span class="lab">2. What you believe</span></div>
+    <div class="srow note"><span class="lab">Your view of the years ahead. To start from the company's last 3 years, use the helper below: it fills in the four fields for you.</span></div>
+<details class="helper" id="help-history">
+  <summary>Start from the last 3 years</summary>
+  <p class="hint">Copy 4 years of sales and 3 years of the rest from the annual report or any free financial site, in the same unit as above. The results go into the fields below; change them to what you believe.</p>
+  <div class="gridwrap">
+  <table class="grid">
+    <thead><tr><th></th><th>3 years ago</th><th>2 years ago</th><th>Last year</th><th>Latest</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Sales</th><td><input data-h="hs0" type="text" inputmode="decimal" autocomplete="off" aria-label="Sales, 3 years ago"></td><td><input data-h="hs1" type="text" inputmode="decimal" autocomplete="off" aria-label="Sales, 2 years ago"></td><td><input data-h="hs2" type="text" inputmode="decimal" autocomplete="off" aria-label="Sales, last year"></td><td><input data-h="hs3" type="text" inputmode="decimal" autocomplete="off" aria-label="Sales, latest year"></td></tr>
+      <tr><th scope="row">Operating profit (EBIT)</th><td></td><td><input data-h="hoi1" type="text" inputmode="decimal" autocomplete="off" aria-label="Operating profit (EBIT), 2 years ago"></td><td><input data-h="hoi2" type="text" inputmode="decimal" autocomplete="off" aria-label="Operating profit (EBIT), last year"></td><td><input data-h="hoi3" type="text" inputmode="decimal" autocomplete="off" aria-label="Operating profit (EBIT), latest year"></td></tr>
+      <tr><th scope="row">Capital expenditures</th><td></td><td><input data-h="hcx1" type="text" inputmode="decimal" autocomplete="off" aria-label="Capital expenditures, 2 years ago"></td><td><input data-h="hcx2" type="text" inputmode="decimal" autocomplete="off" aria-label="Capital expenditures, last year"></td><td><input data-h="hcx3" type="text" inputmode="decimal" autocomplete="off" aria-label="Capital expenditures, latest year"></td></tr>
+      <tr><th scope="row">Depreciation and amortization</th><td></td><td><input data-h="hda1" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation and amortization, 2 years ago"></td><td><input data-h="hda2" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation and amortization, last year"></td><td><input data-h="hda3" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation and amortization, latest year"></td></tr>
+      <tr><th scope="row">Increase in working capital<span class="hint">Positive when it grows. The cash flow statement shows it with the opposite sign.</span></th><td></td><td><input data-h="hwc1" type="text" inputmode="text" autocomplete="off" aria-label="Increase in working capital, 2 years ago"></td><td><input data-h="hwc2" type="text" inputmode="text" autocomplete="off" aria-label="Increase in working capital, last year"></td><td><input data-h="hwc3" type="text" inputmode="text" autocomplete="off" aria-label="Increase in working capital, latest year"></td></tr>
+      <tr><th scope="row">Cash taxes paid<span class="hint">Optional</span></th><td></td><td><input data-h="htx1" type="text" inputmode="decimal" autocomplete="off" aria-label="Cash taxes paid, 2 years ago"></td><td><input data-h="htx2" type="text" inputmode="decimal" autocomplete="off" aria-label="Cash taxes paid, last year"></td><td><input data-h="htx3" type="text" inputmode="decimal" autocomplete="off" aria-label="Cash taxes paid, latest year"></td></tr>
+      <tr><th scope="row">Pre-tax income<span class="hint">Optional</span></th><td></td><td><input data-h="hpt1" type="text" inputmode="decimal" autocomplete="off" aria-label="Pre-tax income, 2 years ago"></td><td><input data-h="hpt2" type="text" inputmode="decimal" autocomplete="off" aria-label="Pre-tax income, last year"></td><td><input data-h="hpt3" type="text" inputmode="decimal" autocomplete="off" aria-label="Pre-tax income, latest year"></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="hresult">Sales growth, a year: <output id="h-g">–</output></p>
+  <p class="hresult">Operating margin: <output id="h-m">–</output></p>
+  <p class="hresult">Reinvestment per $1 of new sales: <output id="h-inv">–</output></p>
+  <p class="hresult">Cash tax rate: <output id="h-t">–</output></p>
+  <p class="hint">Reinvestment = (capex − D&amp;A + increase in working capital) ÷ growth in sales over the 3 years. It's lumpy, so read it next to what the business does. "n/m" means sales didn't grow.</p>
+</details>    <div class="srow in key">
+      <label class="lab" for="f-g">Sales growth, a year (%) *</label>
+      <span class="cell"><input id="f-g" data-k="g" data-kind="percent" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in key">
+      <label class="lab" for="f-m">Operating margin (%) *<span class="hint">Operating profit ÷ sales.</span></label>
+      <span class="cell"><input id="f-m" data-k="m" data-kind="percent" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-t">Cash tax rate (%)<span class="hint">Taxes paid in cash on operating profit. 21% is the US federal rate.</span></label>
+      <span class="cell"><input id="f-t" data-k="t" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="21" data-default="21"></span>
+    </div>
+    <div class="srow in key">
+      <label class="lab" for="f-inv">Reinvestment per $1 of new sales (%) *<span class="hint">Capex above depreciation, plus extra working capital, for each new dollar of sales. 25 means 25 cents.</span></label>
+      <span class="cell"><input id="f-inv" data-k="inv" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-r">Discount rate (%)<span class="hint">Set it by risk: large, steady companies 7-9%. Smaller or indebted ones 10-12%. Very small and risky, 15% or more.</span></label>
+      <span class="cell"><input id="f-r" data-k="r" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="9" data-default="9"></span>
+    </div>
+<details class="helper" id="help-wacc">
+  <summary>Calculate the WACC instead</summary>
+  <p class="hint">The book discounts at the weighted average cost of capital. With little debt it lands close to a rate set by risk; with a lot of debt, use this one. The result goes into the discount rate.</p>
+  <div class="hgrid hgrid-2">
+    <label for="w-rf">10-year government bond yield (%)</label>
+    <input id="w-rf" data-h="wrf" type="text" inputmode="decimal" autocomplete="off">
+    <label for="w-b">Beta</label>
+    <input id="w-b" data-h="wb" type="text" inputmode="decimal" autocomplete="off">
+    <label for="w-erp">Equity risk premium (%)<span class="hint">Aswath Damodaran publishes one every month.</span></label>
+    <input id="w-erp" data-h="werp" type="text" inputmode="decimal" autocomplete="off">
+    <label for="w-kd">Pre-tax cost of debt (%)<span class="hint">Yield on the company's bonds, or on bonds with the same rating.</span></label>
+    <input id="w-kd" data-h="wkd" type="text" inputmode="decimal" autocomplete="off">
+    <label for="w-tx">Tax rate (%)</label>
+    <input id="w-tx" data-h="wtx" type="text" inputmode="decimal" autocomplete="off">
+    <label for="w-w">Debt ÷ (debt + market value) (%)</label>
+    <input id="w-w" data-h="ww" type="text" inputmode="decimal" autocomplete="off">
+  </div>
+  <p class="hresult">Cost of equity: <output id="h-ke">–</output></p>
+  <p class="hresult">After-tax cost of debt: <output id="h-kd">–</output></p>
+  <p class="hresult">WACC: <output id="h-wacc">–</output></p>
+</details>    <div class="srow in">
+      <label class="lab" for="f-cg">Cash flow growth after the forecast (%)<span class="hint">Inflation (2%) if the company keeps its pricing power, half of it if it keeps some, 0 if none, below zero for a business in decline.</span></label>
+      <span class="cell"><input id="f-cg" data-k="cg" data-kind="percent" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false" value="2" data-default="2"></span>
+    </div>
+    <div class="srow head"><span class="lab">3. What the price implies</span></div>
+    <div class="srow calc-row"><span class="lab">Market value of the shares</span><output class="cell" id="o-mcap">–</output></div>
+    <div class="srow calc-row"><span class="lab">Enterprise value<span class="hint">Market value + debt − cash and investments</span></span><output class="cell" id="o-ev">–</output></div>
+    <div class="srow calc-row"><span class="lab">Value per share with no advantage<span class="hint">Today's profit growing only at the post-forecast rate, plus cash, minus debt.</span></span><output class="cell" id="o-v0">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Years of advantage the price implies<span class="hint">Years of cash flows it takes to reach the price. The book calls it the market-implied forecast period: 5 to 15 years for most US stocks, up to 30 for strong competitive positions.</span></span><output class="cell" id="o-yrs">–</output></div>
+    <div class="srow calc-row"><span class="lab">Value per share at the nearest full year</span><output class="cell" id="o-vyr">–</output></div>
+    <div class="srow calc-row"><span class="lab">Threshold margin<span class="hint">The operating margin a year of growth needs just to keep the value where it is.</span></span><output class="cell" id="o-tm">–</output></div>
+    <div class="srow test"><span class="lab">Does growth add value?<span class="hint">Yes when your margin is above the threshold.</span></span><output class="cell" id="x-grow">–</output></div>
+    <div class="srow head"><span class="lab">4. The growth the price implies</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-n">Years you expect the advantage to last</label>
+      <span class="cell"><input id="f-n" data-k="n" data-kind="years" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="10" data-default="10"></span>
+    </div>
+    <div class="srow calc-row total"><span class="lab">Sales growth the price implies, a year</span><output class="cell" id="o-ig">–</output></div>
+    <div class="srow calc-row"><span class="lab">Versus your sales growth</span><output class="cell" id="o-igb">–</output></div>
+    <div class="srow calc-row"><span class="lab">Versus the last 3 years<span class="hint">Needs the last-3-years helper in section 2.</span></span><output class="cell" id="o-igh">–</output></div>
+<div class="profile ytable" id="yt" hidden>
+  <p class="hsub">Year by year</p>
+  <div class="gridwrap">
+  <table class="grid">
+    <thead><tr><th>Year</th><th>Sales</th><th>NOPAT</th><th>Free cash flow</th><th>Value per share</th></tr></thead>
+    <tbody id="yt-body"></tbody>
+  </table>
+  </div>
+  <p class="hint">Value per share = cash flows up to that year, plus the continuing value after it, plus cash, minus debt, all discounted to today. The row in bold is the full year closest to the price.</p>
+</div>  </div>
+
+
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
+  <div class="actions">
+    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
+    <button type="button" class="button ghost" id="reset">Clear</button>
+  </div>
+<p class="copy-note">&#34;More than 30&#34; means your numbers never reach the price within 30 years.</p>  <div class="sharebar" id="sharebar">
+    <label class="sb-co"><span>Company or ticker <em>(optional, goes in the link and the files)</em></span>
+      <input id="sb-company" type="text" maxlength="60" autocomplete="off" spellcheck="false" placeholder="e.g. ACME"></label>
+    <div class="sb-groups">
+      <p class="share-buttons"><span class="sb-k">Share</span>
+        <button type="button" id="sb-x">X</button>
+        <button type="button" id="sb-in">LinkedIn</button>
+        <button type="button" id="sb-native" hidden>More</button></p>
+      <p class="share-buttons"><span class="sb-k">Download</span>
+        <button type="button" id="sb-pdf">PDF</button>
+        <button type="button" id="sb-csv">CSV</button></p>
+      <p class="share-buttons sb-community" hidden><span class="sb-k">Community</span>
+        <button type="button" id="sb-save">Send to Ezra</button>
+        <button type="button" id="sb-tm">Leave a testimonial</button></p>
+    </div>
+    <div class="sb-box" id="sb-savebox" hidden>
+      <p>Send this calculation to Ezra. He reads them, and with your OK he may share some with the community. Nothing leaves your browser until you press Send.</p>
+      <label>Your name or X handle <em>(optional)</em> <input id="sb-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label class="check"><input id="sb-ok" type="checkbox"> Ezra can publish this calculation and my name or handle</label>
+      <input id="sb-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="sb-send">Send</button> <span id="sb-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+    <div class="sb-box" id="testimonial" hidden>
+      <p>Did this calculator help you? Tell Ezra in a few words.</p>
+      <label>What did it help you with? <textarea id="tm-text" rows="4" maxlength="1500"></textarea></label>
+      <label>Name <input id="tm-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label>X or LinkedIn handle <em>(optional)</em> <input id="tm-handle" type="text" maxlength="80" autocomplete="off"></label>
+      <label>What you do <em>(optional, e.g. "individual investor" or "analyst at a fund")</em> <input id="tm-role" type="text" maxlength="120" autocomplete="off"></label>
+      <label class="check"><input id="tm-ok" type="checkbox"> Ezra can publish this on the site with my name</label>
+      <input id="tm-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="tm-send">Send</button> <span id="tm-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+  </div>
+
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">How it's calculated</h2>
+  <p>Each year, sales grow at your rate. Operating profit is sales times your margin, less cash taxes: that's NOPAT. Free cash flow is NOPAT minus what the company reinvests to grow, at your rate per dollar of new sales.</p>
+  <p>After the last year of the forecast, the company keeps earning that year's NOPAT, growing at the post-forecast rate, but new investment earns only its cost and adds nothing. That's the continuing value: NOPAT × (1 + growth) ÷ (discount rate − growth).</p>
+  <p>Discount the cash flows and the continuing value, add cash, take away debt and divide by the shares. Then stretch the forecast one year at a time until the value per share reaches the price. The number of years is what the price implies.</p>
+  <p>Section 4 runs the same model the other way: you fix the years, and it finds the sales growth that makes the value equal the price.</p>
+
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Companies with sales, a steady operating margin and a sense of how much they reinvest to grow: consumer brands, retailers, industrials, software and services with a record.</p>
+  <p>It works badly for three kinds of company:</p>
+  <ul>
+    <li><strong>Banks and insurers.</strong> Debt is their raw material, so the book reads them through equity cash flows, and this calculator works on the whole enterprise.</li>
+    <li><strong>Companies that lose money.</strong> With no margin, there's no cash flow to discount until you say when and how the losses end.</li>
+    <li><strong>Cyclical companies at a peak or a trough.</strong> One year's margin carried forward gives a misleading answer. Use an average over the cycle.</li>
+  </ul>
+
+  <h2 class="rule-head">How to read the result</h2>
+  <h3>The years</h3>
+  <p>Mauboussin and Rappaport find that most US stocks price in 5 to 15 years of returns above the cost of capital, and up to 30 for companies with strong competitive positions. A long period is a bet that the moat holds that long, and you can judge whether it will.</p>
+  <h3>The threshold margin</h3>
+  <p>Growth only adds value when the company earns more on new investment than it costs. If your margin is below the threshold, growing faster makes the business worth less, and the implied years read backwards.</p>
+  <h3>The rate</h3>
+  <p>The years move a lot with the discount rate. Try one point higher before you decide.</p>
+
+  <h2 class="rule-head">How this version differs from the book</h2>
+  <p>The book reads the expectations from analyst consensus. Here you type what you believe, or start from the company's own last 3 years.</p>
+  <p>The book splits fixed capital and working capital. Here they're one number, which gives the same result. It discounts at the WACC; here the default is a rate set by risk, as in the <a href="../epv/">EPV calculator</a>, with the WACC a click away. And one growth rate after the forecast covers the book's four continuing values: perpetuity (0%), with inflation, with part of it, or in decline (below zero).</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>From <em>Expectations Investing</em> by Michael J. Mauboussin and Alfred Rappaport (Columbia Business School Publishing, revised edition 2021): chapter 2 for the cash flows and the continuing value, chapter 3 for the threshold margin, and chapter 5 for reading the expectations in the price. This calculator reproduces the book's own examples.</p>
+</section>
+
+<aside class="wanted soon-box" id="coming-soon">
+  <p class="wanted-kicker">Coming soon</p>
+  <p class="wanted-head">The AI version</p>
+  <p class="wanted-body">The full version is coming: an Excel template and an AI skill built for Claude. They add low, consensus and high scenarios, find the value driver that moves the price most, and weigh the scenarios into an expected value against the price. Subscribe to Ezra&#39;s Notes to hear first.</p>
+  <iframe class="substack" src="https://www.ezrasnotes.com/embed" title="Subscribe to Ezra's Notes" width="480" height="150" frameborder="0" scrolling="no" loading="lazy"></iframe>
+</aside>
+
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Holdings</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a inversores</a>
+  </p>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
+<script>document.addEventListener("click",function(e){var m=document.querySelector(".nav-menu[open]");if(m&&!m.contains(e.target))m.removeAttribute("open")});</script>
+<script src="../static/share.js?v=1c964819"></script><script type="module" src="../static/reverse-dcf.js?v=1c964819"></script></body>
+</html>

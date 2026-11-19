@@ -374,3 +374,9 @@ table.grid .gcalc th, table.grid .gcalc output { font-weight: 700; }
 [hidden] { display: none !important; }
 .sb-co input, .sb-box input[type=text] { text-align: left; }
 .sb-box input[type=checkbox] { all: revert; width: auto; flex: none; margin: 0 2px 0 0; accent-color: var(--ink); }
+.ytable table.grid td { text-align: right; font-size: 15px; }
+.ytable tr.hit th, .ytable tr.hit td { font-weight: 700; }
+@media (max-width: 560px) {
+  .ytable table.grid th:nth-child(3), .ytable table.grid td:nth-child(3) { display: none; }
+  .ytable table.grid td, .ytable table.grid tbody th { font-size: 13px; min-width: 0; }
+}

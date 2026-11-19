@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
+{% block title %}Reverse DCF calculator{% endblock %}
+{% block description %}Start from the share price and work out what it assumes: how many years of above-cost returns, and how much sales growth. Mauboussin and Rappaport's method, with your own numbers. Free, and it runs in your browser.{% endblock %}
+{% block main %}
+<section class="lede">
+  <h1 class="page-title">Reverse DCF</h1>
+  <p class="dek">A normal valuation starts with a forecast and ends with a price. This one starts with the price. You say what you think the business will do, and it tells you how many years of that the market is already paying for, or how much growth it needs.</p>
+  <p>You'll need the share price, last year's sales, debt and cash, and your view of the years ahead. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="rdform" class="calc" novalidate>
+{{ sheet.units(currencies) }}
+  <p class="small">Amounts as the annual report shows them, all in the same unit. The share price always goes in full. Percentages go in as whole numbers: 7 means 7%. Fields with * are needed.</p>
+
+{{ sheet.rows(rows, "Reverse DCF worksheet") }}
+
+{{ sheet.actions('"More than 30" means your numbers never reach the price within 30 years.') }}
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">How it's calculated</h2>
+  <p>Each year, sales grow at your rate. Operating profit is sales times your margin, less cash taxes: that's NOPAT. Free cash flow is NOPAT minus what the company reinvests to grow, at your rate per dollar of new sales.</p>
+  <p>After the last year of the forecast, the company keeps earning that year's NOPAT, growing at the post-forecast rate, but new investment earns only its cost and adds nothing. That's the continuing value: NOPAT × (1 + growth) ÷ (discount rate − growth).</p>
+  <p>Discount the cash flows and the continuing value, add cash, take away debt and divide by the shares. Then stretch the forecast one year at a time until the value per share reaches the price. The number of years is what the price implies.</p>
+  <p>Section 4 runs the same model the other way: you fix the years, and it finds the sales growth that makes the value equal the price.</p>
+
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Companies with sales, a steady operating margin and a sense of how much they reinvest to grow: consumer brands, retailers, industrials, software and services with a record.</p>
+  <p>It works badly for three kinds of company:</p>
+  <ul>
+    <li><strong>Banks and insurers.</strong> Debt is their raw material, so the book reads them through equity cash flows, and this calculator works on the whole enterprise.</li>
+    <li><strong>Companies that lose money.</strong> With no margin, there's no cash flow to discount until you say when and how the losses end.</li>
+    <li><strong>Cyclical companies at a peak or a trough.</strong> One year's margin carried forward gives a misleading answer. Use an average over the cycle.</li>
+  </ul>
+
+  <h2 class="rule-head">How to read the result</h2>
+  <h3>The years</h3>
+  <p>Mauboussin and Rappaport find that most US stocks price in 5 to 15 years of returns above the cost of capital, and up to 30 for companies with strong competitive positions. A long period is a bet that the moat holds that long, and you can judge whether it will.</p>
+  <h3>The threshold margin</h3>
+  <p>Growth only adds value when the company earns more on new investment than it costs. If your margin is below the threshold, growing faster makes the business worth less, and the implied years read backwards.</p>
+  <h3>The rate</h3>
+  <p>The years move a lot with the discount rate. Try one point higher before you decide.</p>
+
+  <h2 class="rule-head">How this version differs from the book</h2>
+  <p>The book reads the expectations from analyst consensus. Here you type what you believe, or start from the company's own last 3 years.</p>
+  <p>The book splits fixed capital and working capital. Here they're one number, which gives the same result. It discounts at the WACC; here the default is a rate set by risk, as in the <a href="{{ root }}epv/">EPV calculator</a>, with the WACC a click away. And one growth rate after the forecast covers the book's four continuing values: perpetuity (0%), with inflation, with part of it, or in decline (below zero).</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>From <em>Expectations Investing</em> by Michael J. Mauboussin and Alfred Rappaport (Columbia Business School Publishing, revised edition 2021): chapter 2 for the cash flows and the continuing value, chapter 3 for the threshold margin, and chapter 5 for reading the expectations in the price. This calculator reproduces the book's own examples.</p>
+</section>
+
+{{ sheet.coming_soon("The full version is coming: an Excel template and an AI skill built for Claude. They add low, consensus and high scenarios, find the value driver that moves the price most, and weigh the scenarios into an expected value against the price. Subscribe to Ezra's Notes to hear first.", substack_embed) }}
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ root }}static/reverse-dcf.js?v={{ asset_v }}"></script>{% endblock %}

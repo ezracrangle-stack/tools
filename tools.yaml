@@ -60,9 +60,12 @@ tools:
     blurb: How much a business earns on its capital, what the new capital earns, how much it reinvests, and the growth that supports.
 
   - slug: reverse-dcf
+    share: "a reverse DCF"
     name: Reverse DCF
-    status: soon
-    blurb: The growth the current price already assumes.
+    nav: Reverse DCF
+    status: live
+    blurb: How many years of above-cost returns the price already assumes, and the sales growth it needs. Mauboussin and Rappaport's method, with your own numbers.
+
 
   - slug: red-flags
     name: Red flags
@@ -470,3 +473,41 @@ roic_rows:
   - {type: total, k: cagr, label: "Actual NOPAT growth, 5 years a year"}
   - {type: calc, k: gap, label: "Fundamental minus actual growth", hint: "Above zero: the reinvestment hasn't shown up in profit yet, or earned less than the average. Below zero: growth came from better returns on old capital, which doesn't last forever."}
   - {type: calc, k: bsVsCf, label: "Capital added ÷ reinvestment, 5 years", hint: "Close to 1.00x when the balance sheet and the cash flow statement agree."}
+
+# Reverse DCF: Mauboussin & Rappaport, Expectations Investing (2021), retail version. Same order as Reverse_DCF_Template.xlsx.
+reverse_dcf_rows:
+  - {type: head, label: "Market data"}
+  - {type: input, k: sh, label: "Diluted shares outstanding", kind: shares, key: true}
+  - {type: input, k: p, label: "Share price", kind: price, key: true, hint: "Per share, in full."}
+
+  - {type: head, label: "1. The company"}
+  - {type: input, k: s0, label: "Sales, last full year", kind: money, key: true}
+  - {type: input, k: debt, label: "Debt", kind: money, hint: "Bank loans and bonds. Add leases, preferred stock and pension deficits if they're large."}
+  - {type: input, k: cash, label: "Cash and investments", kind: money, hint: "Cash, securities and stakes in other companies the business doesn't need to operate."}
+
+  - {type: head, label: "2. What you believe"}
+  - {type: note, label: "Your view of the years ahead. To start from the company's last 3 years, use the helper below: it fills in the four fields for you."}
+  - {type: helper, id: rd-history}
+  - {type: input, k: g, label: "Sales growth, a year (%)", kind: percent, key: true, signed: true}
+  - {type: input, k: m, label: "Operating margin (%)", kind: percent, key: true, signed: true, hint: "Operating profit ÷ sales."}
+  - {type: input, k: t, label: "Cash tax rate (%)", kind: percent, default: 21, hint: "Taxes paid in cash on operating profit. 21% is the US federal rate."}
+  - {type: input, k: inv, label: "Reinvestment per $1 of new sales (%)", kind: percent, key: true, hint: "Capex above depreciation, plus extra working capital, for each new dollar of sales. 25 means 25 cents."}
+  - {type: input, k: r, label: "Discount rate (%)", kind: percent, default: 9, hint: "Set it by risk: large, steady companies 7-9%. Smaller or indebted ones 10-12%. Very small and risky, 15% or more."}
+  - {type: helper, id: rd-wacc}
+  - {type: input, k: cg, label: "Cash flow growth after the forecast (%)", kind: percent, default: 2, signed: true, hint: "Inflation (2%) if the company keeps its pricing power, half of it if it keeps some, 0 if none, below zero for a business in decline."}
+
+  - {type: head, label: "3. What the price implies"}
+  - {type: calc, k: mcap, label: "Market value of the shares"}
+  - {type: calc, k: ev, label: "Enterprise value", hint: "Market value + debt − cash and investments"}
+  - {type: calc, k: v0, label: "Value per share with no advantage", hint: "Today's profit growing only at the post-forecast rate, plus cash, minus debt."}
+  - {type: total, k: yrs, label: "Years of advantage the price implies", hint: "Years of cash flows it takes to reach the price. The book calls it the market-implied forecast period: 5 to 15 years for most US stocks, up to 30 for strong competitive positions."}
+  - {type: calc, k: vyr, label: "Value per share at the nearest full year"}
+  - {type: calc, k: tm, label: "Threshold margin", hint: "The operating margin a year of growth needs just to keep the value where it is."}
+  - {type: test, k: grow, label: "Does growth add value?", hint: "Yes when your margin is above the threshold."}
+
+  - {type: head, label: "4. The growth the price implies"}
+  - {type: input, k: n, label: "Years you expect the advantage to last", kind: years, default: 10}
+  - {type: total, k: ig, label: "Sales growth the price implies, a year"}
+  - {type: calc, k: igb, label: "Versus your sales growth"}
+  - {type: calc, k: igh, label: "Versus the last 3 years", hint: "Needs the last-3-years helper in section 2."}
+  - {type: helper, id: rd-table}
