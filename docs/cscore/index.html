@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTNNLB6W9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FTNNLB6W9D');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>Montier's C-Score: is the company cooking its books? · Ezra's Notes</title>
+<meta name="description" content="James Montier's C-Score: six common earnings manipulations, from a widening gap between earnings and cash flow to rising receivables and inventory. Two years of numbers, a score from 0 to 6. Free, and it runs in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css?v=13e94eea">
+<meta property="og:title" content="Montier's C-Score: is the company cooking its books? · Ezra's Notes">
+<meta property="og:description" content="James Montier's C-Score: six common earnings manipulations, from a widening gap between earnings and cash flow to rising receivables and inventory. Two years of numbers, a score from 0 to 6. Free, and it runs in your browser.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/cscore/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="../static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
+<link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/cscore/">
+</head>
+<body data-collect="https://script.google.com/macros/s/AKfycbz-a4q03dY00RYGWBKOHaKqYKL92Z3afAqhJ5iYdPQGYCMbU2CpFTR-JfEfArbdoUZXHg/exec" data-tool-name="Montier&#39;s C-Score">
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="../">Tools</a>
+  <p class="byline">By <a href="https://x.com/ezracrangle">@ezracrangle</a></p>
+  <nav>
+    <a href="../">All tools</a>
+    <details class="nav-menu">
+      <summary>Montier</summary>
+      <div class="nav-drop"><a href="../net-net/">Net-net</a><a href="../epv/">EPV</a><a href="../greenwald/">Greenwald</a><a href="../penman/">Penman</a><a href="../graham/">Graham</a><a href="../fcf/">Mauboussin</a><a href="../roic/">ROIC</a><a href="../reverse-dcf/">Reverse DCF</a><a href="../compounders/">Compounders</a><a href="../dhandho/">Pabrai</a><a href="../lynch/">Lynch</a><a href="../marks/">Marks</a><a href="../cscore/" aria-current="page">Montier</a><a href="../beauty-contest/">Beauty contest</a></div>
+    </details>
+    <a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<div class="print-head" aria-hidden="true"><strong>Ezra's Notes · Tools</strong><span id="print-stamp"></span></div>
+<div class="print-summary verdict" id="print-summary" aria-hidden="true"></div>
+<section class="lede">
+  <h1 class="page-title">Montier's C-Score</h1>
+  <p class="dek">C for cooking the books, or cheating. James Montier's score from <em>Value Investing</em> counts how many of six common earnings manipulations a company shows, from earnings that pull away from cash flow to receivables and inventory growing faster than sales.</p>
+  <p>You need two years of the income statement, cash flow statement and balance sheet. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="csform" class="calc" novalidate>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-co">Company<span class="hint">Optional.</span></label>
+      <span class="cell"><input id="f-co" type="text" maxlength="60" autocomplete="off" spellcheck="false" style="text-align:left"></span>
+    </div>
+  </div>
+  <div class="profile csx">
+    <p class="hsub">Two years of numbers *</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Prior year</th><th>Latest year</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">Revenue</th><td><input data-k="rev0" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, prior year"></td><td><input data-k="rev1" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, latest year"></td></tr>
+      <tr><th scope="row">Cost of goods sold<span class="hint">For days of inventory.</span></th><td><input data-k="cogs0" type="text" inputmode="decimal" autocomplete="off" aria-label="Cost of goods sold, prior year"></td><td><input data-k="cogs1" type="text" inputmode="decimal" autocomplete="off" aria-label="Cost of goods sold, latest year"></td></tr>
+      <tr><th scope="row">Net income</th><td><input data-k="ni0" data-signed="1" type="text" inputmode="text" autocomplete="off" aria-label="Net income, prior year"></td><td><input data-k="ni1" data-signed="1" type="text" inputmode="text" autocomplete="off" aria-label="Net income, latest year"></td></tr>
+      <tr><th scope="row">Cash flow from operations</th><td><input data-k="cfo0" data-signed="1" type="text" inputmode="text" autocomplete="off" aria-label="Cash flow from operations, prior year"></td><td><input data-k="cfo1" data-signed="1" type="text" inputmode="text" autocomplete="off" aria-label="Cash flow from operations, latest year"></td></tr>
+      <tr><th scope="row">Accounts receivable<span class="hint">Year-end.</span></th><td><input data-k="ar0" type="text" inputmode="decimal" autocomplete="off" aria-label="Accounts receivable, prior year"></td><td><input data-k="ar1" type="text" inputmode="decimal" autocomplete="off" aria-label="Accounts receivable, latest year"></td></tr>
+      <tr><th scope="row">Inventory<span class="hint">Year-end.</span></th><td><input data-k="inv0" type="text" inputmode="decimal" autocomplete="off" aria-label="Inventory, prior year"></td><td><input data-k="inv1" type="text" inputmode="decimal" autocomplete="off" aria-label="Inventory, latest year"></td></tr>
+      <tr><th scope="row">Other current assets<span class="hint">The catch-all line on the balance sheet.</span></th><td><input data-k="oca0" type="text" inputmode="decimal" autocomplete="off" aria-label="Other current assets, prior year"></td><td><input data-k="oca1" type="text" inputmode="decimal" autocomplete="off" aria-label="Other current assets, latest year"></td></tr>
+      <tr><th scope="row">Depreciation<span class="hint">Cash flow statement. Leave out amortization of intangibles if you can.</span></th><td><input data-k="dep0" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation, prior year"></td><td><input data-k="dep1" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation, latest year"></td></tr>
+      <tr><th scope="row">Gross property, plant and equipment<span class="hint">Before accumulated depreciation, in the notes.</span></th><td><input data-k="ppe0" type="text" inputmode="decimal" autocomplete="off" aria-label="Gross property, plant and equipment, prior year"></td><td><input data-k="ppe1" type="text" inputmode="decimal" autocomplete="off" aria-label="Gross property, plant and equipment, latest year"></td></tr>
+      <tr><th scope="row">Total assets</th><td><input data-k="ta0" type="text" inputmode="decimal" autocomplete="off" aria-label="Total assets, prior year"></td><td><input data-k="ta1" type="text" inputmode="decimal" autocomplete="off" aria-label="Total assets, latest year"></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="hint">Same unit for every amount (e.g. millions). Flows for the fiscal year, balances at year-end. Net income and cash flow can be negative.</p>
+  </div>
+
+  <div class="sheet">
+    <div class="srow in key">
+      <label class="lab" for="f-hi">What counts as high asset growth (%)<span class="hint">The book doesn't give a number. 10 is our default.</span></label>
+      <span class="cell"><input id="f-hi" data-k="hi" type="text" inputmode="decimal" autocomplete="off" value="10" data-default="10"></span>
+    </div>
+  </div>
+
+  <div class="profile csx">
+    <p class="hsub">The six flags</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Prior year</th><th>Latest year</th><th>Flag</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">1. Net income minus cash flow from operations<span class="hint">Up if the gap grows: earnings rest on estimates; cash is harder to shape.</span></th><td><output id="c-gap0">–</output></td><td><output id="c-gap1">–</output></td><td><output id="c-gapf">–</output></td></tr>
+      <tr><th scope="row">2. Days sales outstanding<span class="hint">Up if it rises: receivables growing faster than sales (channel stuffing).</span></th><td><output id="c-dso0">–</output></td><td><output id="c-dso1">–</output></td><td><output id="c-dsof">–</output></td></tr>
+      <tr><th scope="row">3. Days sales of inventory<span class="hint">Up if it rises: inventory piling up usually means sales are slowing.</span></th><td><output id="c-dsi0">–</output></td><td><output id="c-dsi1">–</output></td><td><output id="c-dsif">–</output></td></tr>
+      <tr><th scope="row">4. Other current assets ÷ revenue<span class="hint">Up if it rises: a place to hide what the CFO doesn't want you to look at.</span></th><td><output id="c-oca0">–</output></td><td><output id="c-oca1">–</output></td><td><output id="c-ocaf">–</output></td></tr>
+      <tr><th scope="row">5. Depreciation ÷ gross PP&amp;E<span class="hint">Up if it falls: a longer assumed asset life lifts earnings.</span></th><td><output id="c-dep0">–</output></td><td><output id="c-dep1">–</output></td><td><output id="c-depf">–</output></td></tr>
+      <tr><th scope="row">6. Total asset growth<span class="hint">Up if it's above your threshold: serial acquirers can use deals to blur their earnings.</span></th><td><output id="c-ta0">–</output></td><td><output id="c-ta1">–</output></td><td><output id="c-taf">–</output></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="sheet">
+    <div class="srow calc-row"><span class="lab">Flags that could be scored</span><output class="cell" id="o-scored">–</output></div>
+    <div class="srow calc-row total"><span class="lab">C-Score<span class="hint">0 = no evidence of manipulation, 6 = every flag up.</span></span><output class="cell" id="o-score">–</output></div>
+    <div class="srow test"><span class="lab">Reading</span><output class="cell" id="x-read">–</output></div>
+    <div class="srow head"><span class="lab">With valuation</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-mcap">Market value of the shares<span class="hint">Optional, same unit as the amounts above.</span></label>
+      <span class="cell"><input id="f-mcap" data-k="mcap" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Price to sales</span><output class="cell" id="o-ps">–</output></div>
+    <div class="srow test"><span class="lab">C-Score of 5 or more and price to sales above 2<span class="hint">The combination that lost about 4% a year in Montier's test.</span></span><output class="cell" id="x-short">–</output></div>
+  </div>
+
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
+  <div class="actions">
+    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
+    <button type="button" class="button ghost" id="reset">Clear</button>
+  </div>
+<p class="copy-note">A high score is a reason to look harder at the notes, not proof that anyone is cheating.</p>  <div class="sharebar" id="sharebar">
+    <label class="sb-co"><span>Company or ticker <em>(optional, goes in the link and the files)</em></span>
+      <input id="sb-company" type="text" maxlength="60" autocomplete="off" spellcheck="false" placeholder="e.g. ACME"></label>
+    <div class="sb-groups">
+      <p class="share-buttons"><span class="sb-k">Share</span>
+        <button type="button" id="sb-x">X</button>
+        <button type="button" id="sb-in">LinkedIn</button>
+        <button type="button" id="sb-native" hidden>More</button></p>
+      <p class="share-buttons"><span class="sb-k">Download</span>
+        <button type="button" id="sb-pdf">PDF</button>
+        <button type="button" id="sb-csv">CSV</button></p>
+      <p class="share-buttons sb-community" hidden><span class="sb-k">Community</span>
+        <button type="button" id="sb-save">Send to Ezra</button>
+        <button type="button" id="sb-tm">Leave a testimonial</button></p>
+    </div>
+    <div class="sb-box" id="sb-savebox" hidden>
+      <p>Send this calculation to Ezra. He reads them, and with your OK he may share some with the community. Nothing leaves your browser until you press Send.</p>
+      <label>Your name or X handle <em>(optional)</em> <input id="sb-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label class="check"><input id="sb-ok" type="checkbox"> Ezra can publish this calculation and my name or handle</label>
+      <input id="sb-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="sb-send">Send</button> <span id="sb-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+    <div class="sb-box" id="testimonial" hidden>
+      <p>Did this calculator help you? Tell Ezra in a few words.</p>
+      <label>What did it help you with? <textarea id="tm-text" rows="4" maxlength="1500"></textarea></label>
+      <label>Name <input id="tm-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label>X or LinkedIn handle <em>(optional)</em> <input id="tm-handle" type="text" maxlength="80" autocomplete="off"></label>
+      <label>What you do <em>(optional, e.g. "individual investor" or "analyst at a fund")</em> <input id="tm-role" type="text" maxlength="120" autocomplete="off"></label>
+      <label class="check"><input id="tm-ok" type="checkbox"> Ezra can publish this on the site with my name</label>
+      <input id="tm-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="tm-send">Send</button> <span id="tm-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+  </div>
+
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">How it's calculated</h2>
+  <p>Each of the six flags scores 1 when it's up, and the C-Score is the total. Montier built it after noticing that short sellers are the most careful readers of accounts. In his words, they're closer to being the accounting police than rumour mongers.</p>
+  <ul>
+    <li><strong>Earnings pulling away from cash flow.</strong> Earnings rest on estimates (bad debts, pension returns, capitalized costs); management has less room to shape cash.</li>
+    <li><strong>Days sales outstanding rising.</strong> Receivables growing faster than sales: the sign of stuffing the channel.</li>
+    <li><strong>Days of inventory rising.</strong> Inventory piling up usually means sales are slowing.</li>
+    <li><strong>Other current assets rising against sales.</strong> Investors watch receivables and inventory, so a careful CFO may use the catch-all line instead.</li>
+    <li><strong>Depreciation falling against gross PP&amp;E.</strong> Stretching the assumed life of assets is an easy way to beat the quarter.</li>
+    <li><strong>High asset growth.</strong> Serial acquirers can use their deals to blur their earnings.</li>
+  </ul>
+
+  <h2 class="rule-head">How to read the result</h2>
+  <p>In Montier's test (1993 to 2007), stocks with high C-Scores trailed the market by about 8% a year in the USA and 5% in Europe. It works best with valuation: expensive stocks are more tempted to keep up appearances, and punished harder when they're found out. A C-Score of 5 with a price to sales above 2 lost about 4% a year in both regions, and more than half of those stocks fell.</p>
+  <p>Montier calls the score only a first step. Read the notes behind every flag that's up: a jump in inventory before a product launch, or asset growth from one sensible acquisition, can have an innocent explanation.</p>
+
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Industrial, retail, consumer and technology companies with receivables, inventory and fixed assets. For banks and insurers most of the lines don't apply, and for companies with no inventory the third flag never goes up.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>James Montier, <em>Value Investing: Tools and Techniques for Intelligent Investment</em> (Wiley, 2009), chapter 25, "Cooking the Books, or, More Sailing Under the Black Flag". The threshold for high asset growth is ours: the book doesn't give one.</p>
+</section>
+
+<aside class="wanted soon-box" id="coming-soon">
+  <p class="wanted-kicker">Coming soon</p>
+  <p class="wanted-head">The AI version</p>
+  <p class="wanted-body">The full version is coming: an Excel template and an AI skill built for Claude. They pull the six lines from the filings, run the score over several years, and read the notes behind every flag. Subscribe to Ezra&#39;s Notes to hear first.</p>
+  <iframe class="substack" src="https://www.ezrasnotes.com/embed" title="Subscribe to Ezra's Notes" width="480" height="150" frameborder="0" scrolling="no" loading="lazy"></iframe>
+</aside>
+
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Holdings</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a inversores</a>
+  </p>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
+<script>document.addEventListener("click",function(e){var m=document.querySelector(".nav-menu[open]");if(m&&!m.contains(e.target))m.removeAttribute("open")});</script>
+<script src="../static/share.js?v=13e94eea"></script><script type="module" src="../static/cscore.js?v=13e94eea"></script></body>
+</html>

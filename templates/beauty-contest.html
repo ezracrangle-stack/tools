@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
+{% block title %}Keynes' beauty contest: the monthly game{% endblock %}
+{% block description %}Pick a number from 0 to 100. The winner is closest to two-thirds of everyone's average. Keynes' beauty contest as James Montier plays it, with a new round every month.{% endblock %}
+{% block main %}
+<section class="lede">
+  <h1 class="page-title">Keynes' beauty contest</h1>
+  <p class="dek">Pick a whole number from 0 to 100. The winner is whoever comes closest to two-thirds of the average of all the guesses. A new round every month.</p>
+  <p>It's the game James Montier uses to show how hard it is to stay one step ahead of everyone else, which is what most investors spend their time trying to do.</p>
+</section>
+
+<form id="bcform" class="calc" novalidate>
+  <div class="sheet">
+    <div class="srow head"><span class="lab">Round: <span id="round-name"></span></span></div>
+    <div class="srow in key">
+      <label class="lab" for="f-guess">Your number<span class="hint">A whole number from 0 to 100.</span></label>
+      <span class="cell"><input id="f-guess" type="text" inputmode="numeric" maxlength="3" autocomplete="off" aria-describedby="bc-err"></span>
+    </div>
+    <p class="hint bc-err" id="bc-err" hidden>Use a whole number from 0 to 100.</p>
+    <div class="srow in">
+      <label class="lab" for="f-name">Your name or X handle<span class="hint">Optional.</span></label>
+      <span class="cell"><input id="f-name" type="text" maxlength="60" autocomplete="off" spellcheck="false" style="text-align:left"></span>
+    </div>
+    <label class="bc-ok"><input id="f-ok" type="checkbox"> Show my name on this page if I win.</label>
+  </div>
+  <div class="actions"><button type="submit" class="button">Send my guess</button></div>
+  <p class="hint">One guess per round. Guesses go to a private sheet; the page only shows the totals, and the winner's name if they ticked the box. The round closes at the end of <span id="round-end"></span> (UTC).</p>
+</form>
+
+<div id="bc-done" class="sheet" hidden>
+  <div class="srow head"><span class="lab">You're in</span></div>
+  <div class="srow calc-row total"><span class="lab">Your number this round</span><output class="cell" id="o-mine">–</output></div>
+  <p class="bc-level" id="x-level" hidden></p>
+  <p class="hint">Results go up here the day after the round closes. Come back then, or try the game on a friend.</p>
+</div>
+
+<div class="sheet">
+  <div class="srow calc-row"><span class="lab">Guesses so far this round</span><output class="cell" id="o-count">–</output></div>
+</div>
+
+<section class="profile">
+  <h2 class="rule-head">Past rounds</h2>
+  <div id="bc-past"><p class="hint">Loading…</p></div>
+</section>
+
+<section class="prose">
+  <h2 class="rule-head">When Montier played it</h2>
+  <p>Montier ran the game with more than 1,000 professional investors. It was the third largest game ever played, and the only one played purely among professionals. The average was 26, so the winning number was 17. Three people picked it.</p>
+  <p>The guesses bunched up at a few numbers, and each bunch is a level of thinking:</p>
+  <ul>
+    <li><strong>50:</strong> the middle of the range, with no thought about the other players.</li>
+    <li><strong>33:</strong> people who expect everyone else to pick 50.</li>
+    <li><strong>22:</strong> people who expect everyone else to pick 33.</li>
+    <li><strong>0:</strong> the game theorists. Two-thirds of zero is zero, so it's the only stable answer. It only wins if everyone plays it.</li>
+    <li><strong>1:</strong> people who know the answer is zero, expect the rest of the world to get it wrong, and still anchor on zero.</li>
+  </ul>
+
+  <h2 class="rule-head">Why it matters to investors</h2>
+  <p>Keynes compared professional investing to a newspaper contest where readers pick the six prettiest faces out of a hundred photos, and the prize goes to whoever picks the faces most popular with everyone else. You don't pick the faces you like. You pick the ones you think the others will pick, and the sharpest players go a step further: they guess what the others think the others will pick.</p>
+  <p>Montier's point: getting in before the crowd and out before the crowd means winning this game over and over. Three in a thousand hit the number once. A value investor skips the game and asks what the business is worth.</p>
+
+  <h2 class="rule-head">How a round works</h2>
+  <p>A round is a calendar month (UTC). Each browser gets one guess per round, and if the same player sends two, only the first counts. Two-thirds of the average is worked out to the decimal, and the guess closest to it wins. Ties share the win.</p>
+
+  <h2 class="rule-head">Where the game comes from</h2>
+  <p>John Maynard Keynes, <em>The General Theory of Employment, Interest and Money</em> (1936), chapter 12. The number version and the results are from James Montier, <em>Value Investing: Tools and Techniques for Intelligent Investment</em> (Wiley, 2009), chapter 1.</p>
+</section>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ root }}static/beauty.js?v={{ asset_v }}"></script>{% endblock %}

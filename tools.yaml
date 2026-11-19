@@ -94,6 +94,20 @@ tools:
     status: live
     blurb: Twenty-three pairs of opposites, from lenders to investors to funds. Pick a side for each and take the market's temperature, as Howard Marks does in Mastering the Market Cycle.
 
+  - slug: cscore
+    share: "Montier's C-Score"
+    name: Montier's C-Score
+    nav: Montier
+    status: live
+    blurb: Is the company cooking its books? Six common earnings manipulations, scored from two years of accounts. From James Montier's Value Investing.
+
+  - slug: beauty-contest
+    share: "Keynes' beauty contest"
+    name: Keynes' beauty contest
+    nav: Beauty contest
+    status: live
+    blurb: A monthly game. Pick a number from 0 to 100; the winner is closest to two-thirds of everyone's average. How far ahead of the crowd can you think?
+
 
   - slug: red-flags
     name: Red flags
