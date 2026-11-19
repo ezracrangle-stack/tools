@@ -32,3 +32,10 @@ Not for the site: Acquirer's Multiple, Magic Formula and Martin Whitman screens.
    - Box below: "This month's reading: [X]. The full report, with the data behind it, is for paid subscribers." Impersonal voice. One line in tools.yaml that Ezra updates monthly.
    - The monthly Market Temperature report itself (data, indicators, credit cycle, posture) stays paid.
    - Upload the book before building, to take Marks's exact pairs (paraphrased).
+
+11. **What to pay for quality (The Compounders).** Oddbjørn Dybvad, Kjetil Nyland and Adnan Hadziefendic, The Compounders: From Small Acquisitions to Giant Shareholder Returns (REQ Capital). Same matrix in REQ's 1H 2021 investor letter.
+   - Max P/E you can pay today and still earn a target return (8% default) over a horizon (20 years default), given ROIC/ROE and reinvestment rate, plus an exit P/E.
+   - Matrix: ROIC rows × reinvestment-rate columns, colored; mark the company's current P/E. Reverse: return at today's P/E.
+   - REQ letter example: ROE 20%, reinvestment ~73% → fair P/E around 45.
+   - Caveat on the page: only holds if incremental ROIC stays at or above today's ROIC; read with the ROIIC tool.
+   - Need the chapter or photos of the matrix to confirm the assumptions (exit P/E, dividends from what isn't reinvested) before building.
