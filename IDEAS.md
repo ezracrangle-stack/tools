@@ -17,3 +17,12 @@ Already listed as "Coming soon" on the site: reverse DCF, red flags, moat and ma
    - Rule: a fairly priced stock has a P/E equal to its earnings growth rate. PEG = P/E ÷ growth (around 1 fair; Lynch: half the growth rate is very attractive, twice is very unattractive).
    - Refinement with dividends: (long-term growth rate + dividend yield) ÷ P/E. Below 1 poor, 1.5 okay, 2 or better is what you want. Book example: 15% growth, 3% dividend, P/E 6 → 3.
    - Show both ratios and say which way is "good" (PEG low is good; Lynch's ratio high is good). Helper: EPS growth from 5 years of EPS. Caveat: not for cyclicals or very high growth rates.
+
+9. **Pabrai's Dhandho bet.** The Dhandho Investor (2007), ch. 10 (Kelly Formula) and ch. 7 (simple intrinsic value).
+   - 2-4 scenarios (probability × outcome per $1) → expected value, expected gain, worst-case loss ("heads I win, tails I don't lose much").
+   - Kelly: edge ÷ odds = fraction of the portfolio. Pabrai's version divides by the total payout; standard Kelly uses net odds, f = (bp − q)/b. Show both. Book examples: coin toss ($2 / −$1) → 25%; 80% win $21, 10% win $7.50, 10% lose $1 → edge $17.45 / $21.
+   - Show Kelly as the ceiling and a prudent size next to it (Pabrai Funds put 10% in Stewart Enterprises when Kelly said almost everything).
+   - Extra: his sell rule (sell above 90% of intrinsic value if there's a better use of the money; at 100% regardless).
+   - Upload the book before building, to check the examples.
+
+Not for the site: Acquirer's Multiple, Magic Formula and Martin Whitman screens. Ezra will run them himself, sort the results into monitors (Value Line / Manual of Ideas style) and publish them for paid subscribers of the newsletter.
