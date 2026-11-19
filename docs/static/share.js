@@ -2,6 +2,8 @@
 // send the calculation to Ezra, and the testimonial form. No tool math here.
 (function () {
   var form = document.querySelector("form.calc");
+  var here = (document.currentScript && document.currentScript.src) || "";
+  var vendor = here ? here.replace(/share\.js.*$/, "vendor/html2pdf.bundle.min.js") : "/static/vendor/html2pdf.bundle.min.js";
   var bar = document.getElementById("sharebar");
   var collect = document.body.getAttribute("data-collect") || "";
   function track(name, params) { if (typeof gtag === "function") gtag("event", name, params || {}); }
@@ -114,12 +116,45 @@
           .then(function () { track("share", { method: "native", tool: slug }); }).catch(function () {});
       });
     }
+    // PDF: build the file in the browser and download it (no print dialog).
+    var pdfBusy = false;
+    function loadPdfLib() {
+      if (window.html2pdf) return Promise.resolve(window.html2pdf);
+      return new Promise(function (ok, no) {
+        var sc = document.createElement("script"); sc.src = vendor; sc.async = true;
+        sc.onload = function () { window.html2pdf ? ok(window.html2pdf) : no(new Error("no html2pdf")); };
+        sc.onerror = no; document.head.appendChild(sc);
+      });
+    }
+    function cleanUp() {
+      document.documentElement.classList.remove("pdf-mode");
+      document.querySelectorAll(".print-skip").forEach(function (r) { r.classList.remove("print-skip"); });
+      var sum = document.getElementById("print-summary"); if (sum) sum.innerHTML = "";
+    }
     document.getElementById("sb-pdf").addEventListener("click", function () {
+      if (pdfBusy) return;
+      var btn = this, label = btn.textContent;
       var stamp = document.getElementById("print-stamp");
       if (stamp) stamp.textContent = (company() ? company() + " · " : "") + new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) + " · " + link();
       track("download", { format: "pdf", tool: slug });
-      prepPrint();
-      window.print();
+      pdfBusy = true; btn.textContent = "Making PDF…";
+      loadPdfLib().then(function (h2p) {
+        prepPrint();
+        document.documentElement.classList.add("pdf-mode");
+        return h2p().set({
+          margin: [12, 12, 14, 12],
+          filename: fileBase() + ".pdf",
+          image: { type: "jpeg", quality: 0.95 },
+          html2canvas: { scale: 2, backgroundColor: "#ffffff", useCORS: true, windowWidth: 720, x: 0, scrollX: 0, scrollY: 0 },
+          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+          pagebreak: { mode: ["css", "legacy"], avoid: [".srow", "tr", ".verdict", ".print-summary", "table"] }
+        }).from(document.body).save();
+      }).catch(function () {
+        // If the library can't load (offline, blocked), fall back to the browser's print dialog.
+        cleanUp(); prepPrint(); window.print();
+      }).then(function () {
+        cleanUp(); pdfBusy = false; btn.textContent = label;
+      });
     });
     document.getElementById("sb-csv").addEventListener("click", function () {
       download(fileBase() + ".csv", csv(), "text/csv;charset=utf-8");

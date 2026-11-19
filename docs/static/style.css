@@ -463,3 +463,19 @@ table.grid .gcalc th, table.grid .gcalc output { font-weight: 700; }
 }
 .nav-drop { width: min(24em, 92vw); }
 .nav-drop a { white-space: normal; line-height: 1.35; }
+/* PDF download: same look as the print version, rendered in the page */
+.pdf-mode, .pdf-mode[data-theme="dark"] { --ink: #000; --mute: #444; --rule: #000; --hair: #bbb; --paper: #fff; --hover: #fff; }
+.pdf-mode body { background: #fff; color: #000; font-size: 15px; padding: 0 !important; margin: 0 !important; width: 700px !important; max-width: 700px !important; }
+.pdf-mode .masthead, .pdf-mode .topline, .pdf-mode .byline, .pdf-mode .actions, .pdf-mode .sharebar, .pdf-mode .copy-note,
+.pdf-mode .stickybar, .pdf-mode #coming-soon, .pdf-mode .soon-box, .pdf-mode .sister, .pdf-mode footer .footer-links,
+.pdf-mode .helper-toggle, .pdf-mode details.helper:not([open]), .pdf-mode .theme-toggle, .pdf-mode #verdict,
+.pdf-mode .prose, .pdf-mode .lede .free, .pdf-mode .print-skip, .pdf-mode .mt-add { display: none !important; }
+.pdf-mode .print-head { display: flex; justify-content: space-between; gap: 12px; font-size: 11px; border-bottom: 1px solid #000; padding-bottom: 4px; margin-bottom: 12px; }
+.pdf-mode .print-head strong { white-space: nowrap; font-family: var(--head); font-weight: 400; text-transform: uppercase; letter-spacing: .12em; }
+.pdf-mode #print-stamp { text-align: right; word-break: break-all; color: #333; }
+.pdf-mode .print-summary { display: block; margin: 0 0 14px; }
+.pdf-mode main { padding-top: 0; }
+.pdf-mode input, .pdf-mode select { border-color: #999 !important; background: #fff; color: #000; }
+.pdf-mode a { text-decoration: none; }
+.pdf-mode footer { margin-top: 12px; padding-top: 6px; }
+.pdf-mode .print-summary, .pdf-mode .verdict { box-sizing: border-box; max-width: 100%; overflow-wrap: anywhere; }
