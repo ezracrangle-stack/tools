@@ -184,6 +184,7 @@ if (typeof document !== "undefined") {
     render("typing");
   }));
   if ("IntersectionObserver" in window) new IntersectionObserver(([e]) => { $("stickybar").classList.toggle("away", e.isIntersecting); }).observe($("verdict"));
+  window.calcLink = () => shareUrl(values());
   $("share-link").addEventListener("click", () => {
     const url = shareUrl(values());
     try { history.replaceState(null, "", url); } catch (e) { /* preview */ }

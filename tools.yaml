@@ -1,48 +1,59 @@
 # Google Analytics measurement ID for tools.ezrasnotes.com. Empty turns Analytics off.
 ga_id: "G-FTNNLB6W9D"
 
+# Google Apps Script web app that receives "Send to Ezra" calculations and testimonials
+# into Ezra's private Google Sheet. Empty hides those buttons.
+collect_url: "https://script.google.com/macros/s/AKfycbz-a4q03dY00RYGWBKOHaKqYKL92Z3afAqhJ5iYdPQGYCMbU2CpFTR-JfEfArbdoUZXHg/exec"
+
 # Every tool on the site. The home page list is built from this file.
 # status: live (has a page) or soon (shows as "Coming soon").
 # To add a tool, see COMO-AGREGAR-UNA-HERRAMIENTA.md.
 
 tools:
   - slug: net-net
+    share: "the net-net calculator"
     name: Net-net calculator
     nav: Net-net
     status: live
     blurb: Graham's NCAV, modern NCAV, net cash, Schloss' working capital and book value, per share and against the price.
 
   - slug: epv
+    share: "the earnings power value calculator"
     name: Earnings power value
     nav: EPV
     status: live
     blurb: What the business is worth if today's cash profits never grow, how much of the price is a bet on growth, and the most you should pay.
 
   - slug: greenwald
+    share: "Greenwald's moat test"
     name: Greenwald's moat test
     nav: Greenwald
     status: live
     blurb: Greenwald's test. What it would cost to rebuild the business, what its earnings are worth with no growth, and what the gap says about its moat.
 
   - slug: penman
+    share: "Penman's residual income model"
     name: Penman's residual income
     nav: Penman
     status: live
     blurb: Anchor on the book value of the operations, then see the growth the price implies and the return you earn at today's price.
 
   - slug: graham
+    share: "Graham's formulas"
     name: Graham's formulas
     nav: Graham
     status: live
     blurb: Graham's growth formula, the Graham number and his seven tests for the defensive investor, as he wrote them in The Intelligent Investor.
 
   - slug: fcf
+    share: "Mauboussin's FCF"
     name: Mauboussin's FCF
     nav: Mauboussin
     status: live
     blurb: Mauboussin and Callahan's fixes to the cash flow statement. Free cash flow after stock pay and leases, and how much the company really invests.
 
   - slug: roic
+    share: "the ROIC, ROIIC and reinvestment calculator"
     name: ROIC, ROIIC and reinvestment
     nav: ROIC
     status: live

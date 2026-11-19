@@ -64,6 +64,39 @@
     <button type="button" class="button ghost" id="reset">Clear</button>
   </div>
   {% if note %}<p class="copy-note">{{ note }}</p>{% endif %}
+  <div class="sharebar" id="sharebar">
+    <label class="sb-co"><span>Company or ticker <em>(optional, goes in the link and the files)</em></span>
+      <input id="sb-company" type="text" maxlength="60" autocomplete="off" spellcheck="false" placeholder="e.g. ACME"></label>
+    <div class="sb-groups">
+      <p class="share-buttons"><span class="sb-k">Share</span>
+        <button type="button" id="sb-x">X</button>
+        <button type="button" id="sb-in">LinkedIn</button>
+        <button type="button" id="sb-native" hidden>More</button></p>
+      <p class="share-buttons"><span class="sb-k">Download</span>
+        <button type="button" id="sb-pdf">PDF</button>
+        <button type="button" id="sb-csv">CSV</button></p>
+      <p class="share-buttons sb-community" hidden><span class="sb-k">Community</span>
+        <button type="button" id="sb-save">Send to Ezra</button>
+        <button type="button" id="sb-tm">Leave a testimonial</button></p>
+    </div>
+    <div class="sb-box" id="sb-savebox" hidden>
+      <p>Send this calculation to Ezra. He reads them, and with your OK he may share some with the community. Nothing leaves your browser until you press Send.</p>
+      <label>Your name or X handle <em>(optional)</em> <input id="sb-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label class="check"><input id="sb-ok" type="checkbox"> Ezra can publish this calculation and my name or handle</label>
+      <input id="sb-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="sb-send">Send</button> <span id="sb-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+    <div class="sb-box" id="testimonial" hidden>
+      <p>Did this calculator help you? Tell Ezra in a few words.</p>
+      <label>What did it help you with? <textarea id="tm-text" rows="4" maxlength="1500"></textarea></label>
+      <label>Name <input id="tm-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label>X or LinkedIn handle <em>(optional)</em> <input id="tm-handle" type="text" maxlength="80" autocomplete="off"></label>
+      <label>What you do <em>(optional, e.g. "individual investor" or "analyst at a fund")</em> <input id="tm-role" type="text" maxlength="120" autocomplete="off"></label>
+      <label class="check"><input id="tm-ok" type="checkbox"> Ezra can publish this on the site with my name</label>
+      <input id="tm-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="tm-send">Send</button> <span id="tm-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+  </div>
 {% endmacro %}
 
 {% macro coming_soon(body, substack_embed) %}

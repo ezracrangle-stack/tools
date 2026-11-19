@@ -208,6 +208,7 @@ if (typeof document !== "undefined") {
   $("cur").addEventListener("change", () => render("typing"));
   fields.forEach((f) => f.addEventListener("blur", () => render("blur")));
   if ("IntersectionObserver" in window) new IntersectionObserver(([e]) => { $("stickybar").classList.toggle("away", e.isIntersecting); }).observe($("verdict"));
+  window.calcLink = () => shareUrl(values());
   $("share-link").addEventListener("click", () => {
     const url = shareUrl(values());
     try { history.replaceState(null, "", url); } catch (e) { /* preview */ }

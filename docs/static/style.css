@@ -313,3 +313,64 @@ table.grid td output { display: block; text-align: right; font-size: 15px; min-w
 table.grid .gcalc th, table.grid .gcalc output { font-weight: 700; }
 .gridhint { display: block; font: italic 14px/1.4 var(--body); color: var(--mute); margin: 4px 0 12px; }
 @media (max-width: 560px) { table.grid tbody th { min-width: 8.5em; font-size: 13px; } table.grid input { width: 5.4em; font-size: 14px; } }
+
+/* ── Nav on small screens: tools fold into a menu ─── */
+.nav-menu { display: block; position: relative; }
+.nav-menu summary { cursor: pointer; list-style: none; }
+.nav-menu summary::-webkit-details-marker { display: none; }
+.nav-menu summary::after { content: " ▾"; }
+.nav-menu[open] summary::after { content: " ▴"; }
+.nav-drop { position: absolute; left: 50%; transform: translateX(-50%); top: calc(100% + 10px); z-index: 20;
+  display: flex; flex-direction: column; min-width: 190px; background: var(--paper); border: 1px solid var(--rule); text-align: left; }
+.nav-drop a { padding: 11px 14px; border-bottom: 1px solid var(--hair); }
+.nav-drop a:last-child { border-bottom: 0; }
+.nav-drop a:hover { background: var(--hover); }
+
+
+/* ── Share, download and community bar ─── */
+.sharebar { margin: 26px 0 0; padding: 16px 0 4px; border-top: 1px solid var(--rule); }
+.sb-co { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; font-size: 15px; margin-bottom: 12px; }
+.sb-co em, .sb-box em { color: var(--mute); }
+.sb-co input, .sb-box input[type=text], .sb-box textarea {
+  font: 16px/1.4 var(--body); color: var(--ink); background: var(--paper); border: 1px solid var(--hair); padding: 7px 9px; }
+.sb-co input { width: 12em; }
+.sb-groups { display: flex; flex-wrap: wrap; gap: 10px 26px; }
+.sb-groups .share-buttons { align-items: center; }
+.sb-k { font: 11px/1 var(--head); text-transform: uppercase; letter-spacing: .14em; color: var(--mute); margin-right: 4px; }
+.sb-box { margin: 14px 0 0; padding: 14px 16px; border: 1px solid var(--rule); font-size: 16px; }
+.sb-box > p:first-child { margin-top: 0; }
+.sb-box label { display: block; margin: 0 0 10px; }
+.sb-box input[type=text], .sb-box textarea { display: block; width: 100%; margin-top: 4px; }
+.sb-box label.check { display: flex; gap: 8px; align-items: baseline; }
+.sb-box .share-buttons { margin: 4px 0 0; align-items: center; }
+.sb-status { font-style: italic; font-size: 15px; }
+.share-buttons button:disabled { opacity: .45; cursor: default; }
+
+/* ── Print / PDF ─── */
+.print-head, .print-summary { display: none; }
+.print-summary:empty { display: none !important; }
+@media print {
+  :root, :root[data-theme="dark"] { --ink: #000; --mute: #444; --rule: #000; --hair: #bbb; --paper: #fff; --hover: #fff; }
+  @page { margin: 14mm 12mm; }
+  body { max-width: none; padding: 0; font-size: 12pt; }
+  .masthead nav, .topline, .byline, .actions, .sharebar, .copy-note, .stickybar, #coming-soon, .soon-box, footer .footer-links,
+  .helper-toggle, details.helper:not([open]), .theme-toggle { display: none !important; }
+  .nameplate { font-size: 26pt; margin: 0 0 4px; }
+  .print-head { display: flex; justify-content: space-between; gap: 12px; font-size: 9pt; border-bottom: 1px solid #000; padding-bottom: 4px; margin-bottom: 12px; }
+  .print-head strong { font-family: var(--head); font-weight: 400; text-transform: uppercase; letter-spacing: .12em; }
+  #print-stamp { text-align: right; word-break: break-all; color: #333; }
+  main { padding-top: 0; }
+  .print-skip { display: none !important; }
+  footer { break-before: avoid; break-inside: avoid; margin-top: 12px; padding-top: 6px; }
+  .print-summary { display: block; order: -1; margin: 0 0 14px; }
+  .masthead { display: none; }
+  .lede .dek { font-size: 13pt; }
+  #verdict { display: none; }
+  input, select { border-color: #999 !important; }
+  .srow, .verdict, .warnings, table { break-inside: avoid; }
+  .prose, .lede .free { display: none !important; }
+  a { text-decoration: none; }
+}
+[hidden] { display: none !important; }
+.sb-co input, .sb-box input[type=text] { text-align: left; }
+.sb-box input[type=checkbox] { all: revert; width: auto; flex: none; margin: 0 2px 0 0; accent-color: var(--ink); }

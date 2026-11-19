@@ -219,6 +219,7 @@ if (typeof document !== "undefined") {
       .observe($("verdict"));
   }
 
+  window.calcLink = () => shareUrl(values());
   $("share-link").addEventListener("click", () => {
     const url = shareUrl(values());
     try { history.replaceState(null, "", url); } catch (e) { /* sandboxed preview */ }

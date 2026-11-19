@@ -179,6 +179,7 @@ if (typeof document !== "undefined") {
   settings.forEach((k) => $(k).addEventListener("change", () => render("typing")));
   fields.forEach((f) => f.addEventListener("blur", () => { const v = parseNumber(f.value); if (ok(v) && Math.abs(v) >= 1000) f.value = fmtInput(v); render("blur"); }));
   if ("IntersectionObserver" in window) new IntersectionObserver(([e]) => { $("stickybar").classList.toggle("away", e.isIntersecting); }).observe($("verdict"));
+  window.calcLink = () => shareUrl(values());
   $("share-link").addEventListener("click", () => {
     const url = shareUrl(values());
     try { history.replaceState(null, "", url); } catch (e) { /* preview */ }

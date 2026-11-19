@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="static/style.css?v=aed28e85">
+<link rel="stylesheet" href="static/style.css?v=d5015d82">
 <meta property="og:title" content="Tools · Ezra's Notes">
 <meta property="og:description" content="Free value investing calculators built from the spreadsheets I use. They run in your browser, with no sign-up.">
 <meta property="og:url" content="https://tools.ezrasnotes.com/">
@@ -25,7 +25,7 @@
 <link rel="apple-touch-icon" href="static/apple-touch-icon.png">
 <link rel="canonical" href="https://tools.ezrasnotes.com/">
 </head>
-<body>
+<body data-collect="https://script.google.com/macros/s/AKfycbz-a4q03dY00RYGWBKOHaKqYKL92Z3afAqhJ5iYdPQGYCMbU2CpFTR-JfEfArbdoUZXHg/exec">
 <header class="masthead">
   <div class="topline">
     <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
@@ -37,18 +37,17 @@
   <p class="byline">By <a href="https://x.com/ezracrangle">@ezracrangle</a></p>
   <nav>
     <a href="" aria-current="page">All tools</a>
-<a href="net-net/">Net-net</a>
-<a href="epv/">EPV</a>
-<a href="greenwald/">Greenwald</a>
-<a href="penman/">Penman</a>
-<a href="graham/">Graham</a>
-<a href="fcf/">Mauboussin</a>
-<a href="roic/">ROIC</a>
-<a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+    <details class="nav-menu">
+      <summary>Tools</summary>
+      <div class="nav-drop"><a href="net-net/">Net-net</a><a href="epv/">EPV</a><a href="greenwald/">Greenwald</a><a href="penman/">Penman</a><a href="graham/">Graham</a><a href="fcf/">Mauboussin</a><a href="roic/">ROIC</a></div>
+    </details>
+    <a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
   </nav>
 </header>
 
 <main>
+<div class="print-head" aria-hidden="true"><strong>Ezra's Notes · Tools</strong><span id="print-stamp"></span></div>
+<div class="print-summary verdict" id="print-summary" aria-hidden="true"></div>
 <section class="lede">
   <p class="dek">Calculators for value investors, built from the spreadsheets I use to check a stock.</p>
   <p class="free">Free, and they'll stay free. No sign-up. Everything runs in your browser, so nothing you type gets saved anywhere.</p>
@@ -110,5 +109,6 @@
 <script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
 document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
 var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
+<script>document.addEventListener("click",function(e){var m=document.querySelector(".nav-menu[open]");if(m&&!m.contains(e.target))m.removeAttribute("open")});</script>
 </body>
 </html>
