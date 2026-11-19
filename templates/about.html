@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
+{% block title %}About{% endblock %}
+{% block description %}Who builds these value investing calculators, why, and how each one is checked against its source.{% endblock %}
+{% block main %}
+<section class="prose about">
+  <h1 class="page-title">About</h1>
+  <p>I'm Ezra Crangle. I write <a href="{{ newsletter_url }}">Ezra's Notes</a>, a newsletter on value investing. For 9 years I ran the Spanish-language edition of MOI Global, the most exclusive community of value investors in the world.</p>
+  <p>I taught myself to invest, and I learned a lot from the professional investors I met along the way. What I know about these methods came from trial and error: running them on real companies, getting things wrong, fixing them. It's never perfect. As Munger put it, the point is to go to bed a little wiser than you woke up.</p>
+  <p>Most of the methods value investors trust live in books and papers: Graham's net-nets, Greenwald's earnings power value, Penman's residual income, Mauboussin's reverse DCF. Reading about them takes an afternoon. Running them on a real company is where most people get stuck.</p>
+  <p>This site puts in one place many of the tools a serious value investor keeps in the toolkit. I wish I'd found a lot of them years ago, when I was still learning by trial and error.</p>
+  <p>I want anyone who invests on their own to be able to use these tools and understand what the result means, without getting lost in the math. Some of them go further, for experienced investors and professionals: Penman's residual income, the reverse DCF, the red flags check.</p>
+
+  <h2 class="rule-head">How they're built</h2>
+  <p>Each calculator follows one source, and the page names it: the book and chapter, or the paper. When I add a rule the source doesn't have (a threshold, a cut-off for a reading), the page says it's mine.</p>
+  <p>Every calculator has an Excel twin. Before a tool goes live, its results are checked against the spreadsheet, number by number, on a set of test cases, and against the worked examples in the book where there are any. When the book's numbers don't add up, the page says so.</p>
+  <p>They're free and they'll stay free. No account, no email gate. Everything runs in your browser, so nothing you type is saved anywhere.</p>
+
+  <h2 class="rule-head">What they do</h2>
+  <p>They do the arithmetic and explain what the result means. The numbers you put in, and the judgment about the business behind them, are yours. Nothing here is investment advice.</p>
+
+  <h2 class="rule-head">Errors and ideas</h2>
+  <p>Found a number that doesn't match the book, or a method you'd like to see here? Every calculator has a "Send to Ezra" button. I read everything that comes in.</p>
+
+  <h2 class="rule-head">My other free sites</h2>
+  <p><a href="https://letters.ezrasnotes.com/">Investor Letters</a>: the fund letters I read every quarter, each linked to the manager's own site.</p>
+  <p><a href="https://holdings.ezrasnotes.com/">Investor Holdings</a>: the 13F portfolios of the value investors I follow, quarter by quarter.</p>
+  <p><a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>: a searchable index of Graham &amp; Doddsville, the Columbia Business School investing newsletter.</p>
+  <p><a href="https://cartas.ezrasnotes.com/">Cartas a inversores</a>: letters from Spanish-speaking value managers, in Spanish.</p>
+</section>
+
+{{ sheet.subscribe(subscribe_url, "about") }}
+{% endblock %}

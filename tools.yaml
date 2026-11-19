@@ -85,8 +85,8 @@ tools:
     blurb: Write down what can happen and how likely it is. Get the odds, the chance of losing money, and how much of your bankroll the Kelly Formula says to bet. From The Dhandho Investor.
 
   - slug: lynch
-    share: "Peter Lynch's P/E vs growth calculator"
-    name: Peter Lynch's P/E vs growth
+    share: "Peter Lynch's PEG calculator"
+    name: Peter Lynch's PEG
     nav: Lynch
     status: live
     blurb: The PEG and its dividend-adjusted version, the P/E without the company's net cash, and what ten years of compounding does to the price. From One Up on Wall Street.

@@ -141,6 +141,8 @@
 
 <a href="#verdict" id="stickybar" class="stickybar" hidden></a>
 
+{{ sheet.subscribe(subscribe_url, "red-flags") }}
+
 <section class="prose">
   <h2 class="rule-head">A. Montier's C-Score</h2>
   <p>C for cooking the books. Each of six flags scores 1 when it's up, and the C-Score is the total. Montier built it after noticing that short sellers are the most careful readers of accounts.</p>
@@ -169,6 +171,5 @@
   <p>James Montier, <em>Value Investing: Tools and Techniques for Intelligent Investment</em> (Wiley, 2009), chapter 25. Messod D. Beneish, "The Detection of Earnings Manipulation", <em>Financial Analysts Journal</em>, September/October 1999. Howard M. Schilit, Jeremy Perler and Yoni Engelhart, <em>Financial Shenanigans</em>, 4th edition (McGraw-Hill, 2018).</p>
 </section>
 
-{{ sheet.coming_soon("The full version is coming: an Excel template and an AI skill built for Claude. They pull the lines from the filings, run the three checks over several years, and read the notes behind every flag. Subscribe to Ezra's Notes to hear first.", substack_embed) }}
 {% endblock %}
 {% block scripts %}<script type="module" src="{{ root }}static/redflags.js?v={{ asset_v }}"></script>{% endblock %}

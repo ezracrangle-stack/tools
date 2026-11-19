@@ -24,6 +24,8 @@
 
 <a href="#verdict" id="stickybar" class="stickybar" hidden></a>
 
+{{ sheet.subscribe(subscribe_url, "penman") }}
+
 <section class="prose">
   <h2 class="rule-head">Which companies it works for</h2>
   <p>Companies with a balance sheet worth anchoring on and a profit you can forecast a year out: manufacturers, retailers, distributors, consumer brands, services with a long record.</p>
@@ -54,6 +56,5 @@
   <p>From Stephen Penman's <em>Accounting for Value</em> (Columbia, 2011). The same model runs through <em>Financial Statement Analysis for Value Investing</em> (Columbia, 2025), which he wrote with Peter Pope.</p>
 </section>
 
-{{ sheet.coming_soon("The full version is coming: an Excel template and an AI skill built for Claude. They add a two-year forecast, growth that fades toward GDP, bear and bull scenarios, and a check on how much of the return comes from debt. Subscribe to Ezra's Notes to hear first.", substack_embed) }}
 {% endblock %}
 {% block scripts %}<script type="module" src="{{ root }}static/penman.js?v={{ asset_v }}"></script>{% endblock %}

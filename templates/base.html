@@ -37,13 +37,14 @@
     </span>
   </div>
   <a class="nameplate" href="{{ root }}">Tools</a>
-  <p class="byline">By <a href="https://x.com/ezracrangle">@ezracrangle</a></p>
+  <p class="byline">By <a href="{{ newsletter_url }}">@ezracrangle</a></p>
   <nav>
     <a href="{{ root }}"{% if page == '' %} aria-current="page"{% endif %}>All tools</a>
     <details class="nav-menu">
-      <summary>{{ (tool.nav or tool.name) if tool else "Tools" }}</summary>
-      <div class="nav-drop">{% for t in tools if t.status == 'live' %}<a href="{{ root }}{{ t.slug }}/"{% if page == t.slug ~ '/' %} aria-current="page"{% endif %}>{{ t.nav or t.name }}</a>{% endfor %}</div>
+      <summary>Tools</summary>
+      <div class="nav-drop">{% for t in tools if t.status == 'live' %}<a href="{{ root }}{{ t.slug }}/"{% if page == t.slug ~ '/' %} aria-current="page"{% endif %}>{{ t.name }}</a>{% endfor %}</div>
     </details>
+    <a href="{{ root }}about/"{% if page == 'about/' %} aria-current="page"{% endif %}>About</a>
     <a href="{{ subscribe_url }}" class="nav-cta">Subscribe</a>
   </nav>
 </header>
@@ -57,8 +58,8 @@
 {% include "_footer.html" %}
 <script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
 <script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
-document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
-var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('.subscribe')?'box':a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var boxes=document.querySelectorAll('.subscribe');if(boxes.length&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){t('subscribe_box_view',{page:location.pathname});io.unobserve(e.target)}})},{threshold:0.5});boxes.forEach(function(x){io.observe(x)})}})();</script>
 <script>document.addEventListener("click",function(e){var m=document.querySelector(".nav-menu[open]");if(m&&!m.contains(e.target))m.removeAttribute("open")});</script>
 {% if tool %}<script src="{{ root }}static/share.js?v={{ asset_v }}"></script>{% endif %}
 {% block scripts %}{% endblock %}

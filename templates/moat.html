@@ -97,6 +97,8 @@
 
 <a href="#verdict" id="stickybar" class="stickybar" hidden></a>
 
+{{ sheet.subscribe(subscribe_url, "moat") }}
+
 <section class="prose">
   <h2 class="rule-head">1. Where the ROIC comes from</h2>
   <p>Return on invested capital is NOPAT margin times invested capital turnover: how much of each sale is left after tax, times how many dollars of sales each dollar of capital brings in. Two companies can earn the same ROIC in opposite ways.</p>
@@ -115,6 +117,5 @@
   <p>Michael J. Mauboussin and Dan Callahan, "Measuring the Moat: Assessing the Magnitude and Sustainability of Value Creation", Counterpoint Global Insights, October 2024. The paper ends with a checklist of the questions behind the numbers.</p>
 </section>
 
-{{ sheet.coming_soon("The full version is coming: an Excel template and an AI skill built for Claude. They pull the numbers from the filings, run both checks over several years, and walk through the paper's checklist. Subscribe to Ezra's Notes to hear first.", substack_embed) }}
 {% endblock %}
 {% block scripts %}<script type="module" src="{{ root }}static/moat.js?v={{ asset_v }}"></script>{% endblock %}

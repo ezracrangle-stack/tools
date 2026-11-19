@@ -70,6 +70,8 @@
 
 <a href="#verdict" id="stickybar" class="stickybar" hidden></a>
 
+{{ sheet.subscribe(subscribe_url, "marks") }}
+
 <section class="prose">
   <h2 class="rule-head">How it works</h2>
   <p>Marks' point is that the risk in investing comes mostly from how other investors behave. When they're euphoric, their buying lifts prices to dangerous levels; when they're despondent, their selling takes prices to bargain lows. The guide is a disciplined way of noticing which of the two is going on.</p>
@@ -87,6 +89,5 @@
   <p>Howard Marks, <em>Mastering the Market Cycle: Getting the Odds on Your Side</em> (2018), chapter XIII, "How to Cope with Market Cycles", and chapter XIV, "Cycle Positioning". The guide first appeared in his memo "It Is What It Is" (March 2006) and in <em>The Most Important Thing</em>.</p>
 </section>
 
-{{ sheet.coming_soon("The Excel version of this guide is coming, so you can keep a monthly log and see the trend. Subscribe to Ezra's Notes to hear first.", substack_embed) }}
 {% endblock %}
 {% block scripts %}<script type="module" src="{{ root }}static/marks.js?v={{ asset_v }}"></script>{% endblock %}

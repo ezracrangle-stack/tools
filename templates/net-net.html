@@ -20,6 +20,8 @@
 
 <a href="#verdict" id="stickybar" class="stickybar" hidden></a>
 
+{{ sheet.subscribe(subscribe_url, "net-net") }}
+
 <section class="prose">
   <h2 class="rule-head">What this calculator can't tell you</h2>
   <p>The worksheet gives you a number. The 10-K tells you if the number is real. Four things I check before I trust it:</p>
@@ -42,6 +44,5 @@
   <p>The modern version of NCAV also subtracts off-balance-sheet liabilities and preferred stock, because both get paid before common shareholders.</p>
 </section>
 
-{{ sheet.coming_soon("An AI version of this method, built as a Claude skill, is coming. It reads the filings, adjusts the balance sheet and tells you whether the discount is real. Subscribe to Ezra's Notes to get it first.", substack_embed) }}
 {% endblock %}
 {% block scripts %}<script type="module" src="{{ root }}static/net-net.js?v={{ asset_v }}"></script>{% endblock %}

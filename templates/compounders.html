@@ -19,6 +19,8 @@
 
 <a href="#verdict" id="stickybar" class="stickybar" hidden></a>
 
+{{ sheet.subscribe(subscribe_url, "compounders") }}
+
 <section class="prose">
   <h2 class="rule-head">How it's calculated</h2>
   <p>A business with no growth is worth its next year's earnings divided by the cost of capital: at 9.5%, about 10.5 times. A business that grows has to reinvest part of its earnings to do it, so less comes out as cash. How much less depends on the return on new capital: growth ÷ return is the share it has to put back.</p>
@@ -46,6 +48,5 @@
   <p>From chapter 13, "The Price Question", of <em>The Compounders</em> by Oddbjørn Dybvad, Kjetil Nyland and Adnan Hadžiefendić: Figure 13.1 for the premium and Figure 13.2 for the fair P/E. The authors' point: with a business that compounds for decades, it's better to make a mistake on the price than on the quality.</p>
 </section>
 
-{{ sheet.coming_soon("The full version is coming: an Excel template and an AI skill built for Claude. They pull the company's return on new capital and reinvestment from its filings, test how long the growth can last, and compare the price with the premium it justifies. Subscribe to Ezra's Notes to hear first.", substack_embed) }}
 {% endblock %}
 {% block scripts %}<script type="module" src="{{ root }}static/compounders.js?v={{ asset_v }}"></script>{% endblock %}

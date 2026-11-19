@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% import "_sheet.html" as sheet %}
-{% block title %}Peter Lynch's P/E vs growth: PEG calculator{% endblock %}
+{% block title %}Peter Lynch's PEG: the P/E vs growth calculator{% endblock %}
 {% block description %}The PEG ratio and Peter Lynch's dividend-adjusted version, the P/E without the company's net cash, and what ten years of compounding does to the price. From One Up on Wall Street. Free, and it runs in your browser.{% endblock %}
 {% block main %}
 <section class="lede">
-  <h1 class="page-title">Peter Lynch's P/E vs growth</h1>
+  <h1 class="page-title">Peter Lynch's PEG</h1>
   <p class="dek">"The p/e ratio of any company that's fairly priced will equal its growth rate." Peter Lynch's rule of thumb from <em>One Up on Wall Street</em>, with the dividend-adjusted version he gives next to it and his trick of taking the cash out of the price, as he did with Ford.</p>
   <p>You need the share price, earnings per share and your estimate of how fast earnings will grow. Nothing you type leaves your browser.</p>
 </section>
@@ -18,6 +18,8 @@
 </form>
 
 <a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+{{ sheet.subscribe(subscribe_url, "lynch") }}
 
 <section class="prose">
   <h2 class="rule-head">How it's calculated</h2>
@@ -45,6 +47,5 @@
   <p>From <em>One Up on Wall Street</em> by Peter Lynch with John Rothchild, chapter 13, "Some Famous Numbers": the sections on the price/earnings ratio, the cash position and the growth rate.</p>
 </section>
 
-{{ sheet.coming_soon("The full version is coming: an Excel template and an AI skill built for Claude. They place the company in Lynch's six categories, pull the growth and the net cash from its filings, and run his checklist for each category. Subscribe to Ezra's Notes to hear first.", substack_embed) }}
 {% endblock %}
 {% block scripts %}<script type="module" src="{{ root }}static/lynch.js?v={{ asset_v }}"></script>{% endblock %}

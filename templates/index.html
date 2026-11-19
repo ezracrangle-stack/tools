@@ -1,10 +1,12 @@
 {% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
 {% block title %}Tools{% endblock %}
 {% block description %}Free value investing calculators built from the spreadsheets I use. They run in your browser, with no sign-up.{% endblock %}
 {% block main %}
 <section class="lede">
   <p class="dek">Calculators for value investors, built from the spreadsheets I use to check a stock.</p>
   <p class="free">Free, and they'll stay free. No sign-up. Everything runs in your browser, so nothing you type gets saved anywhere.</p>
+  <p>Each one follows a book or a paper, names it, and is checked against an Excel version before it goes live. <a href="{{ root }}about/">Why I built them</a>.</p>
 </section>
 <ul class="tool-list">
 {% for t in tools %}
@@ -15,4 +17,18 @@
   </li>
 {% endfor %}
 </ul>
+
+{{ sheet.subscribe(subscribe_url, "home") }}
+
+<aside class="sister">
+  <p class="sister-kicker">Sister site</p>
+  <p class="sister-head"><a href="https://letters.ezrasnotes.com/">Investor Letters</a></p>
+  <p class="sister-body">The fund letters I read every quarter, Terry Smith and Rob Vinall among them, each linked to the manager's own site. Free, like this one.</p>
+</aside>
+
+<aside class="sister">
+  <p class="sister-kicker">Sister site</p>
+  <p class="sister-head"><a href="https://holdings.ezrasnotes.com/">Investor Holdings</a></p>
+  <p class="sister-body">The 13F portfolios of more than 40 value investors: what they own and what they bought or sold, quarter by quarter. Free, like this one.</p>
+</aside>
 {% endblock %}

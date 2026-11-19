@@ -20,6 +20,8 @@
 
 <a href="#verdict" id="stickybar" class="stickybar" hidden></a>
 
+{{ sheet.subscribe(subscribe_url, "graham") }}
+
 <section class="prose">
   <h2 class="rule-head">Which companies it works for</h2>
   <p>Large, steady, profitable companies with a long record, which is the universe Graham had in mind for the defensive investor. He also wanted them held in a portfolio of 10 to 30 stocks, never one at a time.</p>
@@ -49,6 +51,5 @@
   <p>The growth formula is in chapter 11 of <em>The Intelligent Investor</em> (revised edition, 1973). The bond-yield version comes from Graham's 1974 article "The Decade 1965-1974: Its Significance for Financial Analysts." The book never uses the name Graham number: it's the cap on P/E times price-to-book (P/B) in chapter 14, which also lists the other five tests.</p>
 </section>
 
-{{ sheet.coming_soon("An AI version, built as a Claude skill, is coming. It reads ten years of annual reports, works out normal earnings and runs all seven of Graham's tests. Subscribe to Ezra's Notes to get it first.", substack_embed) }}
 {% endblock %}
 {% block scripts %}<script type="module" src="{{ root }}static/graham.js?v={{ asset_v }}"></script>{% endblock %}

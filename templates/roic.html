@@ -20,6 +20,8 @@
 
 <a href="#verdict" id="stickybar" class="stickybar" hidden></a>
 
+{{ sheet.subscribe(subscribe_url, "roic") }}
+
 <section class="prose">
   <h2 class="rule-head">How it's calculated</h2>
   <ul>
@@ -52,6 +54,5 @@
   <p>ROIC is the standard calculation you'll find in most finance textbooks: after-tax operating profit over the capital that debt and equity holders put in. The reinvestment rate and the growth it supports come from Aswath Damodaran's valuation classes at NYU Stern. ROIIC, the operating cash rule and the view with and without goodwill come from Michael J. Mauboussin and Dan Callahan, "Return on Invested Capital: How to Calculate ROIC and Handle Common Issues" (Counterpoint Global Insights, 2022).</p>
 </section>
 
-{{ sheet.coming_soon("The full version is coming: an Excel template and an AI skill built for Claude. They capitalize R&D and marketing the way Mauboussin and Callahan do, and read ten years of reports for you. Subscribe to Ezra's Notes to hear first.", substack_embed) }}
 {% endblock %}
 {% block scripts %}<script type="module" src="{{ root }}static/roic.js?v={{ asset_v }}"></script>{% endblock %}

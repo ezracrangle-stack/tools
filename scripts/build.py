@@ -48,6 +48,7 @@ def build():
         path.write_text(env.get_template(template).render(page=page, root=root, **common, **kw), encoding="utf-8")
 
     render("index.html", "", "")
+    render("about.html", "about/", "../")
     for t in tools:
         if t["status"] == "live":
             extra = {"rows": data.get(t["slug"].replace("-", "_") + "_rows", []), "marks_reading": data.get("marks_reading") or {}}

@@ -19,6 +19,8 @@
 
 <a href="#verdict" id="stickybar" class="stickybar" hidden></a>
 
+{{ sheet.subscribe(subscribe_url, "dhandho") }}
+
 <section class="prose">
   <h2 class="rule-head">How it's calculated</h2>
   <p>The edge is what you expect to make per dollar: each outcome's return times its probability, added up. Pabrai's shortcut divides the edge by the odds, meaning what you win if you win. A coin toss that pays $2 or costs $1 has an edge of $0.50 and odds of $2, so you bet 25% of your bankroll.</p>
@@ -41,6 +43,5 @@
   <p>From <em>The Dhandho Investor: The Low-Risk Value Method to High Returns</em> by Mohnish Pabrai (Wiley, 2007): chapter 10 for the Kelly Formula and the portfolio tables, and chapters 12, 13 and 15 for the cases. The formula is John L. Kelly Jr.'s, from Bell Labs in 1956.</p>
 </section>
 
-{{ sheet.coming_soon("The full version is coming: an Excel template and an AI skill built for Claude. They check the odds against the company's filings, run the book's cases, and size a whole portfolio of bets. Subscribe to Ezra's Notes to hear first.", substack_embed) }}
 {% endblock %}
 {% block scripts %}<script type="module" src="{{ root }}static/dhandho.js?v={{ asset_v }}"></script>{% endblock %}

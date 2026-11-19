@@ -20,6 +20,8 @@
 
 <a href="#verdict" id="stickybar" class="stickybar" hidden></a>
 
+{{ sheet.subscribe(subscribe_url, "fcf") }}
+
 <section class="prose">
   <h2 class="rule-head">Which companies it works for</h2>
   <p>Almost any company outside finance. It matters most for three kinds:</p>
@@ -45,6 +47,5 @@
   <p>Michael J. Mauboussin and Dan Callahan, "Categorizing for Clarity: Cash Flow Statement Adjustments to Improve Insight," Counterpoint Global Insights (Morgan Stanley Investment Management), October 6, 2021. Their case study is Amazon in 2020.</p>
 </section>
 
-{{ sheet.coming_soon("The full version is coming: an Excel template and an AI skill built for Claude. The skill reads the annual reports, splits SG&A into maintenance and investment, and builds the amortization schedule for you. Subscribe to Ezra's Notes to hear first.", substack_embed) }}
 {% endblock %}
 {% block scripts %}<script type="module" src="{{ root }}static/fcf.js?v={{ asset_v }}"></script>{% endblock %}

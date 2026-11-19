@@ -20,6 +20,8 @@
 
 <a href="#verdict" id="stickybar" class="stickybar" hidden></a>
 
+{{ sheet.subscribe(subscribe_url, "reverse-dcf") }}
+
 <section class="prose">
   <h2 class="rule-head">How it's calculated</h2>
   <p>Each year, sales grow at your rate. Operating profit is sales times your margin, less cash taxes: that's NOPAT. Free cash flow is NOPAT minus what the company reinvests to grow, at your rate per dollar of new sales.</p>
@@ -52,6 +54,5 @@
   <p>From <em>Expectations Investing</em> by Michael J. Mauboussin and Alfred Rappaport (Columbia Business School Publishing, revised edition 2021): chapter 2 for the cash flows and the continuing value, chapter 3 for the threshold margin, and chapter 5 for reading the expectations in the price. This calculator reproduces the book's own examples.</p>
 </section>
 
-{{ sheet.coming_soon("The full version is coming: an Excel template and an AI skill built for Claude. They add low, consensus and high scenarios, find the value driver that moves the price most, and weigh the scenarios into an expected value against the price. Subscribe to Ezra's Notes to hear first.", substack_embed) }}
 {% endblock %}
 {% block scripts %}<script type="module" src="{{ root }}static/reverse-dcf.js?v={{ asset_v }}"></script>{% endblock %}

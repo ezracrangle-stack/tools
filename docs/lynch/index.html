@@ -7,13 +7,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
-<title>Peter Lynch's P/E vs growth: PEG calculator · Ezra's Notes</title>
+<title>Peter Lynch's PEG: the P/E vs growth calculator · Ezra's Notes</title>
 <meta name="description" content="The PEG ratio and Peter Lynch's dividend-adjusted version, the P/E without the company's net cash, and what ten years of compounding does to the price. From One Up on Wall Street. Free, and it runs in your browser.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../static/style.css?v=48937a69">
-<meta property="og:title" content="Peter Lynch's P/E vs growth: PEG calculator · Ezra's Notes">
+<link rel="stylesheet" href="../static/style.css?v=82ae2256">
+<meta property="og:title" content="Peter Lynch's PEG: the P/E vs growth calculator · Ezra's Notes">
 <meta property="og:description" content="The PEG ratio and Peter Lynch's dividend-adjusted version, the P/E without the company's net cash, and what ten years of compounding does to the price. From One Up on Wall Street. Free, and it runs in your browser.">
 <meta property="og:url" content="https://tools.ezrasnotes.com/lynch/">
 <meta property="og:type" content="website">
@@ -25,7 +25,7 @@
 <link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
 <link rel="canonical" href="https://tools.ezrasnotes.com/lynch/">
 </head>
-<body data-collect="https://script.google.com/macros/s/AKfycbz-a4q03dY00RYGWBKOHaKqYKL92Z3afAqhJ5iYdPQGYCMbU2CpFTR-JfEfArbdoUZXHg/exec" data-tool-name="Peter Lynch&#39;s P/E vs growth calculator">
+<body data-collect="https://script.google.com/macros/s/AKfycbz-a4q03dY00RYGWBKOHaKqYKL92Z3afAqhJ5iYdPQGYCMbU2CpFTR-JfEfArbdoUZXHg/exec" data-tool-name="Peter Lynch&#39;s PEG calculator">
 <header class="masthead">
   <div class="topline">
     <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
@@ -34,13 +34,14 @@
     </span>
   </div>
   <a class="nameplate" href="../">Tools</a>
-  <p class="byline">By <a href="https://x.com/ezracrangle">@ezracrangle</a></p>
+  <p class="byline">By <a href="https://www.ezrasnotes.com">@ezracrangle</a></p>
   <nav>
     <a href="../">All tools</a>
     <details class="nav-menu">
-      <summary>Lynch</summary>
-      <div class="nav-drop"><a href="../net-net/">Net-net</a><a href="../epv/">EPV</a><a href="../greenwald/">Greenwald</a><a href="../penman/">Penman</a><a href="../graham/">Graham</a><a href="../fcf/">Mauboussin</a><a href="../roic/">ROIC</a><a href="../reverse-dcf/">Reverse DCF</a><a href="../compounders/">Compounders</a><a href="../dhandho/">Pabrai</a><a href="../lynch/" aria-current="page">Lynch</a><a href="../marks/">Marks</a><a href="../moat/">Moat</a><a href="../red-flags/">Red flags</a><a href="../beauty-contest/">Beauty contest</a></div>
+      <summary>Tools</summary>
+      <div class="nav-drop"><a href="../net-net/">Net-net calculator</a><a href="../epv/">Earnings power value</a><a href="../greenwald/">Greenwald&#39;s moat test</a><a href="../penman/">Penman&#39;s residual income</a><a href="../graham/">Graham&#39;s formulas</a><a href="../fcf/">Mauboussin&#39;s FCF</a><a href="../roic/">ROIC, ROIIC and reinvestment</a><a href="../reverse-dcf/">Reverse DCF</a><a href="../compounders/">What to pay for quality</a><a href="../dhandho/">Pabrai&#39;s Dhandho bet</a><a href="../lynch/" aria-current="page">Peter Lynch&#39;s PEG</a><a href="../marks/">Howard Marks&#39; market temperature</a><a href="../moat/">Measuring the moat</a><a href="../red-flags/">Red flags</a><a href="../beauty-contest/">Keynes&#39; beauty contest</a></div>
     </details>
+    <a href="../about/">About</a>
     <a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
   </nav>
 </header>
@@ -49,7 +50,7 @@
 <div class="print-head" aria-hidden="true"><strong>Ezra's Notes · Tools</strong><span id="print-stamp"></span></div>
 <div class="print-summary verdict" id="print-summary" aria-hidden="true"></div>
 <section class="lede">
-  <h1 class="page-title">Peter Lynch's P/E vs growth</h1>
+  <h1 class="page-title">Peter Lynch's PEG</h1>
   <p class="dek">"The p/e ratio of any company that's fairly priced will equal its growth rate." Peter Lynch's rule of thumb from <em>One Up on Wall Street</em>, with the dividend-adjusted version he gives next to it and his trick of taking the cash out of the price, as he did with Ford.</p>
   <p>You need the share price, earnings per share and your estimate of how fast earnings will grow. Nothing you type leaves your browser.</p>
 </section>
@@ -167,6 +168,14 @@
 
 <a href="#verdict" id="stickybar" class="stickybar" hidden></a>
 
+<aside class="sister subscribe" data-place="lynch">
+  <p class="sister-kicker">Newsletter</p>
+  <p class="sister-head"><a href="https://www.ezrasnotes.com/subscribe?utm_source=tools&amp;utm_medium=site&amp;utm_campaign=lynch">Ezra's Notes</a></p>
+  <p class="sister-body">For long-term investors who look at companies the way an owner does. Free, every week.</p>
+  <a class="button" href="https://www.ezrasnotes.com/subscribe?utm_source=tools&amp;utm_medium=site&amp;utm_campaign=lynch">Subscribe free</a>
+</aside>
+
+
 <section class="prose">
   <h2 class="rule-head">How it's calculated</h2>
   <p>The PEG divides the P/E by the growth rate of earnings, taken as a whole number: a P/E of 15 on 15% growth is 1. Lynch: a company with 12% growth and a P/E of 6 is very attractive; one with 6% growth and a P/E of 12 is headed for a comedown.</p>
@@ -193,13 +202,6 @@
   <p>From <em>One Up on Wall Street</em> by Peter Lynch with John Rothchild, chapter 13, "Some Famous Numbers": the sections on the price/earnings ratio, the cash position and the growth rate.</p>
 </section>
 
-<aside class="wanted soon-box" id="coming-soon">
-  <p class="wanted-kicker">Coming soon</p>
-  <p class="wanted-head">The AI version</p>
-  <p class="wanted-body">The full version is coming: an Excel template and an AI skill built for Claude. They place the company in Lynch&#39;s six categories, pull the growth and the net cash from its filings, and run his checklist for each category. Subscribe to Ezra&#39;s Notes to hear first.</p>
-  <iframe class="substack" src="https://www.ezrasnotes.com/embed" title="Subscribe to Ezra's Notes" width="480" height="150" frameborder="0" scrolling="no" loading="lazy"></iframe>
-</aside>
-
 </main>
 
 <footer>
@@ -216,8 +218,8 @@
   <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
 </footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
 <script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
-document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
-var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('.subscribe')?'box':a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var boxes=document.querySelectorAll('.subscribe');if(boxes.length&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){t('subscribe_box_view',{page:location.pathname});io.unobserve(e.target)}})},{threshold:0.5});boxes.forEach(function(x){io.observe(x)})}})();</script>
 <script>document.addEventListener("click",function(e){var m=document.querySelector(".nav-menu[open]");if(m&&!m.contains(e.target))m.removeAttribute("open")});</script>
-<script src="../static/share.js?v=48937a69"></script><script type="module" src="../static/lynch.js?v=48937a69"></script></body>
+<script src="../static/share.js?v=82ae2256"></script><script type="module" src="../static/lynch.js?v=82ae2256"></script></body>
 </html>

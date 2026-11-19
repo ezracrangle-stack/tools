@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../static/style.css?v=48937a69">
+<link rel="stylesheet" href="../static/style.css?v=82ae2256">
 <meta property="og:title" content="Red flags: C-Score, M-Score and Financial Shenanigans checks · Ezra's Notes">
 <meta property="og:description" content="Three accounting checks on two years of numbers: James Montier's C-Score, Messod Beneish's M-Score and four quick checks from Financial Shenanigans. Free, and it runs in your browser.">
 <meta property="og:url" content="https://tools.ezrasnotes.com/red-flags/">
@@ -34,13 +34,14 @@
     </span>
   </div>
   <a class="nameplate" href="../">Tools</a>
-  <p class="byline">By <a href="https://x.com/ezracrangle">@ezracrangle</a></p>
+  <p class="byline">By <a href="https://www.ezrasnotes.com">@ezracrangle</a></p>
   <nav>
     <a href="../">All tools</a>
     <details class="nav-menu">
-      <summary>Red flags</summary>
-      <div class="nav-drop"><a href="../net-net/">Net-net</a><a href="../epv/">EPV</a><a href="../greenwald/">Greenwald</a><a href="../penman/">Penman</a><a href="../graham/">Graham</a><a href="../fcf/">Mauboussin</a><a href="../roic/">ROIC</a><a href="../reverse-dcf/">Reverse DCF</a><a href="../compounders/">Compounders</a><a href="../dhandho/">Pabrai</a><a href="../lynch/">Lynch</a><a href="../marks/">Marks</a><a href="../moat/">Moat</a><a href="../red-flags/" aria-current="page">Red flags</a><a href="../beauty-contest/">Beauty contest</a></div>
+      <summary>Tools</summary>
+      <div class="nav-drop"><a href="../net-net/">Net-net calculator</a><a href="../epv/">Earnings power value</a><a href="../greenwald/">Greenwald&#39;s moat test</a><a href="../penman/">Penman&#39;s residual income</a><a href="../graham/">Graham&#39;s formulas</a><a href="../fcf/">Mauboussin&#39;s FCF</a><a href="../roic/">ROIC, ROIIC and reinvestment</a><a href="../reverse-dcf/">Reverse DCF</a><a href="../compounders/">What to pay for quality</a><a href="../dhandho/">Pabrai&#39;s Dhandho bet</a><a href="../lynch/">Peter Lynch&#39;s PEG</a><a href="../marks/">Howard Marks&#39; market temperature</a><a href="../moat/">Measuring the moat</a><a href="../red-flags/" aria-current="page">Red flags</a><a href="../beauty-contest/">Keynes&#39; beauty contest</a></div>
     </details>
+    <a href="../about/">About</a>
     <a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
   </nav>
 </header>
@@ -179,6 +180,14 @@
 
 <a href="#verdict" id="stickybar" class="stickybar" hidden></a>
 
+<aside class="sister subscribe" data-place="red-flags">
+  <p class="sister-kicker">Newsletter</p>
+  <p class="sister-head"><a href="https://www.ezrasnotes.com/subscribe?utm_source=tools&amp;utm_medium=site&amp;utm_campaign=red-flags">Ezra's Notes</a></p>
+  <p class="sister-body">For long-term investors who look at companies the way an owner does. Free, every week.</p>
+  <a class="button" href="https://www.ezrasnotes.com/subscribe?utm_source=tools&amp;utm_medium=site&amp;utm_campaign=red-flags">Subscribe free</a>
+</aside>
+
+
 <section class="prose">
   <h2 class="rule-head">A. Montier's C-Score</h2>
   <p>C for cooking the books. Each of six flags scores 1 when it's up, and the C-Score is the total. Montier built it after noticing that short sellers are the most careful readers of accounts.</p>
@@ -207,13 +216,6 @@
   <p>James Montier, <em>Value Investing: Tools and Techniques for Intelligent Investment</em> (Wiley, 2009), chapter 25. Messod D. Beneish, "The Detection of Earnings Manipulation", <em>Financial Analysts Journal</em>, September/October 1999. Howard M. Schilit, Jeremy Perler and Yoni Engelhart, <em>Financial Shenanigans</em>, 4th edition (McGraw-Hill, 2018).</p>
 </section>
 
-<aside class="wanted soon-box" id="coming-soon">
-  <p class="wanted-kicker">Coming soon</p>
-  <p class="wanted-head">The AI version</p>
-  <p class="wanted-body">The full version is coming: an Excel template and an AI skill built for Claude. They pull the lines from the filings, run the three checks over several years, and read the notes behind every flag. Subscribe to Ezra&#39;s Notes to hear first.</p>
-  <iframe class="substack" src="https://www.ezrasnotes.com/embed" title="Subscribe to Ezra's Notes" width="480" height="150" frameborder="0" scrolling="no" loading="lazy"></iframe>
-</aside>
-
 </main>
 
 <footer>
@@ -230,8 +232,8 @@
   <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
 </footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
 <script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
-document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
-var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('.subscribe')?'box':a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var boxes=document.querySelectorAll('.subscribe');if(boxes.length&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){t('subscribe_box_view',{page:location.pathname});io.unobserve(e.target)}})},{threshold:0.5});boxes.forEach(function(x){io.observe(x)})}})();</script>
 <script>document.addEventListener("click",function(e){var m=document.querySelector(".nav-menu[open]");if(m&&!m.contains(e.target))m.removeAttribute("open")});</script>
-<script src="../static/share.js?v=48937a69"></script><script type="module" src="../static/redflags.js?v=48937a69"></script></body>
+<script src="../static/share.js?v=82ae2256"></script><script type="module" src="../static/redflags.js?v=82ae2256"></script></body>
 </html>

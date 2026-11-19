@@ -99,11 +99,12 @@
   </div>
 {% endmacro %}
 
-{% macro coming_soon(body, substack_embed) %}
-<aside class="wanted soon-box" id="coming-soon">
-  <p class="wanted-kicker">Coming soon</p>
-  <p class="wanted-head">The AI version</p>
-  <p class="wanted-body">{{ body }}</p>
-  <iframe class="substack" src="{{ substack_embed }}" title="Subscribe to Ezra's Notes" width="480" height="150" frameborder="0" scrolling="no" loading="lazy"></iframe>
+{% macro subscribe(subscribe_url, place) %}
+{% set u = subscribe_url ~ "?utm_source=tools&utm_medium=site&utm_campaign=" ~ place %}
+<aside class="sister subscribe" data-place="{{ place }}">
+  <p class="sister-kicker">Newsletter</p>
+  <p class="sister-head"><a href="{{ u }}">Ezra's Notes</a></p>
+  <p class="sister-body">For long-term investors who look at companies the way an owner does. Free, every week.</p>
+  <a class="button" href="{{ u }}">Subscribe free</a>
 </aside>
 {% endmacro %}

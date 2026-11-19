@@ -353,7 +353,7 @@ table.grid .gcalc th, table.grid .gcalc output { font-weight: 700; }
   :root, :root[data-theme="dark"] { --ink: #000; --mute: #444; --rule: #000; --hair: #bbb; --paper: #fff; --hover: #fff; }
   @page { margin: 14mm 12mm; }
   body { max-width: none; padding: 0; font-size: 12pt; }
-  .masthead nav, .topline, .byline, .actions, .sharebar, .copy-note, .stickybar, #coming-soon, .soon-box, footer .footer-links,
+  .masthead nav, .topline, .byline, .actions, .sharebar, .copy-note, .stickybar, #coming-soon, .soon-box, .sister, footer .footer-links,
   .helper-toggle, details.helper:not([open]), .theme-toggle { display: none !important; }
   .nameplate { font-size: 26pt; margin: 0 0 4px; }
   .print-head { display: flex; justify-content: space-between; gap: 12px; font-size: 9pt; border-bottom: 1px solid #000; padding-bottom: 4px; margin-bottom: 12px; }
@@ -461,3 +461,5 @@ table.grid .gcalc th, table.grid .gcalc output { font-weight: 700; }
   .mtx table.grid td input { width: 4.2em; font-size: 14px; padding: 4px; }
   .mtx table.grid td output { font-size: 13px; }
 }
+.nav-drop { width: min(24em, 92vw); }
+.nav-drop a { white-space: normal; line-height: 1.35; }

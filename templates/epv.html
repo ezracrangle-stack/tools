@@ -20,6 +20,8 @@
 
 <a href="#verdict" id="stickybar" class="stickybar" hidden></a>
 
+{{ sheet.subscribe(subscribe_url, "epv") }}
+
 <section class="prose">
   <h2 class="rule-head">Which companies it works for</h2>
   <p>Profitable businesses with a few years of steady results: consumer brands, distributors, services, small industrial firms that have been around a while. Their profits and capex this year say something about next year, and that's what an EPV needs.</p>
@@ -51,6 +53,5 @@
   <p>Owner earnings come from Warren Buffett's 1986 letter to Berkshire shareholders. So does the idea behind the maximum price: divide owner earnings by the government bond yield. Oakley swaps the bond yield for inflation plus 3%, because with bond yields near zero, Buffett's version justifies almost any price.</p>
 </section>
 
-{{ sheet.coming_soon("An AI version of this method, built as a Claude skill, is coming. It reads the annual reports, estimates maintenance capex and normal profits, and tells you how much of the price is a bet on growth. Subscribe to Ezra's Notes to get it first.", substack_embed) }}
 {% endblock %}
 {% block scripts %}<script type="module" src="{{ root }}static/epv.js?v={{ asset_v }}"></script>{% endblock %}
