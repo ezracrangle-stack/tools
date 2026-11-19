@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
+{% block title %}What to pay for quality: the Compounders' price matrix{% endblock %}
+{% block description %}How much more than the market you can pay for a business that reinvests at high returns, and the P/E that still earns your target return. From chapter 13 of The Compounders. Free, and it runs in your browser.{% endblock %}
+{% block main %}
+<section class="lede">
+  <h1 class="page-title">What to pay for quality</h1>
+  <p class="dek">A business that reinvests its profits at high returns is worth more than one that doesn't grow, and often much more than it looks. This calculator works out how much more, with the method from chapter 13 of <em>The Compounders</em> by Oddbjørn Dybvad, Kjetil Nyland and Adnan Hadžiefendić: the premium you can pay over the market for a given return and growth, and the P/E you can pay today and still earn your target return.</p>
+  <p>You need the return the company earns on the capital it adds and how fast it grows. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="cpform" class="calc" novalidate>
+  <p class="small">Percentages go in as whole numbers: 16 means 16%. P/Es as plain numbers: 18 means 18x. Fields with * are needed; section 4 works on its own once you fill in reinvestment and ROE.</p>
+
+{{ sheet.rows(rows, "Price matrix worksheet") }}
+
+{{ sheet.actions('"n/m" means the number can\'t be worked out, for example growth at or above the cost of capital forever.') }}
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">How it's calculated</h2>
+  <p>A business with no growth is worth its next year's earnings divided by the cost of capital: at 9.5%, about 10.5 times. A business that grows has to reinvest part of its earnings to do it, so less comes out as cash. How much less depends on the return on new capital: growth ÷ return is the share it has to put back.</p>
+  <p>Its value is (1 − growth ÷ return on new capital) ÷ (cost of capital − growth). The book doesn't print the formula; this is the standard one (McKinsey's <em>Valuation</em> uses it, and so does Michael Mauboussin), and it gives the book's table to within a point. When new capital earns exactly its cost, the two values are the same and growth is worth nothing. Below it, growth makes the business worth less.</p>
+  <p>The book assumes the growth lasts forever. Put a number of years and the business grows at your rate for those years, then keeps growing but only earns its cost of capital, so the extra growth adds nothing.</p>
+  <p>Section 4 follows the business for the years you hold it: earnings grow at reinvestment × ROE, you collect the rest as dividends, and you sell at the P/E you choose. The fair P/E is what all that is worth today at your target return.</p>
+
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Businesses that can keep reinvesting at returns above their cost of capital: serial acquirers like the ones in the book, and any company with room to grow and a record of high returns on the capital it adds.</p>
+  <p>It works badly for two kinds of company:</p>
+  <ul>
+    <li><strong>Banks and insurers.</strong> Their returns on capital mean something else. Use the ROE version in section 4 with care.</li>
+    <li><strong>Cyclicals and turnarounds.</strong> One year's return on capital says little about the next ten.</li>
+  </ul>
+
+  <h2 class="rule-head">What this calculator can't tell you</h2>
+  <h3>The return on new capital</h3>
+  <p>It's the number everything rests on, and it's the hardest to know. Measure it over several years (the <a href="{{ root }}roic/">ROIC calculator</a> gives you ROIIC over 3 and 5 years) and ask whether the company can keep finding places to put money at that return.</p>
+  <h3>How long it lasts</h3>
+  <p>Forever is a long time. Try 10 or 15 years and see how much of the premium survives.</p>
+  <h3>The market multiple</h3>
+  <p>The book treats "the market" as a business with no edge. The index P/E isn't exactly that, so read the justified P/E as a range.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>From chapter 13, "The Price Question", of <em>The Compounders</em> by Oddbjørn Dybvad, Kjetil Nyland and Adnan Hadžiefendić: Figure 13.1 for the premium and Figure 13.2 for the fair P/E. The authors' point: with a business that compounds for decades, it's better to make a mistake on the price than on the quality.</p>
+</section>
+
+{{ sheet.coming_soon("The full version is coming: an Excel template and an AI skill built for Claude. They pull the company's return on new capital and reinvestment from its filings, test how long the growth can last, and compare the price with the premium it justifies. Subscribe to Ezra's Notes to hear first.", substack_embed) }}
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ root }}static/compounders.js?v={{ asset_v }}"></script>{% endblock %}

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTNNLB6W9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FTNNLB6W9D');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>What to pay for quality: the Compounders' price matrix · Ezra's Notes</title>
+<meta name="description" content="How much more than the market you can pay for a business that reinvests at high returns, and the P/E that still earns your target return. From chapter 13 of The Compounders. Free, and it runs in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css?v=bd5656b3">
+<meta property="og:title" content="What to pay for quality: the Compounders' price matrix · Ezra's Notes">
+<meta property="og:description" content="How much more than the market you can pay for a business that reinvests at high returns, and the P/E that still earns your target return. From chapter 13 of The Compounders. Free, and it runs in your browser.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/compounders/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="../static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
+<link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/compounders/">
+</head>
+<body data-collect="https://script.google.com/macros/s/AKfycbz-a4q03dY00RYGWBKOHaKqYKL92Z3afAqhJ5iYdPQGYCMbU2CpFTR-JfEfArbdoUZXHg/exec" data-tool-name="the Compounders&#39; price matrix">
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="../">Tools</a>
+  <p class="byline">By <a href="https://x.com/ezracrangle">@ezracrangle</a></p>
+  <nav>
+    <a href="../">All tools</a>
+    <details class="nav-menu">
+      <summary>Compounders</summary>
+      <div class="nav-drop"><a href="../net-net/">Net-net</a><a href="../epv/">EPV</a><a href="../greenwald/">Greenwald</a><a href="../penman/">Penman</a><a href="../graham/">Graham</a><a href="../fcf/">Mauboussin</a><a href="../roic/">ROIC</a><a href="../reverse-dcf/">Reverse DCF</a><a href="../compounders/" aria-current="page">Compounders</a></div>
+    </details>
+    <a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<div class="print-head" aria-hidden="true"><strong>Ezra's Notes · Tools</strong><span id="print-stamp"></span></div>
+<div class="print-summary verdict" id="print-summary" aria-hidden="true"></div>
+<section class="lede">
+  <h1 class="page-title">What to pay for quality</h1>
+  <p class="dek">A business that reinvests its profits at high returns is worth more than one that doesn't grow, and often much more than it looks. This calculator works out how much more, with the method from chapter 13 of <em>The Compounders</em> by Oddbjørn Dybvad, Kjetil Nyland and Adnan Hadžiefendić: the premium you can pay over the market for a given return and growth, and the P/E you can pay today and still earn your target return.</p>
+  <p>You need the return the company earns on the capital it adds and how fast it grows. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="cpform" class="calc" novalidate>
+  <p class="small">Percentages go in as whole numbers: 16 means 16%. P/Es as plain numbers: 18 means 18x. Fields with * are needed; section 4 works on its own once you fill in reinvestment and ROE.</p>
+
+  <div class="sheet" role="group" aria-label="Price matrix worksheet">
+    <div class="srow head"><span class="lab">1. The business</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-r">Cost of capital (%)<span class="hint">The book uses 9.5%. It's also the return of a business with no edge, the baseline for 'the market'.</span></label>
+      <span class="cell"><input id="f-r" data-k="r" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="9.5" data-default="9.5"></span>
+    </div>
+    <div class="srow in key">
+      <label class="lab" for="f-ro">Return on new capital (%) *<span class="hint">What the company earns on the capital it adds (ROIIC), not on what it already has. The book's columns: 9.5% to 22%.</span></label>
+      <span class="cell"><input id="f-ro" data-k="ro" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in key">
+      <label class="lab" for="f-g">Growth, a year (%) *<span class="hint">Of earnings.</span></label>
+      <span class="cell"><input id="f-g" data-k="g" data-kind="percent" data-signed="1" type="text" inputmode="text" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-n">Years the growth lasts<span class="hint">Blank = forever, as in the book. With a number, the business keeps growing after that but only earns its cost of capital, so growth adds nothing more.</span></label>
+      <span class="cell"><input id="f-n" data-k="n" data-kind="years" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow head"><span class="lab">2. What it&#39;s worth</span></div>
+    <div class="srow calc-row"><span class="lab">No-growth business: value of $1 of next year&#39;s earnings<span class="hint">1 ÷ cost of capital</span></span><output class="cell" id="o-vng">–</output></div>
+    <div class="srow calc-row"><span class="lab">This business: value of $1 of next year&#39;s earnings<span class="hint">(1 − growth ÷ return on new capital) ÷ (cost of capital − growth), when growth lasts forever</span></span><output class="cell" id="o-v">–</output></div>
+    <div class="srow calc-row"><span class="lab">Value multiple vs no growth</span><output class="cell" id="o-mult">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Premium you can pay<span class="hint">Over the market multiple, if the market is a business with no edge.</span></span><output class="cell" id="o-prem">–</output></div>
+    <div class="srow calc-row"><span class="lab">Share of the value that comes from growth</span><output class="cell" id="o-fg">–</output></div>
+    <div class="srow calc-row"><span class="lab">Share of earnings it has to reinvest<span class="hint">Growth ÷ return on new capital</span></span><output class="cell" id="o-reinv">–</output></div>
+    <div class="srow head"><span class="lab">3. Against the market</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-mpe">Market P/E<span class="hint">Optional. The P/E of a business with no edge; the index P/E is a rough stand-in.</span></label>
+      <span class="cell"><input id="f-mpe" data-k="mpe" data-kind="pe" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-cpe">Company&#39;s P/E<span class="hint">Optional.</span></label>
+      <span class="cell"><input id="f-cpe" data-k="cpe" data-kind="pe" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row total"><span class="lab">P/E the premium justifies</span><output class="cell" id="o-jpe">–</output></div>
+    <div class="srow calc-row"><span class="lab">Premium you&#39;re paying<span class="hint">Company's P/E ÷ market P/E − 1</span></span><output class="cell" id="o-paying">–</output></div>
+    <div class="srow calc-row"><span class="lab">Justified P/E vs the company&#39;s P/E<span class="hint">Above zero: the price is below what the premium justifies.</span></span><output class="cell" id="o-room">–</output></div>
+<div class="profile cpm">
+  <p class="hsub">The premium matrix (Figure 13.1)</p>
+  <div class="gridwrap">
+  <table class="grid">
+    <thead><tr><th>Growth ↓ · return on new capital →</th><th><input data-k="mc1" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="9.5" data-default="9.5" aria-label="Return on new capital, column 1 (%)"></th><th><input data-k="mc2" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="12" data-default="12" aria-label="Return on new capital, column 2 (%)"></th><th><input data-k="mc3" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="16" data-default="16" aria-label="Return on new capital, column 3 (%)"></th><th><input data-k="mc4" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="18" data-default="18" aria-label="Return on new capital, column 4 (%)"></th><th><input data-k="mc5" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="22" data-default="22" aria-label="Return on new capital, column 5 (%)"></th></tr></thead>
+    <tbody>
+      <tr><th scope="row"><input data-k="mg1" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="5" data-default="5" aria-label="Growth, row 1 (%)"></th><td><output id="pm11">–</output></td><td><output id="pm12">–</output></td><td><output id="pm13">–</output></td><td><output id="pm14">–</output></td><td><output id="pm15">–</output></td></tr>
+      <tr><th scope="row"><input data-k="mg2" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="6" data-default="6" aria-label="Growth, row 2 (%)"></th><td><output id="pm21">–</output></td><td><output id="pm22">–</output></td><td><output id="pm23">–</output></td><td><output id="pm24">–</output></td><td><output id="pm25">–</output></td></tr>
+      <tr><th scope="row"><input data-k="mg3" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="8" data-default="8" aria-label="Growth, row 3 (%)"></th><td><output id="pm31">–</output></td><td><output id="pm32">–</output></td><td><output id="pm33">–</output></td><td><output id="pm34">–</output></td><td><output id="pm35">–</output></td></tr>
+      <tr><th scope="row"><input data-k="mg4" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" aria-label="Growth, row 4 (%)"></th><td><output id="pm41">–</output></td><td><output id="pm42">–</output></td><td><output id="pm43">–</output></td><td><output id="pm44">–</output></td><td><output id="pm45">–</output></td></tr>
+      <tr><th scope="row"><input data-k="mg5" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" aria-label="Growth, row 5 (%)"></th><td><output id="pm51">–</output></td><td><output id="pm52">–</output></td><td><output id="pm53">–</output></td><td><output id="pm54">–</output></td><td><output id="pm55">–</output></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="hint">Premium over a business with no growth, at your cost of capital and years. Type any returns and growth rates in the headers. Your company's cell is in bold when it's on the grid.</p>
+</div>    <div class="srow head"><span class="lab">4. Fair P/E for your target return</span></div>
+    <div class="srow note"><span class="lab">Figure 13.2 of the book: the P/E you can pay today and still earn your target, for a business that reinvests part of its earnings at a given ROE.</span></div>
+    <div class="srow in">
+      <label class="lab" for="f-rr">Share of earnings reinvested (%)<span class="hint">The book shows 60%, 70% and 80%. The rest is paid out to you.</span></label>
+      <span class="cell"><input id="f-rr" data-k="rr" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-roe">Return on equity (%)<span class="hint">On the earnings it keeps. The book's range: 10% to 30%.</span></label>
+      <span class="cell"><input id="f-roe" data-k="roe" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-k">Your target return (%)<span class="hint">The book uses 8% a year.</span></label>
+      <span class="cell"><input id="f-k" data-k="k" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="8" data-default="8"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-hy">Years you hold<span class="hint">The book uses 20.</span></label>
+      <span class="cell"><input id="f-hy" data-k="hy" data-kind="years" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="20" data-default="20"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-xpe">P/E you sell at<span class="hint">Blank = 1 ÷ your target return (12.5x at 8%): the business valued with no growth when you sell. The book doesn't say what it used.</span></label>
+      <span class="cell"><input id="f-xpe" data-k="xpe" data-kind="pe" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Earnings growth, a year<span class="hint">Reinvestment × ROE</span></span><output class="cell" id="o-fgr">–</output></div>
+    <div class="srow calc-row"><span class="lab">P/E you sell at, used</span><output class="cell" id="o-fx">–</output></div>
+    <div class="srow calc-row"><span class="lab">Dividends, per $1 of today&#39;s earnings<span class="hint">Present value at your target return</span></span><output class="cell" id="o-fdiv">–</output></div>
+    <div class="srow calc-row"><span class="lab">Sale, per $1 of today&#39;s earnings<span class="hint">Present value at your target return</span></span><output class="cell" id="o-fsale">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Fair P/E today</span><output class="cell" id="o-fpe">–</output></div>
+    <div class="srow calc-row"><span class="lab">Earnings when you sell, per $1 today</span><output class="cell" id="o-fen">–</output></div>
+    <div class="srow in">
+      <label class="lab" for="f-fpe2">Company&#39;s P/E<span class="hint">Optional, to compare.</span></label>
+      <span class="cell"><input id="f-fpe2" data-k="fpe2" data-kind="pe" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Fair P/E vs the company&#39;s P/E<span class="hint">Above zero: at today's P/E you'd earn more than your target, if the reinvestment and ROE hold.</span></span><output class="cell" id="o-fvs">–</output></div>
+<div class="profile cpm">
+  <p class="hsub">Fair P/E by reinvestment and ROE (Figure 13.2)</p>
+  <div class="gridwrap">
+  <table class="grid">
+    <thead><tr><th>Reinvested ↓ · ROE →</th><th><input data-k="fe1" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="10" data-default="10" aria-label="ROE, column 1 (%)"></th><th><input data-k="fe2" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="12" data-default="12" aria-label="ROE, column 2 (%)"></th><th><input data-k="fe3" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="14" data-default="14" aria-label="ROE, column 3 (%)"></th><th><input data-k="fe4" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="16" data-default="16" aria-label="ROE, column 4 (%)"></th><th><input data-k="fe5" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="18" data-default="18" aria-label="ROE, column 5 (%)"></th><th><input data-k="fe6" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="20" data-default="20" aria-label="ROE, column 6 (%)"></th><th><input data-k="fe7" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="22" data-default="22" aria-label="ROE, column 7 (%)"></th><th><input data-k="fe8" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="24" data-default="24" aria-label="ROE, column 8 (%)"></th><th><input data-k="fe9" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="26" data-default="26" aria-label="ROE, column 9 (%)"></th><th><input data-k="fe10" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="28" data-default="28" aria-label="ROE, column 10 (%)"></th><th><input data-k="fe11" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="30" data-default="30" aria-label="ROE, column 11 (%)"></th></tr></thead>
+    <tbody>
+      <tr><th scope="row"><input data-k="fr1" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="60" data-default="60" aria-label="Reinvestment, row 1 (%)"></th><td><output id="fp11">–</output></td><td><output id="fp12">–</output></td><td><output id="fp13">–</output></td><td><output id="fp14">–</output></td><td><output id="fp15">–</output></td><td><output id="fp16">–</output></td><td><output id="fp17">–</output></td><td><output id="fp18">–</output></td><td><output id="fp19">–</output></td><td><output id="fp110">–</output></td><td><output id="fp111">–</output></td></tr>
+      <tr><th scope="row"><input data-k="fr2" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="70" data-default="70" aria-label="Reinvestment, row 2 (%)"></th><td><output id="fp21">–</output></td><td><output id="fp22">–</output></td><td><output id="fp23">–</output></td><td><output id="fp24">–</output></td><td><output id="fp25">–</output></td><td><output id="fp26">–</output></td><td><output id="fp27">–</output></td><td><output id="fp28">–</output></td><td><output id="fp29">–</output></td><td><output id="fp210">–</output></td><td><output id="fp211">–</output></td></tr>
+      <tr><th scope="row"><input data-k="fr3" data-kind="percent" type="text" inputmode="decimal" autocomplete="off" value="80" data-default="80" aria-label="Reinvestment, row 3 (%)"></th><td><output id="fp31">–</output></td><td><output id="fp32">–</output></td><td><output id="fp33">–</output></td><td><output id="fp34">–</output></td><td><output id="fp35">–</output></td><td><output id="fp36">–</output></td><td><output id="fp37">–</output></td><td><output id="fp38">–</output></td><td><output id="fp39">–</output></td><td><output id="fp310">–</output></td><td><output id="fp311">–</output></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="hint">At your target return, years and exit P/E. The book's chart runs higher at 80% reinvestment (243x at a 30% ROE) and lower at 60%: it doesn't say how it treats dividends or the sale, so the numbers won't match it exactly.</p>
+</div>  </div>
+
+
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
+  <div class="actions">
+    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
+    <button type="button" class="button ghost" id="reset">Clear</button>
+  </div>
+<p class="copy-note">&#34;n/m&#34; means the number can&#39;t be worked out, for example growth at or above the cost of capital forever.</p>  <div class="sharebar" id="sharebar">
+    <label class="sb-co"><span>Company or ticker <em>(optional, goes in the link and the files)</em></span>
+      <input id="sb-company" type="text" maxlength="60" autocomplete="off" spellcheck="false" placeholder="e.g. ACME"></label>
+    <div class="sb-groups">
+      <p class="share-buttons"><span class="sb-k">Share</span>
+        <button type="button" id="sb-x">X</button>
+        <button type="button" id="sb-in">LinkedIn</button>
+        <button type="button" id="sb-native" hidden>More</button></p>
+      <p class="share-buttons"><span class="sb-k">Download</span>
+        <button type="button" id="sb-pdf">PDF</button>
+        <button type="button" id="sb-csv">CSV</button></p>
+      <p class="share-buttons sb-community" hidden><span class="sb-k">Community</span>
+        <button type="button" id="sb-save">Send to Ezra</button>
+        <button type="button" id="sb-tm">Leave a testimonial</button></p>
+    </div>
+    <div class="sb-box" id="sb-savebox" hidden>
+      <p>Send this calculation to Ezra. He reads them, and with your OK he may share some with the community. Nothing leaves your browser until you press Send.</p>
+      <label>Your name or X handle <em>(optional)</em> <input id="sb-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label class="check"><input id="sb-ok" type="checkbox"> Ezra can publish this calculation and my name or handle</label>
+      <input id="sb-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="sb-send">Send</button> <span id="sb-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+    <div class="sb-box" id="testimonial" hidden>
+      <p>Did this calculator help you? Tell Ezra in a few words.</p>
+      <label>What did it help you with? <textarea id="tm-text" rows="4" maxlength="1500"></textarea></label>
+      <label>Name <input id="tm-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label>X or LinkedIn handle <em>(optional)</em> <input id="tm-handle" type="text" maxlength="80" autocomplete="off"></label>
+      <label>What you do <em>(optional, e.g. "individual investor" or "analyst at a fund")</em> <input id="tm-role" type="text" maxlength="120" autocomplete="off"></label>
+      <label class="check"><input id="tm-ok" type="checkbox"> Ezra can publish this on the site with my name</label>
+      <input id="tm-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="tm-send">Send</button> <span id="tm-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+  </div>
+
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<section class="prose">
+  <h2 class="rule-head">How it's calculated</h2>
+  <p>A business with no growth is worth its next year's earnings divided by the cost of capital: at 9.5%, about 10.5 times. A business that grows has to reinvest part of its earnings to do it, so less comes out as cash. How much less depends on the return on new capital: growth ÷ return is the share it has to put back.</p>
+  <p>Its value is (1 − growth ÷ return on new capital) ÷ (cost of capital − growth). The book doesn't print the formula; this is the standard one (McKinsey's <em>Valuation</em> uses it, and so does Michael Mauboussin), and it gives the book's table to within a point. When new capital earns exactly its cost, the two values are the same and growth is worth nothing. Below it, growth makes the business worth less.</p>
+  <p>The book assumes the growth lasts forever. Put a number of years and the business grows at your rate for those years, then keeps growing but only earns its cost of capital, so the extra growth adds nothing.</p>
+  <p>Section 4 follows the business for the years you hold it: earnings grow at reinvestment × ROE, you collect the rest as dividends, and you sell at the P/E you choose. The fair P/E is what all that is worth today at your target return.</p>
+
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Businesses that can keep reinvesting at returns above their cost of capital: serial acquirers like the ones in the book, and any company with room to grow and a record of high returns on the capital it adds.</p>
+  <p>It works badly for two kinds of company:</p>
+  <ul>
+    <li><strong>Banks and insurers.</strong> Their returns on capital mean something else. Use the ROE version in section 4 with care.</li>
+    <li><strong>Cyclicals and turnarounds.</strong> One year's return on capital says little about the next ten.</li>
+  </ul>
+
+  <h2 class="rule-head">What this calculator can't tell you</h2>
+  <h3>The return on new capital</h3>
+  <p>It's the number everything rests on, and it's the hardest to know. Measure it over several years (the <a href="../roic/">ROIC calculator</a> gives you ROIIC over 3 and 5 years) and ask whether the company can keep finding places to put money at that return.</p>
+  <h3>How long it lasts</h3>
+  <p>Forever is a long time. Try 10 or 15 years and see how much of the premium survives.</p>
+  <h3>The market multiple</h3>
+  <p>The book treats "the market" as a business with no edge. The index P/E isn't exactly that, so read the justified P/E as a range.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>From chapter 13, "The Price Question", of <em>The Compounders</em> by Oddbjørn Dybvad, Kjetil Nyland and Adnan Hadžiefendić: Figure 13.1 for the premium and Figure 13.2 for the fair P/E. The authors' point: with a business that compounds for decades, it's better to make a mistake on the price than on the quality.</p>
+</section>
+
+<aside class="wanted soon-box" id="coming-soon">
+  <p class="wanted-kicker">Coming soon</p>
+  <p class="wanted-head">The AI version</p>
+  <p class="wanted-body">The full version is coming: an Excel template and an AI skill built for Claude. They pull the company&#39;s return on new capital and reinvestment from its filings, test how long the growth can last, and compare the price with the premium it justifies. Subscribe to Ezra&#39;s Notes to hear first.</p>
+  <iframe class="substack" src="https://www.ezrasnotes.com/embed" title="Subscribe to Ezra's Notes" width="480" height="150" frameborder="0" scrolling="no" loading="lazy"></iframe>
+</aside>
+
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Holdings</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a inversores</a>
+  </p>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var f=document.querySelector('iframe.substack');if(f){window.addEventListener('blur',function(){setTimeout(function(){if(document.activeElement===f)t('subscribe_click',{location:'coming_soon_box',page:location.pathname})},0)})}})();</script>
+<script>document.addEventListener("click",function(e){var m=document.querySelector(".nav-menu[open]");if(m&&!m.contains(e.target))m.removeAttribute("open")});</script>
+<script src="../static/share.js?v=bd5656b3"></script><script type="module" src="../static/compounders.js?v=bd5656b3"></script></body>
+</html>

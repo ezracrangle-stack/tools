@@ -380,3 +380,8 @@ table.grid .gcalc th, table.grid .gcalc output { font-weight: 700; }
   .ytable table.grid th:nth-child(3), .ytable table.grid td:nth-child(3) { display: none; }
   .ytable table.grid td, .ytable table.grid tbody th { font-size: 13px; min-width: 0; }
 }
+.cpm table.grid thead th input, .cpm table.grid tbody th input { width: 4.2em; padding: 5px 4px; font-size: 14px; text-align: right; }
+.cpm table.grid tbody th { min-width: 0; }
+.cpm table.grid thead th:first-child { text-align: left; white-space: normal; min-width: 8em; }
+.cpm table.grid td { text-align: right; }
+.cpm table.grid td.hit output { font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }

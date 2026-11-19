@@ -66,6 +66,13 @@ tools:
     status: live
     blurb: How many years of above-cost returns the price already assumes, and the sales growth it needs. Mauboussin and Rappaport's method, with your own numbers.
 
+  - slug: compounders
+    share: "the Compounders' price matrix"
+    name: What to pay for quality
+    nav: Compounders
+    status: live
+    blurb: How much more than the market you can pay for a business that reinvests at high returns, and the P/E that still earns your target. From The Compounders.
+
 
   - slug: red-flags
     name: Red flags
@@ -511,3 +518,44 @@ reverse_dcf_rows:
   - {type: calc, k: igb, label: "Versus your sales growth"}
   - {type: calc, k: igh, label: "Versus the last 3 years", hint: "Needs the last-3-years helper in section 2."}
   - {type: helper, id: rd-table}
+
+# What to pay for quality: The Compounders, chapter 13. Same order as Pay_For_Quality_Template.xlsx.
+compounders_rows:
+  - {type: head, label: "1. The business"}
+  - {type: input, k: r, label: "Cost of capital (%)", kind: percent, default: "9.5", hint: "The book uses 9.5%. It's also the return of a business with no edge, the baseline for 'the market'."}
+  - {type: input, k: ro, label: "Return on new capital (%)", kind: percent, key: true, hint: "What the company earns on the capital it adds (ROIIC), not on what it already has. The book's columns: 9.5% to 22%."}
+  - {type: input, k: g, label: "Growth, a year (%)", kind: percent, key: true, signed: true, hint: "Of earnings."}
+  - {type: input, k: n, label: "Years the growth lasts", kind: years, hint: "Blank = forever, as in the book. With a number, the business keeps growing after that but only earns its cost of capital, so growth adds nothing more."}
+
+  - {type: head, label: "2. What it's worth"}
+  - {type: calc, k: vng, label: "No-growth business: value of $1 of next year's earnings", hint: "1 ÷ cost of capital"}
+  - {type: calc, k: v, label: "This business: value of $1 of next year's earnings", hint: "(1 − growth ÷ return on new capital) ÷ (cost of capital − growth), when growth lasts forever"}
+  - {type: calc, k: mult, label: "Value multiple vs no growth"}
+  - {type: total, k: prem, label: "Premium you can pay", hint: "Over the market multiple, if the market is a business with no edge."}
+  - {type: calc, k: fg, label: "Share of the value that comes from growth"}
+  - {type: calc, k: reinv, label: "Share of earnings it has to reinvest", hint: "Growth ÷ return on new capital"}
+
+  - {type: head, label: "3. Against the market"}
+  - {type: input, k: mpe, label: "Market P/E", kind: pe, hint: "Optional. The P/E of a business with no edge; the index P/E is a rough stand-in."}
+  - {type: input, k: cpe, label: "Company's P/E", kind: pe, hint: "Optional."}
+  - {type: total, k: jpe, label: "P/E the premium justifies"}
+  - {type: calc, k: paying, label: "Premium you're paying", hint: "Company's P/E ÷ market P/E − 1"}
+  - {type: calc, k: room, label: "Justified P/E vs the company's P/E", hint: "Above zero: the price is below what the premium justifies."}
+  - {type: helper, id: cp-matrix}
+
+  - {type: head, label: "4. Fair P/E for your target return"}
+  - {type: note, label: "Figure 13.2 of the book: the P/E you can pay today and still earn your target, for a business that reinvests part of its earnings at a given ROE."}
+  - {type: input, k: rr, label: "Share of earnings reinvested (%)", kind: percent, hint: "The book shows 60%, 70% and 80%. The rest is paid out to you."}
+  - {type: input, k: roe, label: "Return on equity (%)", kind: percent, hint: "On the earnings it keeps. The book's range: 10% to 30%."}
+  - {type: input, k: k, label: "Your target return (%)", kind: percent, default: 8, hint: "The book uses 8% a year."}
+  - {type: input, k: hy, label: "Years you hold", kind: years, default: 20, hint: "The book uses 20."}
+  - {type: input, k: xpe, label: "P/E you sell at", kind: pe, hint: "Blank = 1 ÷ your target return (12.5x at 8%): the business valued with no growth when you sell. The book doesn't say what it used."}
+  - {type: calc, k: fgr, label: "Earnings growth, a year", hint: "Reinvestment × ROE"}
+  - {type: calc, k: fx, label: "P/E you sell at, used"}
+  - {type: calc, k: fdiv, label: "Dividends, per $1 of today's earnings", hint: "Present value at your target return"}
+  - {type: calc, k: fsale, label: "Sale, per $1 of today's earnings", hint: "Present value at your target return"}
+  - {type: total, k: fpe, label: "Fair P/E today"}
+  - {type: calc, k: fen, label: "Earnings when you sell, per $1 today"}
+  - {type: input, k: fpe2, label: "Company's P/E", kind: pe, hint: "Optional, to compare."}
+  - {type: calc, k: fvs, label: "Fair P/E vs the company's P/E", hint: "Above zero: at today's P/E you'd earn more than your target, if the reinvestment and ROE hold."}
+  - {type: helper, id: cp-grid}
