@@ -121,10 +121,6 @@ tools:
 
 
 
-  - slug: moat-management
-    name: Moat and management scorecard
-    status: soon
-    blurb: A scorecard for the competitive advantage and the people running it.
 
 # The net-net calculator, row by row, in the same order as Ezra's Excel template.
 # type: head (section title), input, calc (calculated line), result (total + per share),
