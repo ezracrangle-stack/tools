@@ -26,3 +26,9 @@ Already listed as "Coming soon" on the site: reverse DCF, red flags, moat and ma
    - Upload the book before building, to check the examples.
 
 Not for the site: Acquirer's Multiple, Magic Formula and Martin Whitman screens. Ezra will run them himself, sort the results into monitors (Value Line / Manual of Ideas style) and publish them for paid subscribers of the newsletter.
+
+10. **Take the market's temperature (Howard Marks).** Mastering the Market Cycle (2018), the "taking the temperature" checklist.
+   - Free tool: Marks's pairs (economy vibrant/sluggish, lenders eager/reticent, investors optimistic/pessimistic, issuance quality, etc.), each scored −2 to +2 by the user → cold / cool / neutral / warm / hot, plus the posture for a quality investor (how demanding to be on margin of safety; never buy/sell advice). Shareable on X.
+   - Box below: "This month's reading: [X]. The full report, with the data behind it, is for paid subscribers." Impersonal voice. One line in tools.yaml that Ezra updates monthly.
+   - The monthly Market Temperature report itself (data, indicators, credit cycle, posture) stays paid.
+   - Upload the book before building, to take Marks's exact pairs (paraphrased).
