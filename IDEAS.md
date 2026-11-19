@@ -39,3 +39,9 @@ Not for the site: Acquirer's Multiple, Magic Formula and Martin Whitman screens.
    - REQ letter example: ROE 20%, reinvestment ~73% → fair P/E around 45.
    - Caveat on the page: only holds if incremental ROIC stays at or above today's ROIC; read with the ROIIC tool.
    - Need the chapter or photos of the matrix to confirm the assumptions (exit P/E, dividends from what isn't reinvested) before building.
+
+12. **Fisher's 15 points (scorecard, complement to the moat and management scorecard).** Philip Fisher, Common Stocks and Uncommon Profits and Other Writings, ch. 3.
+   - Each of the 15 points as a question (paraphrased), answered yes / partly / no, with a box for the evidence (scuttlebutt: customers, suppliers, competitors, former employees). Ends with the points met and the gaps; no pass/fail (Fisher says a great company can miss a few).
+   - Add the three reasons to sell, and the four dimensions of Conservative Investors Sleep Well (same edition).
+   - Separate tool, linked with the moat and management scorecard. Paid version: the management-assessment skill.
+   - Upload the book before building, to paraphrase the points faithfully.
