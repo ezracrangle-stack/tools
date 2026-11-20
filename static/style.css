@@ -480,3 +480,13 @@ table.grid .gcalc th, table.grid .gcalc output { font-weight: 700; }
 .pdf-mode footer { margin-top: 12px; padding-top: 6px; }
 .pdf-mode .print-summary, .pdf-mode .verdict { box-sizing: border-box; max-width: 100%; overflow-wrap: anywhere; }
 .pdf-mode .print-summary p { padding-right: 14px; }
+
+/* ── Back to top ─────────────────────────── */
+.to-top { position: fixed; right: 20px; bottom: 20px; z-index: 50; width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center; border: 2px solid var(--ink);
+  background: var(--paper); color: var(--ink); font: 20px/1 var(--head); text-decoration: none;
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity .2s, transform .2s, visibility .2s; }
+.to-top.show { opacity: 1; visibility: visible; transform: none; }
+.to-top:hover, .to-top:focus-visible { background: var(--ink); color: var(--paper); }
+@media print { .to-top { display: none; } }

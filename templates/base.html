@@ -63,5 +63,18 @@ var boxes=document.querySelectorAll('.subscribe');if(boxes.length&&'Intersection
 <script>document.addEventListener("click",function(e){var m=document.querySelector(".nav-menu[open]");if(m&&!m.contains(e.target))m.removeAttribute("open")});</script>
 {% if tool %}<script src="{{ root }}static/share.js?v={{ asset_v }}"></script>{% endif %}
 {% block scripts %}{% endblock %}
+<a href="#" class="to-top" id="to-top" aria-label="Back to top" title="Back to top">&uarr;</a>
+<script>
+(function () {
+  var b = document.getElementById('to-top');
+  function check() { b.classList.toggle('show', window.scrollY > window.innerHeight * 1.2); }
+  window.addEventListener('scroll', check, { passive: true }); check();
+  b.addEventListener('click', function (e) {
+    e.preventDefault();
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: still ? 'auto' : 'smooth' });
+  });
+})();
+</script>
 </body>
 </html>
