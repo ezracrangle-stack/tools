@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
+{% macro inrow(k, label, hint, signed=false, default="") %}
+    <div class="srow in{% if not default and not signed %}{% endif %}">
+      <label class="lab" for="f-{{ k }}">{{ label }}{% if hint %}<span class="hint">{{ hint }}</span>{% endif %}</label>
+      <span class="cell"><input id="f-{{ k }}" data-k="{{ k }}"{% if signed %} data-signed="1"{% endif %} type="text" inputmode="{{ 'text' if signed else 'decimal' }}" autocomplete="off"{% if default %} value="{{ default }}" data-default="{{ default }}"{% endif %}></span>
+    </div>
+{%- endmacro %}
+{% block title %}Intangibles and earnings: what a company earns once its intangible investment counts as investment{% endblock %}
+{% block description %}Mauboussin and Callahan's adjustment: capitalize the part of SG&A and R&D that is investment, by industry, and see operating margin, net income, book value, P/E and P/B before and after. Free, and it runs in your browser.{% endblock %}
+{% block main %}
+<section class="lede">
+  <h1 class="page-title">Intangibles and earnings</h1>
+  <p class="dek">Accounting books a new factory as an asset, but most spending on brands, customers, software and R&amp;D as an expense. Companies that invest in intangibles look less profitable than they are. This calculator, from Michael Mauboussin and Dan Callahan's <em>Intangibles and Earnings</em>, treats that spending as an investment and shows what changes.</p>
+  <p>Copy the numbers from the annual report. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="intform" class="calc" novalidate>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-co">Company<span class="hint">Optional, for the link and the files.</span></label>
+      <span class="cell"><input id="f-co" type="text" maxlength="60" autocomplete="off" spellcheck="false" style="text-align:left"></span>
+    </div>
+    <div class="srow head"><span class="lab">The company, latest year</span></div>
+    {{ inrow("rev", "Revenue", "Same unit for every amount.") }}
+    {{ inrow("ebit", "Operating income", "As reported.", true) }}
+    {{ inrow("ni", "Net income", "As reported.", true) }}
+    {{ inrow("sga", "SG&A, excluding R&D", "If the company reports R&D inside SG&A, take it out.") }}
+    {{ inrow("rd", "R&D", "Leave blank if there's none.") }}
+    {{ inrow("g", "Annual growth of SG&A and R&D (%)", "Recent growth of this spending, e.g. over the last 3-5 years. Inflation counts too.", true) }}
+    {{ inrow("tax", "Tax rate (%)", "Optional. Blank = no tax, as in the paper.") }}
+    {{ inrow("eq", "Shareholders' equity", "Optional, for book value and P/B.", true) }}
+    {{ inrow("mcap", "Market value of the shares", "Optional, for P/E and P/B.") }}
+
+    <div class="srow head"><span class="lab">How much of it is investment</span></div>
+    <div class="srow in key">
+      <label class="lab" for="f-ind">Industry<span class="hint">Fills in the figures below, from the study the paper uses.</span></label>
+      <span class="cell"><select id="f-ind" data-default="Business Services" aria-label="Industry"></select></span>
+    </div>
+  </div>
+  <div class="profile csx">
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Industry figure</th><th>Your figure</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">SG&amp;A that is investment (%)</th><td><output id="t-smain">–</output></td><td><input data-k="smain" id="f-smain" type="text" inputmode="decimal" autocomplete="off" aria-label="Your figure: SG&amp;A that is investment"></td></tr>
+      <tr><th scope="row">R&amp;D that is investment (%)</th><td><output id="t-srd">–</output></td><td><input data-k="srd" id="f-srd" type="text" inputmode="decimal" autocomplete="off" aria-label="Your figure: R&amp;D that is investment"></td></tr>
+      <tr><th scope="row">Useful life of SG&amp;A investment (years)</th><td><output id="t-lmain">–</output></td><td><input data-k="lmain" id="f-lmain" type="text" inputmode="decimal" autocomplete="off" aria-label="Your figure: useful life of SG&amp;A investment"></td></tr>
+      <tr><th scope="row">Useful life of R&amp;D investment (years)</th><td><output id="t-lrd">–</output></td><td><input data-k="lrd" id="f-lrd" type="text" inputmode="decimal" autocomplete="off" aria-label="Your figure: useful life of R&amp;D investment"></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="hint">Leave "Your figure" blank to use the industry's. Change it if you know the company better: a software firm's marketing may last longer than its industry's average. Lives up to 10 years; decimals are fine.</p>
+  </div>
+
+  <div class="profile csx">
+    <p class="hsub">The adjustment</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>SG&amp;A</th><th>R&amp;D</th><th>Total</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">Investment this year<span class="hint">Taken out of expenses.</span></th><td><output id="o-invm">–</output></td><td><output id="o-invr">–</output></td><td><output id="o-inv">–</output></td></tr>
+      <tr><th scope="row">Amortization of past investment<span class="hint">Added back, straight line from the year after.</span></th><td><output id="o-amm">–</output></td><td><output id="o-amr">–</output></td><td><output id="o-am">–</output></td></tr>
+      <tr class="rf-strong"><th scope="row">Change in operating income</th><td><output id="o-dm">–</output></td><td><output id="o-dr">–</output></td><td><output id="o-d">–</output></td></tr>
+      <tr><th scope="row">Intangible capital not on the balance sheet</th><td><output id="o-asm">–</output></td><td><output id="o-asr">–</output></td><td><output id="o-as">–</output></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="profile csx">
+    <p class="hsub">Before and after</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>As reported</th><th>Adjusted</th><th>Change</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">Operating income</th><td><output id="b-ebit">–</output></td><td><output id="a-ebit">–</output></td><td></td></tr>
+      <tr class="rf-strong"><th scope="row">Operating margin</th><td><output id="b-m">–</output></td><td><output id="a-m">–</output></td><td><output id="c-m">–</output></td></tr>
+      <tr><th scope="row">Net income</th><td><output id="b-ni">–</output></td><td><output id="a-ni">–</output></td><td><output id="c-ni">–</output></td></tr>
+      <tr><th scope="row">Shareholders' equity</th><td><output id="b-eq">–</output></td><td><output id="a-eq">–</output></td><td><output id="c-eq">–</output></td></tr>
+      <tr><th scope="row">P/E</th><td><output id="b-pe">–</output></td><td><output id="a-pe">–</output></td><td></td></tr>
+      <tr><th scope="row">P/B</th><td><output id="b-pb">–</output></td><td><output id="a-pb">–</output></td><td></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="srow test"><span class="lab">Reading<span class="hint">Our cut, not the paper's: under 0.5 points of margin barely moves; 3 points or more is large.</span></span><output class="cell" id="x-read">–</output></div>
+  </div>
+
+{{ sheet.actions('These are estimates: the size of the adjustment, not a restatement of the accounts.') }}
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+{{ sheet.subscribe(subscribe_url, "intangibles") }}
+
+<section class="prose">
+  <h2 class="rule-head">Why earnings mislead</h2>
+  <p>A company that spends $1,000 on a machine that lasts 5 years books it as an asset and expenses $200 a year. A company that spends $1,000 to win a customer who stays 5 years expenses all $1,000 at once, inside SG&amp;A. Same economics, different accounting. And the faster the second company grows, the more its reported earnings understate what it makes.</p>
+  <p>Mauboussin and Callahan's fix: treat the part of SG&amp;A and R&amp;D that is investment the way accounting treats capex. Take it out of expenses, put it on the balance sheet, and amortize it over its useful life. Free cash flow doesn't change. Earnings, book value and the multiples built on them do.</p>
+
+  <h2 class="rule-head">How much of SG&amp;A is investment</h2>
+  <p>It depends on the industry. The paper uses a 2022 study by Aneel Iqbal, Shivaram Rajgopal, Anup Srivastava and Rong Zhao that estimated, for 42 industries, how much of SG&amp;A (without R&amp;D) and of R&amp;D is investment, and how long it lasts. It goes from 0% of SG&amp;A in transportation to 80% in precious metals; the average is 54% of SG&amp;A and 76% of R&amp;D, with lives of 3.3 and 4.4 years. Many analysts capitalize the same share for every company, which hides those differences.</p>
+
+  <h2 class="rule-head">Why growth matters</h2>
+  <p>If the spending doesn't grow, this year's investment and the amortization of past years end up equal, and earnings don't change. Growth opens the gap: this year's investment is bigger than the older, smaller years being amortized. In the paper's example, with 30% of $1,000 of SG&amp;A as investment, a 3-year life and 10% growth, SG&amp;A falls about 5.1%. If the spending shrinks, the adjustment lowers earnings.</p>
+  <p>In the paper's cases (2021), a pharmaceutical company's operating margin went from −0.9% to 14.6% and a business-supplies company's from 3.4% to 4.0%. For the S&amp;P 500, net income would be about 12% higher.</p>
+
+  <h2 class="rule-head">Our assumptions</h2>
+  <p>Spending has grown at a steady rate, and each year's investment is amortized in a straight line from the year after. The paper adds the change to net income before tax; leave the tax rate blank to do the same, or fill it in to move net income and book value after tax. The reading's cut-offs are ours.</p>
+
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Any company that invests through SG&amp;A or R&amp;D: software, consumer brands, pharma, services. It moves little for companies whose investment is mostly capex. Not for banks and insurers. Pair it with the <a href="{{ root }}roic/">ROIC calculator</a>: capitalizing intangibles raises invested capital too, which usually brings very high ROICs down to earth.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>Michael J. Mauboussin and Dan Callahan, "Intangibles and Earnings: Improving the Usefulness of Financial Statements", Counterpoint Global Insights, April 12, 2022. Industry figures: Aneel Iqbal, Shivaram Rajgopal, Anup Srivastava and Rong Zhao, "Value of Internally Generated Intangible Capital", working paper, February 2022.</p>
+</section>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ root }}static/intangibles.js?v={{ asset_v }}"></script>{% endblock %}

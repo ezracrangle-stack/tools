@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTNNLB6W9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FTNNLB6W9D');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>Intangibles and earnings: what a company earns once its intangible investment counts as investment · Ezra's Notes</title>
+<meta name="description" content="Mauboussin and Callahan's adjustment: capitalize the part of SG&A and R&D that is investment, by industry, and see operating margin, net income, book value, P/E and P/B before and after. Free, and it runs in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css?v=b7e7608f">
+<meta property="og:title" content="Intangibles and earnings: what a company earns once its intangible investment counts as investment · Ezra's Notes">
+<meta property="og:description" content="Mauboussin and Callahan's adjustment: capitalize the part of SG&A and R&D that is investment, by industry, and see operating margin, net income, book value, P/E and P/B before and after. Free, and it runs in your browser.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/intangibles/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="../static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
+<link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/intangibles/"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://tools.ezrasnotes.com/", "name": "Home", "position": 1}, {"@type": "ListItem", "item": "https://tools.ezrasnotes.com/intangibles/", "name": "Intangibles and earnings: what a company earns once its intangible investment counts as investment", "position": 2}]}</script></head>
+<body data-collect="https://script.google.com/macros/s/AKfycbz-a4q03dY00RYGWBKOHaKqYKL92Z3afAqhJ5iYdPQGYCMbU2CpFTR-JfEfArbdoUZXHg/exec" data-tool-name="the intangibles and earnings calculator">
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="../">Tools</a>
+  <p class="byline">By <a href="https://www.ezrasnotes.com">@ezracrangle</a></p>
+  <nav>
+    <a href="../">All tools</a>
+    <details class="nav-menu">
+      <summary>Tools</summary>
+      <div class="nav-drop"><a href="../net-net/">Net-net calculator</a><a href="../epv/">Earnings power value</a><a href="../greenwald/">Greenwald&#39;s moat test</a><a href="../penman/">Penman&#39;s residual income</a><a href="../graham/">Graham&#39;s formulas</a><a href="../fcf/">Mauboussin&#39;s FCF</a><a href="../roic/">ROIC, ROIIC and reinvestment</a><a href="../reverse-dcf/">Reverse DCF</a><a href="../compounders/">What to pay for quality</a><a href="../dhandho/">Pabrai&#39;s Dhandho bet</a><a href="../lynch/">Peter Lynch&#39;s PEG</a><a href="../marks/">Howard Marks&#39; market temperature</a><a href="../intangibles/" aria-current="page">Intangibles and earnings</a><a href="../moat/">Measuring the moat</a><a href="../red-flags/">Red flags</a><a href="../beauty-contest/">Keynes&#39; beauty contest</a></div>
+    </details>
+    <a href="../about/">About</a>
+    <a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<div class="print-head" aria-hidden="true"><strong>Ezra's Notes · Tools</strong><span id="print-stamp"></span></div>
+<div class="print-summary verdict" id="print-summary" aria-hidden="true"></div>
+<section class="lede">
+  <h1 class="page-title">Intangibles and earnings</h1>
+  <p class="dek">Accounting books a new factory as an asset, but most spending on brands, customers, software and R&amp;D as an expense. Companies that invest in intangibles look less profitable than they are. This calculator, from Michael Mauboussin and Dan Callahan's <em>Intangibles and Earnings</em>, treats that spending as an investment and shows what changes.</p>
+  <p>Copy the numbers from the annual report. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="intform" class="calc" novalidate>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-co">Company<span class="hint">Optional, for the link and the files.</span></label>
+      <span class="cell"><input id="f-co" type="text" maxlength="60" autocomplete="off" spellcheck="false" style="text-align:left"></span>
+    </div>
+    <div class="srow head"><span class="lab">The company, latest year</span></div>
+        <div class="srow in">
+      <label class="lab" for="f-rev">Revenue<span class="hint">Same unit for every amount.</span></label>
+      <span class="cell"><input id="f-rev" data-k="rev" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+        <div class="srow in">
+      <label class="lab" for="f-ebit">Operating income<span class="hint">As reported.</span></label>
+      <span class="cell"><input id="f-ebit" data-k="ebit" data-signed="1" type="text" inputmode="text" autocomplete="off"></span>
+    </div>
+        <div class="srow in">
+      <label class="lab" for="f-ni">Net income<span class="hint">As reported.</span></label>
+      <span class="cell"><input id="f-ni" data-k="ni" data-signed="1" type="text" inputmode="text" autocomplete="off"></span>
+    </div>
+        <div class="srow in">
+      <label class="lab" for="f-sga">SG&amp;A, excluding R&amp;D<span class="hint">If the company reports R&amp;D inside SG&amp;A, take it out.</span></label>
+      <span class="cell"><input id="f-sga" data-k="sga" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+        <div class="srow in">
+      <label class="lab" for="f-rd">R&amp;D<span class="hint">Leave blank if there&#39;s none.</span></label>
+      <span class="cell"><input id="f-rd" data-k="rd" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+        <div class="srow in">
+      <label class="lab" for="f-g">Annual growth of SG&amp;A and R&amp;D (%)<span class="hint">Recent growth of this spending, e.g. over the last 3-5 years. Inflation counts too.</span></label>
+      <span class="cell"><input id="f-g" data-k="g" data-signed="1" type="text" inputmode="text" autocomplete="off"></span>
+    </div>
+        <div class="srow in">
+      <label class="lab" for="f-tax">Tax rate (%)<span class="hint">Optional. Blank = no tax, as in the paper.</span></label>
+      <span class="cell"><input id="f-tax" data-k="tax" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+        <div class="srow in">
+      <label class="lab" for="f-eq">Shareholders&#39; equity<span class="hint">Optional, for book value and P/B.</span></label>
+      <span class="cell"><input id="f-eq" data-k="eq" data-signed="1" type="text" inputmode="text" autocomplete="off"></span>
+    </div>
+        <div class="srow in">
+      <label class="lab" for="f-mcap">Market value of the shares<span class="hint">Optional, for P/E and P/B.</span></label>
+      <span class="cell"><input id="f-mcap" data-k="mcap" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+
+    <div class="srow head"><span class="lab">How much of it is investment</span></div>
+    <div class="srow in key">
+      <label class="lab" for="f-ind">Industry<span class="hint">Fills in the figures below, from the study the paper uses.</span></label>
+      <span class="cell"><select id="f-ind" data-default="Business Services" aria-label="Industry"></select></span>
+    </div>
+  </div>
+  <div class="profile csx">
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Industry figure</th><th>Your figure</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">SG&amp;A that is investment (%)</th><td><output id="t-smain">–</output></td><td><input data-k="smain" id="f-smain" type="text" inputmode="decimal" autocomplete="off" aria-label="Your figure: SG&amp;A that is investment"></td></tr>
+      <tr><th scope="row">R&amp;D that is investment (%)</th><td><output id="t-srd">–</output></td><td><input data-k="srd" id="f-srd" type="text" inputmode="decimal" autocomplete="off" aria-label="Your figure: R&amp;D that is investment"></td></tr>
+      <tr><th scope="row">Useful life of SG&amp;A investment (years)</th><td><output id="t-lmain">–</output></td><td><input data-k="lmain" id="f-lmain" type="text" inputmode="decimal" autocomplete="off" aria-label="Your figure: useful life of SG&amp;A investment"></td></tr>
+      <tr><th scope="row">Useful life of R&amp;D investment (years)</th><td><output id="t-lrd">–</output></td><td><input data-k="lrd" id="f-lrd" type="text" inputmode="decimal" autocomplete="off" aria-label="Your figure: useful life of R&amp;D investment"></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="hint">Leave "Your figure" blank to use the industry's. Change it if you know the company better: a software firm's marketing may last longer than its industry's average. Lives up to 10 years; decimals are fine.</p>
+  </div>
+
+  <div class="profile csx">
+    <p class="hsub">The adjustment</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>SG&amp;A</th><th>R&amp;D</th><th>Total</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">Investment this year<span class="hint">Taken out of expenses.</span></th><td><output id="o-invm">–</output></td><td><output id="o-invr">–</output></td><td><output id="o-inv">–</output></td></tr>
+      <tr><th scope="row">Amortization of past investment<span class="hint">Added back, straight line from the year after.</span></th><td><output id="o-amm">–</output></td><td><output id="o-amr">–</output></td><td><output id="o-am">–</output></td></tr>
+      <tr class="rf-strong"><th scope="row">Change in operating income</th><td><output id="o-dm">–</output></td><td><output id="o-dr">–</output></td><td><output id="o-d">–</output></td></tr>
+      <tr><th scope="row">Intangible capital not on the balance sheet</th><td><output id="o-asm">–</output></td><td><output id="o-asr">–</output></td><td><output id="o-as">–</output></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="profile csx">
+    <p class="hsub">Before and after</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>As reported</th><th>Adjusted</th><th>Change</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">Operating income</th><td><output id="b-ebit">–</output></td><td><output id="a-ebit">–</output></td><td></td></tr>
+      <tr class="rf-strong"><th scope="row">Operating margin</th><td><output id="b-m">–</output></td><td><output id="a-m">–</output></td><td><output id="c-m">–</output></td></tr>
+      <tr><th scope="row">Net income</th><td><output id="b-ni">–</output></td><td><output id="a-ni">–</output></td><td><output id="c-ni">–</output></td></tr>
+      <tr><th scope="row">Shareholders' equity</th><td><output id="b-eq">–</output></td><td><output id="a-eq">–</output></td><td><output id="c-eq">–</output></td></tr>
+      <tr><th scope="row">P/E</th><td><output id="b-pe">–</output></td><td><output id="a-pe">–</output></td><td></td></tr>
+      <tr><th scope="row">P/B</th><td><output id="b-pb">–</output></td><td><output id="a-pb">–</output></td><td></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="srow test"><span class="lab">Reading<span class="hint">Our cut, not the paper's: under 0.5 points of margin barely moves; 3 points or more is large.</span></span><output class="cell" id="x-read">–</output></div>
+  </div>
+
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
+  <div class="actions">
+    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
+    <button type="button" class="button ghost" id="reset">Clear</button>
+  </div>
+<p class="copy-note">These are estimates: the size of the adjustment, not a restatement of the accounts.</p>  <div class="sharebar" id="sharebar">
+    <label class="sb-co"><span>Company or ticker <em>(optional, goes in the link and the files)</em></span>
+      <input id="sb-company" type="text" maxlength="60" autocomplete="off" spellcheck="false" placeholder="e.g. ACME"></label>
+    <div class="sb-groups">
+      <p class="share-buttons"><span class="sb-k">Share</span>
+        <button type="button" id="sb-x">X</button>
+        <button type="button" id="sb-in">LinkedIn</button>
+        <button type="button" id="sb-native" hidden>More</button></p>
+      <p class="share-buttons"><span class="sb-k">Download</span>
+        <button type="button" id="sb-pdf">PDF</button>
+        <button type="button" id="sb-csv">CSV</button></p>
+      <p class="share-buttons sb-community" hidden><span class="sb-k">Community</span>
+        <button type="button" id="sb-save">Send to Ezra</button>
+        <button type="button" id="sb-tm">Leave a testimonial</button></p>
+    </div>
+    <div class="sb-box" id="sb-savebox" hidden>
+      <p>Send this calculation to Ezra. He reads them, and with your OK he may share some with the community. Nothing leaves your browser until you press Send.</p>
+      <label>Your name or X handle <em>(optional)</em> <input id="sb-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label class="check"><input id="sb-ok" type="checkbox"> Ezra can publish this calculation and my name or handle</label>
+      <input id="sb-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="sb-send">Send</button> <span id="sb-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+    <div class="sb-box" id="testimonial" hidden>
+      <p>Did this calculator help you? Tell Ezra in a few words.</p>
+      <label>What did it help you with? <textarea id="tm-text" rows="4" maxlength="1500"></textarea></label>
+      <label>Name <input id="tm-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label>X or LinkedIn handle <em>(optional)</em> <input id="tm-handle" type="text" maxlength="80" autocomplete="off"></label>
+      <label>What you do <em>(optional, e.g. "individual investor" or "analyst at a fund")</em> <input id="tm-role" type="text" maxlength="120" autocomplete="off"></label>
+      <label class="check"><input id="tm-ok" type="checkbox"> Ezra can publish this on the site with my name</label>
+      <input id="tm-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="tm-send">Send</button> <span id="tm-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+  </div>
+
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<aside class="sister subscribe" data-place="intangibles">
+  <p class="sister-kicker">Newsletter</p>
+  <p class="sister-head"><a href="https://www.ezrasnotes.com/subscribe?utm_source=tools&amp;utm_medium=site&amp;utm_campaign=intangibles">Ezra's Notes</a></p>
+  <p class="sister-body">For long-term investors who look at companies the way an owner does. Free, every week.</p>
+  <a class="button" href="https://www.ezrasnotes.com/subscribe?utm_source=tools&amp;utm_medium=site&amp;utm_campaign=intangibles">Subscribe free</a>
+</aside>
+
+
+<section class="prose">
+  <h2 class="rule-head">Why earnings mislead</h2>
+  <p>A company that spends $1,000 on a machine that lasts 5 years books it as an asset and expenses $200 a year. A company that spends $1,000 to win a customer who stays 5 years expenses all $1,000 at once, inside SG&amp;A. Same economics, different accounting. And the faster the second company grows, the more its reported earnings understate what it makes.</p>
+  <p>Mauboussin and Callahan's fix: treat the part of SG&amp;A and R&amp;D that is investment the way accounting treats capex. Take it out of expenses, put it on the balance sheet, and amortize it over its useful life. Free cash flow doesn't change. Earnings, book value and the multiples built on them do.</p>
+
+  <h2 class="rule-head">How much of SG&amp;A is investment</h2>
+  <p>It depends on the industry. The paper uses a 2022 study by Aneel Iqbal, Shivaram Rajgopal, Anup Srivastava and Rong Zhao that estimated, for 42 industries, how much of SG&amp;A (without R&amp;D) and of R&amp;D is investment, and how long it lasts. It goes from 0% of SG&amp;A in transportation to 80% in precious metals; the average is 54% of SG&amp;A and 76% of R&amp;D, with lives of 3.3 and 4.4 years. Many analysts capitalize the same share for every company, which hides those differences.</p>
+
+  <h2 class="rule-head">Why growth matters</h2>
+  <p>If the spending doesn't grow, this year's investment and the amortization of past years end up equal, and earnings don't change. Growth opens the gap: this year's investment is bigger than the older, smaller years being amortized. In the paper's example, with 30% of $1,000 of SG&amp;A as investment, a 3-year life and 10% growth, SG&amp;A falls about 5.1%. If the spending shrinks, the adjustment lowers earnings.</p>
+  <p>In the paper's cases (2021), a pharmaceutical company's operating margin went from −0.9% to 14.6% and a business-supplies company's from 3.4% to 4.0%. For the S&amp;P 500, net income would be about 12% higher.</p>
+
+  <h2 class="rule-head">Our assumptions</h2>
+  <p>Spending has grown at a steady rate, and each year's investment is amortized in a straight line from the year after. The paper adds the change to net income before tax; leave the tax rate blank to do the same, or fill it in to move net income and book value after tax. The reading's cut-offs are ours.</p>
+
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Any company that invests through SG&amp;A or R&amp;D: software, consumer brands, pharma, services. It moves little for companies whose investment is mostly capex. Not for banks and insurers. Pair it with the <a href="../roic/">ROIC calculator</a>: capitalizing intangibles raises invested capital too, which usually brings very high ROICs down to earth.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>Michael J. Mauboussin and Dan Callahan, "Intangibles and Earnings: Improving the Usefulness of Financial Statements", Counterpoint Global Insights, April 12, 2022. Industry figures: Aneel Iqbal, Shivaram Rajgopal, Anup Srivastava and Rong Zhao, "Value of Internally Generated Intangible Capital", working paper, February 2022.</p>
+</section>
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+  </p>
+  <nav class="footer-network" aria-label="More from Ezra's Notes"><span class="fn-label">More from Ezra's Notes</span>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a Inversores</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Investor Holdings</a>
+    <span aria-current="page">Tools</span>
+  </nav>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('.subscribe')?'box':a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var boxes=document.querySelectorAll('.subscribe');if(boxes.length&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){t('subscribe_box_view',{page:location.pathname});io.unobserve(e.target)}})},{threshold:0.5});boxes.forEach(function(x){io.observe(x)})}})();</script>
+<script>document.addEventListener("click",function(e){var m=document.querySelector(".nav-menu[open]");if(m&&!m.contains(e.target))m.removeAttribute("open")});</script>
+<script src="../static/share.js?v=b7e7608f"></script><script type="module" src="../static/intangibles.js?v=b7e7608f"></script><a href="#" class="to-top" id="to-top" aria-label="Back to top" title="Back to top">&uarr;</a>
+<script>
+(function () {
+  var b = document.getElementById('to-top');
+  function check() { b.classList.toggle('show', window.scrollY > window.innerHeight * 1.2); }
+  window.addEventListener('scroll', check, { passive: true }); check();
+  b.addEventListener('click', function (e) {
+    e.preventDefault();
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: still ? 'auto' : 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>

@@ -98,6 +98,13 @@ tools:
     status: live
     blurb: Twenty-three pairs of opposites, from lenders to investors to funds. Pick a side for each and take the market's temperature, as Howard Marks does in Mastering the Market Cycle.
 
+  - slug: intangibles
+    share: "the intangibles and earnings calculator"
+    name: Intangibles and earnings
+    nav: Intangibles
+    status: live
+    blurb: What a company really earns once its spending on brands, customers and R&D counts as investment, by industry. From Mauboussin and Callahan's Intangibles and Earnings.
+
   - slug: moat
     share: "the Measuring the Moat calculator"
     name: Measuring the moat
