@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
+{% macro yrow(k, label, hint="") %}
+      <tr><th scope="row">{{ label }}{% if hint %}<span class="hint">{{ hint }}</span>{% endif %}</th>{% for i in range(5) %}<td><input data-k="{{ k }}{{ i }}" type="text" inputmode="decimal" autocomplete="off" aria-label="{{ label }}, year {{ i + 1 }}"></td>{% endfor %}</tr>
+{%- endmacro %}
+{% macro trow(id, label, total=false) %}
+      <tr{% if total %} class="rf-strong"{% endif %}><th scope="row">{{ label }}</th><td><output id="{{ id }}">–</output></td><td><output id="{{ id|replace('-', 'p-', 1) }}">–</output></td></tr>
+{%- endmacro %}
+{% block title %}Where the money went: capital allocation calculator{% endblock %}
+{% block description %}Where a company's cash came from and where it went over 5 years, what each $1 of new sales cost, and its payout. Mauboussin and Callahan's method. Free.{% endblock %}
+{% block main %}
+<section class="lede">
+  <h1 class="page-title">Where the money went</h1>
+  <p class="dek">Capital allocation starts with a plain question: where did the cash come from, and where did it go? Michael Mauboussin and Dan Callahan begin every assessment there, before ROIC or incentives.</p>
+  <p>5 years from the cash flow statement, oldest first, all as positive numbers. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="caform" class="calc" novalidate>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-co">Company<span class="hint">Optional, for the link and the files.</span></label>
+      <span class="cell"><input id="f-co" type="text" maxlength="60" autocomplete="off" spellcheck="false" style="text-align:left"></span>
+    </div>
+  </div>
+  <div class="profile csx mtx cax">
+    <p class="hsub">1. The cash flow statement</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th>{% for i in range(5) %}<th>Year {{ i + 1 }}</th>{% endfor %}</tr></thead>
+      <tbody>
+      <tr><th scope="row">Year<span class="hint">Optional.</span></th>{% for i in range(5) %}<td><input data-k="y{{ i }}" data-text="1" type="text" maxlength="9" autocomplete="off" aria-label="Year {{ i + 1 }}"></td>{% endfor %}</tr>
+      {{- yrow("rev", "Revenue", "Same unit for every amount.") }}
+      {{- yrow("ni", "Net income", "For the payout ratio.") }}
+      {{- yrow("cfo", "Cash from operations") }}
+      {{- yrow("nwc", "Increase in working capital", "Optional. Positive if it grew (the cash flow statement shows it with a minus).") }}
+      {{- yrow("capex", "Capital expenditures") }}
+      {{- yrow("da", "Depreciation and amortization") }}
+      {{- yrow("acq", "Acquisitions", "Cash paid, net of cash acquired.") }}
+      {{- yrow("sold", "Asset sales and divestitures") }}
+      {{- yrow("debtIn", "Debt issued") }}
+      {{- yrow("debtOut", "Debt repaid") }}
+      {{- yrow("issued", "Shares issued", "Including option exercises.") }}
+      {{- yrow("buy", "Share buybacks", "Gross.") }}
+      {{- yrow("div", "Dividends") }}
+      {{- yrow("mcap", "Market value of the shares", "Optional, for the shareholder yield.") }}
+      <tr><th scope="row">Net buybacks</th>{% for i in range(5) %}<td><output id="n-{{ i }}">–</output></td>{% endfor %}</tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-rev0x">Revenue the year before year 1<span class="hint">For the change in sales over the 5 years.</span></label>
+      <span class="cell"><input id="f-rev0x" data-k="rev0x" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+  </div>
+
+  <div class="profile csx">
+    <p class="hsub">2. Where the money came from</p>
+    <table class="grid">
+      <thead><tr><th></th><th>5 years</th><th>% of total</th></tr></thead>
+      <tbody>
+      {{ trow("s-ops", "Operations, before working capital") }}
+      {{ trow("s-sold", "Asset sales and divestitures") }}
+      {{ trow("s-debtIn", "Debt issued") }}
+      {{ trow("s-issued", "Shares issued") }}
+      <tr class="rf-strong"><th scope="row">Total</th><td><output id="s-tot">–</output></td><td></td></tr>
+      </tbody>
+    </table>
+    <p class="hsub">3. Where it went</p>
+    <table class="grid">
+      <thead><tr><th></th><th>5 years</th><th>% of total</th></tr></thead>
+      <tbody>
+      {{ trow("u-capex", "Capital expenditures") }}
+      {{ trow("u-acq", "Acquisitions") }}
+      {{ trow("u-nwc", "Working capital") }}
+      {{ trow("u-div", "Dividends") }}
+      {{ trow("u-buy", "Share buybacks") }}
+      {{ trow("u-debtOut", "Debt repaid") }}
+      <tr class="rf-strong"><th scope="row">Total</th><td><output id="u-tot">–</output></td><td></td></tr>
+      <tr><th scope="row">Left over: cash and other items</th><td><output id="o-left">–</output></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sheet">
+    <div class="srow head"><span class="lab">The mix</span></div>
+    <div class="srow calc-row total"><span class="lab">Funded by the business itself<span class="hint">Operations and asset sales ÷ all sources.</span></span><output class="cell" id="o-self">–</output></div>
+    <div class="srow calc-row"><span class="lab">Invested in the business<span class="hint">Capex, acquisitions and working capital ÷ all uses.</span></span><output class="cell" id="o-inv">–</output></div>
+    <div class="srow calc-row"><span class="lab">Returned to lenders and shareholders<span class="hint">Dividends, buybacks and debt repaid ÷ all uses.</span></span><output class="cell" id="o-ret">–</output></div>
+    <div class="srow head"><span class="lab">4. What each $1 of new sales cost</span></div>
+    <div class="srow calc-row"><span class="lab">Change in sales over the 5 years</span><output class="cell" id="o-ds">–</output></div>
+    <div class="srow calc-row"><span class="lab">Incremental M&amp;A rate<span class="hint">(Acquisitions − asset sales) ÷ change in sales.</span></span><output class="cell" id="o-mna">–</output></div>
+    <div class="srow calc-row"><span class="lab">Incremental fixed capital rate<span class="hint">(Capex − depreciation) ÷ change in sales.</span></span><output class="cell" id="o-fix">–</output></div>
+    <div class="srow calc-row"><span class="lab">Incremental working capital rate<span class="hint">Increase in working capital ÷ change in sales.</span></span><output class="cell" id="o-wc">–</output></div>
+    <div class="srow head"><span class="lab">5. What went back to shareholders</span></div>
+    <div class="srow calc-row"><span class="lab">Dividends plus net buybacks</span><output class="cell" id="o-sh">–</output></div>
+    <div class="srow calc-row"><span class="lab">From dividends</span><output class="cell" id="o-div">–</output></div>
+    <div class="srow calc-row"><span class="lab">From net buybacks</span><output class="cell" id="o-buy">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Total net payout ratio<span class="hint">÷ net income. Russell 3000: 50% in 1985, 64% in 2021.</span></span><output class="cell" id="o-pay">–</output></div>
+    <div class="srow calc-row"><span class="lab">Total shareholder yield, average<span class="hint">Each year ÷ market value, years with a market value.</span></span><output class="cell" id="o-yld">–</output></div>
+    <div class="srow calc-row"><span class="lab">Dividends: highest year − lowest</span><output class="cell" id="o-dr">–</output></div>
+    <div class="srow calc-row"><span class="lab">Net buybacks: highest year − lowest</span><output class="cell" id="o-nr">–</output></div>
+  </div>
+
+{{ sheet.actions('This is how the money was spent, not whether it was spent well. For that, look at ROIC and what each deal or project returned.') }}
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+{{ sheet.subscribe(subscribe_url, "capital-allocation") }}
+
+<section class="prose">
+  <h2 class="rule-head">Sources and uses</h2>
+  <p>Cash comes from the business (operations and asset sales) or from claimholders (new debt and new shares). It goes back into the business (capex, acquisitions, working capital, and intangible spending that runs through the income statement) or back to claimholders (dividends, buybacks and debt repaid). That's Exhibit 4 of the paper, and it's the first step of their checklist.</p>
+  <p>Most US companies fund themselves. Mauboussin and Callahan read that both ways: high returns mean little need for outside money, but internal money also skips the scrutiny lenders and new shareholders would apply.</p>
+
+  <h2 class="rule-head">What each $1 of new sales cost</h2>
+  <p>Alfred Rappaport's value drivers put every kind of investment on the same scale: how much the company spent for each $1 of new sales. If working capital grew $200 while sales grew $1,000, the working capital rate is 20%. Capex of $500 with $200 of depreciation is a fixed capital rate of 30%. Negative rates mean that line was a source of cash, like capex below depreciation.</p>
+  <p>The paper's two examples show why the split matters. Over 5 years, one large software company spent about evenly across capex, intangibles and acquisitions. A networking company put almost all of its net investment into acquisitions, while its capex ran below depreciation. Same exercise, very different questions to ask management.</p>
+
+  <h2 class="rule-head">What went back to shareholders</h2>
+  <p>Dividends are sticky: once paid, companies treat them like a fixed cost. Buybacks swing with the cycle. Comparing the range of each (highest year minus lowest) shows how much of the payout management treats as optional. The total net payout ratio for the Russell 3000 went from 50% of net income in 1985 to 64% in 2021.</p>
+  <p>Net buybacks subtract the shares the company issued, mostly to pay its people. For more on that, use the <a href="{{ root }}buybacks/">buybacks and stock comp</a> calculator.</p>
+
+  <h2 class="rule-head">What it leaves out</h2>
+  <p>The intangible investment that runs through SG&amp;A and R&amp;D isn't here, because it doesn't show up as investment in the cash flow statement. The <a href="{{ root }}intangibles/">intangibles</a> calculator estimates it. And this is spending, not results: pair it with <a href="{{ root }}roic/">ROIC and ROIIC</a> to see whether the money earned its keep.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>Michael J. Mauboussin and Dan Callahan, "Capital Allocation: Results, Analysis, and Assessment", Counterpoint Global Insights, December 2022: Exhibit 4, the "Past Spending Patterns" section and Exhibit 40. The incremental rates are from Alfred Rappaport's <em>Creating Shareholder Value</em>.</p>
+</section>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ root }}static/capalloc.js?v={{ asset_v }}"></script>{% endblock %}

@@ -144,6 +144,16 @@ tools:
     status: live
     blurb: What a company really earns once its spending on brands, customers and R&D counts as investment, by industry. From Mauboussin and Callahan's Intangibles and Earnings.
 
+  - slug: capital-allocation
+    og_title: "Where the money went"
+    og_sub: "Mauboussin and Callahan"
+    og: "Where a company's cash came from, where it went, and what went back to shareholders."
+    share: "the capital allocation calculator"
+    name: Where the money went
+    nav: Capital allocation
+    status: live
+    blurb: Where a company's cash came from and where it went over 5 years, what each $1 of new sales cost in investment, and how much went back to shareholders.
+
   - slug: buybacks
     og_title: "Buybacks and stock comp"
     og_sub: "Mauboussin and Callahan"

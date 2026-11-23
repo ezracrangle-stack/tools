@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTNNLB6W9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FTNNLB6W9D');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>Where the money went: capital allocation calculator · Ezra's Notes</title>
+<meta name="description" content="Where a company's cash came from and where it went over 5 years, what each $1 of new sales cost, and its payout. Mauboussin and Callahan's method. Free.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css?v=14a037f5">
+<meta property="og:title" content="Where the money went: capital allocation calculator · Ezra's Notes">
+<meta property="og:description" content="Where a company's cash came from and where it went over 5 years, what each $1 of new sales cost, and its payout. Mauboussin and Callahan's method. Free.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/capital-allocation/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes"><meta property="og:image" content="https://tools.ezrasnotes.com/static/og/capital-allocation.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Where the money went, a free calculator by Ezra Crangle. Where a company&#39;s cash came from, where it went, and what went back to shareholders.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tools.ezrasnotes.com/static/og/capital-allocation.png">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="../static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
+<link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/capital-allocation/"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://tools.ezrasnotes.com/", "name": "Home", "position": 1}, {"@type": "ListItem", "item": "https://tools.ezrasnotes.com/capital-allocation/", "name": "Where the money went: capital allocation calculator", "position": 2}]}</script></head>
+<body data-collect="https://script.google.com/macros/s/AKfycbz-a4q03dY00RYGWBKOHaKqYKL92Z3afAqhJ5iYdPQGYCMbU2CpFTR-JfEfArbdoUZXHg/exec" data-tool-name="the capital allocation calculator">
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="../">Tools</a>
+  <p class="byline">By <a href="https://www.ezrasnotes.com">@ezracrangle</a></p>
+  <nav>
+    <a href="../">All tools</a>
+    <details class="nav-menu">
+      <summary>Tools</summary>
+      <div class="nav-drop"><a href="../net-net/">Net-net calculator</a><a href="../epv/">Earnings power value</a><a href="../greenwald/">Greenwald&#39;s moat test</a><a href="../penman/">Penman&#39;s residual income</a><a href="../graham/">Graham&#39;s formulas</a><a href="../fcf/">Mauboussin&#39;s FCF</a><a href="../roic/">ROIC, ROIIC and reinvestment</a><a href="../reverse-dcf/">Reverse DCF</a><a href="../compounders/">What to pay for quality</a><a href="../dhandho/">Pabrai&#39;s Dhandho bet</a><a href="../lynch/">Peter Lynch&#39;s PEG</a><a href="../marks/">Howard Marks&#39; market temperature</a><a href="../intangibles/">Intangibles and earnings</a><a href="../capital-allocation/" aria-current="page">Where the money went</a><a href="../buybacks/">Buybacks and stock comp</a><a href="../moat/">Measuring the moat</a><a href="../red-flags/">Red flags</a><a href="../beauty-contest/">Keynes&#39; beauty contest</a></div>
+    </details>
+    <a href="../about/">About</a>
+    <a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<div class="print-head" aria-hidden="true"><strong>Ezra's Notes · Tools</strong><span id="print-stamp"></span></div>
+<div class="print-summary verdict" id="print-summary" aria-hidden="true"></div>
+<section class="lede">
+  <h1 class="page-title">Where the money went</h1>
+  <p class="dek">Capital allocation starts with a plain question: where did the cash come from, and where did it go? Michael Mauboussin and Dan Callahan begin every assessment there, before ROIC or incentives.</p>
+  <p>5 years from the cash flow statement, oldest first, all as positive numbers. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="caform" class="calc" novalidate>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-co">Company<span class="hint">Optional, for the link and the files.</span></label>
+      <span class="cell"><input id="f-co" type="text" maxlength="60" autocomplete="off" spellcheck="false" style="text-align:left"></span>
+    </div>
+  </div>
+  <div class="profile csx mtx cax">
+    <p class="hsub">1. The cash flow statement</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Year 4</th><th>Year 5</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">Year<span class="hint">Optional.</span></th><td><input data-k="y0" data-text="1" type="text" maxlength="9" autocomplete="off" aria-label="Year 1"></td><td><input data-k="y1" data-text="1" type="text" maxlength="9" autocomplete="off" aria-label="Year 2"></td><td><input data-k="y2" data-text="1" type="text" maxlength="9" autocomplete="off" aria-label="Year 3"></td><td><input data-k="y3" data-text="1" type="text" maxlength="9" autocomplete="off" aria-label="Year 4"></td><td><input data-k="y4" data-text="1" type="text" maxlength="9" autocomplete="off" aria-label="Year 5"></td></tr>      <tr><th scope="row">Revenue<span class="hint">Same unit for every amount.</span></th><td><input data-k="rev0" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 1"></td><td><input data-k="rev1" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 2"></td><td><input data-k="rev2" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 3"></td><td><input data-k="rev3" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 4"></td><td><input data-k="rev4" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 5"></td></tr>      <tr><th scope="row">Net income<span class="hint">For the payout ratio.</span></th><td><input data-k="ni0" type="text" inputmode="decimal" autocomplete="off" aria-label="Net income, year 1"></td><td><input data-k="ni1" type="text" inputmode="decimal" autocomplete="off" aria-label="Net income, year 2"></td><td><input data-k="ni2" type="text" inputmode="decimal" autocomplete="off" aria-label="Net income, year 3"></td><td><input data-k="ni3" type="text" inputmode="decimal" autocomplete="off" aria-label="Net income, year 4"></td><td><input data-k="ni4" type="text" inputmode="decimal" autocomplete="off" aria-label="Net income, year 5"></td></tr>      <tr><th scope="row">Cash from operations</th><td><input data-k="cfo0" type="text" inputmode="decimal" autocomplete="off" aria-label="Cash from operations, year 1"></td><td><input data-k="cfo1" type="text" inputmode="decimal" autocomplete="off" aria-label="Cash from operations, year 2"></td><td><input data-k="cfo2" type="text" inputmode="decimal" autocomplete="off" aria-label="Cash from operations, year 3"></td><td><input data-k="cfo3" type="text" inputmode="decimal" autocomplete="off" aria-label="Cash from operations, year 4"></td><td><input data-k="cfo4" type="text" inputmode="decimal" autocomplete="off" aria-label="Cash from operations, year 5"></td></tr>      <tr><th scope="row">Increase in working capital<span class="hint">Optional. Positive if it grew (the cash flow statement shows it with a minus).</span></th><td><input data-k="nwc0" type="text" inputmode="decimal" autocomplete="off" aria-label="Increase in working capital, year 1"></td><td><input data-k="nwc1" type="text" inputmode="decimal" autocomplete="off" aria-label="Increase in working capital, year 2"></td><td><input data-k="nwc2" type="text" inputmode="decimal" autocomplete="off" aria-label="Increase in working capital, year 3"></td><td><input data-k="nwc3" type="text" inputmode="decimal" autocomplete="off" aria-label="Increase in working capital, year 4"></td><td><input data-k="nwc4" type="text" inputmode="decimal" autocomplete="off" aria-label="Increase in working capital, year 5"></td></tr>      <tr><th scope="row">Capital expenditures</th><td><input data-k="capex0" type="text" inputmode="decimal" autocomplete="off" aria-label="Capital expenditures, year 1"></td><td><input data-k="capex1" type="text" inputmode="decimal" autocomplete="off" aria-label="Capital expenditures, year 2"></td><td><input data-k="capex2" type="text" inputmode="decimal" autocomplete="off" aria-label="Capital expenditures, year 3"></td><td><input data-k="capex3" type="text" inputmode="decimal" autocomplete="off" aria-label="Capital expenditures, year 4"></td><td><input data-k="capex4" type="text" inputmode="decimal" autocomplete="off" aria-label="Capital expenditures, year 5"></td></tr>      <tr><th scope="row">Depreciation and amortization</th><td><input data-k="da0" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation and amortization, year 1"></td><td><input data-k="da1" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation and amortization, year 2"></td><td><input data-k="da2" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation and amortization, year 3"></td><td><input data-k="da3" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation and amortization, year 4"></td><td><input data-k="da4" type="text" inputmode="decimal" autocomplete="off" aria-label="Depreciation and amortization, year 5"></td></tr>      <tr><th scope="row">Acquisitions<span class="hint">Cash paid, net of cash acquired.</span></th><td><input data-k="acq0" type="text" inputmode="decimal" autocomplete="off" aria-label="Acquisitions, year 1"></td><td><input data-k="acq1" type="text" inputmode="decimal" autocomplete="off" aria-label="Acquisitions, year 2"></td><td><input data-k="acq2" type="text" inputmode="decimal" autocomplete="off" aria-label="Acquisitions, year 3"></td><td><input data-k="acq3" type="text" inputmode="decimal" autocomplete="off" aria-label="Acquisitions, year 4"></td><td><input data-k="acq4" type="text" inputmode="decimal" autocomplete="off" aria-label="Acquisitions, year 5"></td></tr>      <tr><th scope="row">Asset sales and divestitures</th><td><input data-k="sold0" type="text" inputmode="decimal" autocomplete="off" aria-label="Asset sales and divestitures, year 1"></td><td><input data-k="sold1" type="text" inputmode="decimal" autocomplete="off" aria-label="Asset sales and divestitures, year 2"></td><td><input data-k="sold2" type="text" inputmode="decimal" autocomplete="off" aria-label="Asset sales and divestitures, year 3"></td><td><input data-k="sold3" type="text" inputmode="decimal" autocomplete="off" aria-label="Asset sales and divestitures, year 4"></td><td><input data-k="sold4" type="text" inputmode="decimal" autocomplete="off" aria-label="Asset sales and divestitures, year 5"></td></tr>      <tr><th scope="row">Debt issued</th><td><input data-k="debtIn0" type="text" inputmode="decimal" autocomplete="off" aria-label="Debt issued, year 1"></td><td><input data-k="debtIn1" type="text" inputmode="decimal" autocomplete="off" aria-label="Debt issued, year 2"></td><td><input data-k="debtIn2" type="text" inputmode="decimal" autocomplete="off" aria-label="Debt issued, year 3"></td><td><input data-k="debtIn3" type="text" inputmode="decimal" autocomplete="off" aria-label="Debt issued, year 4"></td><td><input data-k="debtIn4" type="text" inputmode="decimal" autocomplete="off" aria-label="Debt issued, year 5"></td></tr>      <tr><th scope="row">Debt repaid</th><td><input data-k="debtOut0" type="text" inputmode="decimal" autocomplete="off" aria-label="Debt repaid, year 1"></td><td><input data-k="debtOut1" type="text" inputmode="decimal" autocomplete="off" aria-label="Debt repaid, year 2"></td><td><input data-k="debtOut2" type="text" inputmode="decimal" autocomplete="off" aria-label="Debt repaid, year 3"></td><td><input data-k="debtOut3" type="text" inputmode="decimal" autocomplete="off" aria-label="Debt repaid, year 4"></td><td><input data-k="debtOut4" type="text" inputmode="decimal" autocomplete="off" aria-label="Debt repaid, year 5"></td></tr>      <tr><th scope="row">Shares issued<span class="hint">Including option exercises.</span></th><td><input data-k="issued0" type="text" inputmode="decimal" autocomplete="off" aria-label="Shares issued, year 1"></td><td><input data-k="issued1" type="text" inputmode="decimal" autocomplete="off" aria-label="Shares issued, year 2"></td><td><input data-k="issued2" type="text" inputmode="decimal" autocomplete="off" aria-label="Shares issued, year 3"></td><td><input data-k="issued3" type="text" inputmode="decimal" autocomplete="off" aria-label="Shares issued, year 4"></td><td><input data-k="issued4" type="text" inputmode="decimal" autocomplete="off" aria-label="Shares issued, year 5"></td></tr>      <tr><th scope="row">Share buybacks<span class="hint">Gross.</span></th><td><input data-k="buy0" type="text" inputmode="decimal" autocomplete="off" aria-label="Share buybacks, year 1"></td><td><input data-k="buy1" type="text" inputmode="decimal" autocomplete="off" aria-label="Share buybacks, year 2"></td><td><input data-k="buy2" type="text" inputmode="decimal" autocomplete="off" aria-label="Share buybacks, year 3"></td><td><input data-k="buy3" type="text" inputmode="decimal" autocomplete="off" aria-label="Share buybacks, year 4"></td><td><input data-k="buy4" type="text" inputmode="decimal" autocomplete="off" aria-label="Share buybacks, year 5"></td></tr>      <tr><th scope="row">Dividends</th><td><input data-k="div0" type="text" inputmode="decimal" autocomplete="off" aria-label="Dividends, year 1"></td><td><input data-k="div1" type="text" inputmode="decimal" autocomplete="off" aria-label="Dividends, year 2"></td><td><input data-k="div2" type="text" inputmode="decimal" autocomplete="off" aria-label="Dividends, year 3"></td><td><input data-k="div3" type="text" inputmode="decimal" autocomplete="off" aria-label="Dividends, year 4"></td><td><input data-k="div4" type="text" inputmode="decimal" autocomplete="off" aria-label="Dividends, year 5"></td></tr>      <tr><th scope="row">Market value of the shares<span class="hint">Optional, for the shareholder yield.</span></th><td><input data-k="mcap0" type="text" inputmode="decimal" autocomplete="off" aria-label="Market value of the shares, year 1"></td><td><input data-k="mcap1" type="text" inputmode="decimal" autocomplete="off" aria-label="Market value of the shares, year 2"></td><td><input data-k="mcap2" type="text" inputmode="decimal" autocomplete="off" aria-label="Market value of the shares, year 3"></td><td><input data-k="mcap3" type="text" inputmode="decimal" autocomplete="off" aria-label="Market value of the shares, year 4"></td><td><input data-k="mcap4" type="text" inputmode="decimal" autocomplete="off" aria-label="Market value of the shares, year 5"></td></tr>
+      <tr><th scope="row">Net buybacks</th><td><output id="n-0">–</output></td><td><output id="n-1">–</output></td><td><output id="n-2">–</output></td><td><output id="n-3">–</output></td><td><output id="n-4">–</output></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-rev0x">Revenue the year before year 1<span class="hint">For the change in sales over the 5 years.</span></label>
+      <span class="cell"><input id="f-rev0x" data-k="rev0x" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+  </div>
+
+  <div class="profile csx">
+    <p class="hsub">2. Where the money came from</p>
+    <table class="grid">
+      <thead><tr><th></th><th>5 years</th><th>% of total</th></tr></thead>
+      <tbody>
+            <tr><th scope="row">Operations, before working capital</th><td><output id="s-ops">–</output></td><td><output id="sp-ops">–</output></td></tr>
+            <tr><th scope="row">Asset sales and divestitures</th><td><output id="s-sold">–</output></td><td><output id="sp-sold">–</output></td></tr>
+            <tr><th scope="row">Debt issued</th><td><output id="s-debtIn">–</output></td><td><output id="sp-debtIn">–</output></td></tr>
+            <tr><th scope="row">Shares issued</th><td><output id="s-issued">–</output></td><td><output id="sp-issued">–</output></td></tr>
+      <tr class="rf-strong"><th scope="row">Total</th><td><output id="s-tot">–</output></td><td></td></tr>
+      </tbody>
+    </table>
+    <p class="hsub">3. Where it went</p>
+    <table class="grid">
+      <thead><tr><th></th><th>5 years</th><th>% of total</th></tr></thead>
+      <tbody>
+            <tr><th scope="row">Capital expenditures</th><td><output id="u-capex">–</output></td><td><output id="up-capex">–</output></td></tr>
+            <tr><th scope="row">Acquisitions</th><td><output id="u-acq">–</output></td><td><output id="up-acq">–</output></td></tr>
+            <tr><th scope="row">Working capital</th><td><output id="u-nwc">–</output></td><td><output id="up-nwc">–</output></td></tr>
+            <tr><th scope="row">Dividends</th><td><output id="u-div">–</output></td><td><output id="up-div">–</output></td></tr>
+            <tr><th scope="row">Share buybacks</th><td><output id="u-buy">–</output></td><td><output id="up-buy">–</output></td></tr>
+            <tr><th scope="row">Debt repaid</th><td><output id="u-debtOut">–</output></td><td><output id="up-debtOut">–</output></td></tr>
+      <tr class="rf-strong"><th scope="row">Total</th><td><output id="u-tot">–</output></td><td></td></tr>
+      <tr><th scope="row">Left over: cash and other items</th><td><output id="o-left">–</output></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sheet">
+    <div class="srow head"><span class="lab">The mix</span></div>
+    <div class="srow calc-row total"><span class="lab">Funded by the business itself<span class="hint">Operations and asset sales ÷ all sources.</span></span><output class="cell" id="o-self">–</output></div>
+    <div class="srow calc-row"><span class="lab">Invested in the business<span class="hint">Capex, acquisitions and working capital ÷ all uses.</span></span><output class="cell" id="o-inv">–</output></div>
+    <div class="srow calc-row"><span class="lab">Returned to lenders and shareholders<span class="hint">Dividends, buybacks and debt repaid ÷ all uses.</span></span><output class="cell" id="o-ret">–</output></div>
+    <div class="srow head"><span class="lab">4. What each $1 of new sales cost</span></div>
+    <div class="srow calc-row"><span class="lab">Change in sales over the 5 years</span><output class="cell" id="o-ds">–</output></div>
+    <div class="srow calc-row"><span class="lab">Incremental M&amp;A rate<span class="hint">(Acquisitions − asset sales) ÷ change in sales.</span></span><output class="cell" id="o-mna">–</output></div>
+    <div class="srow calc-row"><span class="lab">Incremental fixed capital rate<span class="hint">(Capex − depreciation) ÷ change in sales.</span></span><output class="cell" id="o-fix">–</output></div>
+    <div class="srow calc-row"><span class="lab">Incremental working capital rate<span class="hint">Increase in working capital ÷ change in sales.</span></span><output class="cell" id="o-wc">–</output></div>
+    <div class="srow head"><span class="lab">5. What went back to shareholders</span></div>
+    <div class="srow calc-row"><span class="lab">Dividends plus net buybacks</span><output class="cell" id="o-sh">–</output></div>
+    <div class="srow calc-row"><span class="lab">From dividends</span><output class="cell" id="o-div">–</output></div>
+    <div class="srow calc-row"><span class="lab">From net buybacks</span><output class="cell" id="o-buy">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Total net payout ratio<span class="hint">÷ net income. Russell 3000: 50% in 1985, 64% in 2021.</span></span><output class="cell" id="o-pay">–</output></div>
+    <div class="srow calc-row"><span class="lab">Total shareholder yield, average<span class="hint">Each year ÷ market value, years with a market value.</span></span><output class="cell" id="o-yld">–</output></div>
+    <div class="srow calc-row"><span class="lab">Dividends: highest year − lowest</span><output class="cell" id="o-dr">–</output></div>
+    <div class="srow calc-row"><span class="lab">Net buybacks: highest year − lowest</span><output class="cell" id="o-nr">–</output></div>
+  </div>
+
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
+  <div class="actions">
+    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
+    <button type="button" class="button ghost" id="reset">Clear</button>
+  </div>
+<p class="copy-note">This is how the money was spent, not whether it was spent well. For that, look at ROIC and what each deal or project returned.</p>  <div class="sharebar" id="sharebar">
+    <label class="sb-co"><span>Company or ticker <em>(optional, goes in the link and the files)</em></span>
+      <input id="sb-company" type="text" maxlength="60" autocomplete="off" spellcheck="false" placeholder="e.g. ACME"></label>
+    <div class="sb-groups">
+      <p class="share-buttons"><span class="sb-k">Share</span>
+        <button type="button" id="sb-x">X</button>
+        <button type="button" id="sb-in">LinkedIn</button>
+        <button type="button" id="sb-native" hidden>More</button></p>
+      <p class="share-buttons"><span class="sb-k">Download</span>
+        <button type="button" id="sb-pdf">PDF</button>
+        <button type="button" id="sb-csv">CSV</button></p>
+      <p class="share-buttons sb-community" hidden><span class="sb-k">Community</span>
+        <button type="button" id="sb-save">Send to Ezra</button>
+        <button type="button" id="sb-tm">Leave a testimonial</button></p>
+    </div>
+    <div class="sb-box" id="sb-savebox" hidden>
+      <p>Send this calculation to Ezra. He reads them, and with your OK he may share some with the community. Nothing leaves your browser until you press Send.</p>
+      <label>Your name or X handle <em>(optional)</em> <input id="sb-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label class="check"><input id="sb-ok" type="checkbox"> Ezra can publish this calculation and my name or handle</label>
+      <input id="sb-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="sb-send">Send</button> <span id="sb-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+    <div class="sb-box" id="testimonial" hidden>
+      <p>Did this calculator help you? Tell Ezra in a few words.</p>
+      <label>What did it help you with? <textarea id="tm-text" rows="4" maxlength="1500"></textarea></label>
+      <label>Name <input id="tm-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label>X or LinkedIn handle <em>(optional)</em> <input id="tm-handle" type="text" maxlength="80" autocomplete="off"></label>
+      <label>What you do <em>(optional, e.g. "individual investor" or "analyst at a fund")</em> <input id="tm-role" type="text" maxlength="120" autocomplete="off"></label>
+      <label class="check"><input id="tm-ok" type="checkbox"> Ezra can publish this on the site with my name</label>
+      <input id="tm-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="tm-send">Send</button> <span id="tm-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+  </div>
+
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<aside class="sister subscribe" data-place="capital-allocation">
+  <p class="sister-kicker">Newsletter</p>
+  <p class="sister-head"><a href="https://www.ezrasnotes.com/subscribe?utm_source=tools&amp;utm_medium=site&amp;utm_campaign=capital-allocation">Ezra's Notes</a></p>
+  <p class="sister-body">For long-term investors who look at companies the way an owner does. Free, every week.</p>
+  <a class="button" href="https://www.ezrasnotes.com/subscribe?utm_source=tools&amp;utm_medium=site&amp;utm_campaign=capital-allocation">Subscribe free</a>
+</aside>
+
+
+<section class="prose">
+  <h2 class="rule-head">Sources and uses</h2>
+  <p>Cash comes from the business (operations and asset sales) or from claimholders (new debt and new shares). It goes back into the business (capex, acquisitions, working capital, and intangible spending that runs through the income statement) or back to claimholders (dividends, buybacks and debt repaid). That's Exhibit 4 of the paper, and it's the first step of their checklist.</p>
+  <p>Most US companies fund themselves. Mauboussin and Callahan read that both ways: high returns mean little need for outside money, but internal money also skips the scrutiny lenders and new shareholders would apply.</p>
+
+  <h2 class="rule-head">What each $1 of new sales cost</h2>
+  <p>Alfred Rappaport's value drivers put every kind of investment on the same scale: how much the company spent for each $1 of new sales. If working capital grew $200 while sales grew $1,000, the working capital rate is 20%. Capex of $500 with $200 of depreciation is a fixed capital rate of 30%. Negative rates mean that line was a source of cash, like capex below depreciation.</p>
+  <p>The paper's two examples show why the split matters. Over 5 years, one large software company spent about evenly across capex, intangibles and acquisitions. A networking company put almost all of its net investment into acquisitions, while its capex ran below depreciation. Same exercise, very different questions to ask management.</p>
+
+  <h2 class="rule-head">What went back to shareholders</h2>
+  <p>Dividends are sticky: once paid, companies treat them like a fixed cost. Buybacks swing with the cycle. Comparing the range of each (highest year minus lowest) shows how much of the payout management treats as optional. The total net payout ratio for the Russell 3000 went from 50% of net income in 1985 to 64% in 2021.</p>
+  <p>Net buybacks subtract the shares the company issued, mostly to pay its people. For more on that, use the <a href="../buybacks/">buybacks and stock comp</a> calculator.</p>
+
+  <h2 class="rule-head">What it leaves out</h2>
+  <p>The intangible investment that runs through SG&amp;A and R&amp;D isn't here, because it doesn't show up as investment in the cash flow statement. The <a href="../intangibles/">intangibles</a> calculator estimates it. And this is spending, not results: pair it with <a href="../roic/">ROIC and ROIIC</a> to see whether the money earned its keep.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>Michael J. Mauboussin and Dan Callahan, "Capital Allocation: Results, Analysis, and Assessment", Counterpoint Global Insights, December 2022: Exhibit 4, the "Past Spending Patterns" section and Exhibit 40. The incremental rates are from Alfred Rappaport's <em>Creating Shareholder Value</em>.</p>
+</section>
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+  </p>
+  <nav class="footer-network" aria-label="More from Ezra's Notes"><span class="fn-label">More from Ezra's Notes</span>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a Inversores</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Investor Holdings</a>
+    <span aria-current="page">Tools</span>
+  </nav>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('.subscribe')?'box':a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var boxes=document.querySelectorAll('.subscribe');if(boxes.length&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){t('subscribe_box_view',{page:location.pathname});io.unobserve(e.target)}})},{threshold:0.5});boxes.forEach(function(x){io.observe(x)})}})();</script>
+<script>document.addEventListener("click",function(e){var m=document.querySelector(".nav-menu[open]");if(m&&!m.contains(e.target))m.removeAttribute("open")});</script>
+<script src="../static/share.js?v=14a037f5"></script><script type="module" src="../static/capalloc.js?v=14a037f5"></script><a href="#" class="to-top" id="to-top" aria-label="Back to top" title="Back to top">&uarr;</a>
+<script>
+(function () {
+  var b = document.getElementById('to-top');
+  function check() { b.classList.toggle('show', window.scrollY > window.innerHeight * 1.2); }
+  window.addEventListener('scroll', check, { passive: true }); check();
+  b.addEventListener('click', function (e) {
+    e.preventDefault();
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: still ? 'auto' : 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>
