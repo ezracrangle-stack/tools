@@ -23,7 +23,9 @@ categories:
   - question: "What does management do with the cash?"
     tools: [capital-allocation, buybacks]
   - question: "How's the market, and how much should you bet?"
-    tools: [marks, dhandho, beauty-contest]
+    tools: [marks, dhandho]
+  - question: "Games"
+    tools: [beauty-contest]
 
 tools:
   - slug: net-net
