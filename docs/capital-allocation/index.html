@@ -7,27 +7,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
-<title>Where the money went: capital allocation calculator · Ezra's Notes</title>
+<title>Capital allocation calculator: where the money went · Ezra's Notes</title>
 <meta name="description" content="Where a company's cash came from and where it went over 5 years, what each $1 of new sales cost, and its payout. Mauboussin and Callahan's method. Free.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../static/style.css?v=14a037f5">
-<meta property="og:title" content="Where the money went: capital allocation calculator · Ezra's Notes">
+<meta property="og:title" content="Capital allocation calculator: where the money went · Ezra's Notes">
 <meta property="og:description" content="Where a company's cash came from and where it went over 5 years, what each $1 of new sales cost, and its payout. Mauboussin and Callahan's method. Free.">
 <meta property="og:url" content="https://tools.ezrasnotes.com/capital-allocation/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tools · Ezra's Notes"><meta property="og:image" content="https://tools.ezrasnotes.com/static/og/capital-allocation.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Where the money went, a free calculator by Ezra Crangle. Where a company&#39;s cash came from, where it went, and what went back to shareholders.">
+<meta property="og:image:alt" content="Capital allocation calculator, a free calculator by Ezra Crangle. Where a company&#39;s cash came from, where it went, and what went back to shareholders.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://tools.ezrasnotes.com/static/og/capital-allocation.png">
 <meta name="twitter:site" content="@ezracrangle">
 <link rel="icon" href="../static/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
 <link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
-<link rel="canonical" href="https://tools.ezrasnotes.com/capital-allocation/"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://tools.ezrasnotes.com/", "name": "Home", "position": 1}, {"@type": "ListItem", "item": "https://tools.ezrasnotes.com/capital-allocation/", "name": "Where the money went: capital allocation calculator", "position": 2}]}</script></head>
+<link rel="canonical" href="https://tools.ezrasnotes.com/capital-allocation/"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://tools.ezrasnotes.com/", "name": "Home", "position": 1}, {"@type": "ListItem", "item": "https://tools.ezrasnotes.com/capital-allocation/", "name": "Capital allocation calculator: where the money went", "position": 2}]}</script></head>
 <body data-collect="https://script.google.com/macros/s/AKfycbz-a4q03dY00RYGWBKOHaKqYKL92Z3afAqhJ5iYdPQGYCMbU2CpFTR-JfEfArbdoUZXHg/exec" data-tool-name="the capital allocation calculator">
 <header class="masthead">
   <div class="topline">
@@ -42,7 +42,7 @@
     <a href="../">All tools</a>
     <details class="nav-menu">
       <summary>Tools</summary>
-      <div class="nav-drop"><a href="../net-net/">Net-net calculator</a><a href="../epv/">Earnings power value</a><a href="../greenwald/">Greenwald&#39;s moat test</a><a href="../penman/">Penman&#39;s residual income</a><a href="../graham/">Graham&#39;s formulas</a><a href="../fcf/">Mauboussin&#39;s FCF</a><a href="../roic/">ROIC, ROIIC and reinvestment</a><a href="../reverse-dcf/">Reverse DCF</a><a href="../compounders/">What to pay for quality</a><a href="../dhandho/">Pabrai&#39;s Dhandho bet</a><a href="../lynch/">Peter Lynch&#39;s PEG</a><a href="../marks/">Howard Marks&#39; market temperature</a><a href="../intangibles/">Intangibles and earnings</a><a href="../capital-allocation/" aria-current="page">Where the money went</a><a href="../buybacks/">Buybacks and stock comp</a><a href="../moat/">Measuring the moat</a><a href="../red-flags/">Red flags</a><a href="../beauty-contest/">Keynes&#39; beauty contest</a></div>
+      <div class="nav-drop"><a href="../net-net/">Net-net calculator</a><a href="../epv/">Earnings power value</a><a href="../greenwald/">Greenwald&#39;s moat test</a><a href="../penman/">Penman&#39;s residual income</a><a href="../graham/">Graham&#39;s formulas</a><a href="../fcf/">Mauboussin&#39;s FCF</a><a href="../roic/">ROIC, ROIIC and reinvestment</a><a href="../reverse-dcf/">Reverse DCF</a><a href="../compounders/">What to pay for quality</a><a href="../dhandho/">Pabrai&#39;s Dhandho bet</a><a href="../lynch/">Peter Lynch&#39;s PEG</a><a href="../marks/">Howard Marks&#39; market temperature</a><a href="../intangibles/">Intangibles and earnings</a><a href="../capital-allocation/" aria-current="page">Capital allocation calculator</a><a href="../buybacks/">Buybacks and stock comp</a><a href="../moat/">Measuring the moat</a><a href="../red-flags/">Red flags</a><a href="../beauty-contest/">Keynes&#39; beauty contest</a></div>
     </details>
     <a href="../about/">About</a>
     <a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
@@ -53,7 +53,7 @@
 <div class="print-head" aria-hidden="true"><strong>Ezra's Notes · Tools</strong><span id="print-stamp"></span></div>
 <div class="print-summary verdict" id="print-summary" aria-hidden="true"></div>
 <section class="lede">
-  <h1 class="page-title">Where the money went</h1>
+  <h1 class="page-title">Capital allocation calculator</h1>
   <p class="dek">Capital allocation starts with a plain question: where did the cash come from, and where did it go? Michael Mauboussin and Dan Callahan begin every assessment there, before ROIC or incentives.</p>
   <p>5 years from the cash flow statement, oldest first, all as positive numbers. Nothing you type leaves your browser.</p>
 </section>

@@ -6,11 +6,11 @@
 {% macro trow(id, label, total=false) %}
       <tr{% if total %} class="rf-strong"{% endif %}><th scope="row">{{ label }}</th><td><output id="{{ id }}">–</output></td><td><output id="{{ id|replace('-', 'p-', 1) }}">–</output></td></tr>
 {%- endmacro %}
-{% block title %}Where the money went: capital allocation calculator{% endblock %}
+{% block title %}Capital allocation calculator: where the money went{% endblock %}
 {% block description %}Where a company's cash came from and where it went over 5 years, what each $1 of new sales cost, and its payout. Mauboussin and Callahan's method. Free.{% endblock %}
 {% block main %}
 <section class="lede">
-  <h1 class="page-title">Where the money went</h1>
+  <h1 class="page-title">Capital allocation calculator</h1>
   <p class="dek">Capital allocation starts with a plain question: where did the cash come from, and where did it go? Michael Mauboussin and Dan Callahan begin every assessment there, before ROIC or incentives.</p>
   <p>5 years from the cash flow statement, oldest first, all as positive numbers. Nothing you type leaves your browser.</p>
 </section>
