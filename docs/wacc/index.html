@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTNNLB6W9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FTNNLB6W9D');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>What discount rate should you use? WACC calculator · Ezra's Notes</title>
+<meta name="description" content="WACC calculator with Mauboussin and Callahan's method: CAPM cost of equity, adjusted or industry beta, after-tax debt, or your own rate. Free.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css?v=d020f87c">
+<meta property="og:title" content="What discount rate should you use? WACC calculator · Ezra's Notes">
+<meta property="og:description" content="WACC calculator with Mauboussin and Callahan's method: CAPM cost of equity, adjusted or industry beta, after-tax debt, or your own rate. Free.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/wacc/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes"><meta property="og:image" content="https://tools.ezrasnotes.com/static/og/wacc.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="What discount rate should you use?, a free calculator by Ezra Crangle. A WACC built the way Mauboussin and Callahan recommend, or your own rate next to it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tools.ezrasnotes.com/static/og/wacc.png">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="../static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
+<link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/wacc/"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://tools.ezrasnotes.com/", "name": "Home", "position": 1}, {"@type": "ListItem", "item": "https://tools.ezrasnotes.com/wacc/", "name": "What discount rate should you use? WACC calculator", "position": 2}]}</script></head>
+<body data-collect="https://script.google.com/macros/s/AKfycbz-a4q03dY00RYGWBKOHaKqYKL92Z3afAqhJ5iYdPQGYCMbU2CpFTR-JfEfArbdoUZXHg/exec" data-tool-name="the discount rate calculator">
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="../">Tools</a>
+  <p class="byline">By <a href="https://www.ezrasnotes.com">@ezracrangle</a></p>
+  <nav>
+    <a href="../">All tools</a>
+    <details class="nav-menu">
+      <summary>Tools</summary>
+      <div class="nav-drop"><a href="../net-net/">Net-net calculator</a><a href="../epv/">Earnings power value</a><a href="../greenwald/">Greenwald&#39;s moat test</a><a href="../penman/">Penman&#39;s residual income</a><a href="../graham/">Graham&#39;s formulas</a><a href="../fcf/">Mauboussin&#39;s FCF</a><a href="../roic/">ROIC, ROIIC and reinvestment</a><a href="../reverse-dcf/">Reverse DCF</a><a href="../compounders/">What to pay for quality</a><a href="../dhandho/">Pabrai&#39;s Dhandho bet</a><a href="../lynch/">Peter Lynch&#39;s PEG</a><a href="../marks/">Howard Marks&#39; market temperature</a><a href="../intangibles/">Intangibles and earnings</a><a href="../wacc/" aria-current="page">What discount rate should you use?</a><a href="../pvgo/">How much growth is priced in?</a><a href="../capital-allocation/">Capital allocation calculator</a><a href="../buybacks/">Buybacks and stock comp</a><a href="../moat/">Measuring the moat</a><a href="../red-flags/">Red flags</a><a href="../beauty-contest/">Keynes&#39; beauty contest</a></div>
+    </details>
+    <a href="../about/">About</a>
+    <a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<div class="print-head" aria-hidden="true"><strong>Ezra's Notes · Tools</strong><span id="print-stamp"></span></div>
+<div class="print-summary verdict" id="print-summary" aria-hidden="true"></div>
+<section class="lede">
+  <h1 class="page-title">What discount rate should you use?</h1>
+  <p class="dek">Every valuation needs a discount rate. The textbook answer is the weighted average cost of capital (WACC), and Michael Mauboussin and Dan Callahan wrote a practical guide to estimating it without overthinking it. If you'd rather set your own rate, there's a place for that at the end.</p>
+  <p>Rates in percent. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="waform" class="calc" novalidate>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-co">Company<span class="hint">Optional, for the link and the files.</span></label>
+      <span class="cell"><input id="f-co" type="text" maxlength="60" autocomplete="off" spellcheck="false" style="text-align:left"></span>
+    </div>
+    <div class="srow head"><span class="lab">1. Cost of equity</span></div>
+        <div class="srow in">
+      <label class="lab" for="f-rf">Risk-free rate, %<span class="hint">Yield on the 10-year government bond.</span></label>
+      <span class="cell"><input id="f-rf" data-k="rf" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+        <div class="srow in">
+      <label class="lab" for="f-erp">Equity risk premium, %<span class="hint">Forward-looking. Aswath Damodaran publishes one every month.</span></label>
+      <span class="cell"><input id="f-erp" data-k="erp" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+        <div class="srow in">
+      <label class="lab" for="f-beta">Beta<span class="hint">60 months of monthly returns against the S&amp;P 500 is a good start.</span></label>
+      <span class="cell"><input id="f-beta" data-k="beta" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-adj">Pull the beta toward 1.0<span class="hint">Beta × 0.67 + 0.33, as Bloomberg does. Betas drift toward 1.0 over time.</span></label>
+      <span class="cell" style="text-align:right"><input id="f-adj" type="checkbox" checked style="appearance:auto;width:18px;height:18px"></span>
+    </div>
+    <details class="helper">
+      <summary>Prefer an industry beta? Relever it here</summary>
+          <div class="srow in">
+      <label class="lab" for="f-ubeta">Unlevered industry beta<span class="hint">Damodaran lists them by industry. Used instead of the beta above.</span></label>
+      <span class="cell"><input id="f-ubeta" data-k="ubeta" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+          <div class="srow calc-row"><span class="lab">Relevered beta<span class="hint">× [1 + (1 − tax rate) × debt ÷ equity], with the tax rate and capital structure below.</span></span><output class="cell" id="o-relev">–</output></div>
+    </details>
+        <div class="srow calc-row"><span class="lab">Beta used</span><output class="cell" id="o-beta">–</output></div>
+        <div class="srow calc-row total"><span class="lab">Cost of equity<span class="hint">Risk-free rate + beta × equity risk premium.</span></span><output class="cell" id="o-ke">–</output></div>
+
+    <div class="srow head"><span class="lab">2. Cost of debt</span></div>
+        <div class="srow in">
+      <label class="lab" for="f-kd">Pre-tax cost of debt, %<span class="hint">Yield to maturity on the long-term debt.</span></label>
+      <span class="cell"><input id="f-kd" data-k="kd" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+        <div class="srow in">
+      <label class="lab" for="f-tax">Marginal tax rate, %<span class="hint">The rate on the last dollar of profit.</span></label>
+      <span class="cell"><input id="f-tax" data-k="tax" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+        <div class="srow calc-row total"><span class="lab">After-tax cost of debt</span><output class="cell" id="o-kd">–</output></div>
+
+    <div class="srow head"><span class="lab">3. Capital structure</span></div>
+        <div class="srow in">
+      <label class="lab" for="f-equity">Market value of equity</label>
+      <span class="cell"><input id="f-equity" data-k="equity" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+        <div class="srow in">
+      <label class="lab" for="f-debt">Debt<span class="hint">Book value is usually close enough.</span></label>
+      <span class="cell"><input id="f-debt" data-k="debt" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+        <div class="srow calc-row"><span class="lab">Equity ÷ total capital</span><output class="cell" id="o-we">–</output></div>
+        <div class="srow calc-row"><span class="lab">Debt ÷ total capital</span><output class="cell" id="o-wd">–</output></div>
+        <div class="srow calc-row"><span class="lab">Debt ÷ equity</span><output class="cell" id="o-de">–</output></div>
+
+    <div class="srow head"><span class="lab">4. WACC</span></div>
+        <div class="srow calc-row total"><span class="lab">WACC<span class="hint">Equity weight × cost of equity + debt weight × after-tax cost of debt.</span></span><output class="cell" id="o-wacc">–</output></div>
+        <div class="srow calc-row"><span class="lab">Cost of equity above cost of debt?<span class="hint">It should always be.</span></span><output class="cell" id="o-check">–</output></div>
+  </div>
+  <div class="profile csx">
+    <table class="grid">
+      <thead><tr><th>WACC if…</th><th>Beta −0.2</th><th>As used</th><th>Beta +0.2</th></tr></thead>
+      <tbody>
+<tr><th scope="row">Premium −1 point</th><td><output id="g00">–</output></td><td><output id="g01">–</output></td><td><output id="g02">–</output></td></tr><tr><th scope="row">Premium as entered</th><td><output id="g10">–</output></td><td><output id="g11">–</output></td><td><output id="g12">–</output></td></tr><tr><th scope="row">Premium +1 point</th><td><output id="g20">–</output></td><td><output id="g21">–</output></td><td><output id="g22">–</output></td></tr>      </tbody>
+    </table>
+  </div>
+  <div class="sheet">
+    <div class="srow head"><span class="lab">5. Or use your own rate</span></div>
+        <div class="srow in">
+      <label class="lab" for="f-own">Your discount rate, %<span class="hint">Set from the risk you see in the business.</span></label>
+      <span class="cell"><input id="f-own" data-k="own" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+        <div class="srow calc-row"><span class="lab">Your rate minus the WACC</span><output class="cell" id="o-ownw">–</output></div>
+        <div class="srow calc-row"><span class="lab">Your rate minus the risk-free rate<span class="hint">The premium you ask over a government bond.</span></span><output class="cell" id="o-ownrf">–</output></div>
+  </div>
+
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
+  <div class="actions">
+    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
+    <button type="button" class="button ghost" id="reset">Clear</button>
+  </div>
+<p class="copy-note">A discount rate is a judgment, not a measurement. Small changes move a valuation a lot: check the table above.</p>  <div class="sharebar" id="sharebar">
+    <label class="sb-co"><span>Company or ticker <em>(optional, goes in the link and the files)</em></span>
+      <input id="sb-company" type="text" maxlength="60" autocomplete="off" spellcheck="false" placeholder="e.g. ACME"></label>
+    <div class="sb-groups">
+      <p class="share-buttons"><span class="sb-k">Share</span>
+        <button type="button" id="sb-x">X</button>
+        <button type="button" id="sb-in">LinkedIn</button>
+        <button type="button" id="sb-native" hidden>More</button></p>
+      <p class="share-buttons"><span class="sb-k">Download</span>
+        <button type="button" id="sb-pdf">PDF</button>
+        <button type="button" id="sb-csv">CSV</button></p>
+      <p class="share-buttons sb-community" hidden><span class="sb-k">Community</span>
+        <button type="button" id="sb-save">Send to Ezra</button>
+        <button type="button" id="sb-tm">Leave a testimonial</button></p>
+    </div>
+    <div class="sb-box" id="sb-savebox" hidden>
+      <p>Send this calculation to Ezra. He reads them, and with your OK he may share some with the community. Nothing leaves your browser until you press Send.</p>
+      <label>Your name or X handle <em>(optional)</em> <input id="sb-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label class="check"><input id="sb-ok" type="checkbox"> Ezra can publish this calculation and my name or handle</label>
+      <input id="sb-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="sb-send">Send</button> <span id="sb-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+    <div class="sb-box" id="testimonial" hidden>
+      <p>Did this calculator help you? Tell Ezra in a few words.</p>
+      <label>What did it help you with? <textarea id="tm-text" rows="4" maxlength="1500"></textarea></label>
+      <label>Name <input id="tm-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label>X or LinkedIn handle <em>(optional)</em> <input id="tm-handle" type="text" maxlength="80" autocomplete="off"></label>
+      <label>What you do <em>(optional, e.g. "individual investor" or "analyst at a fund")</em> <input id="tm-role" type="text" maxlength="120" autocomplete="off"></label>
+      <label class="check"><input id="tm-ok" type="checkbox"> Ezra can publish this on the site with my name</label>
+      <input id="tm-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="tm-send">Send</button> <span id="tm-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+  </div>
+
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<aside class="sister subscribe" data-place="wacc">
+  <p class="sister-kicker">Newsletter</p>
+  <p class="sister-head"><a href="https://www.ezrasnotes.com/subscribe?utm_source=tools&amp;utm_medium=site&amp;utm_campaign=wacc">Ezra's Notes</a></p>
+  <p class="sister-body">For long-term investors who look at companies the way an owner does. Free, every week.</p>
+  <a class="button" href="https://www.ezrasnotes.com/subscribe?utm_source=tools&amp;utm_medium=site&amp;utm_campaign=wacc">Subscribe free</a>
+</aside>
+
+
+<section class="prose">
+  <h2 class="rule-head">The recipe</h2>
+  <p>Mauboussin and Callahan's starting point: the 10-year government bond for the risk-free rate, a forward-looking equity risk premium, and a beta from 60 months of monthly returns, adjusted as needed. The cost of equity is the risk-free rate plus beta times the premium (the CAPM). Debt costs its yield to maturity, less the tax it saves. Weight each by market value, not book value, and use the company's target mix if it has one.</p>
+  <p>Their example: a 5% after-tax cost of debt and a 10% cost of equity, with 20% debt and 80% equity, give a WACC of 9.0%. For the Russell 3000, excluding financials and real estate, the WACC averaged 7.9% from 1985 to 2022 and was 8.8% at the end of 2022.</p>
+
+  <h2 class="rule-head">Beta, the weak link</h2>
+  <p>Beta is the hardest input and the paper is candid about it: low-beta stocks have earned more, and high-beta stocks less, than the model predicts. A single beta is also imprecise; one large company's came out at 1.22, but anywhere from 0.86 to 1.58 fit the data. Two fixes help. Pulling the beta toward 1.0 reflects how betas drift as companies mature (1.22 becomes 1.15). Or take the average unlevered beta of the industry and relever it with the company's debt: an industry beta of 1.05 with 25% debt, 75% equity and a 20% tax rate becomes 1.33.</p>
+
+  <h2 class="rule-head">The equity risk premium</h2>
+  <p>It moves. Damodaran's estimates since 1961 run from 2.1% in 1999 to 6.5% in 1979, and averaged 5.5% from August 2008 to 2022. The paper finds them sensible, and FactSet uses them as its default. Higher costs of equity have tended to come before better 10-year returns for the S&amp;P 500.</p>
+
+  <h2 class="rule-head">If you don't use WACC</h2>
+  <p>Plenty of investors don't. The paper itself notes that value investors define risk as the chance of a permanent loss of capital and argue that price volatility, and beta with it, does a poor job of capturing it. They set their own rate for each company instead, higher where they see more risk. Section 5 puts that rate next to the WACC and the risk-free rate, so you can see how much you're asking for.</p>
+  <p>Mauboussin and Callahan see it differently: keep the rate consistent and put the risk into the cash flows, by weighing scenarios and their probabilities. They point out that executives who pad their hurdle rates tend to add about 6 points to the cost of capital. Either way, the <a href="../reverse-dcf/">reverse DCF</a> and the <a href="../pvgo/">PVGO calculator</a> both need a rate, and this is where to pick it.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>Michael J. Mauboussin and Dan Callahan, "Cost of Capital: A Practical Guide to Measuring Opportunity Cost", Counterpoint Global Insights, February 15, 2023.</p>
+</section>
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+  </p>
+  <nav class="footer-network" aria-label="More from Ezra's Notes"><span class="fn-label">More from Ezra's Notes</span>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a Inversores</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Investor Holdings</a>
+    <span aria-current="page">Tools</span>
+  </nav>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('.subscribe')?'box':a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var boxes=document.querySelectorAll('.subscribe');if(boxes.length&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){t('subscribe_box_view',{page:location.pathname});io.unobserve(e.target)}})},{threshold:0.5});boxes.forEach(function(x){io.observe(x)})}})();</script>
+<script>document.addEventListener("click",function(e){var m=document.querySelector(".nav-menu[open]");if(m&&!m.contains(e.target))m.removeAttribute("open")});</script>
+<script src="../static/share.js?v=d020f87c"></script><script type="module" src="../static/wacc.js?v=d020f87c"></script><a href="#" class="to-top" id="to-top" aria-label="Back to top" title="Back to top">&uarr;</a>
+<script>
+(function () {
+  var b = document.getElementById('to-top');
+  function check() { b.classList.toggle('show', window.scrollY > window.innerHeight * 1.2); }
+  window.addEventListener('scroll', check, { passive: true }); check();
+  b.addEventListener('click', function (e) {
+    e.preventDefault();
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: still ? 'auto' : 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>

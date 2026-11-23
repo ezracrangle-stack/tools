@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
+{% macro inrow(k, label, hint) %}
+    <div class="srow in">
+      <label class="lab" for="f-{{ k }}">{{ label }}{% if hint %}<span class="hint">{{ hint }}</span>{% endif %}</label>
+      <span class="cell"><input id="f-{{ k }}" data-k="{{ k }}" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+{%- endmacro %}
+{% macro out(id, label, hint="", total=false) %}
+    <div class="srow calc-row{% if total %} total{% endif %}"><span class="lab">{{ label }}{% if hint %}<span class="hint">{{ hint }}</span>{% endif %}</span><output class="cell" id="{{ id }}">–</output></div>
+{%- endmacro %}
+{% block title %}What discount rate should you use? WACC calculator{% endblock %}
+{% block description %}WACC calculator with Mauboussin and Callahan's method: CAPM cost of equity, adjusted or industry beta, after-tax debt, or your own rate. Free.{% endblock %}
+{% block main %}
+<section class="lede">
+  <h1 class="page-title">What discount rate should you use?</h1>
+  <p class="dek">Every valuation needs a discount rate. The textbook answer is the weighted average cost of capital (WACC), and Michael Mauboussin and Dan Callahan wrote a practical guide to estimating it without overthinking it. If you'd rather set your own rate, there's a place for that at the end.</p>
+  <p>Rates in percent. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="waform" class="calc" novalidate>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-co">Company<span class="hint">Optional, for the link and the files.</span></label>
+      <span class="cell"><input id="f-co" type="text" maxlength="60" autocomplete="off" spellcheck="false" style="text-align:left"></span>
+    </div>
+    <div class="srow head"><span class="lab">1. Cost of equity</span></div>
+    {{ inrow("rf", "Risk-free rate, %", "Yield on the 10-year government bond.") }}
+    {{ inrow("erp", "Equity risk premium, %", "Forward-looking. Aswath Damodaran publishes one every month.") }}
+    {{ inrow("beta", "Beta", "60 months of monthly returns against the S&P 500 is a good start.") }}
+    <div class="srow in">
+      <label class="lab" for="f-adj">Pull the beta toward 1.0<span class="hint">Beta × 0.67 + 0.33, as Bloomberg does. Betas drift toward 1.0 over time.</span></label>
+      <span class="cell" style="text-align:right"><input id="f-adj" type="checkbox" checked style="appearance:auto;width:18px;height:18px"></span>
+    </div>
+    <details class="helper">
+      <summary>Prefer an industry beta? Relever it here</summary>
+      {{ inrow("ubeta", "Unlevered industry beta", "Damodaran lists them by industry. Used instead of the beta above.") }}
+      {{ out("o-relev", "Relevered beta", "× [1 + (1 − tax rate) × debt ÷ equity], with the tax rate and capital structure below.") }}
+    </details>
+    {{ out("o-beta", "Beta used") }}
+    {{ out("o-ke", "Cost of equity", "Risk-free rate + beta × equity risk premium.", true) }}
+
+    <div class="srow head"><span class="lab">2. Cost of debt</span></div>
+    {{ inrow("kd", "Pre-tax cost of debt, %", "Yield to maturity on the long-term debt.") }}
+    {{ inrow("tax", "Marginal tax rate, %", "The rate on the last dollar of profit.") }}
+    {{ out("o-kd", "After-tax cost of debt", "", true) }}
+
+    <div class="srow head"><span class="lab">3. Capital structure</span></div>
+    {{ inrow("equity", "Market value of equity", "") }}
+    {{ inrow("debt", "Debt", "Book value is usually close enough.") }}
+    {{ out("o-we", "Equity ÷ total capital") }}
+    {{ out("o-wd", "Debt ÷ total capital") }}
+    {{ out("o-de", "Debt ÷ equity") }}
+
+    <div class="srow head"><span class="lab">4. WACC</span></div>
+    {{ out("o-wacc", "WACC", "Equity weight × cost of equity + debt weight × after-tax cost of debt.", true) }}
+    {{ out("o-check", "Cost of equity above cost of debt?", "It should always be.") }}
+  </div>
+  <div class="profile csx">
+    <table class="grid">
+      <thead><tr><th>WACC if…</th><th>Beta −0.2</th><th>As used</th><th>Beta +0.2</th></tr></thead>
+      <tbody>
+      {% for lbl in ["Premium −1 point", "Premium as entered", "Premium +1 point"] %}{% set a = loop.index0 %}<tr><th scope="row">{{ lbl }}</th>{% for b in range(3) %}<td><output id="g{{ a }}{{ b }}">–</output></td>{% endfor %}</tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="sheet">
+    <div class="srow head"><span class="lab">5. Or use your own rate</span></div>
+    {{ inrow("own", "Your discount rate, %", "Set from the risk you see in the business.") }}
+    {{ out("o-ownw", "Your rate minus the WACC") }}
+    {{ out("o-ownrf", "Your rate minus the risk-free rate", "The premium you ask over a government bond.") }}
+  </div>
+
+{{ sheet.actions('A discount rate is a judgment, not a measurement. Small changes move a valuation a lot: check the table above.') }}
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+{{ sheet.subscribe(subscribe_url, "wacc") }}
+
+<section class="prose">
+  <h2 class="rule-head">The recipe</h2>
+  <p>Mauboussin and Callahan's starting point: the 10-year government bond for the risk-free rate, a forward-looking equity risk premium, and a beta from 60 months of monthly returns, adjusted as needed. The cost of equity is the risk-free rate plus beta times the premium (the CAPM). Debt costs its yield to maturity, less the tax it saves. Weight each by market value, not book value, and use the company's target mix if it has one.</p>
+  <p>Their example: a 5% after-tax cost of debt and a 10% cost of equity, with 20% debt and 80% equity, give a WACC of 9.0%. For the Russell 3000, excluding financials and real estate, the WACC averaged 7.9% from 1985 to 2022 and was 8.8% at the end of 2022.</p>
+
+  <h2 class="rule-head">Beta, the weak link</h2>
+  <p>Beta is the hardest input and the paper is candid about it: low-beta stocks have earned more, and high-beta stocks less, than the model predicts. A single beta is also imprecise; one large company's came out at 1.22, but anywhere from 0.86 to 1.58 fit the data. Two fixes help. Pulling the beta toward 1.0 reflects how betas drift as companies mature (1.22 becomes 1.15). Or take the average unlevered beta of the industry and relever it with the company's debt: an industry beta of 1.05 with 25% debt, 75% equity and a 20% tax rate becomes 1.33.</p>
+
+  <h2 class="rule-head">The equity risk premium</h2>
+  <p>It moves. Damodaran's estimates since 1961 run from 2.1% in 1999 to 6.5% in 1979, and averaged 5.5% from August 2008 to 2022. The paper finds them sensible, and FactSet uses them as its default. Higher costs of equity have tended to come before better 10-year returns for the S&amp;P 500.</p>
+
+  <h2 class="rule-head">If you don't use WACC</h2>
+  <p>Plenty of investors don't. The paper itself notes that value investors define risk as the chance of a permanent loss of capital and argue that price volatility, and beta with it, does a poor job of capturing it. They set their own rate for each company instead, higher where they see more risk. Section 5 puts that rate next to the WACC and the risk-free rate, so you can see how much you're asking for.</p>
+  <p>Mauboussin and Callahan see it differently: keep the rate consistent and put the risk into the cash flows, by weighing scenarios and their probabilities. They point out that executives who pad their hurdle rates tend to add about 6 points to the cost of capital. Either way, the <a href="{{ root }}reverse-dcf/">reverse DCF</a> and the <a href="{{ root }}pvgo/">PVGO calculator</a> both need a rate, and this is where to pick it.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>Michael J. Mauboussin and Dan Callahan, "Cost of Capital: A Practical Guide to Measuring Opportunity Cost", Counterpoint Global Insights, February 15, 2023.</p>
+</section>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ root }}static/wacc.js?v={{ asset_v }}"></script>{% endblock %}

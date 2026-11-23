@@ -144,6 +144,16 @@ tools:
     status: live
     blurb: What a company really earns once its spending on brands, customers and R&D counts as investment, by industry. From Mauboussin and Callahan's Intangibles and Earnings.
 
+  - slug: wacc
+    og_title: "What discount rate should you use?"
+    og_sub: "WACC · Mauboussin and Callahan"
+    og: "A WACC built the way Mauboussin and Callahan recommend, or your own rate next to it."
+    share: "the discount rate calculator"
+    name: What discount rate should you use?
+    nav: WACC
+    status: live
+    blurb: The weighted average cost of capital (WACC) step by step, with Mauboussin and Callahan's method, or your own rate set from the risk you see.
+
   - slug: pvgo
     og_title: "How much growth is priced in?"
     og_sub: "PVGO · Mauboussin and Callahan"
