@@ -141,8 +141,8 @@ footer { margin-top: 56px; padding-top: 14px; border-top: 3px double var(--rule)
 /* ── Tool list (home) ─────────────────────── */
 .tool-list { list-style: none; margin: 0; padding: 0; border-top: 3px solid var(--rule); }
 .tool-list li { display: grid; grid-template-columns: 1fr auto; gap: 4px 18px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid var(--hair); }
-.tool-list h2 { font-size: 24px; margin: 0; }
-.tool-list h2 a { text-decoration: none; }
+.tool-list h2, .tool-list h3 { font-size: 24px; margin: 0; }
+.tool-list h2 a, .tool-list h3 a { text-decoration: none; }
 .tool-list p { margin: 0; grid-column: 1 / -1; }
 .tool-list .soon { color: var(--mute); }
 .status { font: 11px/1 var(--head); text-transform: uppercase; letter-spacing: .12em; white-space: nowrap; }
@@ -505,3 +505,11 @@ table.grid .gcalc th, table.grid .gcalc output { font-weight: 700; }
 .cax table.grid td input { width: 5.4em; }
 .cax table.grid tbody th { white-space: normal; min-width: 9em; }
 @media (max-width: 560px) { .cax table.grid .hint { font-size: 11px; } .cax table.grid td input { width: 4em; font-size: 13px; padding: 5px 4px; } .cax table.grid tbody th { min-width: 7.5em; font-size: 12.5px; } .cax table.grid td output { min-width: 0; font-size: 13px; } }
+/* Home: tools grouped by the question they answer */
+.tool-group { margin: 40px 0 0; }
+.tool-group:first-of-type { margin-top: 24px; }
+.tool-group > .rule-head { margin: 0 0 10px; }
+.tool-group .tool-list { border-top-width: 1px; }
+.nav-drop { max-height: min(75vh, 640px); overflow-y: auto; }
+.nav-drop .nav-group { margin: 0; padding: 10px 14px 8px; background: var(--hover); font: 11px/1.3 var(--head); text-transform: uppercase; letter-spacing: .08em; color: var(--mute); border-bottom: 1px solid var(--rule); white-space: normal; }
+.nav-drop .nav-group:first-child { padding-top: 8px; }

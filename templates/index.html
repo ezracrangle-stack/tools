@@ -8,15 +8,21 @@
   <p class="free">Free, and they'll stay free. No sign-up. Everything runs in your browser, so nothing you type gets saved anywhere.</p>
   <p>Each one follows a book or a paper, names it, and is checked against an Excel version before it goes live. <a href="{{ root }}about/">Why I built them</a>.</p>
 </section>
+{% set by_slug = {} %}{% for t in tools %}{% set _ = by_slug.update({t.slug: t}) %}{% endfor %}
+{% for c in categories %}
+<section class="tool-group">
+<h2 class="rule-head">{{ c.question }}</h2>
 <ul class="tool-list">
-{% for t in tools %}
+{% for slug in c.tools %}{% set t = by_slug[slug] %}
   <li>
-    {% if t.status == 'live' %}<h2><a href="{{ root }}{{ t.slug }}/">{{ t.name }}</a></h2><span class="status live">Live</span>
-    {% else %}<h2 class="soon">{{ t.name }}</h2><span class="status later">Coming soon</span>{% endif %}
+    {% if t.status == 'live' %}<h3><a href="{{ root }}{{ t.slug }}/">{{ t.name }}</a></h3><span class="status live">Live</span>
+    {% else %}<h3 class="soon">{{ t.name }}</h3><span class="status later">Coming soon</span>{% endif %}
     <p{% if t.status != 'live' %} class="soon"{% endif %}>{{ t.blurb }}</p>
   </li>
 {% endfor %}
 </ul>
+</section>
+{% endfor %}
 
 {{ sheet.subscribe(subscribe_url, "home") }}
 

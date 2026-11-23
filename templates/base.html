@@ -61,7 +61,7 @@
     <a href="{{ root }}"{% if page == '' %} aria-current="page"{% endif %}>All tools</a>
     <details class="nav-menu">
       <summary>Tools</summary>
-      <div class="nav-drop">{% for t in tools if t.status == 'live' %}<a href="{{ root }}{{ t.slug }}/"{% if page == t.slug ~ '/' %} aria-current="page"{% endif %}>{{ t.name }}</a>{% endfor %}</div>
+      <div class="nav-drop">{% set nav_by = {} %}{% for t in tools %}{% set _ = nav_by.update({t.slug: t}) %}{% endfor %}{% for c in categories %}<p class="nav-group">{{ c.question }}</p>{% for slug in c.tools %}{% set t = nav_by[slug] %}{% if t.status == 'live' %}<a href="{{ root }}{{ t.slug }}/"{% if page == t.slug ~ '/' %} aria-current="page"{% endif %}>{{ t.name }}</a>{% endif %}{% endfor %}{% endfor %}</div>
     </details>
     <a href="{{ root }}about/"{% if page == 'about/' %} aria-current="page"{% endif %}>About</a>
     <a href="{{ subscribe_url }}" class="nav-cta">Subscribe</a>

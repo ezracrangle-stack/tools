@@ -13,6 +13,18 @@ redirects:
 # status: live (has a page) or soon (shows as "Coming soon").
 # To add a tool, see COMO-AGREGAR-UNA-HERRAMIENTA.md.
 
+categories:
+  - question: "What is it worth?"
+    tools: [net-net, epv, greenwald, penman, graham, lynch, compounders, wacc]
+  - question: "What does the price assume?"
+    tools: [reverse-dcf, pvgo, base-rates]
+  - question: "Is it a good business, and can you trust the numbers?"
+    tools: [roic, moat, fcf, intangibles, life-cycle, red-flags]
+  - question: "What does management do with the cash?"
+    tools: [capital-allocation, buybacks]
+  - question: "How's the market, and how much should you bet?"
+    tools: [marks, dhandho, beauty-contest]
+
 tools:
   - slug: net-net
     og_title: "Net-net"
