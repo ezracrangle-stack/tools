@@ -1,0 +1,1266 @@
+{
+ "example": {
+  "years": [
+   {
+    "rev": 5000,
+    "sbc": 150,
+    "buy": 400,
+    "mcap": 20000,
+    "shares": 198,
+    "bought": 4.2
+   },
+   {
+    "rev": 5600,
+    "sbc": 180,
+    "buy": 380,
+    "mcap": 24000,
+    "shares": 197,
+    "bought": 3.3
+   },
+   {
+    "rev": 6100,
+    "sbc": 210,
+    "buy": 450,
+    "mcap": 26000,
+    "shares": 195,
+    "bought": 3.4
+   }
+  ],
+  "start": 200,
+  "price": 140,
+  "b": [
+   100000,
+   1000,
+   200,
+   20000
+  ],
+  "excel": {
+   "rows": [
+    [
+     0.03,
+     0.02,
+     95.2380952380952
+    ],
+    [
+     0.0321428571428571,
+     0.0158333333333333,
+     115.151515151515
+    ],
+    [
+     0.0344262295081967,
+     0.0173076923076923,
+     132.352941176471
+    ]
+   ],
+   "sbcAvg": 0.0321896955503513,
+   "buyAvg": 0.0177136752136752,
+   "sbcLevel": "High",
+   "buyLevel": "High",
+   "quadrant": "SBC high, buybacks high",
+   "tsrAvg": 0.053,
+   "tsrMed": 0.062,
+   "end": 195,
+   "dilution": -0.0256410256410256,
+   "sbcTot": 540,
+   "buyTot": 1230,
+   "net": 690,
+   "offset": 0.439024390243902,
+   "paid": 112.844036697248,
+   "vsToday": 0.240650406504065,
+   "before": 100,
+   "ratio": 2,
+   "bought": 100,
+   "left": 900,
+   "after": 88.8888888888889,
+   "sellers": 100,
+   "holders": -11.1111111111111,
+   "moved": -10000,
+   "winner": "The sellers"
+  }
+ },
+ "random 1": {
+  "years": [
+   {
+    "rev": 24204.480548732932,
+    "sbc": 28.77986774839919,
+    "buy": null,
+    "mcap": 24053.732144437257,
+    "shares": 646.0744926436399,
+    "bought": null
+   },
+   {
+    "rev": 39097.40473737488,
+    "sbc": null,
+    "buy": 0,
+    "mcap": 260658.95401648516,
+    "shares": 627.5178880762668,
+    "bought": null
+   },
+   {
+    "rev": null,
+    "sbc": null,
+    "buy": null,
+    "mcap": null,
+    "shares": null,
+    "bought": null
+   }
+  ],
+  "start": 641.4322424767446,
+  "price": 189.95780271187337,
+  "b": [
+   876315.3438228691,
+   60624.603183616,
+   28.909561392715105,
+   0
+  ],
+  "excel": {
+   "rows": [
+    [
+     0.00118903058838442,
+     null,
+     null
+    ],
+    [
+     null,
+     0,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "sbcAvg": 0.00118903058838442,
+   "buyAvg": 0,
+   "sbcLevel": "Low",
+   "buyLevel": "Low",
+   "quadrant": "SBC low, buybacks low",
+   "tsrAvg": 0.094,
+   "tsrMed": 0.076,
+   "end": 627.517888076267,
+   "dilution": -0.0221736378593669,
+   "sbcTot": 28.7798677483992,
+   "buyTot": 0,
+   "net": -28.7798677483992,
+   "offset": null,
+   "paid": null,
+   "vsToday": null,
+   "before": 14.4547806963576,
+   "ratio": 2,
+   "bought": 0,
+   "left": 60624.603183616,
+   "after": 14.4547806963576,
+   "sellers": 14.4547806963575,
+   "holders": 0,
+   "moved": 0,
+   "winner": "The sellers"
+  }
+ },
+ "random 2": {
+  "years": [
+   {
+    "rev": 856.9610490581308,
+    "sbc": 0,
+    "buy": 92.58498592748546,
+    "mcap": 2183.494636969162,
+    "shares": null,
+    "bought": 25.158654050007325
+   },
+   {
+    "rev": 21836.6293560187,
+    "sbc": null,
+    "buy": 0,
+    "mcap": null,
+    "shares": null,
+    "bought": null
+   },
+   {
+    "rev": 35193.49661820189,
+    "sbc": null,
+    "buy": null,
+    "mcap": null,
+    "shares": 641.0882144857383,
+    "bought": null
+   }
+  ],
+  "start": 595.9953108744703,
+  "price": 109.97007260916885,
+  "b": [
+   6347977.536914531,
+   19951.348701425482,
+   159.08642648456595,
+   1798159.8271799355
+  ],
+  "excel": {
+   "rows": [
+    [
+     0,
+     0.0424022044111817,
+     3.68004527362459
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "sbcAvg": 0,
+   "buyAvg": 0.0424022044111817,
+   "sbcLevel": "Low",
+   "buyLevel": "High",
+   "quadrant": "SBC low, buybacks high",
+   "tsrAvg": 0.137,
+   "tsrMed": 0.114,
+   "end": 641.088214485738,
+   "dilution": 0.070338063611792,
+   "sbcTot": 0,
+   "buyTot": 92.5849859274855,
+   "net": 92.5849859274855,
+   "offset": 0,
+   "paid": 3.68004527362459,
+   "vsToday": 28.8828042680182,
+   "before": 318.172852969132,
+   "ratio": 0.5,
+   "bought": 11303.03739241,
+   "left": 8648.31130901546,
+   "after": 526.093192897858,
+   "sellers": -159.086426484566,
+   "holders": 207.920339928726,
+   "moved": 1798159.82717994,
+   "winner": "The holders who stay"
+  }
+ },
+ "random 3": {
+  "years": [
+   {
+    "rev": 14900.750597726019,
+    "sbc": null,
+    "buy": 0,
+    "mcap": null,
+    "shares": 295.1787437022432,
+    "bought": null
+   },
+   {
+    "rev": 16479.108097443914,
+    "sbc": 151.18885671649994,
+    "buy": 939.0777460414977,
+    "mcap": null,
+    "shares": 306.97764558854846,
+    "bought": null
+   },
+   {
+    "rev": null,
+    "sbc": null,
+    "buy": null,
+    "mcap": null,
+    "shares": null,
+    "bought": null
+   }
+  ],
+  "start": null,
+  "price": 268.75468400137095,
+  "b": [
+   1373011.8892935903,
+   38225.3000089607,
+   35.918930367367466,
+   314743.7872935658
+  ],
+  "excel": {
+   "rows": [
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     0.00917457764233921,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "sbcAvg": 0.00917457764233921,
+   "buyAvg": null,
+   "sbcLevel": "High",
+   "buyLevel": null,
+   "quadrant": null,
+   "tsrAvg": null,
+   "tsrMed": null,
+   "end": 306.977645588549,
+   "dilution": null,
+   "sbcTot": 151.1888567165,
+   "buyTot": 939.077746041498,
+   "net": 787.888889324998,
+   "offset": 0.160997167011792,
+   "paid": null,
+   "vsToday": null,
+   "before": 35.9189303673675,
+   "ratio": 1,
+   "bought": 8762.61581496069,
+   "left": 29462.684194,
+   "after": 35.9189303673675,
+   "sellers": 0,
+   "holders": 0,
+   "moved": 0,
+   "winner": "Nobody: bought at value"
+  }
+ },
+ "random 4": {
+  "years": [
+   {
+    "rev": 39295.410903657066,
+    "sbc": null,
+    "buy": null,
+    "mcap": 121539.7964455029,
+    "shares": 984.4395591725741,
+    "bought": null
+   },
+   {
+    "rev": null,
+    "sbc": null,
+    "buy": null,
+    "mcap": null,
+    "shares": null,
+    "bought": null
+   },
+   {
+    "rev": null,
+    "sbc": null,
+    "buy": null,
+    "mcap": null,
+    "shares": null,
+    "bought": null
+   }
+  ],
+  "start": 936.8314000267961,
+  "price": null,
+  "b": [
+   5959393.014919033,
+   97064.81890863992,
+   122.79202870667648,
+   0
+  ],
+  "excel": {
+   "rows": [
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "sbcAvg": null,
+   "buyAvg": null,
+   "sbcLevel": null,
+   "buyLevel": null,
+   "quadrant": null,
+   "tsrAvg": null,
+   "tsrMed": null,
+   "end": 984.439559172574,
+   "dilution": 0.0483606725290406,
+   "sbcTot": 0,
+   "buyTot": 0,
+   "net": 0,
+   "offset": null,
+   "paid": null,
+   "vsToday": null,
+   "before": 61.3960143533382,
+   "ratio": 2,
+   "bought": 0,
+   "left": 97064.8189086399,
+   "after": 61.3960143533382,
+   "sellers": 61.3960143533383,
+   "holders": 0,
+   "moved": 0,
+   "winner": "The sellers"
+  }
+ },
+ "random 5": {
+  "years": [
+   {
+    "rev": 41825.09724197878,
+    "sbc": 2501.740807573857,
+    "buy": 0,
+    "mcap": 106879.31380370943,
+    "shares": 1948.708727359955,
+    "bought": null
+   },
+   {
+    "rev": 2325.0246483351584,
+    "sbc": 0,
+    "buy": 0,
+    "mcap": 8238.495602865622,
+    "shares": 1858.057796999769,
+    "bought": null
+   },
+   {
+    "rev": 12498.261641867592,
+    "sbc": 0,
+    "buy": null,
+    "mcap": 23772.997181890812,
+    "shares": null,
+    "bought": null
+   }
+  ],
+  "start": null,
+  "price": null,
+  "b": [
+   4947937.347001226,
+   9381.570797173274,
+   1054.8206593488737,
+   0
+  ],
+  "excel": {
+   "rows": [
+    [
+     0.0598143452745622,
+     0,
+     null
+    ],
+    [
+     0,
+     0,
+     null
+    ],
+    [
+     0,
+     null,
+     null
+    ]
+   ],
+   "sbcAvg": 0.0199381150915207,
+   "buyAvg": 0,
+   "sbcLevel": "High",
+   "buyLevel": "Low",
+   "quadrant": "SBC high, buybacks low",
+   "tsrAvg": -0.001,
+   "tsrMed": 0.026,
+   "end": 1858.05779699977,
+   "dilution": null,
+   "sbcTot": 2501.74080757386,
+   "buyTot": 0,
+   "net": -2501.74080757386,
+   "offset": null,
+   "paid": null,
+   "vsToday": null,
+   "before": 527.410329674437,
+   "ratio": 2,
+   "bought": 0,
+   "left": 9381.57079717327,
+   "after": 527.410329674437,
+   "sellers": 527.410329674437,
+   "holders": 0,
+   "moved": 0,
+   "winner": "The sellers"
+  }
+ },
+ "random 6": {
+  "years": [
+   {
+    "rev": 40075.48063683903,
+    "sbc": 1959.273026896908,
+    "buy": 2263.057447687042,
+    "mcap": 210284.18987114003,
+    "shares": 619.5899435961978,
+    "bought": 6.667965086802786
+   },
+   {
+    "rev": 4181.838121273897,
+    "sbc": 241.31894483102388,
+    "buy": 0,
+    "mcap": null,
+    "shares": 597.3092454984961,
+    "bought": null
+   },
+   {
+    "rev": 43568.955349025484,
+    "sbc": 0,
+    "buy": 0,
+    "mcap": 243832.1807207885,
+    "shares": 619.8764587227183,
+    "bought": null
+   }
+  ],
+  "start": 627.5991330368261,
+  "price": 8.867531753723732,
+  "b": [
+   1167740.7946726212,
+   81006.24700784654,
+   11.532353000474245,
+   0
+  ],
+  "excel": {
+   "rows": [
+    [
+     0.0488895702749442,
+     0.0107619001175211,
+     339.392516041525
+    ],
+    [
+     0.0577064290469264,
+     null,
+     null
+    ],
+    [
+     0,
+     0,
+     null
+    ]
+   ],
+   "sbcAvg": 0.0355319997739569,
+   "buyAvg": 0.00538095005876053,
+   "sbcLevel": "High",
+   "buyLevel": "Low",
+   "quadrant": "SBC high, buybacks low",
+   "tsrAvg": -0.001,
+   "tsrMed": 0.026,
+   "end": 619.876458722718,
+   "dilution": -0.0124584087771629,
+   "sbcTot": 2200.59197172793,
+   "buyTot": 2263.05744768704,
+   "net": 62.4654759591099,
+   "offset": 0.972397750652352,
+   "paid": 339.392516041525,
+   "vsToday": -0.973872341508442,
+   "before": 14.4154412505928,
+   "ratio": 0.800000000000001,
+   "bought": 0,
+   "left": 81006.2470078465,
+   "after": 14.4154412505928,
+   "sellers": -2.88308825011855,
+   "holders": 0,
+   "moved": 0,
+   "winner": "The holders who stay"
+  }
+ },
+ "random 7": {
+  "years": [
+   {
+    "rev": 41012.244713616565,
+    "sbc": 1930.046255275733,
+    "buy": null,
+    "mcap": 189897.54052671103,
+    "shares": 1395.4091947175089,
+    "bought": null
+   },
+   {
+    "rev": 28259.91053360426,
+    "sbc": null,
+    "buy": 1167.3103176419947,
+    "mcap": 64390.950083039585,
+    "shares": 1371.2173054381424,
+    "bought": null
+   },
+   {
+    "rev": null,
+    "sbc": null,
+    "buy": null,
+    "mcap": null,
+    "shares": null,
+    "bought": null
+   }
+  ],
+  "start": 1359.389495746359,
+  "price": 30.116598033614903,
+  "b": [
+   3817768.6757704127,
+   78760.00951647077,
+   38.77875281335021,
+   1158634.2582951817
+  ],
+  "excel": {
+   "rows": [
+    [
+     0.047060244294186,
+     null,
+     null
+    ],
+    [
+     null,
+     0.0181284841446913,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "sbcAvg": 0.047060244294186,
+   "buyAvg": 0.0181284841446913,
+   "sbcLevel": "High",
+   "buyLevel": "High",
+   "quadrant": "SBC high, buybacks high",
+   "tsrAvg": 0.053,
+   "tsrMed": 0.062,
+   "end": 1371.21730543814,
+   "dilution": 0.00862577335107628,
+   "sbcTot": 1930.04625527573,
+   "buyTot": 1167.310317642,
+   "net": -762.735937633738,
+   "offset": 1,
+   "paid": null,
+   "vsToday": null,
+   "before": 48.4734410166878,
+   "ratio": 0.8,
+   "bought": 29878.069154826,
+   "left": 48881.9403616448,
+   "after": 54.3991175023347,
+   "sellers": -9.69468820333756,
+   "holders": 5.92567648564695,
+   "moved": 289658.564573795,
+   "winner": "The holders who stay"
+  }
+ },
+ "random 8": {
+  "years": [
+   {
+    "rev": 25867.495108242983,
+    "sbc": 0,
+    "buy": null,
+    "mcap": null,
+    "shares": 197.1706562681742,
+    "bought": null
+   },
+   {
+    "rev": null,
+    "sbc": null,
+    "buy": null,
+    "mcap": null,
+    "shares": null,
+    "bought": null
+   },
+   {
+    "rev": null,
+    "sbc": null,
+    "buy": null,
+    "mcap": null,
+    "shares": null,
+    "bought": null
+   }
+  ],
+  "start": 200.52879134699452,
+  "price": null,
+  "b": [
+   3722313.411490087,
+   16365.780301522154,
+   227.4449090058896,
+   735909.1467241829
+  ],
+  "excel": {
+   "rows": [
+    [
+     0,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "sbcAvg": 0,
+   "buyAvg": null,
+   "sbcLevel": "Low",
+   "buyLevel": null,
+   "quadrant": null,
+   "tsrAvg": null,
+   "tsrMed": null,
+   "end": 197.170656268174,
+   "dilution": -0.0170316168865048,
+   "sbcTot": 0,
+   "buyTot": 0,
+   "net": 0,
+   "offset": null,
+   "paid": null,
+   "vsToday": null,
+   "before": 227.44490900589,
+   "ratio": 1,
+   "bought": 3235.54899487826,
+   "left": 13130.2313066439,
+   "after": 227.44490900589,
+   "sellers": 0,
+   "holders": 0,
+   "moved": 0,
+   "winner": "Nobody: bought at value"
+  }
+ },
+ "random 9": {
+  "years": [
+   {
+    "rev": 35670.32954730867,
+    "sbc": 667.3572091549817,
+    "buy": 67.77120325747661,
+    "mcap": null,
+    "shares": 1110.2487680017023,
+    "bought": null
+   },
+   {
+    "rev": 20853.254899045227,
+    "sbc": null,
+    "buy": 2630.887237185876,
+    "mcap": 53375.42177521415,
+    "shares": null,
+    "bought": 56.061927468502525
+   },
+   {
+    "rev": 27432.196204983673,
+    "sbc": 1287.8644735787807,
+    "buy": 3060.5976069886565,
+    "mcap": 200267.8586892721,
+    "shares": 1157.2085321750938,
+    "bought": 17.68506283305895
+   }
+  ],
+  "start": null,
+  "price": 46.49693227745878,
+  "b": [
+   9859100.779326601,
+   34070.39413610211,
+   578.7488539135843,
+   0
+  ],
+  "excel": {
+   "rows": [
+    [
+     0.018709028417298,
+     null,
+     null
+    ],
+    [
+     null,
+     0.0492902378976156,
+     46.9282337583558
+    ],
+    [
+     0.0469471880397535,
+     0.0152825202557209,
+     173.061166696419
+    ]
+   ],
+   "sbcAvg": 0.0328281082285257,
+   "buyAvg": 0.0322863790766682,
+   "sbcLevel": "High",
+   "buyLevel": "High",
+   "quadrant": "SBC high, buybacks high",
+   "tsrAvg": 0.053,
+   "tsrMed": 0.062,
+   "end": 1157.20853217509,
+   "dilution": null,
+   "sbcTot": 1955.22168273376,
+   "buyTot": 5759.25604743201,
+   "net": 3804.03436469825,
+   "offset": 0.339492057069693,
+   "paid": 77.1758253577709,
+   "vsToday": -0.397519468539419,
+   "before": 289.374426956792,
+   "ratio": 2,
+   "bought": 0,
+   "left": 34070.3941361021,
+   "after": 289.374426956792,
+   "sellers": 289.374426956792,
+   "holders": 0,
+   "moved": 0,
+   "winner": "The sellers"
+  }
+ },
+ "random 10": {
+  "years": [
+   {
+    "rev": 10275.612816297502,
+    "sbc": null,
+    "buy": 253.90698630518457,
+    "mcap": 65897.41303819613,
+    "shares": 1783.881222902165,
+    "bought": 6.87340950654555
+   },
+   {
+    "rev": 9143.828167607757,
+    "sbc": 331.2457857440637,
+    "buy": null,
+    "mcap": 64932.965344023934,
+    "shares": 1853.0913807955117,
+    "bought": null
+   },
+   {
+    "rev": 9528.87339082625,
+    "sbc": null,
+    "buy": null,
+    "mcap": 75279.89059667783,
+    "shares": null,
+    "bought": null
+   }
+  ],
+  "start": 1808.7309344267226,
+  "price": 187.2707558577485,
+  "b": [
+   8529218.821145143,
+   68807.15686060883,
+   99.16664731168983,
+   0
+  ],
+  "excel": {
+   "rows": [
+    [
+     null,
+     0.00385306455289849,
+     36.9404712556976
+    ],
+    [
+     0.0362261603862494,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "sbcAvg": 0.0362261603862494,
+   "buyAvg": 0.00385306455289849,
+   "sbcLevel": "High",
+   "buyLevel": "Low",
+   "quadrant": "SBC high, buybacks low",
+   "tsrAvg": -0.001,
+   "tsrMed": 0.026,
+   "end": 1853.09138079551,
+   "dilution": 0.0239386178299235,
+   "sbcTot": 331.245785744064,
+   "buyTot": 253.906986305185,
+   "net": -77.3387994388791,
+   "offset": 1,
+   "paid": 36.9404712556976,
+   "vsToday": 4.06952806750846,
+   "before": 123.958309139612,
+   "ratio": 0.8,
+   "bought": 0,
+   "left": 68807.1568606088,
+   "after": 123.958309139612,
+   "sellers": -24.7916618279225,
+   "holders": 0,
+   "moved": 0,
+   "winner": "The holders who stay"
+  }
+ },
+ "random 11": {
+  "years": [
+   {
+    "rev": 27092.7177893105,
+    "sbc": 0,
+    "buy": 0,
+    "mcap": 118643.29157823994,
+    "shares": null,
+    "bought": null
+   },
+   {
+    "rev": 12938.532044013356,
+    "sbc": 355.9662440431881,
+    "buy": 0,
+    "mcap": 93284.62766859209,
+    "shares": null,
+    "bought": null
+   },
+   {
+    "rev": 8224.600783062513,
+    "sbc": 480.5420641170242,
+    "buy": 310.75567235905385,
+    "mcap": 6755.821499609235,
+    "shares": 847.7588110548007,
+    "bought": 38.995384845926544
+   }
+  ],
+  "start": 766.8535672069994,
+  "price": 70.53765318380259,
+  "b": [
+   8926712.754445152,
+   77814.10163806465,
+   91.77475615888558,
+   0
+  ],
+  "excel": {
+   "rows": [
+    [
+     0,
+     0,
+     null
+    ],
+    [
+     0.0275121043741506,
+     0,
+     null
+    ],
+    [
+     0.058427402957556,
+     0.0459982064915463,
+     7.96903719727016
+    ]
+   ],
+   "sbcAvg": 0.0286465024439022,
+   "buyAvg": 0.0153327354971821,
+   "sbcLevel": "High",
+   "buyLevel": "High",
+   "quadrant": "SBC high, buybacks high",
+   "tsrAvg": 0.053,
+   "tsrMed": 0.062,
+   "end": 847.758811054801,
+   "dilution": 0.0954342706826452,
+   "sbcTot": 836.508308160212,
+   "buyTot": 310.755672359054,
+   "net": -525.752635801159,
+   "offset": 1,
+   "paid": 7.96903719727016,
+   "vsToday": 7.85146491824203,
+   "before": 114.718445198607,
+   "ratio": 0.8,
+   "bought": 0,
+   "left": 77814.1016380647,
+   "after": 114.718445198607,
+   "sellers": -22.9436890397214,
+   "holders": 0,
+   "moved": 0,
+   "winner": "The holders who stay"
+  }
+ },
+ "random 12": {
+  "years": [
+   {
+    "rev": 1417.1003956807435,
+    "sbc": null,
+    "buy": 0,
+    "mcap": 3102.6986490621994,
+    "shares": 354.98522290343305,
+    "bought": null
+   },
+   {
+    "rev": null,
+    "sbc": null,
+    "buy": null,
+    "mcap": null,
+    "shares": null,
+    "bought": null
+   },
+   {
+    "rev": null,
+    "sbc": null,
+    "buy": null,
+    "mcap": null,
+    "shares": null,
+    "bought": null
+   }
+  ],
+  "start": 368.4732453966082,
+  "price": null,
+  "b": [
+   7315950.759429326,
+   65552.41827483836,
+   320.53451055685036,
+   2105335.8774117767
+  ],
+  "excel": {
+   "rows": [
+    [
+     null,
+     0,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "sbcAvg": null,
+   "buyAvg": 0,
+   "sbcLevel": null,
+   "buyLevel": "Low",
+   "quadrant": null,
+   "tsrAvg": null,
+   "tsrMed": null,
+   "end": 354.985222903433,
+   "dilution": -0.037996011165919,
+   "sbcTot": 0,
+   "buyTot": 0,
+   "net": 0,
+   "offset": null,
+   "paid": null,
+   "vsToday": null,
+   "before": 111.604589913924,
+   "ratio": 2.87205491103965,
+   "bought": 6568.20344790416,
+   "left": 58984.2148269342,
+   "after": 88.3391411974548,
+   "sellers": 208.929920642927,
+   "holders": -23.2654487164688,
+   "moved": -1372294.22513721,
+   "winner": "The sellers"
+  }
+ },
+ "exhibit 39 at $50": {
+  "years": [
+   {
+    "rev": null,
+    "sbc": null,
+    "buy": null,
+    "mcap": null,
+    "shares": null,
+    "bought": null
+   },
+   {
+    "rev": null,
+    "sbc": null,
+    "buy": null,
+    "mcap": null,
+    "shares": null,
+    "bought": null
+   },
+   {
+    "rev": null,
+    "sbc": null,
+    "buy": null,
+    "mcap": null,
+    "shares": null,
+    "bought": null
+   }
+  ],
+  "start": null,
+  "price": null,
+  "b": [
+   100000,
+   1000,
+   50,
+   20000
+  ],
+  "excel": {
+   "rows": [
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "sbcAvg": null,
+   "buyAvg": null,
+   "sbcLevel": null,
+   "buyLevel": null,
+   "quadrant": null,
+   "tsrAvg": null,
+   "tsrMed": null,
+   "end": null,
+   "dilution": null,
+   "sbcTot": 0,
+   "buyTot": 0,
+   "net": 0,
+   "offset": null,
+   "paid": null,
+   "vsToday": null,
+   "before": 100,
+   "ratio": 0.5,
+   "bought": 400,
+   "left": 600,
+   "after": 133.333333333333,
+   "sellers": -50,
+   "holders": 33.3333333333333,
+   "moved": 20000,
+   "winner": "The holders who stay"
+  }
+ },
+ "at value": {
+  "years": [
+   {
+    "rev": 1000,
+    "sbc": 5,
+    "buy": 30,
+    "mcap": 2000,
+    "shares": null,
+    "bought": null
+   },
+   {
+    "rev": null,
+    "sbc": null,
+    "buy": null,
+    "mcap": null,
+    "shares": null,
+    "bought": null
+   },
+   {
+    "rev": null,
+    "sbc": null,
+    "buy": null,
+    "mcap": null,
+    "shares": null,
+    "bought": null
+   }
+  ],
+  "start": null,
+  "price": null,
+  "b": [
+   100000,
+   1000,
+   100,
+   20000
+  ],
+  "excel": {
+   "rows": [
+    [
+     0.005,
+     0.015,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "sbcAvg": 0.005,
+   "buyAvg": 0.015,
+   "sbcLevel": "Low",
+   "buyLevel": "Low",
+   "quadrant": "SBC low, buybacks low",
+   "tsrAvg": 0.094,
+   "tsrMed": 0.076,
+   "end": null,
+   "dilution": null,
+   "sbcTot": 5,
+   "buyTot": 30,
+   "net": 25,
+   "offset": 0.166666666666667,
+   "paid": null,
+   "vsToday": null,
+   "before": 100,
+   "ratio": 1,
+   "bought": 200,
+   "left": 800,
+   "after": 100,
+   "sellers": 0,
+   "holders": 0,
+   "moved": 0,
+   "winner": "Nobody: bought at value"
+  }
+ },
+ "too big": {
+  "years": [
+   {
+    "rev": 1000,
+    "sbc": 10,
+    "buy": 10,
+    "mcap": 2000,
+    "shares": null,
+    "bought": null
+   },
+   {
+    "rev": null,
+    "sbc": null,
+    "buy": null,
+    "mcap": null,
+    "shares": null,
+    "bought": null
+   },
+   {
+    "rev": null,
+    "sbc": null,
+    "buy": null,
+    "mcap": null,
+    "shares": null,
+    "bought": null
+   }
+  ],
+  "start": null,
+  "price": null,
+  "b": [
+   1000,
+   10,
+   10,
+   150
+  ],
+  "excel": {
+   "rows": [
+    [
+     0.01,
+     0.005,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "sbcAvg": 0.01,
+   "buyAvg": 0.005,
+   "sbcLevel": "High",
+   "buyLevel": "Low",
+   "quadrant": "SBC high, buybacks low",
+   "tsrAvg": -0.001,
+   "tsrMed": 0.026,
+   "end": null,
+   "dilution": null,
+   "sbcTot": 10,
+   "buyTot": 10,
+   "net": 0,
+   "offset": 1,
+   "paid": null,
+   "vsToday": null,
+   "before": 100,
+   "ratio": 0.1,
+   "bought": null,
+   "left": null,
+   "after": null,
+   "sellers": null,
+   "holders": null,
+   "moved": null,
+   "winner": null
+  }
+ }
+}

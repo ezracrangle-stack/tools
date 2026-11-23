@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTNNLB6W9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FTNNLB6W9D');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>Buybacks and stock comp: which one is it? · Ezra's Notes</title>
+<meta name="description" content="How much stock a company issues to pay its people and how much it buys back, against Mauboussin and Callahan's medians, plus dilution, how much of the buybacks only offset stock comp, and who wins from a buyback. Free, and it runs in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css?v=54a9b1d6">
+<meta property="og:title" content="Buybacks and stock comp: which one is it? · Ezra's Notes">
+<meta property="og:description" content="How much stock a company issues to pay its people and how much it buys back, against Mauboussin and Callahan's medians, plus dilution, how much of the buybacks only offset stock comp, and who wins from a buyback. Free, and it runs in your browser.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/buybacks/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="../static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
+<link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/buybacks/"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://tools.ezrasnotes.com/", "name": "Home", "position": 1}, {"@type": "ListItem", "item": "https://tools.ezrasnotes.com/buybacks/", "name": "Buybacks and stock comp: which one is it?", "position": 2}]}</script></head>
+<body data-collect="https://script.google.com/macros/s/AKfycbz-a4q03dY00RYGWBKOHaKqYKL92Z3afAqhJ5iYdPQGYCMbU2CpFTR-JfEfArbdoUZXHg/exec" data-tool-name="the buybacks and stock comp calculator">
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="../">Tools</a>
+  <p class="byline">By <a href="https://www.ezrasnotes.com">@ezracrangle</a></p>
+  <nav>
+    <a href="../">All tools</a>
+    <details class="nav-menu">
+      <summary>Tools</summary>
+      <div class="nav-drop"><a href="../net-net/">Net-net calculator</a><a href="../epv/">Earnings power value</a><a href="../greenwald/">Greenwald&#39;s moat test</a><a href="../penman/">Penman&#39;s residual income</a><a href="../graham/">Graham&#39;s formulas</a><a href="../fcf/">Mauboussin&#39;s FCF</a><a href="../roic/">ROIC, ROIIC and reinvestment</a><a href="../reverse-dcf/">Reverse DCF</a><a href="../compounders/">What to pay for quality</a><a href="../dhandho/">Pabrai&#39;s Dhandho bet</a><a href="../lynch/">Peter Lynch&#39;s PEG</a><a href="../marks/">Howard Marks&#39; market temperature</a><a href="../intangibles/">Intangibles and earnings</a><a href="../buybacks/" aria-current="page">Buybacks and stock comp</a><a href="../moat/">Measuring the moat</a><a href="../red-flags/">Red flags</a><a href="../beauty-contest/">Keynes&#39; beauty contest</a></div>
+    </details>
+    <a href="../about/">About</a>
+    <a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<div class="print-head" aria-hidden="true"><strong>Ezra's Notes · Tools</strong><span id="print-stamp"></span></div>
+<div class="print-summary verdict" id="print-summary" aria-hidden="true"></div>
+<section class="lede">
+  <h1 class="page-title">Buybacks and stock comp</h1>
+  <p class="dek">Lots of companies pay their people in stock and buy stock back at the same time. If the stock is cheap, issuing it hurts the holders. If it's expensive, buying it back hurts them. Michael Mauboussin and Dan Callahan's question: which one is it?</p>
+  <p>Up to 3 years from the cash flow statement, oldest first. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="bbform" class="calc" novalidate>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-co">Company<span class="hint">Optional, for the link and the files.</span></label>
+      <span class="cell"><input id="f-co" type="text" maxlength="60" autocomplete="off" spellcheck="false" style="text-align:left"></span>
+    </div>
+  </div>
+  <div class="profile csx mtx">
+    <p class="hsub">1. What it issues and what it buys back</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">Year<span class="hint">Optional.</span></th><td><input data-k="y0" data-text="1" type="text" maxlength="9" autocomplete="off" aria-label="Year 1"></td><td><input data-k="y1" data-text="1" type="text" maxlength="9" autocomplete="off" aria-label="Year 2"></td><td><input data-k="y2" data-text="1" type="text" maxlength="9" autocomplete="off" aria-label="Year 3"></td></tr>      <tr><th scope="row">Revenue<span class="hint">Same unit for every amount.</span></th><td><input data-k="rev0" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 1"></td><td><input data-k="rev1" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 2"></td><td><input data-k="rev2" type="text" inputmode="decimal" autocomplete="off" aria-label="Revenue, year 3"></td></tr>      <tr><th scope="row">Stock-based compensation<span class="hint">Added back in the cash flow statement.</span></th><td><input data-k="sbc0" type="text" inputmode="decimal" autocomplete="off" aria-label="Stock-based compensation, year 1"></td><td><input data-k="sbc1" type="text" inputmode="decimal" autocomplete="off" aria-label="Stock-based compensation, year 2"></td><td><input data-k="sbc2" type="text" inputmode="decimal" autocomplete="off" aria-label="Stock-based compensation, year 3"></td></tr>      <tr><th scope="row">Share buybacks<span class="hint">Cash spent, gross.</span></th><td><input data-k="buy0" type="text" inputmode="decimal" autocomplete="off" aria-label="Share buybacks, year 1"></td><td><input data-k="buy1" type="text" inputmode="decimal" autocomplete="off" aria-label="Share buybacks, year 2"></td><td><input data-k="buy2" type="text" inputmode="decimal" autocomplete="off" aria-label="Share buybacks, year 3"></td></tr>      <tr><th scope="row">Market value of the shares<span class="hint">Average for the year, or year-end.</span></th><td><input data-k="mcap0" type="text" inputmode="decimal" autocomplete="off" aria-label="Market value of the shares, year 1"></td><td><input data-k="mcap1" type="text" inputmode="decimal" autocomplete="off" aria-label="Market value of the shares, year 2"></td><td><input data-k="mcap2" type="text" inputmode="decimal" autocomplete="off" aria-label="Market value of the shares, year 3"></td></tr>      <tr><th scope="row">Shares outstanding, year-end<span class="hint">Same unit every year.</span></th><td><input data-k="sh0" type="text" inputmode="decimal" autocomplete="off" aria-label="Shares outstanding, year-end, year 1"></td><td><input data-k="sh1" type="text" inputmode="decimal" autocomplete="off" aria-label="Shares outstanding, year-end, year 2"></td><td><input data-k="sh2" type="text" inputmode="decimal" autocomplete="off" aria-label="Shares outstanding, year-end, year 3"></td></tr>      <tr><th scope="row">Shares repurchased<span class="hint">Optional, for the price paid.</span></th><td><input data-k="bt0" type="text" inputmode="decimal" autocomplete="off" aria-label="Shares repurchased, year 1"></td><td><input data-k="bt1" type="text" inputmode="decimal" autocomplete="off" aria-label="Shares repurchased, year 2"></td><td><input data-k="bt2" type="text" inputmode="decimal" autocomplete="off" aria-label="Shares repurchased, year 3"></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="sheet">
+        <div class="srow in">
+      <label class="lab" for="f-start">Shares outstanding at the start of year 1<span class="hint">For dilution: year-end shares of the year before.</span></label>
+      <span class="cell"><input id="f-start" data-k="start" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+        <div class="srow in">
+      <label class="lab" for="f-px">Share price today<span class="hint">Optional, to compare with the price paid.</span></label>
+      <span class="cell"><input id="f-px" data-k="px" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+  </div>
+  <div class="profile csx mtx">
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">SBC ÷ revenue</th><td><output id="p-sbc0">–</output></td><td><output id="p-sbc1">–</output></td><td><output id="p-sbc2">–</output></td></tr>
+      <tr><th scope="row">Buybacks ÷ market value</th><td><output id="p-buy0">–</output></td><td><output id="p-buy1">–</output></td><td><output id="p-buy2">–</output></td></tr>
+      <tr><th scope="row">Average price paid</th><td><output id="p-px0">–</output></td><td><output id="p-px1">–</output></td><td><output id="p-px2">–</output></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="srow head"><span class="lab">Against the paper</span></div>
+    <div class="srow calc-row"><span class="lab">SBC ÷ revenue, average<span class="hint">Paper's median: 0.8%.</span></span><output class="cell" id="o-sbc">–</output></div>
+    <div class="srow calc-row"><span class="lab">Level</span><output class="cell" id="l-sbc">–</output></div>
+    <div class="srow calc-row"><span class="lab">Buybacks ÷ market value, average<span class="hint">Paper's median: 1.5%.</span></span><output class="cell" id="o-buy">–</output></div>
+    <div class="srow calc-row"><span class="lab">Level</span><output class="cell" id="l-buy">–</output></div>
+    <div class="srow test"><span class="lab">Quadrant</span><output class="cell" id="x-quad">–</output></div>
+    <div class="srow calc-row"><span class="lab">That group's annual return, 2021-2023<span class="hint">Exhibit 8. The Russell 3000 returned 8.5% a year.</span></span><output class="cell" id="o-tsr">–</output></div>
+    <div class="srow head"><span class="lab">Dilution and the buybacks</span></div>
+    <div class="srow calc-row total"><span class="lab">Dilution over the period<span class="hint">1 − shares before ÷ shares after. Negative: the share count fell.</span></span><output class="cell" id="o-dil">–</output></div>
+    <div class="srow calc-row"><span class="lab">Stock-based compensation, total</span><output class="cell" id="o-sbct">–</output></div>
+    <div class="srow calc-row"><span class="lab">Buybacks, total</span><output class="cell" id="o-buyt">–</output></div>
+    <div class="srow calc-row"><span class="lab">Buybacks minus SBC<span class="hint">Negative: more value went out in stock pay than was spent buying stock back.</span></span><output class="cell" id="o-net">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Share of buybacks that only offset SBC</span><output class="cell" id="o-off">–</output></div>
+    <div class="srow calc-row"><span class="lab">Average price paid, all years</span><output class="cell" id="o-paid">–</output></div>
+    <div class="srow calc-row"><span class="lab">Today's price against it<span class="hint">About price, not value.</span></span><output class="cell" id="o-today">–</output></div>
+
+    <div class="srow head"><span class="lab">2. Who wins from a buyback</span></div>
+    <p class="hint">When the price paid differs from what the stock is worth, a buyback moves value between the shareholders who sell and those who stay.</p>
+        <div class="srow in">
+      <label class="lab" for="f-val">Value of the equity (your estimate)<span class="hint">Total, same unit as the buyback.</span></label>
+      <span class="cell"><input id="f-val" data-k="val" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+        <div class="srow in">
+      <label class="lab" for="f-bsh">Shares outstanding</label>
+      <span class="cell"><input id="f-bsh" data-k="bsh" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+        <div class="srow in">
+      <label class="lab" for="f-bpx">Price paid per share</label>
+      <span class="cell"><input id="f-bpx" data-k="bpx" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+        <div class="srow in">
+      <label class="lab" for="f-amt">Amount spent on the buyback</label>
+      <span class="cell"><input id="f-amt" data-k="amt" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+    <div class="srow calc-row"><span class="lab">Value per share before</span><output class="cell" id="w-before">–</output></div>
+    <div class="srow calc-row"><span class="lab">Price ÷ value</span><output class="cell" id="w-ratio">–</output></div>
+    <div class="srow calc-row"><span class="lab">Shares bought back</span><output class="cell" id="w-bought">–</output></div>
+    <div class="srow calc-row"><span class="lab">Value per share after</span><output class="cell" id="w-after">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Sellers: gain per share</span><output class="cell" id="w-sellers">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Holders who stay: gain per share</span><output class="cell" id="w-holders">–</output></div>
+    <div class="srow calc-row"><span class="lab">Value moved to the holders who stay</span><output class="cell" id="w-moved">–</output></div>
+    <div class="srow test"><span class="lab">Who wins</span><output class="cell" id="x-win">–</output></div>
+  </div>
+
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
+  <div class="actions">
+    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
+    <button type="button" class="button ghost" id="reset">Clear</button>
+  </div>
+<p class="copy-note">Buybacks and stock pay are judged against value, which only you can estimate. The paper&#39;s returns are one period, driven by many other things.</p>  <div class="sharebar" id="sharebar">
+    <label class="sb-co"><span>Company or ticker <em>(optional, goes in the link and the files)</em></span>
+      <input id="sb-company" type="text" maxlength="60" autocomplete="off" spellcheck="false" placeholder="e.g. ACME"></label>
+    <div class="sb-groups">
+      <p class="share-buttons"><span class="sb-k">Share</span>
+        <button type="button" id="sb-x">X</button>
+        <button type="button" id="sb-in">LinkedIn</button>
+        <button type="button" id="sb-native" hidden>More</button></p>
+      <p class="share-buttons"><span class="sb-k">Download</span>
+        <button type="button" id="sb-pdf">PDF</button>
+        <button type="button" id="sb-csv">CSV</button></p>
+      <p class="share-buttons sb-community" hidden><span class="sb-k">Community</span>
+        <button type="button" id="sb-save">Send to Ezra</button>
+        <button type="button" id="sb-tm">Leave a testimonial</button></p>
+    </div>
+    <div class="sb-box" id="sb-savebox" hidden>
+      <p>Send this calculation to Ezra. He reads them, and with your OK he may share some with the community. Nothing leaves your browser until you press Send.</p>
+      <label>Your name or X handle <em>(optional)</em> <input id="sb-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label class="check"><input id="sb-ok" type="checkbox"> Ezra can publish this calculation and my name or handle</label>
+      <input id="sb-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="sb-send">Send</button> <span id="sb-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+    <div class="sb-box" id="testimonial" hidden>
+      <p>Did this calculator help you? Tell Ezra in a few words.</p>
+      <label>What did it help you with? <textarea id="tm-text" rows="4" maxlength="1500"></textarea></label>
+      <label>Name <input id="tm-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label>X or LinkedIn handle <em>(optional)</em> <input id="tm-handle" type="text" maxlength="80" autocomplete="off"></label>
+      <label>What you do <em>(optional, e.g. "individual investor" or "analyst at a fund")</em> <input id="tm-role" type="text" maxlength="120" autocomplete="off"></label>
+      <label class="check"><input id="tm-ok" type="checkbox"> Ezra can publish this on the site with my name</label>
+      <input id="tm-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="tm-send">Send</button> <span id="tm-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+  </div>
+
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<aside class="sister subscribe" data-place="buybacks">
+  <p class="sister-kicker">Newsletter</p>
+  <p class="sister-head"><a href="https://www.ezrasnotes.com/subscribe?utm_source=tools&amp;utm_medium=site&amp;utm_campaign=buybacks">Ezra's Notes</a></p>
+  <p class="sister-body">For long-term investors who look at companies the way an owner does. Free, every week.</p>
+  <a class="button" href="https://www.ezrasnotes.com/subscribe?utm_source=tools&amp;utm_medium=site&amp;utm_campaign=buybacks">Subscribe free</a>
+</aside>
+
+
+<section class="prose">
+  <h2 class="rule-head">Which one is it?</h2>
+  <p>Paying people in stock is issuing stock. A buyback is retiring it. A company that does both a lot at once is selling and buying its own shares, and only one of those can be at a good price. If the stock is worth more than its price, the buybacks help the holders who stay and the stock pay costs them. If it's worth less, the reverse.</p>
+  <p>Many companies size their buybacks to keep the share count flat. That sounds prudent, but it decides the buyback by the stock pay, not by the price.</p>
+
+  <h2 class="rule-head">The paper's numbers</h2>
+  <p>Mauboussin and Callahan took Russell 3000 companies with sales over $1 billion and averaged, for 2021 to 2023, stock-based compensation over sales and gross buybacks over market value. The medians were 0.8% and 1.5%. Splitting the companies at those medians gave four groups. Their average annual returns: 13.7% for low SBC and high buybacks, 9.4% for low and low, 5.3% for high and high, and −0.1% for high SBC with few buybacks. The Russell 3000 returned 8.5% a year.</p>
+  <p>They're clear that many other things drove those returns. Over 5 years the best and worst groups stayed the same, but the two middle groups swapped places.</p>
+
+  <h2 class="rule-head">Dilution</h2>
+  <p>Dilution is 1 minus the shares before over the shares after. A company with 1,000 shares that issues 100 more dilutes its holders by 9.1%: they now own 90.9% of it. Smaller companies dilute more; in the paper, the largest companies' median dilution over 3 years was negative, because buybacks more than offset the stock they issued.</p>
+
+  <h2 class="rule-head">Who wins from a buyback</h2>
+  <p>A buyback doesn't create or destroy value for the company. It moves value between shareholders. In the paper's example, a company worth $100,000 with 1,000 shares spends $20,000 on a buyback. At $200 a share, double its value, the holders who stay lose $11.11 a share and the sellers gain $100. At $50, half its value, the holders who stay gain $33.33 a share.</p>
+  <p>That's why the value estimate matters more than the buyback itself. Use the <a href="../reverse-dcf/">reverse DCF</a> or the <a href="../epv/">earnings power value</a> calculator to estimate it.</p>
+
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Any listed company that pays in stock or buys back stock. Stock pay matters most in technology and healthcare, where it's highest as a share of sales. The paper's medians come from US companies with sales over $1 billion, so use them as a reference, not a rule, for smaller ones.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>Michael J. Mauboussin and Dan Callahan, "Which One Is It? Equity Issuance and Retirement", Counterpoint Global Insights, July 2024. The buyback example: Mauboussin and Callahan, "Capital Allocation: Results, Analysis, and Assessment", Counterpoint Global Insights, December 2022, Exhibit 39, from Mauboussin and Rappaport's <em>Expectations Investing</em>.</p>
+</section>
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+  </p>
+  <nav class="footer-network" aria-label="More from Ezra's Notes"><span class="fn-label">More from Ezra's Notes</span>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a Inversores</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Investor Holdings</a>
+    <span aria-current="page">Tools</span>
+  </nav>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('.subscribe')?'box':a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var boxes=document.querySelectorAll('.subscribe');if(boxes.length&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){t('subscribe_box_view',{page:location.pathname});io.unobserve(e.target)}})},{threshold:0.5});boxes.forEach(function(x){io.observe(x)})}})();</script>
+<script>document.addEventListener("click",function(e){var m=document.querySelector(".nav-menu[open]");if(m&&!m.contains(e.target))m.removeAttribute("open")});</script>
+<script src="../static/share.js?v=54a9b1d6"></script><script type="module" src="../static/buybacks.js?v=54a9b1d6"></script><a href="#" class="to-top" id="to-top" aria-label="Back to top" title="Back to top">&uarr;</a>
+<script>
+(function () {
+  var b = document.getElementById('to-top');
+  function check() { b.classList.toggle('show', window.scrollY > window.innerHeight * 1.2); }
+  window.addEventListener('scroll', check, { passive: true }); check();
+  b.addEventListener('click', function (e) {
+    e.preventDefault();
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: still ? 'auto' : 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>

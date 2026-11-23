@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
+{% macro yrow(k, label, hint="") %}
+      <tr><th scope="row">{{ label }}{% if hint %}<span class="hint">{{ hint }}</span>{% endif %}</th>{% for i in range(3) %}<td><input data-k="{{ k }}{{ i }}" type="text" inputmode="decimal" autocomplete="off" aria-label="{{ label }}, year {{ i + 1 }}"></td>{% endfor %}</tr>
+{%- endmacro %}
+{% macro inrow(k, label, hint) %}
+    <div class="srow in">
+      <label class="lab" for="f-{{ k }}">{{ label }}{% if hint %}<span class="hint">{{ hint }}</span>{% endif %}</label>
+      <span class="cell"><input id="f-{{ k }}" data-k="{{ k }}" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+{%- endmacro %}
+{% block title %}Buybacks and stock comp: which one is it?{% endblock %}
+{% block description %}How much stock a company issues to pay its people and how much it buys back, against Mauboussin and Callahan's medians, plus dilution, how much of the buybacks only offset stock comp, and who wins from a buyback. Free, and it runs in your browser.{% endblock %}
+{% block main %}
+<section class="lede">
+  <h1 class="page-title">Buybacks and stock comp</h1>
+  <p class="dek">Lots of companies pay their people in stock and buy stock back at the same time. If the stock is cheap, issuing it hurts the holders. If it's expensive, buying it back hurts them. Michael Mauboussin and Dan Callahan's question: which one is it?</p>
+  <p>Up to 3 years from the cash flow statement, oldest first. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="bbform" class="calc" novalidate>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-co">Company<span class="hint">Optional, for the link and the files.</span></label>
+      <span class="cell"><input id="f-co" type="text" maxlength="60" autocomplete="off" spellcheck="false" style="text-align:left"></span>
+    </div>
+  </div>
+  <div class="profile csx mtx">
+    <p class="hsub">1. What it issues and what it buys back</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">Year<span class="hint">Optional.</span></th>{% for i in range(3) %}<td><input data-k="y{{ i }}" data-text="1" type="text" maxlength="9" autocomplete="off" aria-label="Year {{ i + 1 }}"></td>{% endfor %}</tr>
+      {{- yrow("rev", "Revenue", "Same unit for every amount.") }}
+      {{- yrow("sbc", "Stock-based compensation", "Added back in the cash flow statement.") }}
+      {{- yrow("buy", "Share buybacks", "Cash spent, gross.") }}
+      {{- yrow("mcap", "Market value of the shares", "Average for the year, or year-end.") }}
+      {{- yrow("sh", "Shares outstanding, year-end", "Same unit every year.") }}
+      {{- yrow("bt", "Shares repurchased", "Optional, for the price paid.") }}
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="sheet">
+    {{ inrow("start", "Shares outstanding at the start of year 1", "For dilution: year-end shares of the year before.") }}
+    {{ inrow("px", "Share price today", "Optional, to compare with the price paid.") }}
+  </div>
+  <div class="profile csx mtx">
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">SBC ÷ revenue</th>{% for i in range(3) %}<td><output id="p-sbc{{ i }}">–</output></td>{% endfor %}</tr>
+      <tr><th scope="row">Buybacks ÷ market value</th>{% for i in range(3) %}<td><output id="p-buy{{ i }}">–</output></td>{% endfor %}</tr>
+      <tr><th scope="row">Average price paid</th>{% for i in range(3) %}<td><output id="p-px{{ i }}">–</output></td>{% endfor %}</tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="srow head"><span class="lab">Against the paper</span></div>
+    <div class="srow calc-row"><span class="lab">SBC ÷ revenue, average<span class="hint">Paper's median: 0.8%.</span></span><output class="cell" id="o-sbc">–</output></div>
+    <div class="srow calc-row"><span class="lab">Level</span><output class="cell" id="l-sbc">–</output></div>
+    <div class="srow calc-row"><span class="lab">Buybacks ÷ market value, average<span class="hint">Paper's median: 1.5%.</span></span><output class="cell" id="o-buy">–</output></div>
+    <div class="srow calc-row"><span class="lab">Level</span><output class="cell" id="l-buy">–</output></div>
+    <div class="srow test"><span class="lab">Quadrant</span><output class="cell" id="x-quad">–</output></div>
+    <div class="srow calc-row"><span class="lab">That group's annual return, 2021-2023<span class="hint">Exhibit 8. The Russell 3000 returned 8.5% a year.</span></span><output class="cell" id="o-tsr">–</output></div>
+    <div class="srow head"><span class="lab">Dilution and the buybacks</span></div>
+    <div class="srow calc-row total"><span class="lab">Dilution over the period<span class="hint">1 − shares before ÷ shares after. Negative: the share count fell.</span></span><output class="cell" id="o-dil">–</output></div>
+    <div class="srow calc-row"><span class="lab">Stock-based compensation, total</span><output class="cell" id="o-sbct">–</output></div>
+    <div class="srow calc-row"><span class="lab">Buybacks, total</span><output class="cell" id="o-buyt">–</output></div>
+    <div class="srow calc-row"><span class="lab">Buybacks minus SBC<span class="hint">Negative: more value went out in stock pay than was spent buying stock back.</span></span><output class="cell" id="o-net">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Share of buybacks that only offset SBC</span><output class="cell" id="o-off">–</output></div>
+    <div class="srow calc-row"><span class="lab">Average price paid, all years</span><output class="cell" id="o-paid">–</output></div>
+    <div class="srow calc-row"><span class="lab">Today's price against it<span class="hint">About price, not value.</span></span><output class="cell" id="o-today">–</output></div>
+
+    <div class="srow head"><span class="lab">2. Who wins from a buyback</span></div>
+    <p class="hint">When the price paid differs from what the stock is worth, a buyback moves value between the shareholders who sell and those who stay.</p>
+    {{ inrow("val", "Value of the equity (your estimate)", "Total, same unit as the buyback.") }}
+    {{ inrow("bsh", "Shares outstanding", "") }}
+    {{ inrow("bpx", "Price paid per share", "") }}
+    {{ inrow("amt", "Amount spent on the buyback", "") }}
+    <div class="srow calc-row"><span class="lab">Value per share before</span><output class="cell" id="w-before">–</output></div>
+    <div class="srow calc-row"><span class="lab">Price ÷ value</span><output class="cell" id="w-ratio">–</output></div>
+    <div class="srow calc-row"><span class="lab">Shares bought back</span><output class="cell" id="w-bought">–</output></div>
+    <div class="srow calc-row"><span class="lab">Value per share after</span><output class="cell" id="w-after">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Sellers: gain per share</span><output class="cell" id="w-sellers">–</output></div>
+    <div class="srow calc-row total"><span class="lab">Holders who stay: gain per share</span><output class="cell" id="w-holders">–</output></div>
+    <div class="srow calc-row"><span class="lab">Value moved to the holders who stay</span><output class="cell" id="w-moved">–</output></div>
+    <div class="srow test"><span class="lab">Who wins</span><output class="cell" id="x-win">–</output></div>
+  </div>
+
+{{ sheet.actions('Buybacks and stock pay are judged against value, which only you can estimate. The paper\'s returns are one period, driven by many other things.') }}
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+{{ sheet.subscribe(subscribe_url, "buybacks") }}
+
+<section class="prose">
+  <h2 class="rule-head">Which one is it?</h2>
+  <p>Paying people in stock is issuing stock. A buyback is retiring it. A company that does both a lot at once is selling and buying its own shares, and only one of those can be at a good price. If the stock is worth more than its price, the buybacks help the holders who stay and the stock pay costs them. If it's worth less, the reverse.</p>
+  <p>Many companies size their buybacks to keep the share count flat. That sounds prudent, but it decides the buyback by the stock pay, not by the price.</p>
+
+  <h2 class="rule-head">The paper's numbers</h2>
+  <p>Mauboussin and Callahan took Russell 3000 companies with sales over $1 billion and averaged, for 2021 to 2023, stock-based compensation over sales and gross buybacks over market value. The medians were 0.8% and 1.5%. Splitting the companies at those medians gave four groups. Their average annual returns: 13.7% for low SBC and high buybacks, 9.4% for low and low, 5.3% for high and high, and −0.1% for high SBC with few buybacks. The Russell 3000 returned 8.5% a year.</p>
+  <p>They're clear that many other things drove those returns. Over 5 years the best and worst groups stayed the same, but the two middle groups swapped places.</p>
+
+  <h2 class="rule-head">Dilution</h2>
+  <p>Dilution is 1 minus the shares before over the shares after. A company with 1,000 shares that issues 100 more dilutes its holders by 9.1%: they now own 90.9% of it. Smaller companies dilute more; in the paper, the largest companies' median dilution over 3 years was negative, because buybacks more than offset the stock they issued.</p>
+
+  <h2 class="rule-head">Who wins from a buyback</h2>
+  <p>A buyback doesn't create or destroy value for the company. It moves value between shareholders. In the paper's example, a company worth $100,000 with 1,000 shares spends $20,000 on a buyback. At $200 a share, double its value, the holders who stay lose $11.11 a share and the sellers gain $100. At $50, half its value, the holders who stay gain $33.33 a share.</p>
+  <p>That's why the value estimate matters more than the buyback itself. Use the <a href="{{ root }}reverse-dcf/">reverse DCF</a> or the <a href="{{ root }}epv/">earnings power value</a> calculator to estimate it.</p>
+
+  <h2 class="rule-head">Which companies it works for</h2>
+  <p>Any listed company that pays in stock or buys back stock. Stock pay matters most in technology and healthcare, where it's highest as a share of sales. The paper's medians come from US companies with sales over $1 billion, so use them as a reference, not a rule, for smaller ones.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>Michael J. Mauboussin and Dan Callahan, "Which One Is It? Equity Issuance and Retirement", Counterpoint Global Insights, July 2024. The buyback example: Mauboussin and Callahan, "Capital Allocation: Results, Analysis, and Assessment", Counterpoint Global Insights, December 2022, Exhibit 39, from Mauboussin and Rappaport's <em>Expectations Investing</em>.</p>
+</section>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ root }}static/buybacks.js?v={{ asset_v }}"></script>{% endblock %}

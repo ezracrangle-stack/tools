@@ -105,6 +105,13 @@ tools:
     status: live
     blurb: What a company really earns once its spending on brands, customers and R&D counts as investment, by industry. From Mauboussin and Callahan's Intangibles and Earnings.
 
+  - slug: buybacks
+    share: "the buybacks and stock comp calculator"
+    name: Buybacks and stock comp
+    nav: Buybacks
+    status: live
+    blurb: How much stock a company issues to pay its people and how much it buys back, against Mauboussin and Callahan's medians, and who wins from a buyback.
+
   - slug: moat
     share: "the Measuring the Moat calculator"
     name: Measuring the moat
