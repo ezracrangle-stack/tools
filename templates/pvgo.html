@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
+{% macro inrow(k, label, hint) %}
+    <div class="srow in">
+      <label class="lab" for="f-{{ k }}">{{ label }}{% if hint %}<span class="hint">{{ hint }}</span>{% endif %}</label>
+      <span class="cell"><input id="f-{{ k }}" data-k="{{ k }}" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+{%- endmacro %}
+{% macro out(id, label, hint="", total=false) %}
+    <div class="srow calc-row{% if total %} total{% endif %}"><span class="lab">{{ label }}{% if hint %}<span class="hint">{{ hint }}</span>{% endif %}</span><output class="cell" id="{{ id }}">–</output></div>
+{%- endmacro %}
+{% macro sens(m) %}
+  <div class="profile csx">
+    <table class="grid">
+      <thead><tr><th>Sensitivity</th><th>−1 point</th><th>As entered</th><th>+1 point</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">Cost of capital</th>{% for i in range(3) %}<td><output id="{{ m }}-r{{ i }}">–</output></td>{% endfor %}</tr>
+      <tr><th scope="row">PVGO % of price</th>{% for i in range(3) %}<td><output id="{{ m }}-s{{ i }}">–</output></td>{% endfor %}</tr>
+      </tbody>
+    </table>
+  </div>
+{%- endmacro %}
+{% block title %}How much growth is priced in? PVGO calculator{% endblock %}
+{% block description %}How much of a stock price pays for growth: a PVGO calculator with Mauboussin and Callahan's two methods and a NOPAT helper. Free, runs in your browser.{% endblock %}
+{% block main %}
+<section class="lede">
+  <h1 class="page-title">How much growth is priced in?</h1>
+  <p class="dek">A stock price pays for two things: today's earnings, if they just stay flat forever, and the chance to invest in ways that create value later. Michael Mauboussin and Dan Callahan call the second part PVGO, the present value of growth opportunities, and read its share of the price as a gauge of expectations.</p>
+  <p>Use either method, or both. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="pvform" class="calc" novalidate>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-co">Company<span class="hint">Optional, for the link and the files.</span></label>
+      <span class="cell"><input id="f-co" type="text" maxlength="60" autocomplete="off" spellcheck="false" style="text-align:left"></span>
+    </div>
+    <div class="srow head"><span class="lab">A. From earnings</span></div>
+    {{ inrow("eps", "Earnings", "Next 12 months or last 12 months. Per share, or in total.") }}
+    {{ inrow("rate", "Cost of equity, %", "Your estimate. The paper used 8.75% for the S&P 500.") }}
+    {{ inrow("price", "Share price", "Or market value, if the earnings are in total.") }}
+    {{ out("a-sspe", "Steady-state P/E", "1 ÷ cost of equity.") }}
+    {{ out("a-pe", "P/E") }}
+    {{ out("a-ss", "Steady-state value", "Earnings ÷ cost of equity.") }}
+    {{ out("a-pv", "PVGO", "Price − steady-state value.") }}
+    {{ out("a-sh", "PVGO % of price", "", true) }}
+    {{ out("a-ssh", "Steady-state % of price") }}
+  </div>
+  {{ sens("a") }}
+  <div class="sheet">
+    <div class="srow head"><span class="lab">B. From NOPAT</span></div>
+    {{ inrow("nopat", "NOPAT", "Net operating profit after taxes, last 12 months.") }}
+    {{ inrow("wacc", "Cost of capital (WACC), %", "") }}
+    {{ inrow("debt", "Net debt", "Debt minus excess cash. Negative if net cash.") }}
+    {{ inrow("equity", "Market value of equity", "Same unit as NOPAT.") }}
+    <details class="helper">
+      <summary>Don't have NOPAT? Work it out here</summary>
+      {{ inrow("ebit", "Operating income (EBIT)", "Last 12 months, from the income statement.") }}
+      {{ inrow("tax", "Tax rate, %", "The effective rate from the income statement is fine.") }}
+      {{ out("h-nopat", "NOPAT", "Operating income × (1 − tax rate). Used when NOPAT above is blank.", true) }}
+      <p class="hint">Already ran the <a href="{{ root }}roic/">ROIC calculator</a>? Its NOPAT for the last year goes straight into NOPAT above. To match the paper, which adds back intangible investment, put the adjusted operating income from the <a href="{{ root }}intangibles/">intangibles calculator</a> in operating income here.</p>
+    </details>
+    {{ out("b-used", "NOPAT used") }}
+    {{ out("b-ev", "Steady-state enterprise value", "NOPAT ÷ WACC.") }}
+    {{ out("b-eq", "Steady-state equity value", "Minus net debt.") }}
+    {{ out("b-pv", "PVGO", "Market value − steady-state equity value.") }}
+    {{ out("b-sh", "PVGO % of price", "", true) }}
+    {{ out("b-ssh", "Steady-state % of price") }}
+  </div>
+  {{ sens("b") }}
+
+{{ sheet.actions('PVGO depends heavily on the cost of capital you choose: check the sensitivity rows. It reads expectations; it isn\'t a value estimate.') }}
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+{{ sheet.subscribe(subscribe_url, "pvgo") }}
+
+<section class="prose">
+  <h2 class="rule-head">Steady state plus growth</h2>
+  <p>If a company's earnings stayed exactly where they are and it never made another investment that earned more than its cost of capital, it would be worth its earnings divided by that cost. That's the steady-state value. Whatever the market pays above it is PVGO: the value of future investments that create value. Growth by itself doesn't count; only growth that earns more than the cost of capital does.</p>
+  <p>The same idea works on a P/E. At an 8.75% cost of equity, a company with flat earnings is worth 11.4 times earnings. In June 2026 the S&P 500 traded at 21.9 times consensus earnings, so a big part of its price was paying for growth.</p>
+
+  <h2 class="rule-head">Two ways to measure it</h2>
+  <p>Method A divides earnings by the cost of equity, as the paper does for the S&P 500 and for its company charts. Method B divides NOPAT by the cost of capital and subtracts net debt, as in the paper's example: NOPAT of $100 at 8% is $1,250 of steady-state value, minus $250 of net debt is $1,000; against $1,500 of market value, PVGO is $500, or 33% of the price.</p>
+  <p>If you don't have NOPAT, the helper takes operating income times one minus the tax rate, the shortcut the authors use in "Return on Invested Capital". The paper's own NOPAT also adds back intangible investment. For a company that spends heavily on R&amp;D or customer acquisition, run the <a href="{{ root }}intangibles/">intangibles</a> calculator first and use its adjusted operating income: for a growing company, that means a higher NOPAT and a lower PVGO.</p>
+
+  <h2 class="rule-head">What the paper found</h2>
+  <p>For the S&P 500, PVGO averaged 35% of the price from 1961 to 2025. It was lowest around 1974 and 2011 and highest around 1999 and 2001. The lowest quarter of readings was followed by 11.6% a year over the next 10 years; the highest quarter by 7.6%.</p>
+  <p>For US companies worth $1 billion or more, from 1990 to 2024, the fifth with the lowest PVGO % had a median 5-year return of 8.7% a year; the highest fifth, 5.0%. The low half beat the high half by 2.6 points a year on average, in about 90% of years.</p>
+
+  <h2 class="rule-head">How to read it</h2>
+  <p>A low PVGO % means the market expects little value creation, as long as the business isn't cyclical or in secular decline (peak earnings make the steady state look too big). A negative PVGO means the price is below the value of today's earnings held flat. A high one means the price depends on future investments that haven't been made yet.</p>
+  <p>The authors find it most useful at the extremes, and a poor tool for timing the market. For single companies the result is very sensitive to the inputs, which is why both methods show what one point of cost of capital does. To see what growth the price implies, use the <a href="{{ root }}reverse-dcf/">reverse DCF</a>.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>Michael J. Mauboussin and Dan Callahan, "Opportunities and Expectations: The Present Value of Growth Opportunities in Valuation", Counterpoint Global Insights, June 18, 2026. The NOPAT helper: Mauboussin and Callahan, "Return on Invested Capital: How to Calculate ROIC and Handle Common Issues", Counterpoint Global Insights, 2022.</p>
+</section>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ root }}static/pvgo.js?v={{ asset_v }}"></script>{% endblock %}

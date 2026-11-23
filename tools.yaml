@@ -144,6 +144,16 @@ tools:
     status: live
     blurb: What a company really earns once its spending on brands, customers and R&D counts as investment, by industry. From Mauboussin and Callahan's Intangibles and Earnings.
 
+  - slug: pvgo
+    og_title: "How much growth is priced in?"
+    og_sub: "PVGO · Mauboussin and Callahan"
+    og: "How much of a stock price pays for today's earnings and how much for future growth."
+    share: "the PVGO calculator"
+    name: How much growth is priced in?
+    nav: PVGO
+    status: live
+    blurb: Split a stock price into today's earnings held flat and the present value of growth opportunities (PVGO), with Mauboussin and Callahan's two methods.
+
   - slug: capital-allocation
     og_title: "Capital allocation"
     og_sub: "Mauboussin and Callahan"
