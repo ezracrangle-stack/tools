@@ -25,7 +25,7 @@
 {% macro flag(p, k, label, hint) %}
       <tr><th scope="row">{{ label }}<span class="hint">{{ hint }}</span></th><td><output id="{{ p }}-{{ k }}0">–</output></td><td><output id="{{ p }}-{{ k }}1">–</output></td><td><output id="{{ p }}-{{ k }}f">–</output></td></tr>{% endmacro %}
 {% block title %}Red flags: C-Score, M-Score and Financial Shenanigans checks{% endblock %}
-{% block description %}Three accounting checks on two years of numbers: James Montier's C-Score, Messod Beneish's M-Score and four quick checks from Financial Shenanigans. Free, and it runs in your browser.{% endblock %}
+{% block description %}Accounting red flags calculator: James Montier's C-Score, the Beneish M-Score and four checks from Financial Shenanigans, on two years of numbers. Free.{% endblock %}
 {% block main %}
 <section class="lede">
   <h1 class="page-title">Red flags</h1>

@@ -20,7 +20,15 @@
 <meta property="og:url" content="{{ page_url }}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tools · Ezra's Notes">
-<meta name="twitter:card" content="summary">
+{%- set og_slug = page.strip("/") %}
+{%- set og_name = og_slug if og_slug in og_images else "og-image" %}
+{%- set og_tool = (tools | selectattr("slug", "equalto", og_slug) | first) if og_slug in og_images else none %}
+<meta property="og:image" content="{{ site_url }}/static/og/{{ og_name }}.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{% if og_tool %}{{ og_tool.name }}, a free calculator by Ezra Crangle. {{ og_tool.og }}{% else %}Value Investing Tools by Ezra Crangle. Free calculators from the spreadsheets I use, checked against their sources.{% endif %}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ site_url }}/static/og/{{ og_name }}.png">
 <meta name="twitter:site" content="@ezracrangle">
 <link rel="icon" href="{{ root }}static/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="512x512" href="{{ root }}static/icon-512.png">

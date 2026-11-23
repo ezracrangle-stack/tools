@@ -22,7 +22,8 @@ def build():
     static = ROOT / "static"
     asset_v = hashlib.md5(b"".join(p.read_bytes() for p in sorted(static.iterdir()) if p.is_file())).hexdigest()[:8]
     common = dict(tools=tools, asset_v=asset_v, ga_id=data.get("ga_id", ""), collect_url=data.get("collect_url", ""), site_url=SITE_URL,
-                  newsletter_url=NEWSLETTER_URL, subscribe_url=SUBSCRIBE_URL, substack_embed=SUBSTACK_EMBED, currencies=CURRENCIES)
+                  newsletter_url=NEWSLETTER_URL, subscribe_url=SUBSCRIBE_URL, substack_embed=SUBSTACK_EMBED, currencies=CURRENCIES,
+                  og_images={p.stem for p in (static / "og").glob("*.png")})
 
     if OUT.exists():
         for p in OUT.iterdir():

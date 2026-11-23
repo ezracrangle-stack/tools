@@ -15,6 +15,9 @@ redirects:
 
 tools:
   - slug: net-net
+    og_title: "Net-net"
+    og_sub: "Benjamin Graham"
+    og: "Graham's net current asset value and net cash per share, against the price."
     share: "the net-net calculator"
     name: Net-net calculator
     nav: Net-net
@@ -22,6 +25,9 @@ tools:
     blurb: Graham's NCAV, modern NCAV, net cash, Schloss' working capital and book value, per share and against the price.
 
   - slug: epv
+    og_title: "EPV"
+    og_sub: "Phil Oakley"
+    og: "Phil Oakley's earnings power value, owner earnings and the most to pay."
     share: "the earnings power value calculator"
     name: Earnings power value
     nav: EPV
@@ -29,6 +35,9 @@ tools:
     blurb: What the business is worth if today's cash profits never grow, how much of the price is a bet on growth, and the most you should pay.
 
   - slug: greenwald
+    og_title: "Moat test"
+    og_sub: "Bruce Greenwald"
+    og: "Asset value, earnings power value and what the gap says about the moat."
     share: "Greenwald's moat test"
     name: Greenwald's moat test
     nav: Greenwald
@@ -36,6 +45,9 @@ tools:
     blurb: Greenwald's test. What it would cost to rebuild the business, what its earnings are worth with no growth, and what the gap says about its moat.
 
   - slug: penman
+    og_title: "Residual income"
+    og_sub: "Stephen Penman"
+    og: "Residual income: the growth the price implies and the return you earn."
     share: "Penman's residual income model"
     name: Penman's residual income
     nav: Penman
@@ -43,6 +55,9 @@ tools:
     blurb: Anchor on the book value of the operations, then see the growth the price implies and the return you earn at today's price.
 
   - slug: graham
+    og_title: "Graham's formulas"
+    og_sub: "The Intelligent Investor"
+    og: "The growth formula, the Graham number and the seven defensive tests."
     share: "Graham's formulas"
     name: Graham's formulas
     nav: Graham
@@ -50,6 +65,9 @@ tools:
     blurb: Graham's growth formula, the Graham number and his seven tests for the defensive investor, as he wrote them in The Intelligent Investor.
 
   - slug: fcf
+    og_title: "Free cash flow"
+    og_sub: "Mauboussin and Callahan"
+    og: "Free cash flow after stock pay and leases, and how much a company invests."
     share: "Mauboussin's FCF"
     name: Mauboussin's FCF
     nav: Mauboussin
@@ -57,6 +75,9 @@ tools:
     blurb: Mauboussin and Callahan's fixes to the cash flow statement. Free cash flow after stock pay and leases, and how much the company really invests.
 
   - slug: roic
+    og_title: "ROIC and reinvestment"
+    og_sub: "Returns on capital"
+    og: "Return on invested and incremental capital, and the reinvestment rate."
     share: "the ROIC, ROIIC and reinvestment calculator"
     name: ROIC, ROIIC and reinvestment
     nav: ROIC
@@ -64,6 +85,9 @@ tools:
     blurb: How much a business earns on its capital, what the new capital earns, how much it reinvests, and the growth that supports.
 
   - slug: reverse-dcf
+    og_title: "Reverse DCF"
+    og_sub: "Mauboussin and Rappaport"
+    og: "Start from the share price and see what it assumes."
     share: "a reverse DCF"
     name: Reverse DCF
     nav: Reverse DCF
@@ -71,6 +95,9 @@ tools:
     blurb: How many years of above-cost returns the price already assumes, and the sales growth it needs. Mauboussin and Rappaport's method, with your own numbers.
 
   - slug: compounders
+    og_title: "What to pay for quality"
+    og_sub: "The Compounders"
+    og: "What P/E to pay for a business that reinvests at high returns."
     share: "the Compounders' price matrix"
     name: What to pay for quality
     nav: Compounders
@@ -78,6 +105,9 @@ tools:
     blurb: How much more than the market you can pay for a business that reinvests at high returns, and the P/E that still earns your target. From The Compounders.
 
   - slug: dhandho
+    og_title: "Dhandho bet"
+    og_sub: "Mohnish Pabrai"
+    og: "The edge, the chance of losing money and the Kelly bet size."
     share: "Pabrai's Dhandho bet sizer"
     name: Pabrai's Dhandho bet
     nav: Pabrai
@@ -85,6 +115,9 @@ tools:
     blurb: Write down what can happen and how likely it is. Get the odds, the chance of losing money, and how much of your bankroll the Kelly Formula says to bet. From The Dhandho Investor.
 
   - slug: lynch
+    og_title: "PEG"
+    og_sub: "Peter Lynch"
+    og: "The PEG, the dividend-adjusted version and the P/E without net cash."
     share: "Peter Lynch's PEG calculator"
     name: Peter Lynch's PEG
     nav: Lynch
@@ -92,6 +125,9 @@ tools:
     blurb: The PEG and its dividend-adjusted version, the P/E without the company's net cash, and what ten years of compounding does to the price. From One Up on Wall Street.
 
   - slug: marks
+    og_title: "Market temperature"
+    og_sub: "Howard Marks"
+    og: "The market's temperature from 23 pairs of opposites."
     share: "Howard Marks' market temperature check"
     name: Howard Marks' market temperature
     nav: Marks
@@ -99,6 +135,9 @@ tools:
     blurb: Twenty-three pairs of opposites, from lenders to investors to funds. Pick a side for each and take the market's temperature, as Howard Marks does in Mastering the Market Cycle.
 
   - slug: intangibles
+    og_title: "Intangibles"
+    og_sub: "Mauboussin and Callahan"
+    og: "Count intangible investment as investment and see earnings and P/E change."
     share: "the intangibles and earnings calculator"
     name: Intangibles and earnings
     nav: Intangibles
@@ -106,6 +145,9 @@ tools:
     blurb: What a company really earns once its spending on brands, customers and R&D counts as investment, by industry. From Mauboussin and Callahan's Intangibles and Earnings.
 
   - slug: buybacks
+    og_title: "Buybacks and stock comp"
+    og_sub: "Mauboussin and Callahan"
+    og: "How much stock a company issues and buys back, and who wins from a buyback."
     share: "the buybacks and stock comp calculator"
     name: Buybacks and stock comp
     nav: Buybacks
@@ -113,6 +155,9 @@ tools:
     blurb: How much stock a company issues to pay its people and how much it buys back, against Mauboussin and Callahan's medians, and who wins from a buyback.
 
   - slug: moat
+    og_title: "Measuring the moat"
+    og_sub: "Mauboussin and Callahan"
+    og: "ROIC split into margin and turnover, and how much market shares move."
     share: "the Measuring the Moat calculator"
     name: Measuring the moat
     nav: Moat
@@ -120,6 +165,9 @@ tools:
     blurb: Where a company's ROIC comes from, margin or turnover, against its peers, and how much market shares move in its industry. From Mauboussin and Callahan's Measuring the Moat.
 
   - slug: red-flags
+    og_title: "Red flags"
+    og_sub: "Montier, Beneish and Schilit"
+    og: "Montier's C-Score, Beneish's M-Score and checks from Financial Shenanigans."
     share: "the red flags check"
     name: Red flags
     nav: Red flags
@@ -127,6 +175,9 @@ tools:
     blurb: Is the company dressing up its numbers? Montier's C-Score, Beneish's M-Score and four checks from Financial Shenanigans, on two years of accounts.
 
   - slug: beauty-contest
+    og_title: "Beauty contest"
+    og_sub: "Keynes and Montier"
+    og: "Pick a number from 0 to 100. Closest to two-thirds of the average wins."
     share: "Keynes' beauty contest"
     name: Keynes' beauty contest
     nav: Beauty contest
