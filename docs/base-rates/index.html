@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTNNLB6W9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FTNNLB6W9D');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>How often does this happen? Base rates of sales growth · Ezra's Notes</title>
+<meta name="description" content="Base rates calculator: how often companies of the same size grew sales as fast as a forecast, from Mauboussin and Callahan's Base Rate Book. Free.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css?v=58f878e7">
+<meta property="og:title" content="How often does this happen? Base rates of sales growth · Ezra's Notes">
+<meta property="og:description" content="Base rates calculator: how often companies of the same size grew sales as fast as a forecast, from Mauboussin and Callahan's Base Rate Book. Free.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/base-rates/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes"><meta property="og:image" content="https://tools.ezrasnotes.com/static/og/base-rates.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="How often does this happen?, a free calculator by Ezra Crangle. How often companies of the same size have grown sales as fast as a forecast.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tools.ezrasnotes.com/static/og/base-rates.png">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="../static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
+<link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/base-rates/"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://tools.ezrasnotes.com/", "name": "Home", "position": 1}, {"@type": "ListItem", "item": "https://tools.ezrasnotes.com/base-rates/", "name": "How often does this happen? Base rates of sales growth", "position": 2}]}</script></head>
+<body data-collect="https://script.google.com/macros/s/AKfycbz-a4q03dY00RYGWBKOHaKqYKL92Z3afAqhJ5iYdPQGYCMbU2CpFTR-JfEfArbdoUZXHg/exec" data-tool-name="the base rates calculator">
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="../">Tools</a>
+  <p class="byline">By <a href="https://www.ezrasnotes.com">@ezracrangle</a></p>
+  <nav>
+    <a href="../">All tools</a>
+    <details class="nav-menu">
+      <summary>Tools</summary>
+      <div class="nav-drop"><a href="../net-net/">Net-net calculator</a><a href="../epv/">Earnings power value</a><a href="../greenwald/">Greenwald&#39;s moat test</a><a href="../penman/">Penman&#39;s residual income</a><a href="../graham/">Graham&#39;s formulas</a><a href="../fcf/">Mauboussin&#39;s FCF</a><a href="../roic/">ROIC, ROIIC and reinvestment</a><a href="../reverse-dcf/">Reverse DCF</a><a href="../compounders/">What to pay for quality</a><a href="../dhandho/">Pabrai&#39;s Dhandho bet</a><a href="../lynch/">Peter Lynch&#39;s PEG</a><a href="../marks/">Howard Marks&#39; market temperature</a><a href="../intangibles/">Intangibles and earnings</a><a href="../base-rates/" aria-current="page">How often does this happen?</a><a href="../life-cycle/">What stage is this company in?</a><a href="../wacc/">What discount rate should you use?</a><a href="../pvgo/">How much growth is priced in?</a><a href="../capital-allocation/">Capital allocation calculator</a><a href="../buybacks/">Buybacks and stock comp</a><a href="../moat/">Measuring the moat</a><a href="../red-flags/">Red flags</a><a href="../beauty-contest/">Keynes&#39; beauty contest</a></div>
+    </details>
+    <a href="../about/">About</a>
+    <a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<div class="print-head" aria-hidden="true"><strong>Ezra's Notes · Tools</strong><span id="print-stamp"></span></div>
+<div class="print-summary verdict" id="print-summary" aria-hidden="true"></div>
+<section class="lede">
+  <h1 class="page-title">How often does this happen?</h1>
+  <p class="dek">Before you believe a sales forecast, check how many companies of the same size have actually grown that fast. Michael Mauboussin, Dan Callahan and Darius Majd measured it for the 1,000 largest companies in the world from 1950 to 2015. Their tables are the outside view: what usually happens, before you get to why this company is different.</p>
+  <p>Nothing you type leaves your browser.</p>
+</section>
+
+<form id="brform" class="calc" novalidate>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-co">Company<span class="hint">Optional, for the link and the files.</span></label>
+      <span class="cell"><input id="f-co" type="text" maxlength="60" autocomplete="off" spellcheck="false" style="text-align:left"></span>
+    </div>
+        <div class="srow in">
+      <label class="lab" for="f-sales">Sales today, US$ millions<span class="hint">Last 12 months.</span></label>
+      <span class="cell"><input id="f-sales" data-k="sales" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+        <div class="srow in">
+      <label class="lab" for="f-growth">Forecast sales growth, % a year<span class="hint">Yours, management&#39;s or the consensus. Nominal.</span></label>
+      <span class="cell"><input id="f-growth" data-k="growth" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+    <div class="srow in">
+      <label class="lab" for="f-h">Over how many years<span class="hint">The paper's four horizons.</span></label>
+      <span class="cell"><select id="f-h"><option value="1">1 year</option><option value="3">3 years</option><option value="5" selected>5 years</option><option value="10">10 years</option></select></span>
+    </div>
+        <div class="srow in">
+      <label class="lab" for="f-infl">Expected inflation, % a year<span class="hint">Your estimate. The tables leave inflation out, so it&#39;s taken out of the forecast too.</span></label>
+      <span class="cell"><input id="f-infl" data-k="infl" type="text" inputmode="decimal" autocomplete="off"></span>
+    </div>
+    <details class="helper">
+      <summary>Converting sales to 2015 dollars</summary>
+          <div class="srow in">
+      <label class="lab" for="f-cpi">Price level today vs 2015<span class="hint">US CPI: 321.9 in 2025 against 237.0 in 2015 (Bureau of Labor Statistics), so 1.36.</span></label>
+      <span class="cell"><input id="f-cpi" data-k="cpi" type="text" inputmode="decimal" autocomplete="off" value="1.36" data-default="1.36"></span>
+    </div>
+    </details>
+
+    <div class="srow head"><span class="lab">The base rate</span></div>
+        <div class="srow calc-row"><span class="lab">Size class (2015 dollars)</span><output class="cell" id="o-cls">–</output></div>
+        <div class="srow calc-row"><span class="lab">Forecast growth, after inflation</span><output class="cell" id="o-real">–</output></div>
+        <div class="srow calc-row"><span class="lab">Growth band</span><output class="cell" id="o-band">–</output></div>
+        <div class="srow calc-row total"><span class="lab">Companies that grew this fast or faster<span class="hint">In this band or above.</span></span><output class="cell" id="o-or">–</output></div>
+        <div class="srow calc-row"><span class="lab">In this band</span><output class="cell" id="o-in">–</output></div>
+        <div class="srow calc-row"><span class="lab">Faster than this band</span><output class="cell" id="o-fast">–</output></div>
+        <div class="srow calc-row"><span class="lab">Median growth, this size and horizon</span><output class="cell" id="o-med">–</output></div>
+        <div class="srow calc-row"><span class="lab">Mean growth</span><output class="cell" id="o-mean">–</output></div>
+        <div class="srow calc-row"><span class="lab">Standard deviation</span><output class="cell" id="o-sd">–</output></div>
+  </div>
+  <div class="profile csx">
+    <p class="hsub" id="d-head">Distribution</p>
+    <table class="grid">
+      <thead><tr><th>Annual growth, after inflation</th><th>Share of companies</th></tr></thead>
+      <tbody>
+<tr id="dr0"><th scope="row">Below −25%</th><td><output id="d0">–</output></td></tr><tr id="dr1"><th scope="row">−25% to −20%</th><td><output id="d1">–</output></td></tr><tr id="dr2"><th scope="row">−20% to −15%</th><td><output id="d2">–</output></td></tr><tr id="dr3"><th scope="row">−15% to −10%</th><td><output id="d3">–</output></td></tr><tr id="dr4"><th scope="row">−10% to −5%</th><td><output id="d4">–</output></td></tr><tr id="dr5"><th scope="row">−5% to 0%</th><td><output id="d5">–</output></td></tr><tr id="dr6"><th scope="row">0% to 5%</th><td><output id="d6">–</output></td></tr><tr id="dr7"><th scope="row">5% to 10%</th><td><output id="d7">–</output></td></tr><tr id="dr8"><th scope="row">10% to 15%</th><td><output id="d8">–</output></td></tr><tr id="dr9"><th scope="row">15% to 20%</th><td><output id="d9">–</output></td></tr><tr id="dr10"><th scope="row">20% to 25%</th><td><output id="d10">–</output></td></tr><tr id="dr11"><th scope="row">25% to 30%</th><td><output id="d11">–</output></td></tr><tr id="dr12"><th scope="row">30% to 35%</th><td><output id="d12">–</output></td></tr><tr id="dr13"><th scope="row">35% to 40%</th><td><output id="d13">–</output></td></tr><tr id="dr14"><th scope="row">40% to 45%</th><td><output id="d14">–</output></td></tr><tr id="dr15"><th scope="row">45% or more</th><td><output id="d15">–</output></td></tr>      </tbody>
+    </table>
+  </div>
+
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
+  <div class="actions">
+    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
+    <button type="button" class="button ghost" id="reset">Clear</button>
+  </div>
+<p class="copy-note">Base rates tell you what usually happens, not what will. A forecast far above them can still come true; it just needs a strong reason.</p>  <div class="sharebar" id="sharebar">
+    <label class="sb-co"><span>Company or ticker <em>(optional, goes in the link and the files)</em></span>
+      <input id="sb-company" type="text" maxlength="60" autocomplete="off" spellcheck="false" placeholder="e.g. ACME"></label>
+    <div class="sb-groups">
+      <p class="share-buttons"><span class="sb-k">Share</span>
+        <button type="button" id="sb-x">X</button>
+        <button type="button" id="sb-in">LinkedIn</button>
+        <button type="button" id="sb-native" hidden>More</button></p>
+      <p class="share-buttons"><span class="sb-k">Download</span>
+        <button type="button" id="sb-pdf">PDF</button>
+        <button type="button" id="sb-csv">CSV</button></p>
+      <p class="share-buttons sb-community" hidden><span class="sb-k">Community</span>
+        <button type="button" id="sb-save">Send to Ezra</button>
+        <button type="button" id="sb-tm">Leave a testimonial</button></p>
+    </div>
+    <div class="sb-box" id="sb-savebox" hidden>
+      <p>Send this calculation to Ezra. He reads them, and with your OK he may share some with the community. Nothing leaves your browser until you press Send.</p>
+      <label>Your name or X handle <em>(optional)</em> <input id="sb-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label class="check"><input id="sb-ok" type="checkbox"> Ezra can publish this calculation and my name or handle</label>
+      <input id="sb-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="sb-send">Send</button> <span id="sb-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+    <div class="sb-box" id="testimonial" hidden>
+      <p>Did this calculator help you? Tell Ezra in a few words.</p>
+      <label>What did it help you with? <textarea id="tm-text" rows="4" maxlength="1500"></textarea></label>
+      <label>Name <input id="tm-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label>X or LinkedIn handle <em>(optional)</em> <input id="tm-handle" type="text" maxlength="80" autocomplete="off"></label>
+      <label>What you do <em>(optional, e.g. "individual investor" or "analyst at a fund")</em> <input id="tm-role" type="text" maxlength="120" autocomplete="off"></label>
+      <label class="check"><input id="tm-ok" type="checkbox"> Ezra can publish this on the site with my name</label>
+      <input id="tm-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="tm-send">Send</button> <span id="tm-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+  </div>
+
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<aside class="sister subscribe" data-place="base-rates">
+  <p class="sister-kicker">Newsletter</p>
+  <p class="sister-head"><a href="https://www.ezrasnotes.com/subscribe?utm_source=tools&amp;utm_medium=site&amp;utm_campaign=base-rates">Ezra's Notes</a></p>
+  <p class="sister-body">For long-term investors who look at companies the way an owner does. Free, every week.</p>
+  <a class="button" href="https://www.ezrasnotes.com/subscribe?utm_source=tools&amp;utm_medium=site&amp;utm_campaign=base-rates">Subscribe free</a>
+</aside>
+
+
+<section class="prose">
+  <h2 class="rule-head">The outside view</h2>
+  <p>Most forecasts are built from the inside: the products, the market, the plan. Psychologists call that the inside view, and it tends to be too optimistic and too narrow. The outside view asks a plainer question: how did similar cases turn out? The most accurate forecasts blend the two. Mauboussin and Callahan frame it as Bayes' Theorem: start from the base rate, then update with what you know about this company.</p>
+  <p>In 2016, analysts' 3-year forecasts for the largest companies had a standard deviation of 8.3%; what the companies actually did had one of 18.7%. Forecasts are usually too tight and too high.</p>
+
+  <h2 class="rule-head">How to read the tables</h2>
+  <p>Pick the size class from the company's sales and the horizon, then find the band its forecast growth falls in. The share of companies in that band and above is how often it happened. The bigger the company, the lower and tighter growth gets. In the paper's example, a carmaker with about $6 billion of sales aimed to grow 50% a year for a decade; no company that size had ever done 45% or more for 10 years, and only about 0.2% had managed 30-35%.</p>
+
+  <h2 class="rule-head">Inflation and the sample</h2>
+  <p>The 2016 tables remove inflation and convert sales to 2015 dollars. Forecasts usually include inflation, so take it out before comparing; leaving it in makes any forecast look more ordinary than it is. The sample is the 1,000 largest companies in the world by market value, the survivors and winners. In their 2026 update for all US public companies with $2-5 billion of sales, 5-year growth after inflation averaged 3.7% a year with a standard deviation of 10.6%, lower than the 2016 tables for that size. Growth was also slower in the 2010s than in earlier decades.</p>
+  <p>Narrowing the sample to one industry doesn't rescue an extreme forecast: every company in the industry is already in the full sample. And growth is not the same as value. It only creates value when the investment behind it earns more than its cost of capital; the <a href="../pvgo/">PVGO calculator</a> shows how much growth a price already assumes.</p>
+
+  <h2 class="rule-head">Where the data come from</h2>
+  <p>Michael J. Mauboussin, Dan Callahan and Darius Majd, "The Base Rate Book: Integrating the Past to Better Anticipate the Future", Credit Suisse, September 2016, Exhibit 4 and appendix. The shares here are computed from the appendix's observation counts. Context from Mauboussin and Callahan, "Bayes and Base Rates" (February 2026) and "Bayes and Base Rates 2.0" (May 2026), Counterpoint Global Insights.</p>
+</section>
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+  </p>
+  <nav class="footer-network" aria-label="More from Ezra's Notes"><span class="fn-label">More from Ezra's Notes</span>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a Inversores</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Investor Holdings</a>
+    <span aria-current="page">Tools</span>
+  </nav>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('.subscribe')?'box':a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var boxes=document.querySelectorAll('.subscribe');if(boxes.length&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){t('subscribe_box_view',{page:location.pathname});io.unobserve(e.target)}})},{threshold:0.5});boxes.forEach(function(x){io.observe(x)})}})();</script>
+<script>document.addEventListener("click",function(e){var m=document.querySelector(".nav-menu[open]");if(m&&!m.contains(e.target))m.removeAttribute("open")});</script>
+<script src="../static/share.js?v=58f878e7"></script><script type="module" src="../static/baserates.js?v=58f878e7"></script><a href="#" class="to-top" id="to-top" aria-label="Back to top" title="Back to top">&uarr;</a>
+<script>
+(function () {
+  var b = document.getElementById('to-top');
+  function check() { b.classList.toggle('show', window.scrollY > window.innerHeight * 1.2); }
+  window.addEventListener('scroll', check, { passive: true }); check();
+  b.addEventListener('click', function (e) {
+    e.preventDefault();
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: still ? 'auto' : 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>

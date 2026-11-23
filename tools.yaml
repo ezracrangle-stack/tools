@@ -144,6 +144,16 @@ tools:
     status: live
     blurb: What a company really earns once its spending on brands, customers and R&D counts as investment, by industry. From Mauboussin and Callahan's Intangibles and Earnings.
 
+  - slug: base-rates
+    og_title: "How often does this happen?"
+    og_sub: "Base rates · Mauboussin and Callahan"
+    og: "How often companies of the same size have grown sales as fast as a forecast."
+    share: "the base rates calculator"
+    name: How often does this happen?
+    nav: Base rates
+    status: live
+    blurb: Check a sales forecast against how often companies of the same size actually grew that fast, from Mauboussin and Callahan's Base Rate Book.
+
   - slug: life-cycle
     og_title: "What stage is this company in?"
     og_sub: "Life cycle · Mauboussin and Callahan"

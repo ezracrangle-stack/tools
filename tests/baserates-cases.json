@@ -1,0 +1,600 @@
+{
+ "example": {
+  "in": [
+   8000,
+   1.36,
+   5,
+   0.15,
+   0.025
+  ],
+  "excel": {
+   "s2015": 5882.35294117647,
+   "cls": 7,
+   "className": "$4.5-7 billion",
+   "real": 0.121951219512195,
+   "band": 9,
+   "bandLabel": "10% to 15%",
+   "inBand": 0.105021879558241,
+   "orFaster": 0.206709731193999,
+   "faster": 0.101687851635757,
+   "median": 0.041,
+   "mean": 0.05,
+   "sd": 0.087
+  }
+ },
+ "empty": {
+  "in": [
+   null,
+   1.36,
+   null,
+   null,
+   null
+  ],
+  "excel": {
+   "s2015": null,
+   "cls": null,
+   "className": null,
+   "real": null,
+   "band": null,
+   "bandLabel": null,
+   "inBand": null,
+   "orFaster": null,
+   "faster": null,
+   "median": null,
+   "mean": null,
+   "sd": null
+  }
+ },
+ "random 1": {
+  "in": [
+   null,
+   1.36,
+   3,
+   0.2,
+   0.0
+  ],
+  "excel": {
+   "s2015": null,
+   "cls": null,
+   "className": null,
+   "real": 0.2,
+   "band": 11,
+   "bandLabel": "20% to 25%",
+   "inBand": null,
+   "orFaster": null,
+   "faster": null,
+   "median": null,
+   "mean": null,
+   "sd": null
+  }
+ },
+ "random 2": {
+  "in": [
+   253738.7232521185,
+   1.36,
+   5,
+   0.6012577636245816,
+   0.052277083751906386
+  ],
+  "excel": {
+   "s2015": 186572.590626558,
+   "cls": 11,
+   "className": "Over $50 billion",
+   "real": 0.521707341487737,
+   "band": 16,
+   "bandLabel": "45% or more",
+   "inBand": 0,
+   "orFaster": 0,
+   "faster": 0,
+   "median": 0.015,
+   "mean": 0.01,
+   "sd": 0.083
+  }
+ },
+ "random 3": {
+  "in": [
+   247911.33838754336,
+   1.7525246609182483,
+   5,
+   0.45,
+   0.0
+  ],
+  "excel": {
+   "s2015": 141459.543432415,
+   "cls": 11,
+   "className": "Over $50 billion",
+   "real": 0.45,
+   "band": 16,
+   "bandLabel": "45% or more",
+   "inBand": 0,
+   "orFaster": 0,
+   "faster": 0,
+   "median": 0.015,
+   "mean": 0.01,
+   "sd": 0.083
+  }
+ },
+ "random 4": {
+  "in": [
+   null,
+   1.2370431502636914,
+   2,
+   -0.023486361009609047,
+   0.0
+  ],
+  "excel": {
+   "s2015": null,
+   "cls": null,
+   "className": null,
+   "real": -0.0234863610096091,
+   "band": 6,
+   "bandLabel": "-5% to 0%",
+   "inBand": null,
+   "orFaster": null,
+   "faster": null,
+   "median": null,
+   "mean": null,
+   "sd": null
+  }
+ },
+ "random 5": {
+  "in": [
+   null,
+   1.36,
+   10,
+   0.45,
+   0.03215855651049334
+  ],
+  "excel": {
+   "s2015": null,
+   "cls": null,
+   "className": null,
+   "real": 0.404822922654576,
+   "band": 15,
+   "bandLabel": "40% to 45%",
+   "inBand": null,
+   "orFaster": null,
+   "faster": null,
+   "median": null,
+   "mean": null,
+   "sd": null
+  }
+ },
+ "random 6": {
+  "in": [
+   68000.0,
+   1.2453351419519696,
+   10,
+   0.2,
+   0.0
+  ],
+  "excel": {
+   "s2015": 54603.7750877367,
+   "cls": 11,
+   "className": "Over $50 billion",
+   "real": 0.2,
+   "band": 11,
+   "bandLabel": "20% to 25%",
+   "inBand": 0,
+   "orFaster": 0,
+   "faster": 0,
+   "median": 0.011,
+   "mean": 0.008,
+   "sd": 0.058
+  }
+ },
+ "random 7": {
+  "in": [
+   70641.74365461843,
+   1.36,
+   1,
+   0.45,
+   0.0
+  ],
+  "excel": {
+   "s2015": 51942.4585695724,
+   "cls": 11,
+   "className": "Over $50 billion",
+   "real": 0.45,
+   "band": 16,
+   "bandLabel": "45% or more",
+   "inBand": 0.0128824476650564,
+   "orFaster": 0.0128824476650564,
+   "faster": 0,
+   "median": 0.021,
+   "mean": 0.023,
+   "sd": 0.163
+  }
+ },
+ "random 8": {
+  "in": [
+   127300.36117698262,
+   0.9700946762981466,
+   2,
+   0.45,
+   0.044175321251857955
+  ],
+  "excel": {
+   "s2015": 131224.677639462,
+   "cls": 11,
+   "className": "Over $50 billion",
+   "real": 0.388655688837388,
+   "band": 14,
+   "bandLabel": "35% to 40%",
+   "inBand": null,
+   "orFaster": null,
+   "faster": null,
+   "median": null,
+   "mean": null,
+   "sd": null
+  }
+ },
+ "random 9": {
+  "in": [
+   265858.86536486645,
+   1.6464719222812731,
+   10,
+   0.2,
+   0.0
+  ],
+  "excel": {
+   "s2015": 161471.848846657,
+   "cls": 11,
+   "className": "Over $50 billion",
+   "real": 0.2,
+   "band": 11,
+   "bandLabel": "20% to 25%",
+   "inBand": 0,
+   "orFaster": 0,
+   "faster": 0,
+   "median": 0.011,
+   "mean": 0.008,
+   "sd": 0.058
+  }
+ },
+ "random 10": {
+  "in": [
+   181053.9658709271,
+   1.36,
+   10,
+   0.4421539836337417,
+   0.0
+  ],
+  "excel": {
+   "s2015": 133127.916081564,
+   "cls": 11,
+   "className": "Over $50 billion",
+   "real": 0.442153983633742,
+   "band": 15,
+   "bandLabel": "40% to 45%",
+   "inBand": 0,
+   "orFaster": 0,
+   "faster": 0,
+   "median": 0.011,
+   "mean": 0.008,
+   "sd": 0.058
+  }
+ },
+ "random 11": {
+  "in": [
+   952.0000000000001,
+   1.36,
+   3,
+   0.45,
+   0.0
+  ],
+  "excel": {
+   "s2015": 700,
+   "cls": 3,
+   "className": "$700 million-1.25 billion",
+   "real": 0.45,
+   "band": 16,
+   "bandLabel": "45% or more",
+   "inBand": 0.0222266322683072,
+   "orFaster": 0.0222266322683072,
+   "faster": 0,
+   "median": 0.068,
+   "mean": 0.092,
+   "sd": 0.135
+  }
+ },
+ "random 12": {
+  "in": [
+   442.00000000000006,
+   1.36,
+   10,
+   -0.25,
+   0.0072909716105658325
+  ],
+  "excel": {
+   "s2015": 325,
+   "cls": 2,
+   "className": "$325-700 million",
+   "real": -0.255428648585206,
+   "band": 1,
+   "bandLabel": "Below -25%",
+   "inBand": 0,
+   "orFaster": 1,
+   "faster": 1,
+   "median": 0.067,
+   "mean": 0.074,
+   "sd": 0.07
+  }
+ },
+ "random 13": {
+  "in": [
+   442.00000000000006,
+   1.36,
+   1,
+   0.2,
+   0.0
+  ],
+  "excel": {
+   "s2015": 325,
+   "cls": 2,
+   "className": "$325-700 million",
+   "real": 0.2,
+   "band": 11,
+   "bandLabel": "20% to 25%",
+   "inBand": 0.0635142209038562,
+   "orFaster": 0.224044669342174,
+   "faster": 0.160530448438318,
+   "median": 0.082,
+   "mean": 0.161,
+   "sd": 0.535
+  }
+ },
+ "random 14": {
+  "in": [
+   155010.79365353988,
+   1.6034024078299949,
+   1,
+   0.2,
+   0.04430240175710635
+  ],
+  "excel": {
+   "s2015": 96676.1636982494,
+   "cls": 11,
+   "className": "Over $50 billion",
+   "real": 0.149092444852107,
+   "band": 9,
+   "bandLabel": "10% to 15%",
+   "inBand": 0.0857487922705314,
+   "orFaster": 0.225845410628019,
+   "faster": 0.140096618357488,
+   "median": 0.021,
+   "mean": 0.023,
+   "sd": 0.163
+  }
+ },
+ "random 15": {
+  "in": [
+   952.0000000000001,
+   1.36,
+   5,
+   null,
+   null
+  ],
+  "excel": {
+   "s2015": 700,
+   "cls": 3,
+   "className": "$700 million-1.25 billion",
+   "real": null,
+   "band": null,
+   "bandLabel": null,
+   "inBand": null,
+   "orFaster": null,
+   "faster": null,
+   "median": 0.064,
+   "mean": 0.079,
+   "sd": 0.105
+  }
+ },
+ "random 16": {
+  "in": [
+   192214.8648191414,
+   1.1803207909849394,
+   1,
+   -0.31770645000207687,
+   null
+  ],
+  "excel": {
+   "s2015": 162849.681448672,
+   "cls": 11,
+   "className": "Over $50 billion",
+   "real": -0.317706450002077,
+   "band": 1,
+   "bandLabel": "Below -25%",
+   "inBand": 0.0402576489533011,
+   "orFaster": 1,
+   "faster": 0.959742351046699,
+   "median": 0.021,
+   "mean": 0.023,
+   "sd": 0.163
+  }
+ },
+ "random 17": {
+  "in": [
+   196005.5523436343,
+   1.3394057108229496,
+   5,
+   null,
+   null
+  ],
+  "excel": {
+   "s2015": 146337.700936937,
+   "cls": 11,
+   "className": "Over $50 billion",
+   "real": null,
+   "band": null,
+   "bandLabel": null,
+   "inBand": null,
+   "orFaster": null,
+   "faster": null,
+   "median": 0.015,
+   "mean": 0.01,
+   "sd": 0.083
+  }
+ },
+ "random 18": {
+  "in": [
+   44518.71515133104,
+   1.36,
+   3,
+   null,
+   null
+  ],
+  "excel": {
+   "s2015": 32734.3493759787,
+   "cls": 10,
+   "className": "$25-50 billion",
+   "real": null,
+   "band": null,
+   "bandLabel": null,
+   "inBand": null,
+   "orFaster": null,
+   "faster": null,
+   "median": 0.022,
+   "mean": 0.024,
+   "sd": 0.109
+  }
+ },
+ "random 19": {
+  "in": [
+   442.00000000000006,
+   1.389081696646242,
+   1,
+   -0.25,
+   null
+  ],
+  "excel": {
+   "s2015": 318.195827550785,
+   "cls": 1,
+   "className": "$0-325 million",
+   "real": -0.25,
+   "band": 2,
+   "bandLabel": "-25% to -20%",
+   "inBand": 0.00688771423994874,
+   "orFaster": 0.985263495114528,
+   "faster": 0.97837578087458,
+   "median": 0.121,
+   "mean": 0.61,
+   "sd": 8.211
+  }
+ },
+ "random 20": {
+  "in": [
+   96820.97574964317,
+   1.36,
+   1,
+   -0.25,
+   0.004222034072118741
+  ],
+  "excel": {
+   "s2015": 71191.8939335612,
+   "cls": 11,
+   "className": "Over $50 billion",
+   "real": -0.253153212583127,
+   "band": 1,
+   "bandLabel": "Below -25%",
+   "inBand": 0.0402576489533011,
+   "orFaster": 1,
+   "faster": 0.959742351046699,
+   "median": 0.021,
+   "mean": 0.023,
+   "sd": 0.163
+  }
+ },
+ "random 21": {
+  "in": [
+   240537.53082385132,
+   1.36,
+   10,
+   0.45,
+   0.011702930587504058
+  ],
+  "excel": {
+   "s2015": 176865.831488126,
+   "cls": 11,
+   "className": "Over $50 billion",
+   "real": 0.433227043395015,
+   "band": 15,
+   "bandLabel": "40% to 45%",
+   "inBand": 0,
+   "orFaster": 0,
+   "faster": 0,
+   "median": 0.011,
+   "mean": 0.008,
+   "sd": 0.058
+  }
+ },
+ "random 22": {
+  "in": [
+   186184.5048900449,
+   1.5359851104363345,
+   10,
+   0.2,
+   0.05771152788943399
+  ],
+  "excel": {
+   "s2015": 121215.045396602,
+   "cls": 11,
+   "className": "Over $50 billion",
+   "real": 0.134524838161204,
+   "band": 9,
+   "bandLabel": "10% to 15%",
+   "inBand": 0.0300272975432211,
+   "orFaster": 0.0391264786169245,
+   "faster": 0.00909918107370337,
+   "median": 0.011,
+   "mean": 0.008,
+   "sd": 0.058
+  }
+ },
+ "random 23": {
+  "in": [
+   78238.03056325403,
+   1.36,
+   2,
+   null,
+   null
+  ],
+  "excel": {
+   "s2015": 57527.9636494515,
+   "cls": 11,
+   "className": "Over $50 billion",
+   "real": null,
+   "band": null,
+   "bandLabel": null,
+   "inBand": null,
+   "orFaster": null,
+   "faster": null,
+   "median": null,
+   "mean": null,
+   "sd": null
+  }
+ },
+ "random 24": {
+  "in": [
+   299888.2770534649,
+   1.54655873458853,
+   1,
+   -0.25,
+   0.024345511792365118
+  ],
+  "excel": {
+   "s2015": 193906.814107032,
+   "cls": 11,
+   "className": "Over $50 billion",
+   "real": -0.267825170935073,
+   "band": 1,
+   "bandLabel": "Below -25%",
+   "inBand": 0.0402576489533011,
+   "orFaster": 1,
+   "faster": 0.959742351046699,
+   "median": 0.021,
+   "mean": 0.023,
+   "sd": 0.163
+  }
+ }
+}

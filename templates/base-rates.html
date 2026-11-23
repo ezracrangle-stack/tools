@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
+{% macro inrow(k, label, hint, default="") %}
+    <div class="srow in">
+      <label class="lab" for="f-{{ k }}">{{ label }}{% if hint %}<span class="hint">{{ hint }}</span>{% endif %}</label>
+      <span class="cell"><input id="f-{{ k }}" data-k="{{ k }}" type="text" inputmode="decimal" autocomplete="off"{% if default %} value="{{ default }}" data-default="{{ default }}"{% endif %}></span>
+    </div>
+{%- endmacro %}
+{% macro out(id, label, hint="", total=false) %}
+    <div class="srow calc-row{% if total %} total{% endif %}"><span class="lab">{{ label }}{% if hint %}<span class="hint">{{ hint }}</span>{% endif %}</span><output class="cell" id="{{ id }}">–</output></div>
+{%- endmacro %}
+{% set labels = ["Below −25%", "−25% to −20%", "−20% to −15%", "−15% to −10%", "−10% to −5%", "−5% to 0%", "0% to 5%", "5% to 10%", "10% to 15%", "15% to 20%", "20% to 25%", "25% to 30%", "30% to 35%", "35% to 40%", "40% to 45%", "45% or more"] %}
+{% block title %}How often does this happen? Base rates of sales growth{% endblock %}
+{% block description %}Base rates calculator: how often companies of the same size grew sales as fast as a forecast, from Mauboussin and Callahan's Base Rate Book. Free.{% endblock %}
+{% block main %}
+<section class="lede">
+  <h1 class="page-title">How often does this happen?</h1>
+  <p class="dek">Before you believe a sales forecast, check how many companies of the same size have actually grown that fast. Michael Mauboussin, Dan Callahan and Darius Majd measured it for the 1,000 largest companies in the world from 1950 to 2015. Their tables are the outside view: what usually happens, before you get to why this company is different.</p>
+  <p>Nothing you type leaves your browser.</p>
+</section>
+
+<form id="brform" class="calc" novalidate>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-co">Company<span class="hint">Optional, for the link and the files.</span></label>
+      <span class="cell"><input id="f-co" type="text" maxlength="60" autocomplete="off" spellcheck="false" style="text-align:left"></span>
+    </div>
+    {{ inrow("sales", "Sales today, US$ millions", "Last 12 months.") }}
+    {{ inrow("growth", "Forecast sales growth, % a year", "Yours, management's or the consensus. Nominal.") }}
+    <div class="srow in">
+      <label class="lab" for="f-h">Over how many years<span class="hint">The paper's four horizons.</span></label>
+      <span class="cell"><select id="f-h"><option value="1">1 year</option><option value="3">3 years</option><option value="5" selected>5 years</option><option value="10">10 years</option></select></span>
+    </div>
+    {{ inrow("infl", "Expected inflation, % a year", "Your estimate. The tables leave inflation out, so it's taken out of the forecast too.") }}
+    <details class="helper">
+      <summary>Converting sales to 2015 dollars</summary>
+      {{ inrow("cpi", "Price level today vs 2015", "US CPI: 321.9 in 2025 against 237.0 in 2015 (Bureau of Labor Statistics), so 1.36.", "1.36") }}
+    </details>
+
+    <div class="srow head"><span class="lab">The base rate</span></div>
+    {{ out("o-cls", "Size class (2015 dollars)") }}
+    {{ out("o-real", "Forecast growth, after inflation") }}
+    {{ out("o-band", "Growth band") }}
+    {{ out("o-or", "Companies that grew this fast or faster", "In this band or above.", true) }}
+    {{ out("o-in", "In this band") }}
+    {{ out("o-fast", "Faster than this band") }}
+    {{ out("o-med", "Median growth, this size and horizon") }}
+    {{ out("o-mean", "Mean growth") }}
+    {{ out("o-sd", "Standard deviation") }}
+  </div>
+  <div class="profile csx">
+    <p class="hsub" id="d-head">Distribution</p>
+    <table class="grid">
+      <thead><tr><th>Annual growth, after inflation</th><th>Share of companies</th></tr></thead>
+      <tbody>
+      {% for l in labels %}<tr id="dr{{ loop.index0 }}"><th scope="row">{{ l }}</th><td><output id="d{{ loop.index0 }}">–</output></td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+{{ sheet.actions('Base rates tell you what usually happens, not what will. A forecast far above them can still come true; it just needs a strong reason.') }}
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+{{ sheet.subscribe(subscribe_url, "base-rates") }}
+
+<section class="prose">
+  <h2 class="rule-head">The outside view</h2>
+  <p>Most forecasts are built from the inside: the products, the market, the plan. Psychologists call that the inside view, and it tends to be too optimistic and too narrow. The outside view asks a plainer question: how did similar cases turn out? The most accurate forecasts blend the two. Mauboussin and Callahan frame it as Bayes' Theorem: start from the base rate, then update with what you know about this company.</p>
+  <p>In 2016, analysts' 3-year forecasts for the largest companies had a standard deviation of 8.3%; what the companies actually did had one of 18.7%. Forecasts are usually too tight and too high.</p>
+
+  <h2 class="rule-head">How to read the tables</h2>
+  <p>Pick the size class from the company's sales and the horizon, then find the band its forecast growth falls in. The share of companies in that band and above is how often it happened. The bigger the company, the lower and tighter growth gets. In the paper's example, a carmaker with about $6 billion of sales aimed to grow 50% a year for a decade; no company that size had ever done 45% or more for 10 years, and only about 0.2% had managed 30-35%.</p>
+
+  <h2 class="rule-head">Inflation and the sample</h2>
+  <p>The 2016 tables remove inflation and convert sales to 2015 dollars. Forecasts usually include inflation, so take it out before comparing; leaving it in makes any forecast look more ordinary than it is. The sample is the 1,000 largest companies in the world by market value, the survivors and winners. In their 2026 update for all US public companies with $2-5 billion of sales, 5-year growth after inflation averaged 3.7% a year with a standard deviation of 10.6%, lower than the 2016 tables for that size. Growth was also slower in the 2010s than in earlier decades.</p>
+  <p>Narrowing the sample to one industry doesn't rescue an extreme forecast: every company in the industry is already in the full sample. And growth is not the same as value. It only creates value when the investment behind it earns more than its cost of capital; the <a href="{{ root }}pvgo/">PVGO calculator</a> shows how much growth a price already assumes.</p>
+
+  <h2 class="rule-head">Where the data come from</h2>
+  <p>Michael J. Mauboussin, Dan Callahan and Darius Majd, "The Base Rate Book: Integrating the Past to Better Anticipate the Future", Credit Suisse, September 2016, Exhibit 4 and appendix. The shares here are computed from the appendix's observation counts. Context from Mauboussin and Callahan, "Bayes and Base Rates" (February 2026) and "Bayes and Base Rates 2.0" (May 2026), Counterpoint Global Insights.</p>
+</section>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ root }}static/baserates.js?v={{ asset_v }}"></script>{% endblock %}
