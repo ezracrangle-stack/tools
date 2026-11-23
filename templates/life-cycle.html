@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% import "_sheet.html" as sheet %}
+{% macro yrow(k, label, hint="") %}
+      <tr><th scope="row">{{ label }}{% if hint %}<span class="hint">{{ hint }}</span>{% endif %}</th>{% for i in range(5) %}<td><input data-k="{{ k }}{{ i }}" type="text" inputmode="decimal" autocomplete="off" aria-label="{{ label }}, year {{ i + 1 }}"></td>{% endfor %}</tr>
+{%- endmacro %}
+{% macro orow(k, label, strong=false) %}
+      <tr{% if strong %} class="rf-strong"{% endif %}><th scope="row">{{ label }}</th>{% for i in range(5) %}<td><output id="a-{{ k }}{{ i }}">–</output></td>{% endfor %}</tr>
+{%- endmacro %}
+{% macro out(id, label, hint="", total=false) %}
+    <div class="srow calc-row{% if total %} total{% endif %}"><span class="lab">{{ label }}{% if hint %}<span class="hint">{{ hint }}</span>{% endif %}</span><output class="cell" id="{{ id }}">–</output></div>
+{%- endmacro %}
+{% block title %}What stage is this company in? Life cycle calculator{% endblock %}
+{% block description %}Find a company's life cycle stage from its cash flow statement, with Dickinson's method and Mauboussin and Callahan's adjustments and results. Free.{% endblock %}
+{% block main %}
+<section class="lede">
+  <h1 class="page-title">What stage is this company in?</h1>
+  <p class="dek">Companies are born, grow, mature, get shaken out and decline, and the statement of cash flows shows where they are. Whether cash from operations, investing and financing comes in or goes out places a company in one of five stages. Michael Mauboussin and Dan Callahan add what happened next to companies in each one.</p>
+  <p>Up to 5 years, oldest first, with the signs as reported. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="lcform" class="calc" novalidate>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-co">Company<span class="hint">Optional, for the link and the files.</span></label>
+      <span class="cell"><input id="f-co" type="text" maxlength="60" autocomplete="off" spellcheck="false" style="text-align:left"></span>
+    </div>
+  </div>
+  <div class="profile csx mtx cax">
+    <p class="hsub">1. The statement of cash flows</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th>{% for i in range(5) %}<th>Year {{ i + 1 }}</th>{% endfor %}</tr></thead>
+      <tbody>
+      <tr><th scope="row">Year<span class="hint">Optional.</span></th>{% for i in range(5) %}<td><input data-k="y{{ i }}" data-text="1" type="text" maxlength="9" autocomplete="off" aria-label="Year {{ i + 1 }}"></td>{% endfor %}</tr>
+      {{- yrow("cfo", "Operating activities", "Net cash, as reported.") }}
+      {{- yrow("cfi", "Investing activities", "Usually negative.") }}
+      {{- yrow("cff", "Financing activities") }}
+      </tbody>
+    </table>
+    </div>
+    <details class="helper">
+      <summary>Optional: the paper's three adjustments</summary>
+      <p class="hint">They move items to where the economics put them. Free cash flow doesn't change; the stage can.</p>
+      <div class="gridwrap">
+      <table class="grid">
+        <tbody>
+        {{- yrow("sbc", "Stock-based compensation", "Positive. Moves from operations to financing: paying in stock is issuing stock.") }}
+        {{- yrow("intang", "Net intangible investment", "From the intangibles calculator ('change in operating income'). Moves from operations to investing. Matters most with heavy SG&A or R&D; otherwise leave it blank.") }}
+        {{- yrow("bought", "Purchases of marketable securities", "Positive, from investing.") }}
+        {{- yrow("sold", "Sales and maturities of marketable securities", "Positive, from investing. Both are taken out of investing.") }}
+        </tbody>
+      </table>
+      </div>
+    </details>
+    <p class="hsub">2. The stage, year by year</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th>{% for i in range(5) %}<th>Year {{ i + 1 }}</th>{% endfor %}</tr></thead>
+      <tbody>
+      {{- orow("op", "Operating, adjusted") }}
+      {{- orow("inv", "Investing, adjusted") }}
+      {{- orow("fin", "Financing, adjusted") }}
+      {{- orow("sg", "Signs") }}
+      {{- orow("st", "Stage", true) }}
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="sheet">
+    {{ out("o-latest", "Stage, latest year", "", true) }}
+    {{ out("o-earlier", "Stage 3 years earlier") }}
+    <div class="srow head"><span class="lab">3. Companies in this stage, 1990-2022</span></div>
+    {{ out("o-roic", "Return on invested capital", "Aggregate, adjusted for intangibles.") }}
+    {{ out("o-grow", "Sales growth, next 3 years", "Median, annual.") }}
+    {{ out("o-age", "Age since IPO", "Median.") }}
+    {{ out("o-debt", "Debt ÷ total capital", "Median.") }}
+    {{ out("o-share", "Share of all company-years") }}
+  </div>
+  <div class="profile csx">
+    <p class="hsub">4. Where they were 3 years later</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Intro.</th><th>Growth</th><th>Maturity</th><th>Shake-out</th><th>Decline</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">Odds</th>{% for j in range(5) %}<td><output id="t-odds{{ j }}">–</output></td>{% endfor %}</tr>
+      <tr><th scope="row">Annual return on that path</th>{% for j in range(5) %}<td><output id="t-tsr{{ j }}">–</output></td>{% endfor %}</tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="sheet">
+    {{ out("o-path", "Its own last 3 years: return on that path", "Average for companies that went from the earlier stage to the latest one.", true) }}
+  </div>
+
+{{ sheet.actions('A stage comes from the signs of three numbers, so one unusual year can flip it. Look at several years, and remember the returns are averages across thousands of companies.') }}
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+{{ sheet.subscribe(subscribe_url, "life-cycle") }}
+
+<section class="prose">
+  <h2 class="rule-head">Five stages, eight patterns</h2>
+  <p>Victoria Dickinson, a professor of accounting, matched the five stages of the life cycle to the statement of cash flows. Each of its three parts can be an inflow or an outflow, which makes eight combinations:</p>
+  <ul>
+    <li><strong>Introduction (− − +).</strong> Operations lose cash, the company invests, and it raises money for both.</li>
+    <li><strong>Growth (+ − +).</strong> Operations bring in cash, but the company invests more and raises the rest.</li>
+    <li><strong>Maturity (+ − −).</strong> Operations pay for the investment and the surplus goes back to lenders and shareholders.</li>
+    <li><strong>Decline (− + ±).</strong> Operations lose cash and the company sells assets.</li>
+    <li><strong>Shake-out (− − −, + + +, + + −).</strong> The catch-all for everything else.</li>
+  </ul>
+
+  <h2 class="rule-head">The three adjustments</h2>
+  <p>Mauboussin and Callahan think the statement of cash flows has become misleading, so they move three things. Stock-based compensation goes from operations to financing, because paying people in stock is issuing stock. Intangible investment, like advertising and software that runs through SG&amp;A, moves from operations to investing. And purchases and sales of marketable securities come out of investing, which should be about the business. In their example, a large online retailer's 2022 operating cash flow went from $46.8 billion to $105.6 billion, investing from −$37.6 billion to −$145.0 billion, and financing from $9.7 billion to $29.3 billion. It stayed in growth.</p>
+
+  <h2 class="rule-head">What the paper found</h2>
+  <p>Across the Russell 3000, excluding financials and real estate, from 1990 to 2022: growth and maturity made up about 80% of all company-years. Returns on capital were negative in introduction and decline and highest in maturity. Companies moved between stages freely; 38% of those in growth were mature 3 years later, and more than half of those in shake-out ended up in maturity.</p>
+  <p>Shareholders did best owning companies that started in maturity, followed by shake-out and growth. Introduction-stage stocks lost money on average and decline-stage ones roughly broke even. What mattered most was where a company ended up: those that reached growth or maturity did well from almost any starting point (decline to growth returned 20% a year), and those that ended in decline did badly from every one.</p>
+
+  <h2 class="rule-head">How to use it</h2>
+  <p>The stage tells you what to look at. In introduction and growth, the question is the return on each new investment; in maturity, how the cash gets returned; in shake-out and decline, whether management can find a way back. The paper also finds the cost of capital follows a U: high early and late, lowest in growth and maturity. To dig into the spending itself, use the <a href="{{ root }}capital-allocation/">capital allocation calculator</a>.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>Michael J. Mauboussin and Dan Callahan, "Trading Stages in the Company Life Cycle", Counterpoint Global Insights. Victoria Dickinson, "Cash Flow Patterns as a Proxy for Firm Life Cycle", <em>The Accounting Review</em>, November 2011.</p>
+</section>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ root }}static/lifecycle.js?v={{ asset_v }}"></script>{% endblock %}

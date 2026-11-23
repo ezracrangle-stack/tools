@@ -144,6 +144,16 @@ tools:
     status: live
     blurb: What a company really earns once its spending on brands, customers and R&D counts as investment, by industry. From Mauboussin and Callahan's Intangibles and Earnings.
 
+  - slug: life-cycle
+    og_title: "What stage is this company in?"
+    og_sub: "Life cycle · Mauboussin and Callahan"
+    og: "A company's life cycle stage from its cash flow statement, and what happened next to companies in that stage."
+    share: "the life cycle calculator"
+    name: What stage is this company in?
+    nav: Life cycle
+    status: live
+    blurb: Place a company in its life cycle stage from the signs of its cash flows, with Mauboussin and Callahan's adjustments and what happened next to companies in each stage.
+
   - slug: wacc
     og_title: "What discount rate should you use?"
     og_sub: "WACC · Mauboussin and Callahan"

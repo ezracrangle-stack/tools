@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTNNLB6W9D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FTNNLB6W9D');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<title>What stage is this company in? Life cycle calculator · Ezra's Notes</title>
+<meta name="description" content="Find a company's life cycle stage from its cash flow statement, with Dickinson's method and Mauboussin and Callahan's adjustments and results. Free.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css?v=1e9d83a5">
+<meta property="og:title" content="What stage is this company in? Life cycle calculator · Ezra's Notes">
+<meta property="og:description" content="Find a company's life cycle stage from its cash flow statement, with Dickinson's method and Mauboussin and Callahan's adjustments and results. Free.">
+<meta property="og:url" content="https://tools.ezrasnotes.com/life-cycle/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tools · Ezra's Notes"><meta property="og:image" content="https://tools.ezrasnotes.com/static/og/life-cycle.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="What stage is this company in?, a free calculator by Ezra Crangle. A company&#39;s life cycle stage from its cash flow statement, and what happened next to companies in that stage.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tools.ezrasnotes.com/static/og/life-cycle.png">
+<meta name="twitter:site" content="@ezracrangle">
+<link rel="icon" href="../static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="../static/icon-512.png">
+<link rel="apple-touch-icon" href="../static/apple-touch-icon.png">
+<link rel="canonical" href="https://tools.ezrasnotes.com/life-cycle/"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://tools.ezrasnotes.com/", "name": "Home", "position": 1}, {"@type": "ListItem", "item": "https://tools.ezrasnotes.com/life-cycle/", "name": "What stage is this company in? Life cycle calculator", "position": 2}]}</script></head>
+<body data-collect="https://script.google.com/macros/s/AKfycbz-a4q03dY00RYGWBKOHaKqYKL92Z3afAqhJ5iYdPQGYCMbU2CpFTR-JfEfArbdoUZXHg/exec" data-tool-name="the life cycle calculator">
+<header class="masthead">
+  <div class="topline">
+    <a href="https://www.ezrasnotes.com">Ezra's Notes</a>
+    <span class="topright">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark mode">Dark</button>
+    </span>
+  </div>
+  <a class="nameplate" href="../">Tools</a>
+  <p class="byline">By <a href="https://www.ezrasnotes.com">@ezracrangle</a></p>
+  <nav>
+    <a href="../">All tools</a>
+    <details class="nav-menu">
+      <summary>Tools</summary>
+      <div class="nav-drop"><a href="../net-net/">Net-net calculator</a><a href="../epv/">Earnings power value</a><a href="../greenwald/">Greenwald&#39;s moat test</a><a href="../penman/">Penman&#39;s residual income</a><a href="../graham/">Graham&#39;s formulas</a><a href="../fcf/">Mauboussin&#39;s FCF</a><a href="../roic/">ROIC, ROIIC and reinvestment</a><a href="../reverse-dcf/">Reverse DCF</a><a href="../compounders/">What to pay for quality</a><a href="../dhandho/">Pabrai&#39;s Dhandho bet</a><a href="../lynch/">Peter Lynch&#39;s PEG</a><a href="../marks/">Howard Marks&#39; market temperature</a><a href="../intangibles/">Intangibles and earnings</a><a href="../life-cycle/" aria-current="page">What stage is this company in?</a><a href="../wacc/">What discount rate should you use?</a><a href="../pvgo/">How much growth is priced in?</a><a href="../capital-allocation/">Capital allocation calculator</a><a href="../buybacks/">Buybacks and stock comp</a><a href="../moat/">Measuring the moat</a><a href="../red-flags/">Red flags</a><a href="../beauty-contest/">Keynes&#39; beauty contest</a></div>
+    </details>
+    <a href="../about/">About</a>
+    <a href="https://www.ezrasnotes.com/subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+</header>
+
+<main>
+<div class="print-head" aria-hidden="true"><strong>Ezra's Notes · Tools</strong><span id="print-stamp"></span></div>
+<div class="print-summary verdict" id="print-summary" aria-hidden="true"></div>
+<section class="lede">
+  <h1 class="page-title">What stage is this company in?</h1>
+  <p class="dek">Companies are born, grow, mature, get shaken out and decline, and the statement of cash flows shows where they are. Whether cash from operations, investing and financing comes in or goes out places a company in one of five stages. Michael Mauboussin and Dan Callahan add what happened next to companies in each one.</p>
+  <p>Up to 5 years, oldest first, with the signs as reported. Nothing you type leaves your browser.</p>
+</section>
+
+<form id="lcform" class="calc" novalidate>
+  <div class="sheet">
+    <div class="srow in">
+      <label class="lab" for="f-co">Company<span class="hint">Optional, for the link and the files.</span></label>
+      <span class="cell"><input id="f-co" type="text" maxlength="60" autocomplete="off" spellcheck="false" style="text-align:left"></span>
+    </div>
+  </div>
+  <div class="profile csx mtx cax">
+    <p class="hsub">1. The statement of cash flows</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Year 4</th><th>Year 5</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">Year<span class="hint">Optional.</span></th><td><input data-k="y0" data-text="1" type="text" maxlength="9" autocomplete="off" aria-label="Year 1"></td><td><input data-k="y1" data-text="1" type="text" maxlength="9" autocomplete="off" aria-label="Year 2"></td><td><input data-k="y2" data-text="1" type="text" maxlength="9" autocomplete="off" aria-label="Year 3"></td><td><input data-k="y3" data-text="1" type="text" maxlength="9" autocomplete="off" aria-label="Year 4"></td><td><input data-k="y4" data-text="1" type="text" maxlength="9" autocomplete="off" aria-label="Year 5"></td></tr>      <tr><th scope="row">Operating activities<span class="hint">Net cash, as reported.</span></th><td><input data-k="cfo0" type="text" inputmode="decimal" autocomplete="off" aria-label="Operating activities, year 1"></td><td><input data-k="cfo1" type="text" inputmode="decimal" autocomplete="off" aria-label="Operating activities, year 2"></td><td><input data-k="cfo2" type="text" inputmode="decimal" autocomplete="off" aria-label="Operating activities, year 3"></td><td><input data-k="cfo3" type="text" inputmode="decimal" autocomplete="off" aria-label="Operating activities, year 4"></td><td><input data-k="cfo4" type="text" inputmode="decimal" autocomplete="off" aria-label="Operating activities, year 5"></td></tr>      <tr><th scope="row">Investing activities<span class="hint">Usually negative.</span></th><td><input data-k="cfi0" type="text" inputmode="decimal" autocomplete="off" aria-label="Investing activities, year 1"></td><td><input data-k="cfi1" type="text" inputmode="decimal" autocomplete="off" aria-label="Investing activities, year 2"></td><td><input data-k="cfi2" type="text" inputmode="decimal" autocomplete="off" aria-label="Investing activities, year 3"></td><td><input data-k="cfi3" type="text" inputmode="decimal" autocomplete="off" aria-label="Investing activities, year 4"></td><td><input data-k="cfi4" type="text" inputmode="decimal" autocomplete="off" aria-label="Investing activities, year 5"></td></tr>      <tr><th scope="row">Financing activities</th><td><input data-k="cff0" type="text" inputmode="decimal" autocomplete="off" aria-label="Financing activities, year 1"></td><td><input data-k="cff1" type="text" inputmode="decimal" autocomplete="off" aria-label="Financing activities, year 2"></td><td><input data-k="cff2" type="text" inputmode="decimal" autocomplete="off" aria-label="Financing activities, year 3"></td><td><input data-k="cff3" type="text" inputmode="decimal" autocomplete="off" aria-label="Financing activities, year 4"></td><td><input data-k="cff4" type="text" inputmode="decimal" autocomplete="off" aria-label="Financing activities, year 5"></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <details class="helper">
+      <summary>Optional: the paper's three adjustments</summary>
+      <p class="hint">They move items to where the economics put them. Free cash flow doesn't change; the stage can.</p>
+      <div class="gridwrap">
+      <table class="grid">
+        <tbody>      <tr><th scope="row">Stock-based compensation<span class="hint">Positive. Moves from operations to financing: paying in stock is issuing stock.</span></th><td><input data-k="sbc0" type="text" inputmode="decimal" autocomplete="off" aria-label="Stock-based compensation, year 1"></td><td><input data-k="sbc1" type="text" inputmode="decimal" autocomplete="off" aria-label="Stock-based compensation, year 2"></td><td><input data-k="sbc2" type="text" inputmode="decimal" autocomplete="off" aria-label="Stock-based compensation, year 3"></td><td><input data-k="sbc3" type="text" inputmode="decimal" autocomplete="off" aria-label="Stock-based compensation, year 4"></td><td><input data-k="sbc4" type="text" inputmode="decimal" autocomplete="off" aria-label="Stock-based compensation, year 5"></td></tr>      <tr><th scope="row">Net intangible investment<span class="hint">From the intangibles calculator (&#39;change in operating income&#39;). Moves from operations to investing. Matters most with heavy SG&amp;A or R&amp;D; otherwise leave it blank.</span></th><td><input data-k="intang0" type="text" inputmode="decimal" autocomplete="off" aria-label="Net intangible investment, year 1"></td><td><input data-k="intang1" type="text" inputmode="decimal" autocomplete="off" aria-label="Net intangible investment, year 2"></td><td><input data-k="intang2" type="text" inputmode="decimal" autocomplete="off" aria-label="Net intangible investment, year 3"></td><td><input data-k="intang3" type="text" inputmode="decimal" autocomplete="off" aria-label="Net intangible investment, year 4"></td><td><input data-k="intang4" type="text" inputmode="decimal" autocomplete="off" aria-label="Net intangible investment, year 5"></td></tr>      <tr><th scope="row">Purchases of marketable securities<span class="hint">Positive, from investing.</span></th><td><input data-k="bought0" type="text" inputmode="decimal" autocomplete="off" aria-label="Purchases of marketable securities, year 1"></td><td><input data-k="bought1" type="text" inputmode="decimal" autocomplete="off" aria-label="Purchases of marketable securities, year 2"></td><td><input data-k="bought2" type="text" inputmode="decimal" autocomplete="off" aria-label="Purchases of marketable securities, year 3"></td><td><input data-k="bought3" type="text" inputmode="decimal" autocomplete="off" aria-label="Purchases of marketable securities, year 4"></td><td><input data-k="bought4" type="text" inputmode="decimal" autocomplete="off" aria-label="Purchases of marketable securities, year 5"></td></tr>      <tr><th scope="row">Sales and maturities of marketable securities<span class="hint">Positive, from investing. Both are taken out of investing.</span></th><td><input data-k="sold0" type="text" inputmode="decimal" autocomplete="off" aria-label="Sales and maturities of marketable securities, year 1"></td><td><input data-k="sold1" type="text" inputmode="decimal" autocomplete="off" aria-label="Sales and maturities of marketable securities, year 2"></td><td><input data-k="sold2" type="text" inputmode="decimal" autocomplete="off" aria-label="Sales and maturities of marketable securities, year 3"></td><td><input data-k="sold3" type="text" inputmode="decimal" autocomplete="off" aria-label="Sales and maturities of marketable securities, year 4"></td><td><input data-k="sold4" type="text" inputmode="decimal" autocomplete="off" aria-label="Sales and maturities of marketable securities, year 5"></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </details>
+    <p class="hsub">2. The stage, year by year</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Year 4</th><th>Year 5</th></tr></thead>
+      <tbody>      <tr><th scope="row">Operating, adjusted</th><td><output id="a-op0">–</output></td><td><output id="a-op1">–</output></td><td><output id="a-op2">–</output></td><td><output id="a-op3">–</output></td><td><output id="a-op4">–</output></td></tr>      <tr><th scope="row">Investing, adjusted</th><td><output id="a-inv0">–</output></td><td><output id="a-inv1">–</output></td><td><output id="a-inv2">–</output></td><td><output id="a-inv3">–</output></td><td><output id="a-inv4">–</output></td></tr>      <tr><th scope="row">Financing, adjusted</th><td><output id="a-fin0">–</output></td><td><output id="a-fin1">–</output></td><td><output id="a-fin2">–</output></td><td><output id="a-fin3">–</output></td><td><output id="a-fin4">–</output></td></tr>      <tr><th scope="row">Signs</th><td><output id="a-sg0">–</output></td><td><output id="a-sg1">–</output></td><td><output id="a-sg2">–</output></td><td><output id="a-sg3">–</output></td><td><output id="a-sg4">–</output></td></tr>      <tr class="rf-strong"><th scope="row">Stage</th><td><output id="a-st0">–</output></td><td><output id="a-st1">–</output></td><td><output id="a-st2">–</output></td><td><output id="a-st3">–</output></td><td><output id="a-st4">–</output></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="sheet">
+        <div class="srow calc-row total"><span class="lab">Stage, latest year</span><output class="cell" id="o-latest">–</output></div>
+        <div class="srow calc-row"><span class="lab">Stage 3 years earlier</span><output class="cell" id="o-earlier">–</output></div>
+    <div class="srow head"><span class="lab">3. Companies in this stage, 1990-2022</span></div>
+        <div class="srow calc-row"><span class="lab">Return on invested capital<span class="hint">Aggregate, adjusted for intangibles.</span></span><output class="cell" id="o-roic">–</output></div>
+        <div class="srow calc-row"><span class="lab">Sales growth, next 3 years<span class="hint">Median, annual.</span></span><output class="cell" id="o-grow">–</output></div>
+        <div class="srow calc-row"><span class="lab">Age since IPO<span class="hint">Median.</span></span><output class="cell" id="o-age">–</output></div>
+        <div class="srow calc-row"><span class="lab">Debt ÷ total capital<span class="hint">Median.</span></span><output class="cell" id="o-debt">–</output></div>
+        <div class="srow calc-row"><span class="lab">Share of all company-years</span><output class="cell" id="o-share">–</output></div>
+  </div>
+  <div class="profile csx">
+    <p class="hsub">4. Where they were 3 years later</p>
+    <div class="gridwrap">
+    <table class="grid">
+      <thead><tr><th></th><th>Intro.</th><th>Growth</th><th>Maturity</th><th>Shake-out</th><th>Decline</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">Odds</th><td><output id="t-odds0">–</output></td><td><output id="t-odds1">–</output></td><td><output id="t-odds2">–</output></td><td><output id="t-odds3">–</output></td><td><output id="t-odds4">–</output></td></tr>
+      <tr><th scope="row">Annual return on that path</th><td><output id="t-tsr0">–</output></td><td><output id="t-tsr1">–</output></td><td><output id="t-tsr2">–</output></td><td><output id="t-tsr3">–</output></td><td><output id="t-tsr4">–</output></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="sheet">
+        <div class="srow calc-row total"><span class="lab">Its own last 3 years: return on that path<span class="hint">Average for companies that went from the earlier stage to the latest one.</span></span><output class="cell" id="o-path">–</output></div>
+  </div>
+
+  <div id="verdict" class="verdict" aria-live="polite"><p>Fill in the fields marked * and the results appear as you type.</p></div>
+  <div id="warnings" class="warnings" hidden aria-live="polite"></div>
+  <div class="actions">
+    <button type="button" class="button" id="share-link">Copy link to this calculation</button>
+    <button type="button" class="button ghost" id="reset">Clear</button>
+  </div>
+<p class="copy-note">A stage comes from the signs of three numbers, so one unusual year can flip it. Look at several years, and remember the returns are averages across thousands of companies.</p>  <div class="sharebar" id="sharebar">
+    <label class="sb-co"><span>Company or ticker <em>(optional, goes in the link and the files)</em></span>
+      <input id="sb-company" type="text" maxlength="60" autocomplete="off" spellcheck="false" placeholder="e.g. ACME"></label>
+    <div class="sb-groups">
+      <p class="share-buttons"><span class="sb-k">Share</span>
+        <button type="button" id="sb-x">X</button>
+        <button type="button" id="sb-in">LinkedIn</button>
+        <button type="button" id="sb-native" hidden>More</button></p>
+      <p class="share-buttons"><span class="sb-k">Download</span>
+        <button type="button" id="sb-pdf">PDF</button>
+        <button type="button" id="sb-csv">CSV</button></p>
+      <p class="share-buttons sb-community" hidden><span class="sb-k">Community</span>
+        <button type="button" id="sb-save">Send to Ezra</button>
+        <button type="button" id="sb-tm">Leave a testimonial</button></p>
+    </div>
+    <div class="sb-box" id="sb-savebox" hidden>
+      <p>Send this calculation to Ezra. He reads them, and with your OK he may share some with the community. Nothing leaves your browser until you press Send.</p>
+      <label>Your name or X handle <em>(optional)</em> <input id="sb-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label class="check"><input id="sb-ok" type="checkbox"> Ezra can publish this calculation and my name or handle</label>
+      <input id="sb-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="sb-send">Send</button> <span id="sb-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+    <div class="sb-box" id="testimonial" hidden>
+      <p>Did this calculator help you? Tell Ezra in a few words.</p>
+      <label>What did it help you with? <textarea id="tm-text" rows="4" maxlength="1500"></textarea></label>
+      <label>Name <input id="tm-name" type="text" maxlength="80" autocomplete="off"></label>
+      <label>X or LinkedIn handle <em>(optional)</em> <input id="tm-handle" type="text" maxlength="80" autocomplete="off"></label>
+      <label>What you do <em>(optional, e.g. "individual investor" or "analyst at a fund")</em> <input id="tm-role" type="text" maxlength="120" autocomplete="off"></label>
+      <label class="check"><input id="tm-ok" type="checkbox"> Ezra can publish this on the site with my name</label>
+      <input id="tm-hp" class="sr" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="share-buttons"><button type="button" id="tm-send">Send</button> <span id="tm-status" class="sb-status" aria-live="polite"></span></p>
+    </div>
+  </div>
+
+</form>
+
+<a href="#verdict" id="stickybar" class="stickybar" hidden></a>
+
+<aside class="sister subscribe" data-place="life-cycle">
+  <p class="sister-kicker">Newsletter</p>
+  <p class="sister-head"><a href="https://www.ezrasnotes.com/subscribe?utm_source=tools&amp;utm_medium=site&amp;utm_campaign=life-cycle">Ezra's Notes</a></p>
+  <p class="sister-body">For long-term investors who look at companies the way an owner does. Free, every week.</p>
+  <a class="button" href="https://www.ezrasnotes.com/subscribe?utm_source=tools&amp;utm_medium=site&amp;utm_campaign=life-cycle">Subscribe free</a>
+</aside>
+
+
+<section class="prose">
+  <h2 class="rule-head">Five stages, eight patterns</h2>
+  <p>Victoria Dickinson, a professor of accounting, matched the five stages of the life cycle to the statement of cash flows. Each of its three parts can be an inflow or an outflow, which makes eight combinations:</p>
+  <ul>
+    <li><strong>Introduction (− − +).</strong> Operations lose cash, the company invests, and it raises money for both.</li>
+    <li><strong>Growth (+ − +).</strong> Operations bring in cash, but the company invests more and raises the rest.</li>
+    <li><strong>Maturity (+ − −).</strong> Operations pay for the investment and the surplus goes back to lenders and shareholders.</li>
+    <li><strong>Decline (− + ±).</strong> Operations lose cash and the company sells assets.</li>
+    <li><strong>Shake-out (− − −, + + +, + + −).</strong> The catch-all for everything else.</li>
+  </ul>
+
+  <h2 class="rule-head">The three adjustments</h2>
+  <p>Mauboussin and Callahan think the statement of cash flows has become misleading, so they move three things. Stock-based compensation goes from operations to financing, because paying people in stock is issuing stock. Intangible investment, like advertising and software that runs through SG&amp;A, moves from operations to investing. And purchases and sales of marketable securities come out of investing, which should be about the business. In their example, a large online retailer's 2022 operating cash flow went from $46.8 billion to $105.6 billion, investing from −$37.6 billion to −$145.0 billion, and financing from $9.7 billion to $29.3 billion. It stayed in growth.</p>
+
+  <h2 class="rule-head">What the paper found</h2>
+  <p>Across the Russell 3000, excluding financials and real estate, from 1990 to 2022: growth and maturity made up about 80% of all company-years. Returns on capital were negative in introduction and decline and highest in maturity. Companies moved between stages freely; 38% of those in growth were mature 3 years later, and more than half of those in shake-out ended up in maturity.</p>
+  <p>Shareholders did best owning companies that started in maturity, followed by shake-out and growth. Introduction-stage stocks lost money on average and decline-stage ones roughly broke even. What mattered most was where a company ended up: those that reached growth or maturity did well from almost any starting point (decline to growth returned 20% a year), and those that ended in decline did badly from every one.</p>
+
+  <h2 class="rule-head">How to use it</h2>
+  <p>The stage tells you what to look at. In introduction and growth, the question is the return on each new investment; in maturity, how the cash gets returned; in shake-out and decline, whether management can find a way back. The paper also finds the cost of capital follows a U: high early and late, lowest in growth and maturity. To dig into the spending itself, use the <a href="../capital-allocation/">capital allocation calculator</a>.</p>
+
+  <h2 class="rule-head">Where the method comes from</h2>
+  <p>Michael J. Mauboussin and Dan Callahan, "Trading Stages in the Company Life Cycle", Counterpoint Global Insights. Victoria Dickinson, "Cash Flow Patterns as a Proxy for Firm Life Cycle", <em>The Accounting Review</em>, November 2011.</p>
+</section>
+</main>
+
+<footer>
+  <p class="footer-links">
+    <a href="https://www.ezrasnotes.com/subscribe">Subscribe to the newsletter</a>
+    <a href="https://substack.com/@ezracrangle">Substack @ezracrangle</a>
+    <a href="https://x.com/ezracrangle">X @ezracrangle</a>
+    <a href="https://www.linkedin.com/in/ezracrangle/">LinkedIn</a>
+  </p>
+  <nav class="footer-network" aria-label="More from Ezra's Notes"><span class="fn-label">More from Ezra's Notes</span>
+    <a href="https://letters.ezrasnotes.com/">Investor Letters</a>
+    <a href="https://cartas.ezrasnotes.com/">Cartas a Inversores</a>
+    <a href="https://gd.ezrasnotes.com/">The G&amp;D Index</a>
+    <a href="https://holdings.ezrasnotes.com/">Investor Holdings</a>
+    <span aria-current="page">Tools</span>
+  </nav>
+  <p class="rights">These calculators are for education. They do arithmetic on the numbers you type in, and the result depends on those numbers. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+</footer><script>(function(){var b=document.getElementById('theme-toggle'),r=document.documentElement;function label(){b.textContent=r.getAttribute('data-theme')==='dark'?'Light':'Dark'}label();b.addEventListener('click',function(){var t=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}label()})})();</script>
+<script>(function(){function t(n,p){if(typeof gtag==='function')gtag('event',n,p||{})}
+document.querySelectorAll('a[href*="ezrasnotes.com/subscribe"]').forEach(function(a){a.addEventListener('click',function(){t('subscribe_click',{location:a.closest('.subscribe')?'box':a.closest('footer')?'footer':'nav',page:location.pathname})})});
+var boxes=document.querySelectorAll('.subscribe');if(boxes.length&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){t('subscribe_box_view',{page:location.pathname});io.unobserve(e.target)}})},{threshold:0.5});boxes.forEach(function(x){io.observe(x)})}})();</script>
+<script>document.addEventListener("click",function(e){var m=document.querySelector(".nav-menu[open]");if(m&&!m.contains(e.target))m.removeAttribute("open")});</script>
+<script src="../static/share.js?v=1e9d83a5"></script><script type="module" src="../static/lifecycle.js?v=1e9d83a5"></script><a href="#" class="to-top" id="to-top" aria-label="Back to top" title="Back to top">&uarr;</a>
+<script>
+(function () {
+  var b = document.getElementById('to-top');
+  function check() { b.classList.toggle('show', window.scrollY > window.innerHeight * 1.2); }
+  window.addEventListener('scroll', check, { passive: true }); check();
+  b.addEventListener('click', function (e) {
+    e.preventDefault();
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: still ? 'auto' : 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>
